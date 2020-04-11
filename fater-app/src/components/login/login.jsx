@@ -7,7 +7,14 @@ import { eye, eyeOff } from "ionicons/icons";
 
 class Login extends Component {
   onSignIn() {
-    console.log("signed");
+    const body = {
+      email: $("#email").val(),
+      password: $("#password").val(),
+    };
+
+    // $.ajax({
+    //     url:
+    // });
   }
 
   onPassChange() {
