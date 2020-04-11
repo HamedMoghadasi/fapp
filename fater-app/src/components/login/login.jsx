@@ -44,12 +44,14 @@ class Login extends Component {
               Sign in
             </button>
           </form>
-          <a href="localhost:3502" className="forgot-password">
+          <a href="/ForgetPassword" className="forgot-password">
             Forgot the password?
           </a>
         </div>
 
-        <input className="btn btn-danger btn-register" value="Regiter Now" />
+        <a href="/Register" className="btn btn-danger btn-register">
+          Register Now
+        </a>
       </div>
     );
   }
