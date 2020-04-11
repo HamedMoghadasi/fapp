@@ -6,15 +6,29 @@ import { IonIcon } from "@ionic/react";
 import { eye, eyeOff } from "ionicons/icons";
 
 class Login extends Component {
-  onSignIn() {
+  onSignIn(e) {
+    e.preventDefault();
+
     const body = {
       email: $("#email").val(),
       password: $("#password").val(),
     };
 
-    // $.ajax({
-    //     url:
-    // });
+    let API_URL = process.env.REACT_APP_API_URL;
+    $.ajax({
+      url: `${API_URL}/api/v1/auth/login`,
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify(body),
+      success: function (data) {
+        console.log(data);
+      },
+      failure: function (err) {
+        console.error(err);
+      },
+    });
+    return false;
   }
 
   onPassChange() {
@@ -31,7 +45,6 @@ class Login extends Component {
   }
 
   togglePassEye() {
-    console.log($("#password").type);
     const isPasswordShown = $("#password-eyeoff").hasClass("active");
 
     if (isPasswordShown) {
@@ -67,7 +80,7 @@ class Login extends Component {
           />
           <p id="profile-name" className="profile-name-card"></p>
 
-          <form className="form-signin">
+          <form className="form-signin" onSubmit={this.onSignIn}>
             <span id="reauth-email" className="reauth-email"></span>
             <input
               type="email"
@@ -103,7 +116,6 @@ class Login extends Component {
             <button
               className="btn btn-lg btn-primary btn-block btn-signin"
               type="submit"
-              onSubmit={this.onSignIn}
             >
               Sign in
             </button>
