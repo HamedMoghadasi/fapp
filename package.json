@@ -1,0 +1,17 @@
+{
+  "name": "fater",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently  \"cd fater-api && npm run start:dev\" \"cd fater-ui && npm run start\"",
+    "initial": "npm install",
+    "build": "concurrently \"npm i -g nodemon\" \"cd fater-api && npm install\" \"cd fater-ui && npm install\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
+}

@@ -1,0 +1,10 @@
+.ol-rotate-reset {
+  margin-top: 40px !important;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .ol-zoom,
+  .ol-zoomslider {
+    display: none;
+  }
+}

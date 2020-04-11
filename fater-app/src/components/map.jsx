@@ -1,0 +1,63 @@
+import React, { Component } from "react";
+import $ from "jquery";
+import OlMap from "ol/Map";
+import OlView from "ol/View";
+import OlTileLayer from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import {
+  defaults as defaultControls,
+  ZoomSlider,
+  ScaleLine,
+  FullScreen,
+} from "ol/control";
+
+import "ol/ol.css";
+import "./map.css";
+import "../styles/components/map.css";
+
+class Map extends Component {
+  _olMap = {};
+  componentDidMount = () => {
+    this.removeAttribute();
+    this.olmap = new OlMap({
+      target: "mapContainer",
+      controls: defaultControls().extend([
+        new ScaleLine(),
+        new FullScreen(),
+        new ZoomSlider(),
+      ]),
+      view: new OlView({
+        center: this.props.map.center,
+        zoom: this.props.map.zoom,
+        projection: this.props.map.projection,
+      }),
+      layers: [
+        new OlTileLayer({
+          source: new OSM(),
+        }),
+      ],
+    });
+
+    this.olmap.on("moveend", () => {
+      let center = this.olmap.getView().getCenter();
+      let zoom = this.olmap.getView().getZoom();
+      this.props.handleUpdatingCenterAndZoom(center, zoom);
+    });
+  };
+  removeAttribute = () => {
+    $(document).ready(() => {
+      $(".ol-attribution").remove();
+    });
+  };
+
+  componentDidUpdate = () => {
+    if (!Object.keys(this.props.map.olmap).length) {
+      this.props.initOpenLayers(this.olmap);
+    }
+  };
+  render() {
+    return <div id="mapContainer"></div>;
+  }
+}
+
+export default Map;
