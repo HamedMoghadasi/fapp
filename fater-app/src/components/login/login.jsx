@@ -4,6 +4,7 @@ import login from "./login.png";
 import $ from "jquery";
 import { IonIcon } from "@ionic/react";
 import { eye, eyeOff } from "ionicons/icons";
+import Cookies from "js-cookie";
 
 class Login extends Component {
   onSignIn(e) {
@@ -15,14 +16,25 @@ class Login extends Component {
     };
 
     let API_URL = process.env.REACT_APP_API_URL;
+    let URL = process.env.REACT_APP_URL;
     $.ajax({
       url: `${API_URL}/api/v1/auth/login`,
       type: "POST",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
+      xhrFields: {
+        withCredentials: true,
+      },
       data: JSON.stringify(body),
-      success: function (data) {
-        console.log(data);
+      success: function (response) {
+        var access_token = response.data.token;
+        Cookies.set("access_token", access_token, {
+          path: "/",
+        });
+
+        console.log(Cookies.getJSON());
+
+        //window.location.href = `/home`;
       },
       failure: function (err) {
         console.error(err);
