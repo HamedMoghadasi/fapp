@@ -112,6 +112,7 @@ html {
 .btn.btn-register {
   display: table;
   margin: 0 auto;
+  min-width: 350px;
 }
 .btn.btn-signin {
   padding: 0px;
@@ -136,4 +137,38 @@ html {
 .forgot-password:active,
 .forgot-password:focus {
   color: #4d90fe;
+}
+#passwordContainer {
+  position: relative;
+}
+
+#passwordContainer input::-ms-reveal {
+  display: none;
+}
+
+#passwordContainer span {
+  cursor: pointer;
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+#passwordContainer span svg {
+  background-color: white;
+  display: block;
+  padding: 0.2em;
+  width: 1.3em;
+  height: 1.8em;
+}
+
+.passwordEye {
+  color: #7b7b7b;
+  margin-top: 6px;
+  margin-right: 2px;
+}
+
+.hide {
+  display: none;
 }
