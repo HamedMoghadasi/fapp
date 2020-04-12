@@ -66,17 +66,21 @@ class Register extends Component {
         disableSpiner();
         if (response.message) {
           notif(response.message, "success");
-        }
 
-        setTimeout(() => {
-          window.location.href = `/login`;
-        }, 15000);
+          setTimeout(() => {
+            window.location.href = `/login`;
+          }, 15000);
+        } else {
+          notif("check you internet connection.", "error");
+        }
       },
       error: function (err) {
         disableSpiner();
         const msg = err.responseJSON.message;
         if (msg) {
           notif(msg, "error");
+        } else {
+          notif("check you internet connection.", "error");
         }
         console.error(msg);
       },

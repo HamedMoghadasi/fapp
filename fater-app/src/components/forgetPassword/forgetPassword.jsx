@@ -65,16 +65,21 @@ class ForgetPassword extends Component {
         const msg = response.message;
         if (msg) {
           notif(msg, "success");
+
+          setTimeout(() => {
+            window.location.href = `/login`;
+          }, 10000);
+        } else {
+          notif("check you internet connection.", "error");
         }
-        setTimeout(() => {
-          window.location.href = `/login`;
-        }, 10000);
       },
       error: function (err) {
         disableSpiner();
         const msg = err.responseJSON.message;
         if (msg) {
           notif(msg, "error");
+        } else {
+          notif("check you internet connection.", "error");
         }
         console.error(msg);
       },

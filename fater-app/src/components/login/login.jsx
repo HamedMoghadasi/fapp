@@ -70,7 +70,10 @@ class Login extends Component {
         const msg = err.responseJSON.message;
         if (msg) {
           notif(msg, "error");
+        } else {
+          notif("check you internet connection.", "error");
         }
+
         console.error(msg);
       },
     });
@@ -112,7 +115,10 @@ class Login extends Component {
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.notify("alert e ahha", "error");
+    this.notify("alert e ahha", "success");
+  }
 
   render() {
     return (
