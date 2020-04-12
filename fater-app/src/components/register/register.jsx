@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import $ from "jquery";
-import { IonIcon } from "@ionic/react";
+import { IonIcon, IonSpinner } from "@ionic/react";
 import { eye, eyeOff } from "ionicons/icons";
 
 import "./register.css";
@@ -27,9 +27,23 @@ class Register extends Component {
     }
   };
 
+  enableSpinner = () => {
+    $("#btn-register").prop("disabled", true);
+    $("#btn-register").css("cursor", "not-allowed");
+    $("#btn-register-text").css("display", "none");
+    $("#btn-register-spinner").css("display", "inline-block");
+  };
+
+  disableSpinner = () => {
+    $("#btn-register").prop("disabled", false);
+    $("#btn-register").css("cursor", "default");
+    $("#btn-register-text").css("display", "inline-block");
+    $("#btn-register-spinner").css("display", "none");
+  };
+
   onSignIn = (e) => {
     e.preventDefault();
-
+    this.enableSpinner();
     const body = {
       email: $("#email").val(),
       username: $("#username").val(),
@@ -38,7 +52,7 @@ class Register extends Component {
 
     let API_URL = process.env.REACT_APP_API_URL;
     const notif = this.notify;
-
+    const disableSpiner = this.disableSpinner;
     $.ajax({
       url: `${API_URL}/api/v1/auth/register`,
       type: "POST",
@@ -49,6 +63,7 @@ class Register extends Component {
       },
       data: JSON.stringify(body),
       success: function (response) {
+        disableSpiner();
         if (response.message) {
           notif(response.message, "success");
         }
@@ -58,6 +73,7 @@ class Register extends Component {
         }, 15000);
       },
       error: function (err) {
+        disableSpiner();
         const msg = err.responseJSON.message;
         if (msg) {
           notif(msg, "error");
@@ -160,8 +176,11 @@ class Register extends Component {
               <button
                 className="btn btn-lg btn-warning btn-block btn-signin"
                 type="submit"
+                id="btn-register"
               >
-                Register
+                <span id="btn-register-text">Register</span>
+
+                <IonSpinner id="btn-register-spinner" name="dots" />
               </button>
             </form>
           </div>

@@ -172,3 +172,8 @@ html {
 .hide {
   display: none;
 }
+
+#btn-signIn-spinner {
+  display: none;
+  margin-top: 5px;
+}

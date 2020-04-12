@@ -173,3 +173,8 @@ html {
 .hide {
   display: none;
 }
+
+#btn-register-spinner {
+  display: none;
+  margin-top: 5px;
+}
