@@ -1,4 +1,11 @@
-import { IonContent, IonHeader, IonPage, IonToolbar } from "@ionic/react";
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonToolbar,
+  IonIcon,
+} from "@ionic/react";
+import { personOutline } from "ionicons/icons";
 import React from "react";
 import "./Home.css";
 import MapContainer from "../containers/map-container";
@@ -8,7 +15,9 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <a href="/login">Sign in</a>
+          <a href="/login" className="btn-login">
+            <IonIcon icon={personOutline} />
+          </a>
         </IonToolbar>
       </IonHeader>
       <IonContent></IonContent>

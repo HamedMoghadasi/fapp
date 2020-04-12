@@ -1,10 +1,20 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
+import {
+  IonApp,
+  IonRouterOutlet,
+  IonTabs,
+  IonTabBar,
+  IonTabButton,
+  IonIcon,
+  IonLabel,
+} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
+
+import { map, person } from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -25,17 +35,51 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import "bootstrap/dist/css/bootstrap.css";
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path="/home" component={Home} exact={true} />
-        <Route path="/login" component={Login} exact={true} />
-        <Route path="/register" component={Register} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+
+const App: React.FC = () => {
+  console.log(window.innerWidth);
+  const accountUrl = true ? "/Login" : "/dashboard";
+
+  if (window.innerWidth >= 800) {
+    return (
+      <IonApp>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route path="/home" component={Home} exact={true} />
+            <Route path="/login" component={Login} exact={true} />
+            <Route path="/register" component={Register} exact={true} />
+            <Route exact path="/" render={() => <Redirect to="/home" />} />
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </IonApp>
+    );
+  }
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/home" component={Home} exact={true} />
+            <Route path="/login" component={Login} exact={true} />
+            <Route path="/register" component={Register} exact={true} />
+            <Route exact path="/" render={() => <Redirect to="/home" />} />
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="Home" href="/home">
+              <IonIcon icon={map} />
+              <IonLabel>Map</IonLabel>
+            </IonTabButton>
+
+            <IonTabButton href={accountUrl}>
+              <IonIcon icon={person} />
+              <IonLabel>Account</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;

@@ -5,9 +5,27 @@ import $ from "jquery";
 import { IonIcon } from "@ionic/react";
 import { eye, eyeOff } from "ionicons/icons";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Login extends Component {
-  onSignIn(e) {
+  notify = (message, type) => {
+    if (type === "error") {
+      toast.error(`${message}`, {
+        autoClose: 10000,
+        fontSize: "20px",
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (type === "success") {
+      toast.success(`${message}`, {
+        autoClose: 10000,
+        fontSize: "20px",
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
+  onSignIn = (e) => {
     e.preventDefault();
 
     const body = {
@@ -15,6 +33,7 @@ class Login extends Component {
       password: $("#password").val(),
     };
 
+    const notif = this.notify;
     let API_URL = process.env.REACT_APP_API_URL;
     $.ajax({
       url: `${API_URL}/api/v1/auth/login`,
@@ -30,16 +49,20 @@ class Login extends Component {
         Cookies.set("access_token", access_token, {
           path: "/",
         });
-        //window.location.href = `/home`;
+        window.location.href = `/home`;
       },
       error: function (err) {
-        console.error(err.responseJSON.message);
+        const msg = err.responseJSON.message;
+        if (msg) {
+          notif(msg, "error");
+        }
+        console.error(msg);
       },
     });
     return false;
-  }
+  };
 
-  onPassChange() {
+  onPassChange = () => {
     const passValue = $("#password").val();
     if (passValue.length > 0) {
       if ($("#password")[0].type === "password") {
@@ -50,7 +73,7 @@ class Login extends Component {
       $("#password-eye").addClass("hide");
       $("#password-eye").removeClass("active");
     }
-  }
+  };
 
   togglePassEye() {
     const isPasswordShown = $("#password-eyeoff").hasClass("active");
@@ -78,69 +101,72 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="card card-container">
-          <img
-            id="profile-img"
-            className="profile-img-card"
-            src={login}
-            alt="user profile"
-          />
-          <p id="profile-name" className="profile-name-card"></p>
-
-          <form className="form-signin" onSubmit={this.onSignIn}>
-            <span id="reauth-email" className="reauth-email"></span>
-            <input
-              type="email"
-              id="email"
-              className="form-control"
-              placeholder="Email address"
-              required
-              autoFocus
+      <React.Fragment>
+        <ToastContainer />
+        <div className="container">
+          <div className="card card-container">
+            <img
+              id="profile-img"
+              className="profile-img-card"
+              src={login}
+              alt="user profile"
             />
-            <div id="passwordContainer">
+            <p id="profile-name" className="profile-name-card"></p>
+
+            <form className="form-signin" onSubmit={this.onSignIn}>
+              <span id="reauth-email" className="reauth-email"></span>
               <input
-                type="password"
-                id="password"
+                type="email"
+                id="email"
                 className="form-control"
-                placeholder="Password"
+                placeholder="Email address"
                 required
-                onChange={this.onPassChange}
+                autoFocus
               />
-              <span onClick={this.togglePassEye}>
-                <IonIcon
-                  className="passwordEye hide"
-                  id="password-eyeoff"
-                  icon={eyeOff}
+              <div id="passwordContainer">
+                <input
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  placeholder="Password"
+                  required
+                  onChange={this.onPassChange}
                 />
-                <IonIcon
-                  className="passwordEye hide"
-                  id="password-eye"
-                  icon={eye}
-                />
-              </span>
-            </div>
-            <div id="remember" className="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me" /> Remember me
-              </label>
-            </div>
-            <button
-              className="btn btn-lg btn-primary btn-block btn-signin"
-              type="submit"
-            >
-              Sign in
-            </button>
-          </form>
-          <a href="/ForgetPassword" className="forgot-password">
-            Forgot the password?
+                <span onClick={this.togglePassEye}>
+                  <IonIcon
+                    className="passwordEye hide"
+                    id="password-eyeoff"
+                    icon={eyeOff}
+                  />
+                  <IonIcon
+                    className="passwordEye hide"
+                    id="password-eye"
+                    icon={eye}
+                  />
+                </span>
+              </div>
+              <div id="remember" className="checkbox">
+                <label>
+                  <input type="checkbox" value="remember-me" /> Remember me
+                </label>
+              </div>
+              <button
+                className="btn btn-lg btn-primary btn-block btn-signin"
+                type="submit"
+              >
+                Sign in
+              </button>
+            </form>
+            <a href="/ForgetPassword" className="forgot-password">
+              Forgot the password?
+            </a>
+          </div>
+
+          <a href="/Register" className="btn btn-danger btn-register">
+            Register Now !
           </a>
         </div>
-
-        <a href="/Register" className="btn btn-danger btn-register">
-          Register Now !
-        </a>
-      </div>
+      </React.Fragment>
     );
   }
 }

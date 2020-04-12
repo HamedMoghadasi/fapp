@@ -7,8 +7,27 @@ import { eye, eyeOff } from "ionicons/icons";
 import "./register.css";
 import register from "./register.png";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 class Register extends Component {
-  onSignIn(e) {
+  notify = (message, type) => {
+    if (type === "error") {
+      toast.error(`${message}`, {
+        autoClose: 10000,
+        fontSize: "20px",
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (type === "success") {
+      toast.success(`${message}`, {
+        autoClose: 10000,
+        fontSize: "20px",
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
+  onSignIn = (e) => {
     e.preventDefault();
 
     const body = {
@@ -16,9 +35,9 @@ class Register extends Component {
       username: $("#username").val(),
       password: $("#password").val(),
     };
-    console.log(body);
 
     let API_URL = process.env.REACT_APP_API_URL;
+    const notif = this.notify;
 
     $.ajax({
       url: `${API_URL}/api/v1/auth/register`,
@@ -30,16 +49,24 @@ class Register extends Component {
       },
       data: JSON.stringify(body),
       success: function (response) {
-        console.log(response);
+        if (response.message) {
+          notif(response.message, "success");
+        }
 
-        //window.location.href = `/login`;
+        setTimeout(() => {
+          window.location.href = `/login`;
+        }, 15000);
       },
       error: function (err) {
-        console.error(err.responseJSON.message);
+        const msg = err.responseJSON.message;
+        if (msg) {
+          notif(msg, "error");
+        }
+        console.error(msg);
       },
     });
     return false;
-  }
+  };
 
   onPassChange() {
     const passValue = $("#password").val();
@@ -78,69 +105,72 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="card card-container">
-          <img
-            id="profile-img"
-            className="profile-img-card"
-            src={register}
-            alt="user profile"
-          />
-          <p id="profile-name" className="profile-name-card"></p>
+      <React.Fragment>
+        <ToastContainer />
+        <div className="container">
+          <div className="card card-container">
+            <img
+              id="profile-img"
+              className="profile-img-card"
+              src={register}
+              alt="user profile"
+            />
+            <p id="profile-name" className="profile-name-card"></p>
 
-          <form className="form-register" onSubmit={this.onSignIn}>
-            <span id="reauth-email" className="reauth-email"></span>
-            <input
-              type="email"
-              id="email"
-              className="form-control"
-              placeholder="Email address"
-              required
-              autoFocus
-            />
-            <input
-              type="username"
-              id="username"
-              className="form-control"
-              placeholder="Username"
-              required
-            />
-            <div id="passwordContainer">
+            <form className="form-register" onSubmit={this.onSignIn}>
+              <span id="reauth-email" className="reauth-email"></span>
               <input
-                type="password"
-                id="password"
+                type="email"
+                id="email"
                 className="form-control"
-                placeholder="Password"
+                placeholder="Email address"
                 required
-                onChange={this.onPassChange}
+                autoFocus
               />
-              <span onClick={this.togglePassEye}>
-                <IonIcon
-                  className="passwordEye hide"
-                  id="password-eyeoff"
-                  icon={eyeOff}
+              <input
+                type="username"
+                id="username"
+                className="form-control"
+                placeholder="Username"
+                required
+              />
+              <div id="passwordContainer">
+                <input
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  placeholder="Password"
+                  required
+                  onChange={this.onPassChange}
                 />
-                <IonIcon
-                  className="passwordEye hide"
-                  id="password-eye"
-                  icon={eye}
-                />
-              </span>
-            </div>
+                <span onClick={this.togglePassEye}>
+                  <IonIcon
+                    className="passwordEye hide"
+                    id="password-eyeoff"
+                    icon={eyeOff}
+                  />
+                  <IonIcon
+                    className="passwordEye hide"
+                    id="password-eye"
+                    icon={eye}
+                  />
+                </span>
+              </div>
 
-            <button
-              className="btn btn-lg btn-warning btn-block btn-signin"
-              type="submit"
-            >
-              Register
-            </button>
-          </form>
+              <button
+                className="btn btn-lg btn-warning btn-block btn-signin"
+                type="submit"
+              >
+                Register
+              </button>
+            </form>
+          </div>
+
+          <a href="/login" className="btn btn-register btn-primary">
+            Have you an account? Log in.
+          </a>
         </div>
-
-        <a href="/login" className="btn btn-register btn-primary">
-          Have you an account? Log in.
-        </a>
-      </div>
+      </React.Fragment>
     );
   }
 }

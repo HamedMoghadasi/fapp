@@ -5,7 +5,7 @@ import {
   IonIcon,
   IonToolbar,
 } from "@ionic/react";
-import { chevronBackOutline } from "ionicons/icons";
+import { homeOutline } from "ionicons/icons";
 import React from "react";
 import "./register.css";
 
@@ -16,8 +16,8 @@ const Login: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <a href="/Login" className="btn-back">
-            <IonIcon icon={chevronBackOutline} /> Login
+          <a href="/" className="btn-back">
+            <IonIcon icon={homeOutline} />
           </a>
         </IonToolbar>
       </IonHeader>

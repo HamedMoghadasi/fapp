@@ -1,3 +1,12 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.btn-login {
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 5px;
+  text-decoration: none !important;
+  color: black;
+  font-size: 25px;
+}
