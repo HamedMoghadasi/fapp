@@ -4,9 +4,9 @@ import login from "./login.png";
 import $ from "jquery";
 import { IonIcon } from "@ionic/react";
 import { eye, eyeOff } from "ionicons/icons";
-import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import localStorage from "local-storage";
 
 class Login extends Component {
   notify = (message, type) => {
@@ -46,9 +46,7 @@ class Login extends Component {
       data: JSON.stringify(body),
       success: function (response) {
         var access_token = response.data.token;
-        Cookies.set("access_token", access_token, {
-          path: "/",
-        });
+        localStorage.set("access_token", access_token);
         window.location.href = `/home`;
       },
       error: function (err) {
