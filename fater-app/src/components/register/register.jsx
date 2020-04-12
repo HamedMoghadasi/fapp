@@ -16,8 +16,10 @@ class Register extends Component {
       username: $("#username").val(),
       password: $("#password").val(),
     };
+    console.log(body);
 
     let API_URL = process.env.REACT_APP_API_URL;
+
     $.ajax({
       url: `${API_URL}/api/v1/auth/register`,
       type: "POST",
@@ -32,8 +34,8 @@ class Register extends Component {
 
         //window.location.href = `/login`;
       },
-      failure: function (err) {
-        console.error(err);
+      error: function (err) {
+        console.error(err.responseJSON.message);
       },
     });
     return false;

@@ -30,13 +30,10 @@ class Login extends Component {
         Cookies.set("access_token", access_token, {
           path: "/",
         });
-
-        console.log(Cookies.getJSON());
-
         //window.location.href = `/home`;
       },
-      failure: function (err) {
-        console.error(err);
+      error: function (err) {
+        console.error(err.responseJSON.message);
       },
     });
     return false;
@@ -123,7 +120,7 @@ class Login extends Component {
                 />
               </span>
             </div>
-            <div id="remember" class="checkbox">
+            <div id="remember" className="checkbox">
               <label>
                 <input type="checkbox" value="remember-me" /> Remember me
               </label>
