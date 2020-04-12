@@ -14,16 +14,10 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Map</IonTitle>
+          <a href="/login">Sign in</a>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Map</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-      </IonContent>
+      <IonContent></IonContent>
       <MapContainer />
     </IonPage>
   );

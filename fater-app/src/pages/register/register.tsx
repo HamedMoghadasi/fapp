@@ -2,28 +2,27 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  IonTitle,
   IonIcon,
   IonToolbar,
 } from "@ionic/react";
 import { chevronBackOutline } from "ionicons/icons";
 import React from "react";
-import "./login.css";
+import "./register.css";
 
-import LoginContainer from "../../components/login/login";
+import RegisterContainer from "../../components/register/register";
 
 const Login: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <a href="/" className="btn-back">
-            <IonIcon icon={chevronBackOutline} /> Home
+          <a href="/Login" className="btn-back">
+            <IonIcon icon={chevronBackOutline} /> Login
           </a>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <LoginContainer />
+        <RegisterContainer />
       </IonContent>
     </IonPage>
   );

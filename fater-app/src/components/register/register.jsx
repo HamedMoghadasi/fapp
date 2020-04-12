@@ -1,23 +1,25 @@
 import React, { Component } from "react";
-import "./login.css";
-import login from "./login.png";
+
 import $ from "jquery";
 import { IonIcon } from "@ionic/react";
 import { eye, eyeOff } from "ionicons/icons";
-import Cookies from "js-cookie";
 
-class Login extends Component {
+import "./register.css";
+import register from "./register.png";
+
+class Register extends Component {
   onSignIn(e) {
     e.preventDefault();
 
     const body = {
       email: $("#email").val(),
+      username: $("#username").val(),
       password: $("#password").val(),
     };
 
     let API_URL = process.env.REACT_APP_API_URL;
     $.ajax({
-      url: `${API_URL}/api/v1/auth/login`,
+      url: `${API_URL}/api/v1/auth/register`,
       type: "POST",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -26,14 +28,9 @@ class Login extends Component {
       },
       data: JSON.stringify(body),
       success: function (response) {
-        var access_token = response.data.token;
-        Cookies.set("access_token", access_token, {
-          path: "/",
-        });
+        console.log(response);
 
-        console.log(Cookies.getJSON());
-
-        //window.location.href = `/home`;
+        //window.location.href = `/login`;
       },
       failure: function (err) {
         console.error(err);
@@ -77,8 +74,6 @@ class Login extends Component {
     }
   }
 
-  componentDidMount() {}
-
   render() {
     return (
       <div className="container">
@@ -86,12 +81,12 @@ class Login extends Component {
           <img
             id="profile-img"
             className="profile-img-card"
-            src={login}
+            src={register}
             alt="user profile"
           />
           <p id="profile-name" className="profile-name-card"></p>
 
-          <form className="form-signin" onSubmit={this.onSignIn}>
+          <form className="form-register" onSubmit={this.onSignIn}>
             <span id="reauth-email" className="reauth-email"></span>
             <input
               type="email"
@@ -100,6 +95,13 @@ class Login extends Component {
               placeholder="Email address"
               required
               autoFocus
+            />
+            <input
+              type="username"
+              id="username"
+              className="form-control"
+              placeholder="Username"
+              required
             />
             <div id="passwordContainer">
               <input
@@ -123,29 +125,22 @@ class Login extends Component {
                 />
               </span>
             </div>
-            <div id="remember" class="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me" /> Remember me
-              </label>
-            </div>
+
             <button
-              className="btn btn-lg btn-primary btn-block btn-signin"
+              className="btn btn-lg btn-warning btn-block btn-signin"
               type="submit"
             >
-              Sign in
+              Register
             </button>
           </form>
-          <a href="/ForgetPassword" className="forgot-password">
-            Forgot the password?
-          </a>
         </div>
 
-        <a href="/Register" className="btn btn-danger btn-register">
-          Register Now !
+        <a href="/login" className="btn btn-register btn-primary">
+          Have you an account? Log in.
         </a>
       </div>
     );
   }
 }
 
-export default Login;
+export default Register;
