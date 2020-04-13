@@ -177,3 +177,23 @@ html {
   display: none;
   margin-top: 5px;
 }
+#captcha-container svg {
+  margin-left: 63px;
+  margin-bottom: 8px;
+}
+
+#captcha-svg-container {
+  background-color: whitesmoke;
+  position: relative;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  min-height: 58px;
+}
+#captcha-svg-container button {
+  border-radius: 5px 2px 2px 2px;
+  width: 10%;
+  background-color: #dee2e6;
+  position: absolute;
+  z-index: 2;
+  top: 0px;
+}

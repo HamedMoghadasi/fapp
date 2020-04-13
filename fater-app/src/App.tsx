@@ -38,7 +38,6 @@ import "./theme/variables.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 const App: React.FC = () => {
-  console.log(window.innerWidth);
   const accountUrl = true ? "/Login" : "/dashboard";
 
   if (window.innerWidth >= 800) {
