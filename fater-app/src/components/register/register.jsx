@@ -69,7 +69,7 @@ class Register extends Component {
 
           setTimeout(() => {
             window.location.href = `/login`;
-          }, 15000);
+          }, 10000);
         } else {
           notif("check you internet connection.", "error");
         }

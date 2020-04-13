@@ -115,10 +115,7 @@ class Login extends Component {
     }
   }
 
-  componentDidMount() {
-    this.notify("alert e ahha", "error");
-    this.notify("alert e ahha", "success");
-  }
+  componentDidMount() {}
 
   render() {
     return (
