@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import localStorage from "local-storage";
 import request from "request";
 import bcrypt from "bcryptjs";
+import authHelper from "../../utils/Auth";
 
 let API_URL = process.env.REACT_APP_API_URL;
 let captchaSecret = process.env.REACT_APP_CAPTCHA_SECRET;
@@ -143,6 +144,7 @@ class Login extends Component {
     });
     return body;
   };
+
   validateCaptcha = () => {
     const token = $("#captcha-input").attr("token");
     const text = $("#captcha-input").val();
@@ -173,6 +175,10 @@ class Login extends Component {
   componentDidMount() {
     this.getCaptcha();
   }
+
+  componentWillMount = () => {
+    authHelper.isAuthenticated();
+  };
 
   render() {
     return (
