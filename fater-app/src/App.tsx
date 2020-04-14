@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import ForgetPassword from "./pages/forgetPassword/forgetPassword";
+import AdminTemplate from "./pages/admin/template/adminTemplate";
 
 import { map, person } from "ionicons/icons";
 
@@ -36,6 +37,8 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "popper.js";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 
 const App: React.FC = () => {
   const accountUrl = true ? "/Login" : "/dashboard";
@@ -54,6 +57,7 @@ const App: React.FC = () => {
               exact={true}
             />
             <Route exact path="/" render={() => <Redirect to="/home" />} />
+            <Route path="/dashboard" component={AdminTemplate} exact={true} />
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>
@@ -74,6 +78,7 @@ const App: React.FC = () => {
               exact={true}
             />
             <Route exact path="/" render={() => <Redirect to="/home" />} />
+            <Route path="/dashboard" component={AdminTemplate} exact={true} />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             <IonTabButton tab="Home" href="/home">
