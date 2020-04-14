@@ -10,9 +10,9 @@ import React from "react";
 
 import "./forgetPassword.css";
 
-import ForgetPassword from "../../components/forgetPassword/forgetPassword";
+import ForgetPasswordContainer from "../../components/forgetPassword/forgetPassword";
 
-const Login: React.FC = () => {
+const ForgetPassword: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -23,10 +23,10 @@ const Login: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <ForgetPassword />
+        <ForgetPasswordContainer />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Login;
+export default ForgetPassword;
