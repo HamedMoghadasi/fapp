@@ -15,12 +15,17 @@ import {
   call,
   logOutOutline,
   add,
+  remove,
+  desktopOutline,
+  desktop,
 } from "ionicons/icons";
 
 import "./sidebar.css";
 let sidebarClass = false;
 let usersSubmenuClass = "collapse list-unstyled";
 let pagesSubmenuClass = "collapse list-unstyled";
+let usersAreaExpanded = false;
+let pagesAreaExpanded = false;
 class SideBar extends Component {
   constructor(props) {
     super(props);
@@ -29,9 +34,11 @@ class SideBar extends Component {
     switch (this.props.menu) {
       case "users":
         usersSubmenuClass += " show";
+        usersAreaExpanded = true;
         break;
       case "pages":
         pagesSubmenuClass += " show";
+        pagesAreaExpanded = true;
       default:
         break;
     }
@@ -63,14 +70,31 @@ class SideBar extends Component {
             <ul className="list-unstyled components">
               {/* <p>Hamed Moghadasi</p> */}
               <li className="active">
+                <Link to="/dashboard" replace>
+                  <IonIcon
+                    className="sidebar-item-icon"
+                    icon={desktopOutline}
+                  />
+                  Dashboard
+                </Link>
+              </li>
+              <li>
                 <a
                   id="usersMenu"
                   href="#usersSubmenu"
+                  className="masterMenu"
                   data-toggle="collapse"
-                  aria-expanded="false"
+                  aria-expanded={usersAreaExpanded}
                 >
                   <IonIcon className="sidebar-item-icon" icon={people} />
-                  <IonIcon className="sidebar-masterItem-icon" icon={add} />
+                  <IonIcon
+                    className="sidebar-masterItem-icon plus"
+                    icon={add}
+                  />
+                  <IonIcon
+                    className="sidebar-masterItem-icon minus"
+                    icon={remove}
+                  />
                   Users
                 </a>
                 <ul className={usersSubmenuClass} id="usersSubmenu">
@@ -109,10 +133,17 @@ class SideBar extends Component {
                   className="masterMenu"
                   href="#pagesSubmenu"
                   data-toggle="collapse"
-                  aria-expanded="false"
+                  aria-expanded={pagesAreaExpanded}
                 >
                   <IonIcon className="sidebar-item-icon" icon={albums} />
-                  <IonIcon className="sidebar-masterItem-icon" icon={add} />
+                  <IonIcon
+                    className="sidebar-masterItem-icon plus"
+                    icon={add}
+                  />
+                  <IonIcon
+                    className="sidebar-masterItem-icon minus"
+                    icon={remove}
+                  />
                   Pages
                 </a>
                 <ul className={pagesSubmenuClass} id="pagesSubmenu">

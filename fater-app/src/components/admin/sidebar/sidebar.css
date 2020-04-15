@@ -78,7 +78,7 @@ a:focus {
   height: 35px;
   line-height: 35px;
   text-align: center;
-  background: #278efd;
+  background: #0062cc;
   color: white;
   position: absolute;
   top: 0px;
@@ -110,7 +110,7 @@ a:focus {
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #278efd;
+  background: #0062cc;
 }
 
 #sidebar .sidebar-footer {
@@ -139,7 +139,7 @@ a:focus {
 }
 
 #sidebar ul.components {
-  padding: 5px 0 25px;
+  padding: 0px 0 25px;
   border-bottom: 1px dashed #0062cc;
 }
 
@@ -247,6 +247,22 @@ a.article:hover {
   position: absolute;
   right: 15px;
   top: 15px;
+}
+
+.sidebar-masterItem-icon.plus {
+  display: none;
+}
+
+.sidebar-masterItem-icon.minus {
+  display: block;
+}
+
+a.masterMenu[aria-expanded="false"] .sidebar-masterItem-icon.plus {
+  display: block;
+}
+
+a.masterMenu[aria-expanded="false"] .sidebar-masterItem-icon.minus {
+  display: none;
 }
 
 #sidebar ul li a:hover .sidebar-masterItem-icon {
