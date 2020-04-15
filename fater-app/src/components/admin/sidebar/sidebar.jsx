@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import { IonIcon } from "@ionic/react";
+import { Link } from "react-router-dom";
 import {
   menu,
   close,
@@ -16,18 +17,32 @@ import {
 } from "ionicons/icons";
 
 import "./sidebar.css";
-
+let sidebarClass = false;
+let usersSubmenuClass = "collapse list-unstyled";
+let pagesSubmenuClass = "collapse list-unstyled";
 class SideBar extends Component {
+  constructor(props) {
+    super(props);
+    sidebarClass = this.props.isSidebarOpen === "true" ? "active" : "";
+    console.log("sidebar: ", sidebarClass);
+    switch (this.props.menu) {
+      case "users":
+        usersSubmenuClass += " show";
+        break;
+      case "pages":
+        pagesSubmenuClass += " show";
+      default:
+        break;
+    }
+  }
   componentDidMount = () => {
     $(document).ready(function () {
       $("#dismiss, .overlay").on("click", function () {
         $("#sidebar").removeClass("active");
-        $(".overlay").removeClass("active");
       });
 
       $("#sidebarCollapse").on("click", function () {
         $("#sidebar").addClass("active");
-        $(".overlay").addClass("active");
         $(".collapse.in").toggleClass("in");
         $("a[aria-expanded=true]").attr("aria-expanded", "false");
       });
@@ -37,7 +52,7 @@ class SideBar extends Component {
     return (
       <React.Fragment>
         <div className="wrapper">
-          <nav id="sidebar">
+          <nav id="sidebar" className={sidebarClass}>
             <div id="dismiss">
               <IonIcon icon={close} />
             </div>
@@ -48,61 +63,83 @@ class SideBar extends Component {
               {/* <p>Hamed Moghadasi</p> */}
               <li className="active">
                 <a
-                  href="#homeSubmenu"
+                  id="usersMenu"
+                  href="#usersSubmenu"
                   data-toggle="collapse"
                   aria-expanded="false"
                 >
                   <IonIcon className="sidebar-item-icon" icon={people} />
                   Users
                 </a>
-                <ul className="collapse list-unstyled" id="homeSubmenu">
+                <ul className={usersSubmenuClass} id="usersSubmenu">
                   <li>
-                    <a href="#">All Users</a>
+                    <Link
+                      to={{
+                        pathname: "/dashboard/Users/All",
+                        state: {
+                          isSidebarOpen: true,
+                        },
+                      }}
+                      replace
+                    >
+                      All Users
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">Suspend User</a>
+                    <Link to="/dashboard/Users/Suspended" replace>
+                      Suspend User
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">Pending Users</a>
+                    <Link to="/dashboard/Users/Pending" replace>
+                      Pending Users
+                    </Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="#">
+                <Link to="/dashboard" replace>
                   <IonIcon className="sidebar-item-icon" icon={analytics} />
                   Logs
-                </a>
+                </Link>
                 <a
-                  href="#pageSubmenu"
+                  id="pagesMenu"
+                  href="#pagesSubmenu"
                   data-toggle="collapse"
                   aria-expanded="false"
                 >
                   <IonIcon className="sidebar-item-icon" icon={albums} />
                   Pages
                 </a>
-                <ul className="collapse list-unstyled" id="pageSubmenu">
+                <ul className={pagesSubmenuClass} id="pagesSubmenu">
                   <li>
-                    <a href="#">Page 1</a>
+                    <Link to="/dashboard" replace>
+                      Page 1
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">Page 2</a>
+                    <Link to="/dashboard" replace>
+                      Page 2
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">Page 3</a>
+                    <Link to="/dashboard" replace>
+                      Page 3
+                    </Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="#">
+                <Link to="/dashboard" replace>
                   <IonIcon className="sidebar-item-icon" icon={heartOutline} />
                   Portfolio
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="/dashboard" replace>
                   <IonIcon className="sidebar-item-icon" icon={call} />
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
 

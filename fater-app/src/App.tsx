@@ -15,7 +15,9 @@ import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import ForgetPassword from "./pages/forgetPassword/forgetPassword";
 import AdminTemplate from "./pages/admin/template/adminTemplate";
-
+import AllUsers from "./pages/admin/users/AllUsers";
+import SuspendedUsers from "./pages/admin/users/SuspendedUser";
+import PendingUsers from "./pages/admin/users/PendingUsers";
 import { map, person } from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
@@ -47,18 +49,31 @@ const App: React.FC = () => {
     return (
       <IonApp>
         <IonReactRouter>
-          <IonRouterOutlet>
-            <Route path="/home" component={Home} exact={true} />
-            <Route path="/login" component={Login} exact={true} />
-            <Route path="/register" component={Register} exact={true} />
-            <Route
-              path="/forgetPassword"
-              component={ForgetPassword}
-              exact={true}
-            />
-            <Route exact path="/" render={() => <Redirect to="/home" />} />
-            <Route path="/dashboard" component={AdminTemplate} exact={true} />
-          </IonRouterOutlet>
+          <Route path="/home" component={Home} exact={true} />
+          <Route path="/login" component={Login} exact={true} />
+          <Route path="/register" component={Register} exact={true} />
+          <Route
+            path="/forgetPassword"
+            component={ForgetPassword}
+            exact={true}
+          />
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route path="/dashboard" component={AdminTemplate} exact={true} />
+          <Route
+            path="/dashboard/Users/All"
+            component={AllUsers}
+            exact={true}
+          />
+          <Route
+            path="/dashboard/Users/Suspended"
+            component={SuspendedUsers}
+            exact={true}
+          />
+          <Route
+            path="/dashboard/Users/Pending"
+            component={PendingUsers}
+            exact={true}
+          />
         </IonReactRouter>
       </IonApp>
     );
@@ -79,6 +94,21 @@ const App: React.FC = () => {
             />
             <Route exact path="/" render={() => <Redirect to="/home" />} />
             <Route path="/dashboard" component={AdminTemplate} exact={true} />
+            <Route
+              path="/dashboard/Users/All"
+              component={AllUsers}
+              exact={true}
+            />
+            <Route
+              path="/dashboard/Users/Suspended"
+              component={SuspendedUsers}
+              exact={true}
+            />
+            <Route
+              path="/dashboard/Users/Pending"
+              component={PendingUsers}
+              exact={true}
+            />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             <IonTabButton tab="Home" href="/home">

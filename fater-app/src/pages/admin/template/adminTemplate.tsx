@@ -22,7 +22,7 @@ const AdminTemplate: React.FC = () => {
       </IonHeader>
       <IonContent>
         <AdminTemplateContainer>
-          <h1>Hamed Moghadasi</h1>
+          <h1>Dashboard</h1>
         </AdminTemplateContainer>
       </IonContent>
     </IonPage>
