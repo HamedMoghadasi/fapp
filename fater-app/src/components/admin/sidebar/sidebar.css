@@ -50,6 +50,9 @@ a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
+#sidebar-wrapper {
+  background-color: red;
+}
 #sidebar {
   width: 300px;
   position: fixed;
@@ -237,4 +240,25 @@ a.article:hover {
   padding-right: 0;
   font-size: 24px;
   color: #545454;
+}
+
+.sidebar-masterItem-icon {
+  color: white;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+#sidebar ul li a:hover .sidebar-masterItem-icon {
+  color: #278efd;
+  font-weight: bold;
+}
+
+#sidebar ul li.active a .sidebar-masterItem-icon {
+  color: white;
+}
+
+.nav-link-icon.logout {
+  position: absolute;
+  margin: 3px;
 }
