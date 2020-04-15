@@ -1,5 +1,19 @@
+/* eslint-disable */
+
 import React, { Component } from "react";
 import $ from "jquery";
+import { IonIcon } from "@ionic/react";
+import {
+  menu,
+  close,
+  apps,
+  people,
+  analytics,
+  albums,
+  heartOutline,
+  call,
+  logOutOutline,
+} from "ionicons/icons";
 
 import "./sidebar.css";
 
@@ -25,42 +39,45 @@ class SideBar extends Component {
         <div className="wrapper">
           <nav id="sidebar">
             <div id="dismiss">
-              <i className="fas fa-arrow-left"></i>
+              <IonIcon icon={close} />
             </div>
 
-            <div className="sidebar-header">
-              <h3>Bootstrap Sidebar</h3>
-            </div>
+            <div className="sidebar-header"></div>
 
             <ul className="list-unstyled components">
-              <p>Dummy Heading</p>
+              {/* <p>Hamed Moghadasi</p> */}
               <li className="active">
                 <a
                   href="#homeSubmenu"
                   data-toggle="collapse"
                   aria-expanded="false"
                 >
-                  Home
+                  <IonIcon className="sidebar-item-icon" icon={people} />
+                  Users
                 </a>
                 <ul className="collapse list-unstyled" id="homeSubmenu">
                   <li>
-                    <a href="#">Home 1</a>
+                    <a href="#">All Users</a>
                   </li>
                   <li>
-                    <a href="#">Home 2</a>
+                    <a href="#">Suspend User</a>
                   </li>
                   <li>
-                    <a href="#">Home 3</a>
+                    <a href="#">Pending Users</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="#">About</a>
+                <a href="#">
+                  <IonIcon className="sidebar-item-icon" icon={analytics} />
+                  Logs
+                </a>
                 <a
                   href="#pageSubmenu"
                   data-toggle="collapse"
                   aria-expanded="false"
                 >
+                  <IonIcon className="sidebar-item-icon" icon={albums} />
                   Pages
                 </a>
                 <ul className="collapse list-unstyled" id="pageSubmenu">
@@ -76,31 +93,36 @@ class SideBar extends Component {
                 </ul>
               </li>
               <li>
-                <a href="#">Portfolio</a>
+                <a href="#">
+                  <IonIcon className="sidebar-item-icon" icon={heartOutline} />
+                  Portfolio
+                </a>
               </li>
               <li>
-                <a href="#">Contact</a>
+                <a href="#">
+                  <IonIcon className="sidebar-item-icon" icon={call} />
+                  Contact
+                </a>
               </li>
             </ul>
 
             <ul className="list-unstyled CTAs">
               <li>
-                <a
-                  href="https://bootstrapious.com/tutorial/files/sidebar.zip"
-                  className="download"
-                >
-                  Download source
+                <a href="#" className="download">
+                  Update Profile
                 </a>
               </li>
               <li>
-                <a
-                  href="https://bootstrapious.com/p/bootstrap-sidebar"
-                  className="article"
-                >
-                  Back to article
+                <a href="#" className="article">
+                  Back to Map
                 </a>
               </li>
             </ul>
+            <div className="sidebar-footer">
+              <span title="Log Out">
+                <IonIcon icon={logOutOutline} />
+              </span>
+            </div>
           </nav>
 
           <div id="content">
@@ -109,21 +131,21 @@ class SideBar extends Component {
                 <button
                   type="button"
                   id="sidebarCollapse"
-                  className="btn btn-info"
+                  className="btn btn-link btn-large"
                 >
-                  <i className="fas fa-align-left"></i>
-                  <span>Toggle Sidebar</span>
+                  <IonIcon icon={menu} />
                 </button>
                 <button
-                  className="btn btn-dark d-inline-block d-lg-none ml-auto"
+                  className="btn btn-link d-inline-block d-lg-none ml-auto"
                   type="button"
+                  id="rightMenuToggle"
                   data-toggle="collapse"
                   data-target="#navbarSupportedContent"
                   aria-controls="navbarSupportedContent"
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                 >
-                  <i className="fas fa-align-justify"></i>
+                  <IonIcon icon={apps} />
                 </button>
 
                 <div
@@ -133,12 +155,12 @@ class SideBar extends Component {
                   <ul className="nav navbar-nav ml-auto">
                     <li className="nav-item active">
                       <a className="nav-link" href="#">
-                        Page
+                        Hamed Moghadasi
                       </a>
                     </li>
                     <li className="nav-item">
                       <a className="nav-link" href="#">
-                        Page
+                        Logout
                       </a>
                     </li>
                   </ul>

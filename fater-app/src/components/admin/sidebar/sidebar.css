@@ -51,16 +51,16 @@ a:focus {
 ----------------------------------------------------- */
 
 #sidebar {
-  width: 250px;
+  width: 300px;
   position: fixed;
   top: 0;
-  left: -250px;
+  left: -300px;
   height: 100vh;
   z-index: 999;
-  background: #7386d5;
+  background: #278efd;
   color: #fff;
   transition: all 0.3s;
-  overflow-y: scroll;
+  overflow-y: auto;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -69,13 +69,16 @@ a:focus {
 }
 
 #dismiss {
+  font-size: 40px;
+  opacity: 0.6;
   width: 35px;
   height: 35px;
   line-height: 35px;
   text-align: center;
-  background: #7386d5;
+  background: #278efd;
+  color: white;
   position: absolute;
-  top: 10px;
+  top: 0px;
   right: 10px;
   cursor: pointer;
   -webkit-transition: all 0.3s;
@@ -84,8 +87,7 @@ a:focus {
 }
 
 #dismiss:hover {
-  background: #fff;
-  color: #7386d5;
+  opacity: 1;
 }
 
 .overlay {
@@ -105,12 +107,37 @@ a:focus {
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #6d7fcc;
+  background: #278efd;
+}
+
+#sidebar .sidebar-footer {
+  font-size: 30px;
+  padding-top: 12px;
+  background: #0052ab;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  line-height: 35px;
+  text-align: right;
+}
+
+#sidebar .sidebar-footer ion-icon {
+  margin-right: 10px;
+  opacity: 0.5;
+  color: white;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#sidebar .sidebar-footer ion-icon:hover {
+  opacity: 1;
 }
 
 #sidebar ul.components {
-  padding: 20px 0;
-  border-bottom: 1px solid #47748b;
+  padding: 5px 0 25px;
+  border-bottom: 1px dashed #0062cc;
 }
 
 #sidebar ul p {
@@ -119,20 +146,27 @@ a:focus {
 }
 
 #sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
   padding: 10px;
   font-size: 1.1em;
   display: block;
 }
 
+.sidebar-item-icon {
+  margin: -1.5px;
+  margin-right: 9.5px;
+}
+
 #sidebar ul li a:hover {
-  color: #7386d5;
+  color: #278efd;
   background: #fff;
 }
 
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #6d7fcc;
+  background: #469fff;
 }
 
 a[data-toggle="collapse"] {
@@ -150,7 +184,7 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #6d7fcc;
+  background: #0062cc;
 }
 
 ul.CTAs {
@@ -167,25 +201,40 @@ ul.CTAs a {
 
 a.download {
   background: #fff;
-  color: #7386d5;
+  color: #278efd !important;
 }
 
 a.article,
 a.article:hover {
-  background: #6d7fcc !important;
+  background: #0062cc !important;
   color: #fff !important;
 }
 
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-
+#content .navbar {
+  z-index: 5;
+}
 #content {
+  opacity: 0.8;
   width: 100%;
-  padding: 20px;
   min-height: 100vh;
   transition: all 0.3s;
   position: absolute;
   top: 0;
   right: 0;
+}
+
+#sidebarCollapse {
+  font-size: 30px;
+  padding-top: 0;
+  padding-left: 0;
+  color: #545454;
+}
+
+#rightMenuToggle {
+  padding-right: 0;
+  font-size: 24px;
+  color: #545454;
 }
