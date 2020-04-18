@@ -1,18 +1,19 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
-import { Roles } from "../../../constants/Roles";
-import { Protect } from "../../../utils/AuthHelper";
+import { Protect } from "../../../utils/Auth";
 import { Redirect } from "react-router-dom";
 
 import AdminTemplateContainer from "../../../components/admin/template/adminTemplate";
 
 export interface IAllUsersProps {
   needAuthentication: boolean;
-  neededRole: Roles;
+  neededRole: string;
 }
 
 const AllUsers: React.FC<IAllUsersProps> = (props) => {
   var userState = Protect(props);
+  console.log("protect result -- ", userState);
+
   if (userState.isValid) {
     return (
       <IonPage>

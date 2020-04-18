@@ -58,9 +58,11 @@ const App: React.FC = () => {
         <Route path="/dashboard" component={Dashboard} exact={true} />
         <Route
           path="/dashboard/Users/All"
-          component={AllUsers}
-          needAuthentication={true}
-          neededRole={Roles.Admin}
+          component={() => {
+            return (
+              <AllUsers needAuthentication={true} neededRole={Roles.Admin} />
+            );
+          }}
           exact={true}
         />
         <Route
