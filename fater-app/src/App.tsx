@@ -1,24 +1,22 @@
+/** React */
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import {
-  IonApp,
-  IonRouterOutlet,
-  IonTabs,
-  IonTabBar,
-  IonTabButton,
-  IonIcon,
-  IonLabel,
-} from "@ionic/react";
+import { Roles } from "./constants/Roles";
+
+/* ionic/react Components */
+import { IonApp } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
+
+/* Pages */
 import Home from "./pages/Home";
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import ForgetPassword from "./pages/forgetPassword/forgetPassword";
-import AdminTemplate from "./pages/admin/template/adminTemplate";
+import Dashboard from "./pages/admin/template/adminTemplate";
 import AllUsers from "./pages/admin/users/AllUsers";
 import SuspendedUsers from "./pages/admin/users/SuspendedUser";
 import PendingUsers from "./pages/admin/users/PendingUsers";
-import { map, person } from "ionicons/icons";
+import AccessDenied from "./pages/errors/AccessDenied";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -43,85 +41,38 @@ import "popper.js";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 
 const App: React.FC = () => {
-  const accountUrl = true ? "/Login" : "/dashboard";
-
-  if (window.innerWidth >= 800) {
-    return (
-      <IonApp>
-        <IonReactRouter>
-          <Route path="/home" component={Home} exact={true} />
-          <Route path="/login" component={Login} exact={true} />
-          <Route path="/register" component={Register} exact={true} />
-          <Route
-            path="/forgetPassword"
-            component={ForgetPassword}
-            exact={true}
-          />
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
-          <Route path="/dashboard" component={AdminTemplate} exact={true} />
-          <Route
-            path="/dashboard/Users/All"
-            component={AllUsers}
-            exact={true}
-          />
-          <Route
-            path="/dashboard/Users/Suspended"
-            component={SuspendedUsers}
-            exact={true}
-          />
-          <Route
-            path="/dashboard/Users/Pending"
-            component={PendingUsers}
-            exact={true}
-          />
-        </IonReactRouter>
-      </IonApp>
-    );
-  }
-
   return (
     <IonApp>
       <IonReactRouter>
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route path="/home" component={Home} exact={true} />
-            <Route path="/login" component={Login} exact={true} />
-            <Route path="/register" component={Register} exact={true} />
-            <Route
-              path="/forgetPassword"
-              component={ForgetPassword}
-              exact={true}
-            />
-            <Route exact path="/" render={() => <Redirect to="/home" />} />
-            <Route path="/dashboard" component={AdminTemplate} exact={true} />
-            <Route
-              path="/dashboard/Users/All"
-              component={AllUsers}
-              exact={true}
-            />
-            <Route
-              path="/dashboard/Users/Suspended"
-              component={SuspendedUsers}
-              exact={true}
-            />
-            <Route
-              path="/dashboard/Users/Pending"
-              component={PendingUsers}
-              exact={true}
-            />
-          </IonRouterOutlet>
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="Home" href="/home">
-              <IonIcon icon={map} />
-              <IonLabel>Map</IonLabel>
-            </IonTabButton>
+        <Route
+          path="/Error/AccessDenied"
+          component={AccessDenied}
+          exact={true}
+        />
 
-            <IonTabButton href={accountUrl}>
-              <IonIcon icon={person} />
-              <IonLabel>Account</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        <Route path="/home" component={Home} exact={true} />
+        <Route path="/login" component={Login} exact={true} />
+        <Route path="/register" component={Register} exact={true} />
+        <Route path="/forgetPassword" component={ForgetPassword} exact={true} />
+        <Route exact path="/" render={() => <Redirect to="/home" />} />
+        <Route path="/dashboard" component={Dashboard} exact={true} />
+        <Route
+          path="/dashboard/Users/All"
+          component={AllUsers}
+          needAuthentication={true}
+          neededRole={Roles.Admin}
+          exact={true}
+        />
+        <Route
+          path="/dashboard/Users/Suspended"
+          component={SuspendedUsers}
+          exact={true}
+        />
+        <Route
+          path="/dashboard/Users/Pending"
+          component={PendingUsers}
+          exact={true}
+        />
       </IonReactRouter>
     </IonApp>
   );
