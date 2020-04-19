@@ -53,6 +53,7 @@ class Login extends Component {
         const body = {
           email: $("#email").val(),
           password: $("#password").val(),
+          rememberMe: `${$("#remember input").prop("checked")}`,
           captcha: `${response.token}${captchaSecret}`,
         };
 
@@ -179,7 +180,6 @@ class Login extends Component {
   componentWillMount = () => {
     authHelper.isAuthenticated();
   };
-
   render() {
     return (
       <React.Fragment>
@@ -228,7 +228,7 @@ class Login extends Component {
               </div>
               <div id="remember" className="checkbox">
                 <label>
-                  <input type="checkbox" value="remember-me" /> Remember me
+                  <input type="checkbox" /> Remember me
                 </label>
               </div>
 
