@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import { IonIcon } from "@ionic/react";
+import { GetAuthenticatedUser } from "../../../utils/Auth";
 import { Link } from "react-router-dom";
 import {
   menu,
@@ -26,6 +27,7 @@ let usersSubmenuClass = "collapse list-unstyled";
 let pagesSubmenuClass = "collapse list-unstyled";
 let usersAreaExpanded = false;
 let pagesAreaExpanded = false;
+let API_URL = process.env.REACT_APP_API_URL;
 class SideBar extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +44,7 @@ class SideBar extends Component {
         break;
     }
   }
+
   componentDidMount = () => {
     $(document).ready(function () {
       $("#dismiss, .overlay").on("click", function () {
@@ -53,10 +56,17 @@ class SideBar extends Component {
         $(".collapse.in").toggleClass("in");
         $("a[aria-expanded=true]").attr("aria-expanded", "false");
       });
+
+      const authenticatedUser = GetAuthenticatedUser();
+      $("#username").html(
+        `<div class="username-container">
+          <b class="email">${authenticatedUser.email}</b>
+          <span class="role">(${authenticatedUser.role})<span>
+         </div>`
+      );
     });
   };
   Logout = () => {
-    console.log("log outed");
     window.localStorage.removeItem("access_token");
     window.location.href = "/login";
   };
@@ -226,7 +236,7 @@ class SideBar extends Component {
               >
                 <ul className="nav navbar-nav ml-auto">
                   <li className="nav-item active">
-                    <span className="nav-link">Hamed Moghadasi</span>
+                    <span className="nav-link" id="username"></span>
                   </li>
                   <li className="nav-item">
                     <span

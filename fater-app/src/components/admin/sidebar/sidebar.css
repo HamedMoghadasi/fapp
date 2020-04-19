@@ -278,3 +278,18 @@ a.masterMenu[aria-expanded="false"] .sidebar-masterItem-icon.minus {
   position: absolute;
   margin: 3px;
 }
+
+.username-container {
+  margin-right: 2.5px;
+  border-bottom: 1px dashed #8c8c8c;
+}
+
+.username-container .email {
+  color: #525961;
+}
+
+.username-container .role {
+  color: #dc3545;
+  margin-left: 2.5px;
+  font-size: 12px;
+}

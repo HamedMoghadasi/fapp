@@ -91,3 +91,42 @@ const verifyUser = function () {
     return { isValid: false, role: "" };
   }
 };
+
+export const GetAuthenticatedUser = function () {
+  try {
+    if (!window.localStorage.access_token) {
+      console.log("Token not founded");
+      return {};
+    } else {
+      console.log("verify");
+      const body = {
+        token: window.localStorage.access_token.replace(/"/g, ""),
+      };
+
+      var temp = null;
+      $.ajax({
+        url: `${API_URL}/api/v1/auth/getAuthenticatedUser`,
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
+        xhrFields: {
+          withCredentials: true,
+        },
+        data: JSON.stringify(body),
+        success: function (response) {
+          temp = response.data;
+          console.log(response);
+        },
+        error: function (error) {
+          console.error(error);
+        },
+      });
+    }
+
+    return temp;
+  } catch (error) {
+    console.log(error);
+    return { message: "and error occured" };
+  }
+};
