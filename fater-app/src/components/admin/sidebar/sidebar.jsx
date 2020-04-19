@@ -30,7 +30,6 @@ class SideBar extends Component {
   constructor(props) {
     super(props);
     sidebarClass = this.props.isSidebarOpen === "true" ? "active" : "";
-    console.log("sidebar: ", sidebarClass);
     switch (this.props.menu) {
       case "users":
         usersSubmenuClass += " show";
@@ -56,6 +55,12 @@ class SideBar extends Component {
       });
     });
   };
+  Logout = () => {
+    console.log("log outed");
+    window.localStorage.removeItem("access_token");
+    window.location.href = "/login";
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -221,17 +226,19 @@ class SideBar extends Component {
               >
                 <ul className="nav navbar-nav ml-auto">
                   <li className="nav-item active">
-                    <a className="nav-link" href="#">
-                      Hamed Moghadasi
-                    </a>
+                    <span className="nav-link">Hamed Moghadasi</span>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <span
+                      className="nav-link"
+                      style={{ cursor: "pointer" }}
+                      onClick={this.Logout}
+                    >
                       Logout
                       <span className="nav-link-icon logout">
                         <IonIcon icon={logOutOutline} />
                       </span>
-                    </a>
+                    </span>
                   </li>
                 </ul>
               </div>
