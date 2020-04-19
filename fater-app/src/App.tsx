@@ -55,7 +55,15 @@ const App: React.FC = () => {
         <Route path="/register" component={Register} exact={true} />
         <Route path="/forgetPassword" component={ForgetPassword} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
-        <Route path="/dashboard" component={Dashboard} exact={true} />
+        <Route
+          path="/dashboard"
+          component={() => {
+            return (
+              <Dashboard needAuthentication={true} neededRole={Roles.Admin} />
+            );
+          }}
+          exact={true}
+        />
         <Route
           path="/dashboard/Users/All"
           component={() => {
@@ -67,12 +75,26 @@ const App: React.FC = () => {
         />
         <Route
           path="/dashboard/Users/Suspended"
-          component={SuspendedUsers}
+          component={() => {
+            return (
+              <SuspendedUsers
+                needAuthentication={true}
+                neededRole={Roles.Admin}
+              />
+            );
+          }}
           exact={true}
         />
         <Route
           path="/dashboard/Users/Pending"
-          component={PendingUsers}
+          component={() => {
+            return (
+              <PendingUsers
+                needAuthentication={true}
+                neededRole={Roles.Admin}
+              />
+            );
+          }}
           exact={true}
         />
       </IonReactRouter>

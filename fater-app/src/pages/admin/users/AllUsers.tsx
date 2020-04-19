@@ -12,8 +12,7 @@ export interface IAllUsersProps {
 
 const AllUsers: React.FC<IAllUsersProps> = (props) => {
   var userState = Protect(props);
-  console.log("protect result -- ", userState);
-
+  
   if (userState.isValid) {
     return (
       <IonPage>
@@ -25,6 +24,7 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
       </IonPage>
     );
   }
+
   return <Redirect to={userState.redirectPath} />;
 };
 

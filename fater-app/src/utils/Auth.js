@@ -23,7 +23,6 @@ const result = {
 
 export const Protect = (props) => {
   var verifyResponse = verifyUser();
-  console.log("ajax response", verifyUser);
   if (verifyResponse) {
     userState.isAuthentication = verifyResponse.isValid;
     userState.role = verifyResponse.role;
@@ -46,6 +45,7 @@ export const Protect = (props) => {
       } else {
         console.log("redirect to login. \n user is not authenticated.");
         result.redirectPath = Urls.Login;
+        result.isValid = false;
       }
     }
   }
@@ -54,31 +54,37 @@ export const Protect = (props) => {
 
 const verifyUser = function () {
   try {
-    const body = {
-      token: window.localStorage.access_token.replace(/"/g, ""),
-    };
-    console.log("body", body);
+    if (!window.localStorage.access_token) {
+      console.log("Token not founded");
+      return { isValid: false, role: "" };
+    } else {
+      console.log("verify");
+      const body = {
+        token: window.localStorage.access_token.replace(/"/g, ""),
+      };
 
-    var temp = null;
-    $.ajax({
-      url: `${API_URL}/api/v1/auth/verifyUser`,
-      type: "POST",
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      async: false,
-      xhrFields: {
-        withCredentials: true,
-      },
-      data: JSON.stringify(body),
-      success: function (response) {
-        temp = response.data;
-        console.log(response.message);
-      },
-      error: function (error) {
-        const msg = error.responseJSON.message;
-        console.error(msg);
-      },
-    });
+      var temp = null;
+      $.ajax({
+        url: `${API_URL}/api/v1/auth/verifyUser`,
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
+        xhrFields: {
+          withCredentials: true,
+        },
+        data: JSON.stringify(body),
+        success: function (response) {
+          temp = response.data;
+          console.log(response.message);
+        },
+        error: function (error) {
+          const msg = error.responseJSON.message;
+          console.error(msg);
+        },
+      });
+    }
+
     return temp;
   } catch (error) {
     console.log(error);
