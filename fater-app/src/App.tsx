@@ -1,6 +1,6 @@
 /** React */
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Roles } from "./constants/Roles";
 
 /* ionic/react Components */

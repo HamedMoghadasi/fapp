@@ -66,7 +66,22 @@ class SideBar extends Component {
       );
     });
   };
+
   Logout = () => {
+    $.ajax({
+      url: `${API_URL}/api/v1/auth/logout`,
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader(
+          "Authorization",
+          `Beare ${window.localStorage.access_token.replace(/"/g, "")}`
+        );
+      },
+      success: function (response) {},
+    });
+
     window.localStorage.removeItem("access_token");
     window.location.href = "/login";
   };
