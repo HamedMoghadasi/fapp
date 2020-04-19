@@ -47,6 +47,7 @@ class Map extends Component {
   removeAttribute = () => {
     $(document).ready(() => {
       $(".ol-attribution").remove();
+      this.olmap.updateSize();
     });
   };
 

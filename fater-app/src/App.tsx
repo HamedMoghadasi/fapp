@@ -17,6 +17,7 @@ import AllUsers from "./pages/admin/users/AllUsers";
 import SuspendedUsers from "./pages/admin/users/SuspendedUser";
 import PendingUsers from "./pages/admin/users/PendingUsers";
 import AccessDenied from "./pages/errors/AccessDenied";
+import NotFound from "./pages/errors/NotFound";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -44,6 +45,10 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
+        <Route path="*">
+          <NotFound />
+        </Route>
+
         <Route
           path="/Error/AccessDenied"
           component={AccessDenied}
@@ -54,7 +59,7 @@ const App: React.FC = () => {
         <Route path="/login" component={Login} exact={true} />
         <Route path="/register" component={Register} exact={true} />
         <Route path="/forgetPassword" component={ForgetPassword} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
+        <Route exact path="/" component={Home} />
         <Route
           path="/dashboard"
           component={() => {
