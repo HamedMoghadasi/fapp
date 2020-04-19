@@ -281,15 +281,15 @@ a.masterMenu[aria-expanded="false"] .sidebar-masterItem-icon.minus {
 
 .username-container {
   margin-right: 2.5px;
-  border-bottom: 1px dashed #8c8c8c;
+  border-bottom: 1px dashed rgba(0, 123, 255, 0.25);
 }
 
 .username-container .email {
-  color: #525961;
+  color: #007bff;
 }
 
 .username-container .role {
-  color: #dc3545;
+  color: rgba(0, 123, 255, 0.5);
   margin-left: 2.5px;
   font-size: 12px;
 }

@@ -60,7 +60,7 @@ class SideBar extends Component {
       const authenticatedUser = GetAuthenticatedUser();
       $("#username").html(
         `<div class="username-container">
-          <b class="email">${authenticatedUser.email}</b>
+          <span class="email">${authenticatedUser.email}</span>
           <span class="role">(${authenticatedUser.role})<span>
          </div>`
       );
