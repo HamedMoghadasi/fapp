@@ -7,7 +7,6 @@ let API_URL = process.env.REACT_APP_API_URL;
 export default class AuthHelper {
   static async isAuthenticated() {
     const token = window.localStorage.getItem("access_token");
-    console.log(token);
   }
 }
 
@@ -95,10 +94,8 @@ const verifyUser = function () {
 export const GetAuthenticatedUser = function () {
   try {
     if (!window.localStorage.access_token) {
-      console.log("Token not founded");
       return {};
     } else {
-      console.log("verify");
       const body = {
         token: window.localStorage.access_token.replace(/"/g, ""),
       };
@@ -116,7 +113,6 @@ export const GetAuthenticatedUser = function () {
         data: JSON.stringify(body),
         success: function (response) {
           temp = response.data;
-          console.log(response);
         },
         error: function (error) {
           console.error(error);
