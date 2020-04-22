@@ -14,3 +14,8 @@ tbody tr:hover {
 tr {
   text-align: center;
 }
+
+.dataTables_info .select-info {
+  color: #28a745;
+  margin-left: 15%;
+}

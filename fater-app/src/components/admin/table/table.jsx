@@ -11,53 +11,27 @@ export default class Tableo extends React.Component {
   constructor(props) {
     super(props);
     this.datatable = null;
+    console.log(this.props);
   }
 
   componentDidMount() {
-    const operators = this.props.operators;
+    const { configuration } = this.props;
+    const operators = configuration.operators;
     $(document).ready(function () {
       this.dataTable = $("#tableo").DataTable({
-        data: [
-          { id: 1, name: "Hamed Moghadasi", age: 25 },
-          { id: 2, name: "reza gholi", age: 25 },
-          { id: 3, name: "juju razii", age: 25 },
-          { id: 1, name: "Hamed Moghadasi", age: 25 },
-          { id: 2, name: "reza gholi", age: 25 },
-          { id: 3, name: "juju razii", age: 25 },
-          { id: 1, name: "Hamed Moghadasi", age: 25 },
-          { id: 2, name: "reza gholi", age: 25 },
-          { id: 3, name: "juju razii", age: 25 },
-          { id: 1, name: "Hamed Moghadasi", age: 25 },
-          { id: 2, name: "reza gholi", age: 25 },
-          { id: 3, name: "juju razii", age: 25 },
-          { id: 1, name: "Hamed Moghadasi", age: 25 },
-          { id: 2, name: "reza gholi", age: 25 },
-          { id: 3, name: "juju razii", age: 25 },
-          { id: 1, name: "Hamed Moghadasi", age: 25 },
-          { id: 2, name: "reza gholi", age: 25 },
-          { id: 3, name: "juju razii", age: 25 },
-          { id: 1, name: "Hamed Moghadasi", age: 25 },
-          { id: 2, name: "reza gholi", age: 25 },
-          { id: 3, name: "juju razii", age: 25 },
-          { id: 1, name: "Hamed Moghadasi", age: 25 },
-          { id: 2, name: "reza gholi", age: 25 },
-          { id: 3, name: "juju razii", age: 25 },
-        ],
-        columns: [
-          { title: "#", data: "id" },
-          { title: "Name", data: "name" },
-          { title: "Age", data: "age" },
-        ],
+        data: configuration.data,
+        columns: configuration.columns,
         select: true,
         searchValue: "",
         options: {
           dom: "lfrtip",
           paging: true,
-          scrollY: 300,
+          scrollY: true,
           scrollX: true,
           scrollCollapse: true,
         },
         createdRow: function (row, data, dataIndex, cells) {
+          configuration.createdRow();
           if (!$(".operatorBtn").prop("disabled")) {
             $(".operatorBtn").prop("disabled", true);
           }
@@ -84,7 +58,6 @@ export default class Tableo extends React.Component {
 
   componentWillUnmount() {
     $("#tableo").DataTable().destroy(true);
-    console.log($("#tableo").DataTable());
   }
 
   // connecting search to an external component, optional but shows how to access the API

@@ -24,6 +24,67 @@ const operators = [
   { dom: "#deleteBtn", handler: handleDelete, event: "click" },
   { dom: "#editBtn", handler: handleEdit, event: "click" },
 ];
+
+function getData() {
+  return [
+    {
+      id: 112,
+      email: "fater-test2@developair.ir",
+      username: "ali",
+      isEmailConfirmed: false,
+      role: "User",
+      state: "Unconfirmed",
+      createdAt: "2020-04-21",
+      updatedAt: "2020-04-21",
+      updatedAt2: "2020-04-21",
+    },
+    {
+      id: 76,
+      email: "h4lmed@gmail.com",
+      username: "hamed",
+      isEmailConfirmed: true,
+      role: "Admin",
+      state: "Active",
+      createdAt: "2020-04-21",
+      updatedAt: "2020-04-21",
+      updatedAt2: "2020-04-21",
+    },
+    {
+      id: 113,
+      email: "fater-test@developair.ir",
+      username: "reza",
+      isEmailConfirmed: true,
+      role: "User",
+      state: "Active",
+      createdAt: "2020-04-21",
+      updatedAt: "2020-04-21",
+      updatedAt2: "2020-04-21",
+    },
+  ];
+}
+
+function getColumns() {
+  return [
+    { title: "#", data: "id" },
+    { title: "Email", data: "email" },
+    { title: "username", data: "username" },
+    { title: "confirmed", data: "isEmailConfirmed" },
+    { title: "role", data: "role" },
+    { title: "state", data: "state" },
+    { title: "createdAt", data: "createdAt" },
+    { title: "updatedAt", data: "updatedAt" },
+  ];
+}
+
+const configuration = {
+  operators,
+  data: getData(),
+  columns: getColumns(),
+  createdRow: function () {
+    console.log("cretedRow");
+  },
+};
+
 const AllUsers: React.FC<IAllUsersProps> = (props) => {
   var userState = Protect(props);
 
@@ -33,7 +94,7 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
         <IonContent>
           <AdminTemplateContainer isSidebarOpen="true" menu="users">
             <h1>All Users</h1>
-            <Table operators={operators}>
+            <Table configuration={configuration}>
               <button
                 id="deleteBtn"
                 className="btn btn-md btn-danger m-1 operatorBtn"
