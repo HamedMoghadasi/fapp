@@ -11,45 +11,21 @@ export interface IAllUsersProps {
   neededRole: string;
 }
 
+const handleDelete = (dt: any) => {
+  console.log(dt);
+  dt.row(".selected").remove().draw();
+};
+
+const handleEdit = (dt: any) => {
+  alert("edit");
+};
+
+const operators = [
+  { dom: "#deleteBtn", handler: handleDelete, event: "click" },
+  { dom: "#editBtn", handler: handleEdit, event: "click" },
+];
 const AllUsers: React.FC<IAllUsersProps> = (props) => {
   var userState = Protect(props);
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "First Name",
-        accessor: "firstName",
-      },
-      {
-        Header: "Last Name",
-        accessor: "lastName",
-      },
-      {
-        Header: "Age",
-        accessor: "age",
-      },
-      {
-        Header: "Operation",
-        accessor: "operation",
-      },
-    ],
-    undefined
-  );
-
-  const data = React.useMemo(
-    () => [
-      {
-        firstName: "Hamed",
-        lastName: "Moghadasi",
-        age: 25,
-      },
-      {
-        firstName: "HamidReza",
-        lastName: "Moghadasi",
-        age: 25,
-      },
-    ],
-    undefined
-  );
 
   if (userState.isValid) {
     return (
@@ -57,7 +33,20 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
         <IonContent>
           <AdminTemplateContainer isSidebarOpen="true" menu="users">
             <h1>All Users</h1>
-            <Table columns={columns} data={data} />
+            <Table operators={operators}>
+              <button
+                id="deleteBtn"
+                className="btn btn-md btn-danger m-1 operatorBtn"
+              >
+                Delete
+              </button>
+              <button
+                id="editBtn"
+                className="btn btn-md btn-warning m-1 operatorBtn"
+              >
+                Edit
+              </button>
+            </Table>
           </AdminTemplateContainer>
         </IonContent>
       </IonPage>

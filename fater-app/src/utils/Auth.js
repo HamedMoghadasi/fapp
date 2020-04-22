@@ -27,14 +27,11 @@ export const Protect = (props) => {
     userState.role = verifyResponse.role;
 
     if (props.needAuthentication) {
-      console.log("need Authenticat!");
       if (userState.isAuthentication) {
-        console.log("authenticated");
         if (
           userState.role === props.neededRole ||
           userState.role === Roles.Admin
         ) {
-          console.log("user authorized");
           result.isValid = true;
           result.redirectPath = "";
         } else {
@@ -57,7 +54,6 @@ const verifyUser = function () {
       console.log("Token not founded");
       return { isValid: false, role: "" };
     } else {
-      console.log("verify");
       const body = {
         token: window.localStorage.access_token.replace(/"/g, ""),
       };
@@ -75,7 +71,6 @@ const verifyUser = function () {
         data: JSON.stringify(body),
         success: function (response) {
           temp = response.data;
-          console.log(response.message);
         },
         error: function (error) {
           const msg = error.responseJSON.message;

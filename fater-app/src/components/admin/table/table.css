@@ -1,0 +1,16 @@
+tr.selected {
+  background-color: rgba(0, 123, 255, 0.25) !important;
+  box-shadow: -1px 0px 20px 3px #909090b8;
+}
+tbody tr.selected:hover {
+  background-color: rgba(0, 123, 255, 0.55) !important;
+  box-shadow: -1px 0px 20px 3px #909090b8;
+}
+tbody tr:hover {
+  background-color: #ebebeb !important;
+  box-shadow: -1px 2px 5px 0px #909090b8;
+}
+
+tr {
+  text-align: center;
+}
