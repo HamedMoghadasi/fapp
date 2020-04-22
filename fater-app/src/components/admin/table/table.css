@@ -19,3 +19,12 @@ tr {
   color: #28a745;
   margin-left: 15%;
 }
+
+/* allow selection  */
+:host .datatable .datatable-body-cell {
+  -webkit-user-select: initial !important;
+  -moz-user-select: initial !important;
+  -ms-user-select: initial !important;
+  -o-user-select: initial !important;
+  user-select: initial !important;
+}

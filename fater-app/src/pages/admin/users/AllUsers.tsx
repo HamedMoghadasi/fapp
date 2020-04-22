@@ -2,9 +2,13 @@ import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { Protect } from "../../../utils/Auth";
 import { Redirect } from "react-router-dom";
+import $ from "jquery";
 
 import AdminTemplateContainer from "../../../components/admin/template/adminTemplate";
 import Table from "../../../components/admin/table/table";
+import userState from "../../../constants/userState";
+
+let API_URL = process.env.REACT_APP_API_URL;
 
 export interface IAllUsersProps {
   needAuthentication: boolean;
@@ -20,47 +24,53 @@ const handleEdit = (dt: any) => {
   alert("edit");
 };
 
+const styleUserStateCell = (state: any) => {
+  let userStateDom = state;
+  if (state) {
+    switch (state) {
+      case userState.Active:
+        userStateDom = `<span class="badge badge-success">${state}</span>`;
+        break;
+      case userState.Unconfirmed:
+        userStateDom = `<span class="badge badge-default">${state}</span>`;
+        break;
+      case userState.Suspend:
+        userStateDom = `<span class="badge badge-warning">${state}</span>`;
+        break;
+      default:
+        break;
+    }
+    return userStateDom;
+  }
+};
 const operators = [
   { dom: "#deleteBtn", handler: handleDelete, event: "click" },
   { dom: "#editBtn", handler: handleEdit, event: "click" },
 ];
 
 function getData() {
-  return [
-    {
-      id: 112,
-      email: "fater-test2@developair.ir",
-      username: "ali",
-      isEmailConfirmed: false,
-      role: "User",
-      state: "Unconfirmed",
-      createdAt: "2020-04-21",
-      updatedAt: "2020-04-21",
-      updatedAt2: "2020-04-21",
-    },
-    {
-      id: 76,
-      email: "h4lmed@gmail.com",
-      username: "hamed",
-      isEmailConfirmed: true,
-      role: "Admin",
-      state: "Active",
-      createdAt: "2020-04-21",
-      updatedAt: "2020-04-21",
-      updatedAt2: "2020-04-21",
-    },
-    {
-      id: 113,
-      email: "fater-test@developair.ir",
-      username: "reza",
-      isEmailConfirmed: true,
-      role: "User",
-      state: "Active",
-      createdAt: "2020-04-21",
-      updatedAt: "2020-04-21",
-      updatedAt2: "2020-04-21",
-    },
-  ];
+  let data: any = [];
+  console.log(window.location.href);
+  if (window.localStorage.access_token) {
+    $.ajax({
+      url: `${API_URL}/api/v1/admin/users`,
+      type: "GET",
+      async: false,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader(
+          "Authorization",
+          `Beare ${window.localStorage.access_token.replace(/"/g, "")}`
+        );
+      },
+      success: function (response) {
+        data = response.data;
+      },
+    });
+  }
+
+  return data;
 }
 
 function getColumns() {
@@ -76,13 +86,15 @@ function getColumns() {
   ];
 }
 
+function createdRow(row: any, data: any, dataIndex: any, cells: any) {
+  cells[5].innerHTML = styleUserStateCell(data.state);
+}
+
 const configuration = {
   operators,
   data: getData(),
   columns: getColumns(),
-  createdRow: function () {
-    console.log("cretedRow");
-  },
+  createdRow: createdRow,
 };
 
 const AllUsers: React.FC<IAllUsersProps> = (props) => {
