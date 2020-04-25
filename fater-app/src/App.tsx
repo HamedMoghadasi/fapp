@@ -18,6 +18,7 @@ import SuspendedUsers from "./pages/admin/users/SuspendedUser";
 import PendingUsers from "./pages/admin/users/PendingUsers";
 import AccessDenied from "./pages/errors/AccessDenied";
 import NotFound from "./pages/errors/NotFound";
+import UserActivityLogs from "./pages/admin/logs/userActivityLogs";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -95,6 +96,18 @@ const App: React.FC = () => {
           component={() => {
             return (
               <PendingUsers
+                needAuthentication={true}
+                neededRole={Roles.Admin}
+              />
+            );
+          }}
+          exact={true}
+        />
+        <Route
+          path="/dashboard/Logs/UsersActivity"
+          component={() => {
+            return (
+              <UserActivityLogs
                 needAuthentication={true}
                 neededRole={Roles.Admin}
               />

@@ -48,11 +48,13 @@ export default class Tableo extends React.Component {
 
       const dt = this.dataTable;
 
-      operators.forEach((operator) => {
-        $(operator.dom).on(operator.event, function () {
-          operator.handler(dt);
+      if (operators.length) {
+        operators.forEach((operator) => {
+          $(operator.dom).on(operator.event, function () {
+            operator.handler(dt);
+          });
         });
-      });
+      }
     });
   }
 

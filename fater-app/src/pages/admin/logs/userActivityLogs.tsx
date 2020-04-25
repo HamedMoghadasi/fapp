@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonIcon } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { Protect } from "../../../utils/Auth";
 import { Redirect } from "react-router-dom";
@@ -7,61 +7,38 @@ import jmoment from "jalali-moment";
 
 import AdminTemplateContainer from "../../../components/admin/template/adminTemplate";
 import Table from "../../../components/admin/table/table";
-import userState from "../../../constants/userState";
-import {
-  trashBin,
-  trashOutline,
-  createSharp,
-  pencilOutline,
-  createOutline,
-} from "ionicons/icons";
+import userActivity from "../../../constants/userActivity";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
-export interface IAllUsersProps {
+export interface IUsersActivityLogsProps {
   needAuthentication: boolean;
   neededRole: string;
 }
 
-const handleDelete = (dt: any) => {
-  console.log(dt);
-  dt.row(".selected").remove().draw();
-};
-
-const handleEdit = (dt: any) => {
-  alert("edit");
-};
-
-const styleUserStateCell = (state: any) => {
-  let userStateDom = state;
-  if (state) {
-    switch (state) {
-      case userState.Active:
-        userStateDom = `<span class="badge badge-success">${state}</span>`;
+const styleActionCell = (action: any) => {
+  let actionDom = action;
+  if (action) {
+    switch (action) {
+      case userActivity.Login:
+        actionDom = `<span class="badge badge-success">${action}</span>`;
         break;
-      case userState.Unconfirmed:
-        userStateDom = `<span class="badge badge-default">${state}</span>`;
-        break;
-      case userState.Suspend:
-        userStateDom = `<span class="badge badge-warning">${state}</span>`;
+      case userActivity.Logout:
+        actionDom = `<span class="badge badge-danger">${action}</span>`;
         break;
       default:
         break;
     }
-    return userStateDom;
+    return actionDom;
   }
 };
-const operators = [
-  { dom: "#deleteBtn", handler: handleDelete, event: "click" },
-  { dom: "#editBtn", handler: handleEdit, event: "click" },
-];
 
 function getData() {
   let data: any = [];
   console.log(window.location.href);
   if (window.localStorage.access_token) {
     $.ajax({
-      url: `${API_URL}/api/v1/admin/users`,
+      url: `${API_URL}/api/v1/admin/UserActivityLogs`,
       type: "GET",
       async: false,
       contentType: "application/json; charset=utf-8",
@@ -97,50 +74,34 @@ function getData() {
 function getColumns() {
   return [
     { title: "Id", data: "id" },
-    { title: "Email", data: "email" },
-    { title: "username", data: "username" },
-    { title: "confirmed", data: "isEmailConfirmed" },
-    { title: "role", data: "role" },
-    { title: "state", data: "state" },
+    { title: "Action", data: "action" },
+    { title: "User Id", data: "userId" },
     { title: "Created at", data: "createdAt" },
     { title: "Updated at", data: "updatedAt" },
   ];
 }
 
 function createdRow(row: any, data: any, dataIndex: any, cells: any) {
-  cells[5].innerHTML = styleUserStateCell(data.state);
+  cells[1].innerHTML = styleActionCell(data.action);
 }
 
 const configuration = {
-  operators,
+  operators: {},
   data: getData(),
   columns: getColumns(),
   createdRow: createdRow,
 };
 
-const AllUsers: React.FC<IAllUsersProps> = (props) => {
+const UserActivityLogs: React.FC<IUsersActivityLogsProps> = (props) => {
   var userState = Protect(props);
 
   if (userState.isValid) {
     return (
       <IonPage>
         <IonContent>
-          <AdminTemplateContainer isSidebarOpen="false" menu="users">
-            <h1>All Users</h1>
-            <Table configuration={configuration}>
-              <button
-                id="editBtn"
-                className="btn btn-md btn-warning m-1 operatorBtn"
-              >
-                Edit
-              </button>
-              <button
-                id="deleteBtn"
-                className="btn btn-md btn-danger m-1 operatorBtn"
-              >
-                Delete
-              </button>
-            </Table>
+          <AdminTemplateContainer isSidebarOpen="true" menu="logs">
+            <h1>User Activity Log</h1>
+            <Table configuration={configuration}></Table>
           </AdminTemplateContainer>
         </IonContent>
       </IonPage>
@@ -150,4 +111,4 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
   return <Redirect to={userState.redirectPath} />;
 };
 
-export default AllUsers;
+export default UserActivityLogs;

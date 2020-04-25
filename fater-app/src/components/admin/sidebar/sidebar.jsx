@@ -23,9 +23,9 @@ import {
 import "./sidebar.css";
 let sidebarClass = false;
 let usersSubmenuClass = "collapse list-unstyled";
-let pagesSubmenuClass = "collapse list-unstyled";
+let logsSubmenuClass = "collapse list-unstyled";
 let usersAreaExpanded = false;
-let pagesAreaExpanded = false;
+let logsAreaExpanded = false;
 let API_URL = process.env.REACT_APP_API_URL;
 class SideBar extends Component {
   constructor(props) {
@@ -36,9 +36,9 @@ class SideBar extends Component {
         usersSubmenuClass += " show";
         usersAreaExpanded = true;
         break;
-      case "pages":
-        pagesSubmenuClass += " show";
-        pagesAreaExpanded = true;
+      case "logs":
+        logsSubmenuClass += " show";
+        logsAreaExpanded = true;
       default:
         break;
     }
@@ -160,11 +160,11 @@ class SideBar extends Component {
               </li>
               <li>
                 <a
-                  id="pagesMenu"
+                  id="logsMenu"
                   className="masterMenu"
-                  href="#pagesSubmenu"
+                  href="#logsSubmenu"
                   data-toggle="collapse"
-                  aria-expanded={pagesAreaExpanded}
+                  aria-expanded={logsAreaExpanded}
                 >
                   <IonIcon className="sidebar-item-icon" icon={albums} />
                   <IonIcon
@@ -175,12 +175,12 @@ class SideBar extends Component {
                     className="sidebar-masterItem-icon minus"
                     icon={remove}
                   />
-                  Loges
+                  Logs
                 </a>
 
-                <ul className={pagesSubmenuClass} id="pagesSubmenu">
+                <ul className={logsSubmenuClass} id="logsSubmenu">
                   <li>
-                    <Link to="/dashboard" replace>
+                    <Link to="/dashboard/Logs/UsersActivity" replace>
                       Users Activity Log
                     </Link>
                   </li>
