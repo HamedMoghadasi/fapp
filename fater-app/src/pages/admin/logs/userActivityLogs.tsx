@@ -85,11 +85,22 @@ function createdRow(row: any, data: any, dataIndex: any, cells: any) {
   cells[1].innerHTML = styleActionCell(data.action);
 }
 
+function rowCallback(
+  row: any,
+  data: any,
+  displayNum: any,
+  displayIndex: any,
+  dataIndex: any
+) {
+  $("td:eq(1)", row)[0].innerHTML = styleActionCell(data.action);
+}
+
 const configuration = {
   operators: {},
   data: getData(),
   columns: getColumns(),
   createdRow: createdRow,
+  rowCallback: rowCallback,
 };
 
 const UserActivityLogs: React.FC<IUsersActivityLogsProps> = (props) => {

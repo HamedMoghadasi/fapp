@@ -31,10 +31,18 @@ export default class Tableo extends React.Component {
           scrollCollapse: true,
         },
         createdRow: function (row, data, dataIndex, cells) {
-          configuration.createdRow(row, data, dataIndex, cells);
           if (!$(".operatorBtn").prop("disabled")) {
             $(".operatorBtn").prop("disabled", true);
           }
+        },
+        rowCallback: function (row, data, displayNum, displayIndex, dataIndex) {
+          configuration.rowCallback(
+            row,
+            data,
+            displayNum,
+            displayIndex,
+            dataIndex
+          );
         },
       });
 

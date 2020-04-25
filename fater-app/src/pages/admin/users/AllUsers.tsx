@@ -8,13 +8,6 @@ import jmoment from "jalali-moment";
 import AdminTemplateContainer from "../../../components/admin/template/adminTemplate";
 import Table from "../../../components/admin/table/table";
 import userState from "../../../constants/userState";
-import {
-  trashBin,
-  trashOutline,
-  createSharp,
-  pencilOutline,
-  createOutline,
-} from "ionicons/icons";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
@@ -25,11 +18,48 @@ export interface IAllUsersProps {
 
 const handleDelete = (dt: any) => {
   console.log(dt);
+
   dt.row(".selected").remove().draw();
 };
 
+const getSelectedRowNode = (dt: any) => {
+  var index = dt.rows({ selected: true }).indexes();
+  return $(dt.row(index).node());
+};
+
 const handleEdit = (dt: any) => {
-  alert("edit");
+  var data = dt.rows({ selected: true }).data()[0];
+  const row = getSelectedRowNode(dt);
+  // if (window.localStorage.access_token) {
+  //   $.ajax({
+  //     url: `${API_URL}/api/v1/admin/users/${data.id}`,
+  //     type: "PUT",
+  //     async: false,
+  //     contentType: "application/json; charset=utf-8",
+  //     dataType: "json",
+  //     beforeSend: function (xhr) {
+  //       xhr.setRequestHeader(
+  //         "Authorization",
+  //         `Beare ${window.localStorage.access_token.replace(/"/g, "")}`
+  //       );
+  //     },
+  //     success: function (response) {},
+  //   });
+  // }
+
+  setTimeout(() => {
+    data.state = "Suspend";
+    dt.row(row).invalidate().draw();
+    console.log("updted");
+  }, 100);
+};
+
+const handleConfirmUser = (dt: any) => {
+  alert("ConfirmUser");
+};
+
+const handleResetPassword = (dt: any) => {
+  alert("ResetPassword");
 };
 
 const styleUserStateCell = (state: any) => {
@@ -54,6 +84,8 @@ const styleUserStateCell = (state: any) => {
 const operators = [
   { dom: "#deleteBtn", handler: handleDelete, event: "click" },
   { dom: "#editBtn", handler: handleEdit, event: "click" },
+  { dom: "#confirmBtn", handler: handleConfirmUser, event: "click" },
+  { dom: "#resetPasswordBtn", handler: handleResetPassword, event: "click" },
 ];
 
 function getData() {
@@ -111,11 +143,22 @@ function createdRow(row: any, data: any, dataIndex: any, cells: any) {
   cells[5].innerHTML = styleUserStateCell(data.state);
 }
 
+function rowCallback(
+  row: any,
+  data: any,
+  displayNum: any,
+  displayIndex: any,
+  dataIndex: any
+) {
+  $("td:eq(5)", row)[0].innerHTML = styleUserStateCell(data.state);
+}
+
 const configuration = {
   operators,
   data: getData(),
   columns: getColumns(),
   createdRow: createdRow,
+  rowCallback: rowCallback,
 };
 
 const AllUsers: React.FC<IAllUsersProps> = (props) => {
@@ -126,14 +169,28 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
       <IonPage>
         <IonContent>
           <AdminTemplateContainer isSidebarOpen="false" menu="users">
-            <h1>All Users</h1>
+            <h1>Manage All Users</h1>
             <Table configuration={configuration}>
+              <button
+                id="confirmBtn"
+                className="btn btn-md btn-success m-1 operatorBtn"
+              >
+                Confirm User
+              </button>
               <button
                 id="editBtn"
                 className="btn btn-md btn-warning m-1 operatorBtn"
               >
                 Edit
               </button>
+
+              <button
+                id="resetPasswordBtn"
+                className="btn btn-md btn-primary m-1 operatorBtn"
+              >
+                Reset Password
+              </button>
+
               <button
                 id="deleteBtn"
                 className="btn btn-md btn-danger m-1 operatorBtn"
