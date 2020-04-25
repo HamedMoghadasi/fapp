@@ -75,14 +75,14 @@ function getData() {
 
 function getColumns() {
   return [
-    { title: "#", data: "id" },
+    { title: "Id", data: "id" },
     { title: "Email", data: "email" },
     { title: "username", data: "username" },
     { title: "confirmed", data: "isEmailConfirmed" },
     { title: "role", data: "role" },
     { title: "state", data: "state" },
-    { title: "createdAt", data: "createdAt" },
-    { title: "updatedAt", data: "updatedAt" },
+    { title: "Created at", data: "createdAt" },
+    { title: "Updated at", data: "updatedAt" },
   ];
 }
 
