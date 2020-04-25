@@ -35,6 +35,9 @@ const styleUserStateCell = (state: any) => {
       case userState.Suspend:
         userStateDom = `<span class="badge badge-warning">${state}</span>`;
         break;
+      case userState.Deleted:
+        userStateDom = `<span class="badge badge-danger">${state}</span>`;
+        break;
       default:
         break;
     }
