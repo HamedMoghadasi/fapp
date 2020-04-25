@@ -2,10 +2,27 @@ import React, { Component } from "react";
 import $ from "jquery";
 import { RolesArray } from "../../../constants/Roles";
 import { userStateArray } from "../../../constants/userState";
+import { ToastContainer, toast } from "react-toastify";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
 class EditUserModal extends Component {
+  notify = (message, type) => {
+    if (type === "error") {
+      toast.error(`${message}`, {
+        autoClose: 10000,
+        fontSize: "20px",
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (type === "success") {
+      toast.success(`${message}`, {
+        autoClose: 10000,
+        fontSize: "20px",
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
   componentDidMount() {
     $(document).ready(function () {
       $("#editModal").on("change", "select", function () {
@@ -46,7 +63,7 @@ class EditUserModal extends Component {
     };
 
     console.log(body);
-
+    const notif = this.notify;
     if (window.localStorage.access_token) {
       $.ajax({
         url: `${API_URL}/api/v1/admin/users/${data.id}`,
@@ -67,6 +84,10 @@ class EditUserModal extends Component {
           data.state = body.state;
 
           dt.row(row).invalidate().draw();
+          notif("Succeful! User Update", "success");
+        },
+        error: function (err) {
+          notif("Failed! User did not Update", "error");
         },
       });
     }
@@ -74,86 +95,89 @@ class EditUserModal extends Component {
 
   render() {
     return (
-      <div
-        className="modal fade"
-        id="editModal"
-        role="dialog"
-        aria-labelledby="editModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="editModalLabel">
-                Edit User
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="editModal-isActive"
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="editModal-isActive"
-                  >
-                    Active User
-                  </label>
-                </div>
-                <hr />
-                <div className="form-group">
-                  <label htmlFor="editModal-roles">Role</label>
-                  <select className="form-control" id="editModal-roles">
-                    {RolesArray.map((item) => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="editModal-states">State</label>
-                  <select className="form-control" id="editModal-states">
-                    {userStateArray.map((item) => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                id="editModal-submit"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                onClick={this.handleSubmit}
-                className="btn btn-primary"
-              >
-                Save changes
-              </button>
+      <>
+        <ToastContainer />
+        <div
+          className="modal fade"
+          id="editModal"
+          role="dialog"
+          aria-labelledby="editModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="editModalLabel">
+                  Edit User
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="form-group form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="editModal-isActive"
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="editModal-isActive"
+                    >
+                      Active User
+                    </label>
+                  </div>
+                  <hr />
+                  <div className="form-group">
+                    <label htmlFor="editModal-roles">Role</label>
+                    <select className="form-control" id="editModal-roles">
+                      {RolesArray.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="editModal-states">State</label>
+                    <select className="form-control" id="editModal-states">
+                      {userStateArray.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  id="editModal-submit"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  onClick={this.handleSubmit}
+                  className="btn btn-primary"
+                >
+                  Save changes
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
