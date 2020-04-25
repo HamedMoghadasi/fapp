@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonIcon } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { Protect } from "../../../utils/Auth";
 import { Redirect } from "react-router-dom";
@@ -7,7 +7,8 @@ import jmoment from "jalali-moment";
 
 import AdminTemplateContainer from "../../../components/admin/template/adminTemplate";
 import Table from "../../../components/admin/table/table";
-import userState from "../../../constants/userState";
+import { userState } from "../../../constants/userState";
+import EditUserModal from "../../../components/admin/modal/editUserModal";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
@@ -27,9 +28,14 @@ const getSelectedRowNode = (dt: any) => {
   return $(dt.row(index).node());
 };
 
+const getRowData = () => {
+  return $("#tableo").DataTable().rows({ selected: true }).data()[0];
+};
+
 const handleEdit = (dt: any) => {
   var data = dt.rows({ selected: true }).data()[0];
   const row = getSelectedRowNode(dt);
+
   // if (window.localStorage.access_token) {
   //   $.ajax({
   //     url: `${API_URL}/api/v1/admin/users/${data.id}`,
@@ -48,8 +54,6 @@ const handleEdit = (dt: any) => {
   // }
 
   setTimeout(() => {
-    data.state = "Suspend";
-    dt.row(row).invalidate().draw();
     console.log("updted");
   }, 100);
 };
@@ -168,6 +172,7 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
     return (
       <IonPage>
         <IonContent>
+          <EditUserModal />
           <AdminTemplateContainer isSidebarOpen="false" menu="users">
             <h1>Manage All Users</h1>
             <Table configuration={configuration}>
@@ -180,6 +185,8 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
               <button
                 id="editBtn"
                 className="btn btn-md btn-warning m-1 operatorBtn"
+                data-toggle="modal"
+                data-target="#editModal"
               >
                 Edit
               </button>
