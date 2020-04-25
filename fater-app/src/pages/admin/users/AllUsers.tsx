@@ -10,6 +10,7 @@ import Table from "../../../components/admin/table/table";
 import { userState } from "../../../constants/userState";
 import EditUserModal from "../../../components/admin/modal/editUserModal";
 import DeleteUserModal from "../../../components/admin/modal/deleteUserModal";
+import ResetPasswordModal from "../../../components/admin/modal/resetPasswordModal";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
@@ -44,9 +45,9 @@ const styleUserStateCell = (state: any) => {
     return userStateDom;
   }
 };
-const operators = [
-  { dom: "#resetPasswordBtn", handler: handleResetPassword, event: "click" },
-];
+// const operators = [
+//   // { dom: "#resetPasswordBtn", handler: handleResetPassword, event: "click" },
+// ];
 
 function getData() {
   let data: any = [];
@@ -114,7 +115,7 @@ function rowCallback(
 }
 
 const configuration = {
-  operators,
+  operators: [],
   data: getData(),
   columns: getColumns(),
   createdRow: createdRow,
@@ -130,7 +131,7 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
         <IonContent>
           <EditUserModal />
           <DeleteUserModal />
-          {/* <ResetPasswordUserModal /> */}
+          <ResetPasswordModal />
           <AdminTemplateContainer isSidebarOpen="false" menu="users">
             <h1>Manage All Users</h1>
             <Table configuration={configuration}>
@@ -146,6 +147,8 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
               <button
                 id="resetPasswordBtn"
                 className="btn btn-md btn-primary m-1 operatorBtn"
+                data-toggle="modal"
+                data-target="#resetPasswordModal"
               >
                 Reset Password
               </button>

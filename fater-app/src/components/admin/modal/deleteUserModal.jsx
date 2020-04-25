@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import { ToastContainer, toast } from "react-toastify";
+import { userState } from "../../../constants/userState";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
@@ -23,15 +24,15 @@ class DeleteUserModal extends Component {
 
   handleSubmit = () => {
     const dt = $("#tableo").DataTable();
-
     var data = dt.rows({ selected: true }).data()[0];
+    var index = dt.rows({ selected: true }).indexes();
+    var row = $(dt.row(index).node());
 
     const notif = this.notify;
     if (window.localStorage.access_token) {
       $.ajax({
         url: `${API_URL}/api/v1/admin/users/${data.id}`,
         type: "DELETE",
-        async: false,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         beforeSend: function (xhr) {
@@ -41,7 +42,9 @@ class DeleteUserModal extends Component {
           );
         },
         success: function (response) {
-          dt.row(".selected").remove().draw();
+          data.state = userState.Deleted;
+
+          dt.row(row).invalidate().draw();
           $("#deleteModal").modal("hide");
           notif("Succeful! User Deleted", "success");
         },
@@ -83,14 +86,6 @@ class DeleteUserModal extends Component {
                 <p>Are you sure you want delete this user ?!</p>
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  id="deleteModal-submit"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
                 <button
                   type="button"
                   onClick={this.handleSubmit}

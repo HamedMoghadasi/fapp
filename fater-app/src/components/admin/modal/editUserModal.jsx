@@ -131,7 +131,7 @@ class EditUserModal extends Component {
                       className="form-check-label"
                       htmlFor="editModal-isActive"
                     >
-                      Active User
+                      Confirmed User
                     </label>
                   </div>
                   <hr />
@@ -158,14 +158,6 @@ class EditUserModal extends Component {
                 </form>
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  id="editModal-submit"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
                 <button
                   type="button"
                   onClick={this.handleSubmit}
