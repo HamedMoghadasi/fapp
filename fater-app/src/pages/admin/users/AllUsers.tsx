@@ -9,6 +9,7 @@ import AdminTemplateContainer from "../../../components/admin/template/adminTemp
 import Table from "../../../components/admin/table/table";
 import { userState } from "../../../constants/userState";
 import EditUserModal from "../../../components/admin/modal/editUserModal";
+import DeleteUserModal from "../../../components/admin/modal/deleteUserModal";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
@@ -16,51 +17,6 @@ export interface IAllUsersProps {
   needAuthentication: boolean;
   neededRole: string;
 }
-
-const handleDelete = (dt: any) => {
-  console.log(dt);
-
-  dt.row(".selected").remove().draw();
-};
-
-const getSelectedRowNode = (dt: any) => {
-  var index = dt.rows({ selected: true }).indexes();
-  return $(dt.row(index).node());
-};
-
-const getRowData = () => {
-  return $("#tableo").DataTable().rows({ selected: true }).data()[0];
-};
-
-const handleEdit = (dt: any) => {
-  var data = dt.rows({ selected: true }).data()[0];
-  const row = getSelectedRowNode(dt);
-
-  // if (window.localStorage.access_token) {
-  //   $.ajax({
-  //     url: `${API_URL}/api/v1/admin/users/${data.id}`,
-  //     type: "PUT",
-  //     async: false,
-  //     contentType: "application/json; charset=utf-8",
-  //     dataType: "json",
-  //     beforeSend: function (xhr) {
-  //       xhr.setRequestHeader(
-  //         "Authorization",
-  //         `Beare ${window.localStorage.access_token.replace(/"/g, "")}`
-  //       );
-  //     },
-  //     success: function (response) {},
-  //   });
-  // }
-
-  setTimeout(() => {
-    console.log("updted");
-  }, 100);
-};
-
-const handleConfirmUser = (dt: any) => {
-  alert("ConfirmUser");
-};
 
 const handleResetPassword = (dt: any) => {
   alert("ResetPassword");
@@ -86,9 +42,6 @@ const styleUserStateCell = (state: any) => {
   }
 };
 const operators = [
-  { dom: "#deleteBtn", handler: handleDelete, event: "click" },
-  { dom: "#editBtn", handler: handleEdit, event: "click" },
-  { dom: "#confirmBtn", handler: handleConfirmUser, event: "click" },
   { dom: "#resetPasswordBtn", handler: handleResetPassword, event: "click" },
 ];
 
@@ -173,15 +126,11 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
       <IonPage>
         <IonContent>
           <EditUserModal />
+          <DeleteUserModal />
+          {/* <ResetPasswordUserModal /> */}
           <AdminTemplateContainer isSidebarOpen="false" menu="users">
             <h1>Manage All Users</h1>
             <Table configuration={configuration}>
-              <button
-                id="confirmBtn"
-                className="btn btn-md btn-success m-1 operatorBtn"
-              >
-                Confirm User
-              </button>
               <button
                 id="editBtn"
                 className="btn btn-md btn-warning m-1 operatorBtn"
@@ -201,6 +150,8 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
               <button
                 id="deleteBtn"
                 className="btn btn-md btn-danger m-1 operatorBtn"
+                data-toggle="modal"
+                data-target="#deleteModal"
               >
                 Delete
               </button>
