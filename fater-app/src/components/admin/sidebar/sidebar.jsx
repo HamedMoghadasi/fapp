@@ -10,7 +10,6 @@ import {
   close,
   apps,
   people,
-  analytics,
   albums,
   heartOutline,
   call,
@@ -18,7 +17,7 @@ import {
   add,
   remove,
   desktopOutline,
-  desktop,
+  map,
 } from "ionicons/icons";
 
 import "./sidebar.css";
@@ -155,9 +154,11 @@ class SideBar extends Component {
               </li>
               <li>
                 <Link to="/dashboard" replace>
-                  <IonIcon className="sidebar-item-icon" icon={analytics} />
-                  Logs
+                  <IonIcon className="sidebar-item-icon" icon={map} />
+                  Map
                 </Link>
+              </li>
+              <li>
                 <a
                   id="pagesMenu"
                   className="masterMenu"
@@ -174,22 +175,13 @@ class SideBar extends Component {
                     className="sidebar-masterItem-icon minus"
                     icon={remove}
                   />
-                  Pages
+                  Loges
                 </a>
+
                 <ul className={pagesSubmenuClass} id="pagesSubmenu">
                   <li>
                     <Link to="/dashboard" replace>
-                      Page 1
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/dashboard" replace>
-                      Page 2
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/dashboard" replace>
-                      Page 3
+                      Users Activity Log
                     </Link>
                   </li>
                 </ul>
