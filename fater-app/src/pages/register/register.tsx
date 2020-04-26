@@ -11,7 +11,7 @@ import "./register.css";
 
 import RegisterContainer from "../../components/register/register";
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -28,4 +28,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Register;

@@ -122,6 +122,9 @@ class ForgetPassword extends Component {
               </button>
             </form>
           </div>
+          <a href="/login" className="btn btn-register btn-primary">
+            Do you remember your password? Log in.
+          </a>
         </div>
       </React.Fragment>
     );

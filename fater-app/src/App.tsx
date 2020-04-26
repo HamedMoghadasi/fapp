@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import ForgetPassword from "./pages/forgetPassword/forgetPassword";
+import ChangePassword from "./pages/changePassword/changePassword";
 import Dashboard from "./pages/admin/template/adminTemplate";
 import AllUsers from "./pages/admin/users/AllUsers";
 import SuspendedUsers from "./pages/admin/users/SuspendedUser";
@@ -61,6 +62,18 @@ const App: React.FC = () => {
         <Route path="/register" component={Register} exact={true} />
         <Route path="/forgetPassword" component={ForgetPassword} exact={true} />
         <Route exact path="/" component={Home} />
+        <Route
+          path="/changePassword"
+          component={() => {
+            return (
+              <ChangePassword
+                needAuthentication={true}
+                neededRole={Roles.User}
+              />
+            );
+          }}
+          exact={true}
+        />
         <Route
           path="/dashboard"
           component={() => {
