@@ -1,0 +1,37 @@
+import React, { Component } from "react";
+import DragableLayerInfo from "../DragableLayerInfo/DragableLayerInfo";
+import $ from "jquery";
+import "jquery-ui-bundle";
+
+import "./BaseLayerList.css";
+
+class BaseLayerList extends Component {
+  componentDidMount() {
+    $("#baselayer-sortable-list").sortable({
+      axis: "y",
+      placeholder: "sortable-placeholder",
+    });
+    $("#baselayer-sortable-list").disableSelection();
+  }
+
+  render() {
+    return (
+      <>
+        <div id="baselayer-container">
+          <h6>
+            <i>Base Layer</i>
+          </h6>
+          <ul id="baselayer-sortable-list">
+            <DragableLayerInfo />
+            <DragableLayerInfo />
+            <DragableLayerInfo />
+            <DragableLayerInfo />
+            <DragableLayerInfo />
+          </ul>
+        </div>
+      </>
+    );
+  }
+}
+
+export default BaseLayerList;
