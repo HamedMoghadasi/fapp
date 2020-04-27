@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import $ from "jquery";
 import { RolesArray } from "../../../constants/Roles";
 import { userStateArray } from "../../../constants/userState";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
@@ -96,7 +96,6 @@ class EditUserModal extends Component {
   render() {
     return (
       <>
-        <ToastContainer />
         <div
           className="modal fade"
           id="editModal"
@@ -161,7 +160,7 @@ class EditUserModal extends Component {
                 <button
                   type="button"
                   onClick={this.handleSubmit}
-                  className="btn btn-primary"
+                  className="btn btn-warning"
                 >
                   Save changes
                 </button>

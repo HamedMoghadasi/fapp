@@ -10,6 +10,7 @@ import changePassword from "./changePassword.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GetAuthenticatedUser } from "../../utils/Auth";
+import { SubmitByEnter } from "../../utils/Helper";
 
 class ChangePassword extends Component {
   notify = (message, type) => {
@@ -28,10 +29,6 @@ class ChangePassword extends Component {
     }
   };
 
-  componentDidMount() {
-    var currentUser = GetAuthenticatedUser();
-    $("#email").val(`${currentUser.email}`);
-  }
   enableSpinner = () => {
     $("#btn-register").prop("disabled", true);
     $("#btn-register").css("cursor", "not-allowed");
@@ -172,6 +169,12 @@ class ChangePassword extends Component {
     }
   }
 
+  componentDidMount() {
+    SubmitByEnter();
+    var currentUser = GetAuthenticatedUser();
+    $("#email").val(`${currentUser.email}`);
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -193,7 +196,7 @@ class ChangePassword extends Component {
                 id="email"
                 className="form-control"
                 disabled
-                readonly
+                readOnly
               />
 
               <div id="oldPasswordContainer">

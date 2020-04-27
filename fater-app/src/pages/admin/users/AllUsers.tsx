@@ -11,6 +11,8 @@ import { userState } from "../../../constants/userState";
 import EditUserModal from "../../../components/admin/modal/editUserModal";
 import DeleteUserModal from "../../../components/admin/modal/deleteUserModal";
 import ResetPasswordModal from "../../../components/admin/modal/resetPasswordModal";
+import { ToastContainer } from "react-toastify";
+import { HandleModalByKey } from "../../../utils/Helper";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
@@ -18,10 +20,6 @@ export interface IAllUsersProps {
   needAuthentication: boolean;
   neededRole: string;
 }
-
-const handleResetPassword = (dt: any) => {
-  alert("ResetPassword");
-};
 
 const styleUserStateCell = (state: any) => {
   let userStateDom = state;
@@ -51,7 +49,6 @@ const styleUserStateCell = (state: any) => {
 
 function getData() {
   let data: any = [];
-  console.log(window.location.href);
   if (window.localStorage.access_token) {
     $.ajax({
       url: `${API_URL}/api/v1/admin/users`,
@@ -124,11 +121,12 @@ const configuration = {
 
 const AllUsers: React.FC<IAllUsersProps> = (props) => {
   var userState = Protect(props);
-
+  HandleModalByKey();
   if (userState.isValid) {
     return (
       <IonPage>
         <IonContent>
+          <ToastContainer />
           <EditUserModal />
           <DeleteUserModal />
           <ResetPasswordModal />

@@ -35,7 +35,6 @@ const styleActionCell = (action: any) => {
 
 function getData() {
   let data: any = [];
-  console.log(window.location.href);
   if (window.localStorage.access_token) {
     $.ajax({
       url: `${API_URL}/api/v1/admin/UserActivityLogs`,

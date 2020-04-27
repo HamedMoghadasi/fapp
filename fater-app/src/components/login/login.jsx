@@ -10,6 +10,7 @@ import localStorage from "local-storage";
 import request from "request";
 import bcrypt from "bcryptjs";
 import authHelper from "../../utils/Auth";
+import { SubmitByEnter } from "../../utils/Helper";
 
 let API_URL = process.env.REACT_APP_API_URL;
 let captchaSecret = process.env.REACT_APP_CAPTCHA_SECRET;
@@ -175,6 +176,7 @@ class Login extends Component {
 
   componentDidMount() {
     this.getCaptcha();
+    SubmitByEnter();
   }
 
   componentWillMount = () => {

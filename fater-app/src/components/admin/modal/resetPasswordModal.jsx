@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 let API_URL = process.env.REACT_APP_API_URL;
 
@@ -87,7 +87,6 @@ class ResetPasswordModal extends Component {
   render() {
     return (
       <>
-        <ToastContainer />
         <div
           className="modal fade"
           id="resetPasswordModal"
@@ -124,7 +123,7 @@ class ResetPasswordModal extends Component {
                   type="button"
                   onClick={this.handleSubmit}
                   id="submitBtn"
-                  className="btn btn-danger"
+                  className="btn btn-primary"
                 >
                   Reset Password
                 </button>

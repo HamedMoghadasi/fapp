@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./forgetPassword.css";
 import forgetPassword from "./forgetPassword.png";
 import { IonSpinner } from "@ionic/react";
+import { SubmitByEnter } from "../../utils/Helper";
 
 class ForgetPassword extends Component {
   notify = (message, type) => {
@@ -86,7 +87,9 @@ class ForgetPassword extends Component {
     });
     return false;
   };
-
+  componentDidMount() {
+    SubmitByEnter();
+  }
   render() {
     return (
       <React.Fragment>

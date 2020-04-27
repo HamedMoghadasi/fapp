@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { userState } from "../../../constants/userState";
 
 let API_URL = process.env.REACT_APP_API_URL;
@@ -55,11 +55,9 @@ class DeleteUserModal extends Component {
       });
     }
   };
-
   render() {
     return (
       <>
-        <ToastContainer />
         <div
           className="modal fade"
           id="deleteModal"

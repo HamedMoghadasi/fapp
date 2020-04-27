@@ -9,6 +9,7 @@ import register from "./register.png";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { SubmitByEnter } from "../../utils/Helper";
 
 class Register extends Component {
   notify = (message, type) => {
@@ -123,6 +124,9 @@ class Register extends Component {
     }
   }
 
+  componentDidMount() {
+    SubmitByEnter();
+  }
   render() {
     return (
       <React.Fragment>
