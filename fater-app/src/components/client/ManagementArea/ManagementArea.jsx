@@ -9,18 +9,18 @@ class ManagementArea extends Component {
   handleClick = () => {};
   render() {
     return (
-      <div id="ma">
-        <div id="ma-header">
-          <IonIcon icon={menuOutline} />
-          header
-        </div>
-        <div id="ma-container">
-          <div id="ma-wrapper">
-            <Tabs />
+      <>
+        <div id="ma">
+          <div id="ma-header">
+            <IonIcon icon={menuOutline} />
+          </div>
+          <div id="ma-container">
+            <div id="ma-wrapper">
+              <Tabs />
+            </div>
           </div>
         </div>
-        <div id="ma-footer"></div>
-      </div>
+      </>
     );
   }
 }
