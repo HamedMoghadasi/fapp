@@ -9,6 +9,7 @@ import { personOutline } from "ionicons/icons";
 import React from "react";
 import "./Home.css";
 import MapContainer from "../containers/map-container";
+import ManagementArea from "../components/client/ManagementArea/ManagementArea";
 
 const Home: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent></IonContent>
+      <ManagementArea />
       <MapContainer />
     </IonPage>
   );

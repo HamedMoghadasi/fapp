@@ -18,7 +18,6 @@ import "../styles/components/map.css";
 class Map extends Component {
   _olMap = {};
   componentDidMount = () => {
-    this.removeAttribute();
     this.olmap = new OlMap({
       target: "mapContainer",
       controls: defaultControls().extend([
@@ -38,16 +37,25 @@ class Map extends Component {
       ],
     });
 
+    $("#mapContainer").data("map", this.olmap);
     this.olmap.on("moveend", () => {
       let center = this.olmap.getView().getCenter();
       let zoom = this.olmap.getView().getZoom();
       this.props.handleUpdatingCenterAndZoom(center, zoom);
     });
+
+    this.removeAttribute();
   };
   removeAttribute = () => {
     $(document).ready(() => {
+      $(".error-container").remove();
       $(".ol-attribution").remove();
-      this.olmap.updateSize();
+
+      setTimeout(() => {
+        var map = $("#mapContainer").data("map");
+        console.log(map);
+        map.updateSize();
+      }, 500);
     });
   };
 
@@ -57,7 +65,7 @@ class Map extends Component {
     }
   };
   render() {
-    return <div id="mapContainer"></div>;
+    return <div id="mapContainer" data-map=""></div>;
   }
 }
 
