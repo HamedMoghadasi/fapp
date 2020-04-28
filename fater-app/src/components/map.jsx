@@ -22,7 +22,7 @@ class Map extends Component {
       target: "mapContainer",
       controls: defaultControls().extend([
         new ScaleLine(),
-        new FullScreen(),
+        // new FullScreen(),
         new ZoomSlider(),
       ]),
       view: new OlView({

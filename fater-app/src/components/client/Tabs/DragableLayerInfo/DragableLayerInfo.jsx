@@ -3,7 +3,6 @@ import "./DragableLayerInfo.css";
 import { IonIcon } from "@ionic/react";
 import {
   eye,
-  closeOutline,
   settingsOutline,
   informationOutline,
   close,

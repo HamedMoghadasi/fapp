@@ -9,16 +9,15 @@
 }
 
 #mapContainer .ol-zoom .ol-zoom-out {
-  margin-top: 204px;
+  margin-top: 150px;
 }
 #mapContainer .ol-zoomslider {
-  background-color: transparent;
-  top: 2.3em;
+  background-color: rgba(145, 145, 146, 1);
+  width: 5px;
+  height: 150px;
+  border-radius: 0;
 }
 
-#mapContainer .ol-touch .ol-zoom .ol-zoom-out {
-  margin-top: 212px;
-}
 #mapContainer .ol-touch .ol-zoomslider {
   top: 2.75em;
 }
@@ -31,4 +30,48 @@
 #mapContainer .ol-zoom-out.ol-has-tooltip:hover [role="tooltip"],
 #mapContainer .ol-zoom-out.ol-has-tooltip:focus [role="tooltip"] {
   top: 232px;
+}
+
+.ol-zoom {
+  top: 2.8em;
+  right: 0.5em;
+  left: auto;
+}
+
+.ol-zoomslider {
+  top: 4.5em;
+  right: 1.25em;
+  left: auto;
+}
+
+.ol-zoomslider button {
+  position: relative;
+  height: 11px;
+  width: 22px;
+  border-radius: 3px;
+  right: 11.6px;
+  background: rgba(0, 123, 255, 1);
+  border: 2px solid #545b62;
+}
+.ol-control button:hover,
+.ol-control button:focus {
+  text-decoration: none;
+  outline: 0;
+  background: rgba(0, 123, 255, 1);
+}
+
+.ol-control,
+.ol-control:hover,
+.ol-control:active {
+  background-color: transparent;
+  border: none;
+}
+
+#mapContainer .ol-zoom .ol-zoom-in,
+#mapContainer .ol-zoom .ol-zoom-out {
+  background-color: rgba(22, 24, 24, 0.8);
+  border-radius: 5px;
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
 }
