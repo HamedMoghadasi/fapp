@@ -53,8 +53,8 @@
   background: rgba(0, 123, 255, 1);
   border: 2px solid #545b62;
 }
-.ol-control button:hover,
-.ol-control button:focus {
+.ol-control button.ol-zoomslider-thumb:hover,
+.ol-control button.ol-zoomslider-thumb:focus {
   text-decoration: none;
   outline: 0;
   background: rgba(0, 123, 255, 1);
@@ -74,4 +74,23 @@
   width: 24px;
   height: 24px;
   margin-left: 4px;
+}
+
+.ol-rotate-reset {
+  background-color: transparent !important;
+  border-radius: 50% !important;
+  outline: 0;
+}
+
+.ol-rotate-reset:hover,
+.ol-rotate-reset:focus,
+.ol-rotate-reset:active {
+  outline: 0;
+}
+
+.ol-rotate-reset .ol-compass {
+  transform: rotate(13.1528rad);
+  color: rgb(220, 53, 69);
+  font-size: 40px;
+  font-weight: 900;
 }

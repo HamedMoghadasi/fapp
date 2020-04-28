@@ -14,6 +14,8 @@ import {
 import "ol/ol.css";
 import "./map.css";
 import "../styles/components/map.css";
+import { IonIcon } from "@ionic/react";
+import { caretUp } from "ionicons/icons";
 
 class Map extends Component {
   _olMap = {};
@@ -53,7 +55,6 @@ class Map extends Component {
 
       setTimeout(() => {
         var map = $("#mapContainer").data("map");
-        console.log(map);
         map.updateSize();
       }, 500);
     });
