@@ -9,6 +9,7 @@ class BaseLayerList extends Component {
   componentDidMount() {
     $("#baselayer-sortable-list").sortable({
       axis: "y",
+      delay: 350,
       placeholder: "sortable-placeholder",
     });
     $("#baselayer-sortable-list").disableSelection();

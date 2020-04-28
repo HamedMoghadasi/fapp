@@ -79,6 +79,9 @@
 .ol-rotate-reset {
   background-color: transparent !important;
   border-radius: 50% !important;
+  position: absolute !important;
+  bottom: 20px !important;
+  right: 17px !important;
   outline: 0;
 }
 
@@ -93,4 +96,18 @@
   color: rgb(220, 53, 69);
   font-size: 40px;
   font-weight: 900;
+}
+
+.ol-rotate,
+.ol-rotate:hover,
+.ol-rotate:active,
+.ol-rotate:focus {
+  bottom: 1.5em;
+  top: auto;
+  right: 1.5em;
+  background: rgba(40, 167, 69, 0.2);
+  border: 2px dashed rgba(220, 53, 69, 0.8);
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
 }
