@@ -12,6 +12,8 @@ import MapContainer from "../containers/map-container";
 import ManagementArea from "../components/client/ManagementArea/ManagementArea";
 import SideToolbar from "../components/client/SideToolbar/SideToolbar";
 import UpperToolbar from "../components/client/UpperToolbar/UpperToolbar";
+import TimelineSlider from "../components/client/Timeline/TimelineSlider/TimelineSlider";
+import TimelineControl from "../components/client/Timeline/TimelineControl/TimelineControl";
 
 const Home: React.FC = () => {
   return (
@@ -29,6 +31,8 @@ const Home: React.FC = () => {
       <MapContainer />
       <UpperToolbar />
       <SideToolbar />
+      <TimelineSlider />
+      <TimelineControl />
     </IonPage>
   );
 };

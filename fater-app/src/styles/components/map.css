@@ -102,7 +102,7 @@
 .ol-rotate:hover,
 .ol-rotate:active,
 .ol-rotate:focus {
-  bottom: 1.5em;
+  bottom: 9.5em;
   top: auto;
   right: 1.5em;
   background: rgba(40, 167, 69, 0.2);
@@ -110,4 +110,10 @@
   width: 65px;
   height: 65px;
   border-radius: 50%;
+}
+
+.ol-scale-line {
+  bottom: 89px;
+  left: auto;
+  right: 10px;
 }

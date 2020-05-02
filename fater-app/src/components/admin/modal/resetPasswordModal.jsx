@@ -70,6 +70,7 @@ class ResetPasswordModal extends Component {
         },
         success: function (response) {
           $("#resetPasswordModal").modal("hide");
+          $("#submitBtn").removeAttr("disabled");
           notif(
             "Succeful! Password Reset. an email sended for user",
             "success"
@@ -78,6 +79,7 @@ class ResetPasswordModal extends Component {
         error: function (err) {
           console.log(err);
           $("#resetPasswordModal").modal("hide");
+          $("#submitBtn").removeAttr("disabled");
           notif("Failed! User did not Deleted", "error");
         },
       });

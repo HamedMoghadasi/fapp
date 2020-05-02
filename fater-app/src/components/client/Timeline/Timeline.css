@@ -1,0 +1,11 @@
+#timeline-container {
+  text-align: center;
+  position: absolute;
+  right: 0.5em;
+  top: 36em;
+  background-color: rgba(22, 24, 24, 0.8);
+  margin: 10px;
+  border-radius: 5px;
+  width: 98%;
+  height: 40px;
+}
