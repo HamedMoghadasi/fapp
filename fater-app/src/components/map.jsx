@@ -4,18 +4,11 @@ import OlMap from "ol/Map";
 import OlView from "ol/View";
 import OlTileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
-import {
-  defaults as defaultControls,
-  ZoomSlider,
-  ScaleLine,
-  FullScreen,
-} from "ol/control";
+import { defaults as defaultControls, ZoomSlider, ScaleLine } from "ol/control";
 
 import "ol/ol.css";
 import "./map.css";
 import "../styles/components/map.css";
-import { IonIcon } from "@ionic/react";
-import { caretUp } from "ionicons/icons";
 
 class Map extends Component {
   _olMap = {};

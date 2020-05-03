@@ -5,11 +5,11 @@
   top: 0.3em;
   background-color: rgba(22, 24, 24, 0.8);
   border-radius: 5px;
-  width: 300px;
+  width: 320px;
   height: 37px;
 }
 
-#ut-container .ut-icon#info {
+#ut-container .ut-icon#home {
   margin-right: 24px;
 }
 #ut-container .ut-icon {

@@ -1,14 +1,37 @@
 import React, { Component } from "react";
-import "./UpperToolbar.css";
+import { projections } from "../../../constants/projections";
+import * as OlProj from "ol/proj";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInfoCircle,
   faPhotoVideo,
   faShareAlt,
   faGlobeAfrica,
+  faHome,
 } from "@fortawesome/free-solid-svg-icons";
+import OlView from "ol/View";
+
+import $ from "jquery";
+
+import "./UpperToolbar.css";
 
 class UpperToolbar extends Component {
+  handleHomeClick = () => {
+    var map = $("#mapContainer").data("map");
+
+    map.getView().animate({
+      center: OlProj.transform(
+        [53, 33],
+        projections.EPSG4326,
+        projections.EPSG3857
+      ),
+      zoom: 4,
+      projection: projections.EPSG3857,
+      duration: 1000,
+    });
+  };
+
   render() {
     return (
       <>
@@ -22,6 +45,12 @@ class UpperToolbar extends Component {
             id="photoVideo"
           />
           <FontAwesomeIcon icon={faInfoCircle} className="ut-icon" id="info" />
+          <FontAwesomeIcon
+            icon={faHome}
+            className="ut-icon"
+            id="home"
+            onClick={this.handleHomeClick}
+          />
         </div>
       </>
     );
