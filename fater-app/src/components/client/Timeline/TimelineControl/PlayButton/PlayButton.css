@@ -1,0 +1,25 @@
+#timeline-control-playButton {
+  position: absolute;
+  top: -3px;
+  right: 14px;
+  border: 1px solid #ffc107;
+  border-radius: 50%;
+  height: 67px;
+  width: 67px;
+  background: rgba(22, 24, 24, 0.8);
+  box-shadow: inset 0px 0px 13px 1px rgba(255, 193, 7, 0.3);
+  outline: 0;
+  transition: 3s ease-in-out;
+}
+
+#timeline-control-playButton:hover ion-icon {
+  color: rgba(255, 193, 7, 1);
+}
+
+#timeline-control-playButton ion-icon {
+  font-size: 55px;
+  color: rgba(255, 193, 7, 0.7);
+  position: absolute;
+  top: 6px;
+  right: 1px;
+}

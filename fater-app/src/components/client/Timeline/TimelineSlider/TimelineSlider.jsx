@@ -6,7 +6,6 @@ import "ion-rangeslider/css/ion.rangeSlider.css";
 import "./TimelineSlider.css";
 
 var lang = "en-US";
-var year = 2018;
 
 function dateToTS(date) {
   return date.valueOf();

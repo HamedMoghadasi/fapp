@@ -1,0 +1,13 @@
+#currentDate-container input.datepicker-input {
+  border: none;
+  position: absolute;
+  background: #4e4e4e;
+  border-bottom: 1px dashed #007bff;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  outline: 0;
+  left: 8px;
+  top: 17px;
+  width: 50%;
+}
