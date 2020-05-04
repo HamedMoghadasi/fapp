@@ -186,7 +186,7 @@ class Register extends Component {
                 type="submit"
                 id="btn-register"
               >
-                <span id="btn-register-text">Register</span>
+                <span id="btn-register-text">ثبت نام</span>
 
                 <IonSpinner id="btn-register-spinner" name="dots" />
               </button>
@@ -194,7 +194,7 @@ class Register extends Component {
           </div>
 
           <a href="/login" className="btn btn-register btn-primary">
-            Have you an account? Log in.
+            حساب کاربری داری ؟ وارد شوید
           </a>
         </div>
       </React.Fragment>

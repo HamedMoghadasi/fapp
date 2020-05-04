@@ -19,9 +19,7 @@ class BaseLayerList extends Component {
     return (
       <>
         <div id="baselayer-container">
-          <h6>
-            <i>Base Layer</i>
-          </h6>
+          <h6>نقشه ها</h6>
           <ul id="baselayer-sortable-list">
             <DragableLayerInfo />
             <DragableLayerInfo />

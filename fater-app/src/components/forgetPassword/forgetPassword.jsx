@@ -120,13 +120,13 @@ class ForgetPassword extends Component {
                 type="submit"
                 id="btn-forgetPassword"
               >
-                <span id="btn-forgetPassword-text">Reset Password</span>
+                <span id="btn-forgetPassword-text">بازیابی رمز</span>
                 <IonSpinner id="btn-forgetPassword-spinner" name="dots" />
               </button>
             </form>
           </div>
           <a href="/login" className="btn btn-register btn-primary">
-            Do you remember your password? Log in.
+            رمز عبور خود را می دانید ؟ وارد شوید
           </a>
         </div>
       </React.Fragment>

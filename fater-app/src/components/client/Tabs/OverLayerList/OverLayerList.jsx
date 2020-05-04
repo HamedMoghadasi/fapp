@@ -22,9 +22,7 @@ class OverLayerList extends Component {
     return (
       <>
         <div id="overlayer-container">
-          <h6>
-            <i>Over Layer</i>
-          </h6>
+          <h6>لایه ها</h6>
           <ul id="overlayer-sortable-list">
             <DragableLayerInfo />
             <DragableLayerInfo />

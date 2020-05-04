@@ -15,12 +15,12 @@ class LayersTabContent extends Component {
           aria-labelledby="layers-tab"
         >
           <div id="LayersTabContent-operators">
-            <button className="btn btn-sm btn-primary">Add Map</button>
-            <button className="btn btn-sm btn-primary">Add Layer</button>
+            <button className="btn btn-sm btn-primary">نقشه جدید</button>
+            <button className="btn btn-sm btn-primary">لایه جدید</button>
           </div>
           <div id="LayersTabContent-items">
-            <OverLayerList />
             <BaseLayerList />
+            <OverLayerList />
           </div>
         </div>
       </>

@@ -230,7 +230,7 @@ class Login extends Component {
               </div>
               <div id="remember" className="checkbox">
                 <label>
-                  <input type="checkbox" /> Remember me
+                  <input type="checkbox" /> مرا به خاطر بسپار
                 </label>
               </div>
 
@@ -254,18 +254,18 @@ class Login extends Component {
                 type="submit"
                 id="btn-signIn"
               >
-                <span id="btn-signIn-text">Sign In</span>
+                <span id="btn-signIn-text">ورود</span>
 
                 <IonSpinner id="btn-signIn-spinner" name="dots" />
               </button>
             </form>
             <a href="/ForgetPassword" className="forgot-password">
-              Forgot the password?
+              بازیابی رمز عبور
             </a>
           </div>
 
           <a href="/Register" className="btn btn-danger btn-register">
-            Register Now !
+            همین الان ثبت نام کنید
           </a>
         </div>
       </React.Fragment>

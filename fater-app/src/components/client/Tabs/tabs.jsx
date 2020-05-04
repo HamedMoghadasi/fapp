@@ -30,7 +30,7 @@ class Tabs extends Component {
               aria-selected="true"
             >
               <IonIcon icon={layers} />
-              Layers
+              لایه‌ها
             </a>
           </li>
           <li className="nav-item">
@@ -44,7 +44,7 @@ class Tabs extends Component {
               aria-selected="false"
             >
               <IonIcon icon={cloudDownloadOutline} />
-              Download
+              دانلود
             </a>
           </li>
           <li className="nav-item">
@@ -58,7 +58,7 @@ class Tabs extends Component {
               aria-selected="false"
             >
               <IonIcon icon={documentTextOutline} />
-              Reports
+              گزارش‌ها
             </a>
           </li>
           <li className="nav-item">
@@ -72,7 +72,7 @@ class Tabs extends Component {
               aria-selected="false"
             >
               <IonIcon icon={personOutline} />
-              User
+              کاربر
             </a>
           </li>
         </ul>

@@ -8,6 +8,11 @@ import rootReducer from "./reducers";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
+// import "./assets/fonts/vazir/Vazir.woff2";
+// import "./assets/fonts/vazir/Vazir.woff";
+// import "./assets/fonts/vazir/Vazir.eot";
+// import "./assets/fonts/vazir/Vazir.ttf";
+
 const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

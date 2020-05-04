@@ -38,6 +38,7 @@ class RangeDate extends Component {
           <DatePicker
             onChange={(value) => this.setState({ to: value })}
             timePicker={false}
+            isGregorian={this.state.isGeorgian}
             value={this.state.to}
           />
         </div>

@@ -249,7 +249,7 @@ class ChangePassword extends Component {
                 type="submit"
                 id="btn-register"
               >
-                <span id="btn-register-text">Change it</span>
+                <span id="btn-register-text">تغییر بده</span>
 
                 <IonSpinner id="btn-register-spinner" name="dots" />
               </button>
@@ -257,7 +257,7 @@ class ChangePassword extends Component {
           </div>
 
           <a href="/" className="btn btn-register btn-link">
-            Back to home
+            بازگشت به صفحه اصلی
           </a>
         </div>
       </React.Fragment>
