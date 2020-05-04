@@ -18,3 +18,68 @@
   font-size: 28px;
   margin: 4px 5px 2px 25px;
 }
+
+#ShareButtons-container {
+  position: absolute;
+  background: rgba(66, 66, 66, 1);
+  top: 42px;
+  border-radius: 5px;
+  padding: 5px;
+  width: 190px;
+  font-size: 30px;
+  color: white;
+}
+
+#ShareButtons-container svg {
+  margin-right: 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+#ShareButtons-container #telegram {
+  color: rgba(47, 166, 222, 0.8);
+}
+#ShareButtons-container #telegram:hover {
+  color: rgba(47, 166, 222, 1);
+}
+#ShareButtons-container #whatsapp {
+  color: rgba(46, 213, 74, 0.8);
+}
+#ShareButtons-container #whatsapp:hover {
+  color: rgba(46, 213, 74, 1);
+}
+#ShareButtons-container #Gmail {
+  color: rgba(234, 67, 53, 0.8);
+}
+#ShareButtons-container #Gmail:hover {
+  color: rgba(234, 67, 53, 1);
+}
+
+#ShareButtons-container #copy {
+  color: rgba(175, 175, 175, 0.8);
+  font-size: 27px;
+}
+#ShareButtons-container #copy:hover {
+  color: rgba(175, 175, 175, 1);
+}
+
+#copiedAlert {
+  background-color: rgba(27, 236, 156, 0.95);
+  position: absolute;
+  right: 20px;
+  width: 61%;
+  font-size: 17px;
+  padding: 3px;
+  top: 13px;
+  color: #212529;
+  border-radius: 7px;
+  font-weight: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s ease-in-out;
+}
+
+#copiedAlert.show {
+  visibility: visible;
+  opacity: 1;
+}
