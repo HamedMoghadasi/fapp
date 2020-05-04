@@ -28,3 +28,12 @@ tr {
   -o-user-select: initial !important;
   user-select: initial !important;
 }
+
+.table-header {
+  direction: rtl;
+  text-align: center;
+  background: rgba(255, 193, 7, 0.1);
+  color: black;
+  padding: 9px;
+  border-radius: 5px;
+}

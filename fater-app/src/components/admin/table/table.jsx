@@ -21,7 +21,9 @@ export default class Tableo extends React.Component {
       this.dataTable = $("#tableo").DataTable({
         data: configuration.data,
         columns: configuration.columns,
-        select: true,
+        select: {
+          info: false,
+        },
         searchValue: "",
         options: {
           dom: "lfrtip",
@@ -30,6 +32,12 @@ export default class Tableo extends React.Component {
           scrollX: true,
           scrollCollapse: true,
         },
+        language: {
+          search: "",
+          lengthMenu: "_MENU_",
+          info: "نمایش رکورد های _START_ تا _END_ از مجموع _TOTAL_ داده",
+        },
+
         createdRow: function (row, data, dataIndex, cells) {
           if (!$(".operatorBtn").prop("disabled")) {
             $(".operatorBtn").prop("disabled", true);

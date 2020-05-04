@@ -57,7 +57,7 @@ a:focus {
   width: 300px;
   position: fixed;
   top: 0;
-  left: -300px;
+  right: -300px;
   height: 100vh;
   z-index: 999;
   background: #278efd;
@@ -68,7 +68,7 @@ a:focus {
 }
 
 #sidebar.active {
-  left: 0;
+  right: 0;
 }
 
 #dismiss {
@@ -82,7 +82,7 @@ a:focus {
   color: white;
   position: absolute;
   top: 0px;
-  right: 10px;
+  left: 10px;
   cursor: pointer;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -152,13 +152,15 @@ a:focus {
   color: #fff;
   text-decoration: none;
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 15px;
   display: block;
+  direction: rtl;
+  text-align: right;
 }
 
 .sidebar-item-icon {
   margin: -1.5px;
-  margin-right: 9.5px;
+  margin-left: 9.5px;
 }
 
 #sidebar ul li a:hover {
@@ -192,10 +194,11 @@ ul ul a {
 
 ul.CTAs {
   padding: 20px;
+  font-size: 14px;
 }
 
 ul.CTAs a {
-  text-align: center;
+  text-align: center !important;
   font-size: 0.9em !important;
   display: block;
   border-radius: 5px;
@@ -218,6 +221,7 @@ a.article:hover {
 ----------------------------------------------------- */
 #content .navbar {
   z-index: 5;
+  direction: rtl;
 }
 #content {
   opacity: 0.8;
@@ -245,7 +249,7 @@ a.article:hover {
 .sidebar-masterItem-icon {
   color: white;
   position: absolute;
-  right: 15px;
+  left: 15px;
   top: 15px;
 }
 
@@ -292,4 +296,10 @@ a.masterMenu[aria-expanded="false"] .sidebar-masterItem-icon.minus {
   color: rgba(0, 123, 255, 0.5);
   margin-left: 2.5px;
   font-size: 12px;
+}
+
+#navbarSupportedContent {
+  font-family: "iransansi", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
 }

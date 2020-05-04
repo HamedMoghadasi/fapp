@@ -131,33 +131,34 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
           <DeleteUserModal />
           <ResetPasswordModal />
           <AdminTemplateContainer isSidebarOpen="false" menu="users">
-            <h1>Manage All Users</h1>
+            <h1 className="table-header">مدیریت کاربران</h1>
+            <br />
             <Table configuration={configuration}>
               <button
                 id="editBtn"
-                className="btn btn-md btn-warning m-1 operatorBtn"
+                className="btn btn-md btn-warning m-1 operatorBtn float-right"
                 data-toggle="modal"
                 data-target="#editModal"
               >
-                Edit
-              </button>
-
-              <button
-                id="resetPasswordBtn"
-                className="btn btn-md btn-primary m-1 operatorBtn"
-                data-toggle="modal"
-                data-target="#resetPasswordModal"
-              >
-                Reset Password
+                ویرایش
               </button>
 
               <button
                 id="deleteBtn"
-                className="btn btn-md btn-danger m-1 operatorBtn"
+                className="btn btn-md btn-danger m-1 operatorBtn float-right"
                 data-toggle="modal"
                 data-target="#deleteModal"
               >
-                Delete
+                حذف
+              </button>
+
+              <button
+                id="resetPasswordBtn"
+                className="btn btn-md btn-primary m-1 operatorBtn "
+                data-toggle="modal"
+                data-target="#resetPasswordModal"
+              >
+                ریست رمز
               </button>
             </Table>
           </AdminTemplateContainer>

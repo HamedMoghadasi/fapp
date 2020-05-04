@@ -1,3 +1,8 @@
+#adminContentContainer,
+.wrapper {
+  font-family: "iransansi", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
 #adminContentContainer {
   margin-top: 120px;
   width: 75%;

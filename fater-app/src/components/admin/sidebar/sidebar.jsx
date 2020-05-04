@@ -104,7 +104,7 @@ class SideBar extends Component {
                     className="sidebar-item-icon"
                     icon={desktopOutline}
                   />
-                  Dashboard
+                  داشبورد
                 </Link>
               </li>
               <li>
@@ -124,7 +124,7 @@ class SideBar extends Component {
                     className="sidebar-masterItem-icon minus"
                     icon={remove}
                   />
-                  Users
+                  کاربران
                 </a>
                 <ul className={usersSubmenuClass} id="usersSubmenu">
                   <li>
@@ -137,25 +137,25 @@ class SideBar extends Component {
                       }}
                       replace
                     >
-                      All Users
+                      مدیریت کاربران
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/dashboard/Users/Suspended" replace>
-                      Suspend User
+                      کاربران معلق
                     </Link>
                   </li>
                   <li>
                     <Link to="/dashboard/Users/Pending" replace>
                       Pending Users
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
               <li>
                 <Link to="/dashboard" replace>
                   <IonIcon className="sidebar-item-icon" icon={map} />
-                  Map
+                  نقشه ها
                 </Link>
               </li>
               <li>
@@ -171,22 +171,22 @@ class SideBar extends Component {
                     className="sidebar-masterItem-icon plus"
                     icon={add}
                   />
+                  گزارشات
                   <IonIcon
                     className="sidebar-masterItem-icon minus"
                     icon={remove}
                   />
-                  Logs
                 </a>
 
                 <ul className={logsSubmenuClass} id="logsSubmenu">
                   <li>
                     <Link to="/dashboard/Logs/UsersActivity" replace>
-                      Users Activity Log
+                      ورود و خروج کاربر
                     </Link>
                   </li>
                 </ul>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/dashboard" replace>
                   <IonIcon className="sidebar-item-icon" icon={heartOutline} />
                   Portfolio
@@ -197,18 +197,18 @@ class SideBar extends Component {
                   <IonIcon className="sidebar-item-icon" icon={call} />
                   Contact
                 </Link>
-              </li>
+              </li> */}
             </ul>
 
             <ul className="list-unstyled CTAs">
               <li>
                 <a href="#" className="download">
-                  Update Profile
+                  بروزرسانی پروفایل
                 </a>
               </li>
               <li>
                 <a href="#" className="article">
-                  Back to Map
+                  بازگشت به نقشه
                 </a>
               </li>
             </ul>
@@ -241,7 +241,7 @@ class SideBar extends Component {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                <ul className="nav navbar-nav ml-auto">
+                <ul className="nav navbar-nav mr-auto">
                   <li className="nav-item active">
                     <span className="nav-link" id="username"></span>
                   </li>
@@ -251,7 +251,7 @@ class SideBar extends Component {
                       style={{ cursor: "pointer" }}
                       onClick={this.Logout}
                     >
-                      Logout
+                      خروج
                       <span className="nav-link-icon logout">
                         <IonIcon icon={logOutOutline} />
                       </span>
