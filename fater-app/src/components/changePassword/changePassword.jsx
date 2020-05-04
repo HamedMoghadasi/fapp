@@ -249,7 +249,7 @@ class ChangePassword extends Component {
                 type="submit"
                 id="btn-register"
               >
-                <span id="btn-register-text">تغییر بده</span>
+                <span id="btn-register-text">تغییر رمز</span>
 
                 <IonSpinner id="btn-register-spinner" name="dots" />
               </button>

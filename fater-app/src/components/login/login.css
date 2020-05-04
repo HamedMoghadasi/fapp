@@ -11,8 +11,8 @@ html {
 .card-container.card {
   max-width: 350px;
   padding: 40px 40px;
-  font-family: "iransansi", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "byekani", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .btn {
@@ -115,8 +115,8 @@ html {
   display: table;
   margin: 0 auto;
   min-width: 350px;
-  font-family: "iransansi", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "byekani", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 .btn.btn-signin {
   padding: 0px;

@@ -194,7 +194,7 @@ class Register extends Component {
           </div>
 
           <a href="/login" className="btn btn-register btn-primary">
-            حساب کاربری داری ؟ وارد شوید
+            حساب کاربری دارید ؟ وارد شوید
           </a>
         </div>
       </React.Fragment>

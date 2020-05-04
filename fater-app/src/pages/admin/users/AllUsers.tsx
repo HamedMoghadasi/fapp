@@ -158,7 +158,7 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
                 data-toggle="modal"
                 data-target="#resetPasswordModal"
               >
-                ریست رمز
+                بازیابی رمز
               </button>
             </Table>
           </AdminTemplateContainer>
