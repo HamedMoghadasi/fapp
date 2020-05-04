@@ -17,7 +17,7 @@ import {
   faTelegramPlane,
 } from "@fortawesome/free-brands-svg-icons";
 
-import copy from "clipboard-copy";
+import copy from "copy-to-clipboard";
 
 import buildUrl from "build-url";
 import $ from "jquery";
@@ -66,6 +66,8 @@ class UpperToolbar extends Component {
   handleCopy = () => {
     let url = this.generateShareLink(true);
     copy(url);
+    console.log(url);
+
     $("#ShareButtons-container #copiedAlert").addClass("show");
     setTimeout(function () {
       $("#ShareButtons-container #copiedAlert").removeClass("show");

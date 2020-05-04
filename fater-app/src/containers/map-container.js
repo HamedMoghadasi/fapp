@@ -3,15 +3,19 @@ import Map from "../components/map";
 import { connect } from "react-redux";
 import {
   updateCenterAndZoom,
-  initialOpenLayersToState
+  initialOpenLayersToState,
 } from "../actions/map-action";
 
 class MapContainer extends Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props.location);
+  }
   UpdateCenterAndZoom = (center, zoom) => {
     this.props.dispatch(updateCenterAndZoom(center, zoom));
   };
 
-  InitialOpenLayersToState = olmap => {
+  InitialOpenLayersToState = (olmap) => {
     this.props.dispatch(initialOpenLayersToState(olmap));
   };
 
@@ -21,11 +25,12 @@ class MapContainer extends Component {
         map={this.props.map}
         handleUpdatingCenterAndZoom={this.UpdateCenterAndZoom}
         initOpenLayers={this.InitialOpenLayersToState}
+        location={this.props.location}
       />
     );
   }
 }
-const mapStateToProps = state => ({
-  map: state.map
+const mapStateToProps = (state) => ({
+  map: state.map,
 });
 export default connect(mapStateToProps)(MapContainer);

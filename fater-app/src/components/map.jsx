@@ -5,6 +5,7 @@ import OlView from "ol/View";
 import OlTileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import { defaults as defaultControls, ZoomSlider, ScaleLine } from "ol/control";
+import queryString from "query-string";
 
 import "ol/ol.css";
 import "./map.css";
@@ -12,7 +13,28 @@ import "../styles/components/map.css";
 
 class Map extends Component {
   _olMap = {};
+  getView = () => {
+    let params = queryString.parse(this.props.location);
+    console.log(params);
+    var view = new OlView({
+      center: this.props.map.center,
+      zoom: this.props.map.zoom,
+      projection: this.props.map.projection,
+    });
+    if (params.lat && params.lon && params.zoom && params.projection) {
+      view = new OlView({
+        center: [Number(params.lon), Number(params.lat)],
+        zoom: params.zoom,
+        projection: params.projection,
+      });
+    }
+    console.log(view);
+    return view;
+  };
   componentDidMount = () => {
+    this.getView();
+    var view_ = this.getView;
+
     this.olmap = new OlMap({
       target: "mapContainer",
       controls: defaultControls().extend([
@@ -20,11 +42,7 @@ class Map extends Component {
         // new FullScreen(),
         new ZoomSlider(),
       ]),
-      view: new OlView({
-        center: this.props.map.center,
-        zoom: this.props.map.zoom,
-        projection: this.props.map.projection,
-      }),
+      view: view_(),
       layers: [
         new OlTileLayer({
           source: new OSM(),

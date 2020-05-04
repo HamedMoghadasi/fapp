@@ -14,8 +14,13 @@ import SideToolbar from "../components/client/SideToolbar/SideToolbar";
 import UpperToolbar from "../components/client/UpperToolbar/UpperToolbar";
 import TimelineSlider from "../components/client/Timeline/TimelineSlider/TimelineSlider";
 import TimelineControl from "../components/client/Timeline/TimelineControl/TimelineControl";
+import { useLocation } from "react-router";
 
 const Home: React.FC = () => {
+  const location = useLocation();
+
+  console.log("location", location.search);
+
   return (
     <IonPage>
       <IonHeader>
@@ -28,7 +33,7 @@ const Home: React.FC = () => {
       <IonContent></IonContent>
       <ManagementArea />
 
-      <MapContainer />
+      <MapContainer location={location.search} />
       <UpperToolbar />
       <SideToolbar />
       <TimelineSlider />
