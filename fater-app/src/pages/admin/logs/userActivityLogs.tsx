@@ -50,19 +50,21 @@ function getData() {
       },
       success: function (response) {
         data = response.data;
-        data.map((item: any) => {
-          item.createdAt = `${jmoment(item.createdAt).format(
-            "jYYYY/jMM/jDD"
-          )} <span class="badge badge-warning" style="opacity:0.6;margin-left:5px">${jmoment(
-            item.createdAt
-          ).format("HH:mm")}</span>`;
+        if (data) {
+          data.map((item: any) => {
+            item.createdAt = `${jmoment(item.createdAt).format(
+              "jYYYY/jMM/jDD"
+            )} <span class="badge badge-warning" style="opacity:0.6;margin-left:5px">${jmoment(
+              item.createdAt
+            ).format("HH:mm")}</span>`;
 
-          item.updatedAt = `${jmoment(item.updatedAt).format(
-            "jYYYY/jMM/jDD"
-          )} <span class="badge badge-warning" style="opacity:0.6;margin-left:5px">${jmoment(
-            item.updatedAt
-          ).format("HH:mm")}</span>`;
-        });
+            item.updatedAt = `${jmoment(item.updatedAt).format(
+              "jYYYY/jMM/jDD"
+            )} <span class="badge badge-warning" style="opacity:0.6;margin-left:5px">${jmoment(
+              item.updatedAt
+            ).format("HH:mm")}</span>`;
+          });
+        }
       },
     });
   }

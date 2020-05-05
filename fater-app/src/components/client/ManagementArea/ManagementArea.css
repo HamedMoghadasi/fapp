@@ -23,11 +23,25 @@
   top: 45px;
   left: 10px;
   overflow: hidden;
-  transition: height 0.5s linear;
+  transition: width 0.2s, height 0.2s;
 }
 
-#ma-container.hide {
-  height: 0;
+#ma.rollUp {
+  min-height: 1%;
+}
+
+#ma.rollUp #ma-header {
+  position: absolute;
+  background-color: rgba(33, 37, 41, 0.7);
+  width: 46px;
+  height: 40px;
+  z-index: 10;
+  border-radius: 1px;
+  top: 5px;
+  left: 10px;
+}
+#ma.rollUp #ma-container {
+  display: none;
 }
 
 #ma-wrapper {
@@ -46,6 +60,7 @@
   border-radius: 10px 10px 0 0;
   top: 5px;
   left: 10px;
+  transition: width 0.15s, height 0.15s, border-radius 0.5s;
 }
 
 #ma-items-wrapper {
@@ -55,7 +70,7 @@
 #ma-header ion-icon {
   font-size: 35px;
   margin-left: 5px;
-  margin-top: 7px;
+  margin-top: 3px;
   color: #adb5bd;
   /* background-color: #0062cc; */
   /* border: 2px solid #adb5bd;

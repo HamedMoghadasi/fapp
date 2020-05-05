@@ -91,7 +91,7 @@ class Share extends Component {
         />
 
         <div id="ShareButtons-container" className="collapse">
-          <div id="copiedAlert">Copied!</div>
+          <div id="copiedAlert">کپی شد</div>
           <FontAwesomeIcon
             icon={faCopy}
             id="copy"

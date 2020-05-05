@@ -84,9 +84,11 @@ class EditUserModal extends Component {
           data.state = body.state;
 
           dt.row(row).invalidate().draw();
+          $("#editModal").modal("hide");
           notif("Succeful! User Update", "success");
         },
         error: function (err) {
+          $("#editModal").modal("hide");
           notif("Failed! User did not Update", "error");
         },
       });

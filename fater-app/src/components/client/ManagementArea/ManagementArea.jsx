@@ -9,16 +9,16 @@ class ManagementArea extends Component {
   handleCollapse = () => {
     console.log("clicked");
 
-    if ($("#ma-container").hasClass("hide")) {
-      $("#ma-container").removeClass("hide");
+    if ($("#ma").hasClass("rollUp")) {
+      $("#ma").removeClass("rollUp");
     } else {
-      $("#ma-container").addClass("hide");
+      $("#ma").addClass("rollUp");
     }
   };
   render() {
     return (
       <>
-        <div id="ma">
+        <div id="ma" className="rollUp">
           <div id="ma-header">
             <IonIcon
               icon={menuOutline}

@@ -3,6 +3,7 @@ import $ from "jquery";
 import "datatables.net-bs4/css/dataTables.bootstrap4.css";
 import "datatables.net-bs4/js/dataTables.bootstrap4";
 import "datatables.net-select/js/dataTables.select";
+import { userState } from "../../../constants/userState";
 
 import "./table.css";
 require("datatables.net");
@@ -54,15 +55,17 @@ export default class Tableo extends React.Component {
         },
       });
 
+      const dt = this.dataTable;
       this.dataTable.on("select", function () {
-        $(".operatorBtn").prop("disabled", false);
+        let isDeletedRow =
+          dt.row(".selected").data().state === userState.Deleted;
+
+        if (!isDeletedRow) $(".operatorBtn").prop("disabled", false);
       });
 
       this.dataTable.on("deselect", function () {
         $(".operatorBtn").prop("disabled", true);
       });
-
-      const dt = this.dataTable;
 
       if (operators.length) {
         operators.forEach((operator) => {
