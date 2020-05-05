@@ -99,9 +99,6 @@ class ResetPasswordModal extends Component {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="resetPasswordModalLabel">
-                  Reset User Password
-                </h5>
                 <button
                   type="button"
                   className="close"
@@ -112,7 +109,10 @@ class ResetPasswordModal extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <p>Are you sure you want Reset this user password ?!</p>
+                <p className="modal-message">
+                  با بازیابی رمز یک ایمیل حاوی رمز جدید برای کاربر ارسال خواهد
+                  شد. آیا از تصمیم خود مطمئن هستید ؟
+                </p>
                 {/* <input
                   placeholder="RESET"
                   id="resetPasswordModal-input"
@@ -127,7 +127,7 @@ class ResetPasswordModal extends Component {
                   id="submitBtn"
                   className="btn btn-primary"
                 >
-                  Reset Password
+                  بازیابی رمز
                 </button>
               </div>
             </div>

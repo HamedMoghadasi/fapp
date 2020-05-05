@@ -68,9 +68,6 @@ class DeleteUserModal extends Component {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="deleteModalLabel">
-                  Delete User
-                </h5>
                 <button
                   type="button"
                   className="close"
@@ -81,7 +78,10 @@ class DeleteUserModal extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <p>Are you sure you want delete this user ?!</p>
+                <p className="modal-message">
+                  بعد از حذف امکان بازیابی دوباره کاربر وجود ندارد، آیا از تصمیم
+                  خود مطمئن هستید ؟
+                </p>
               </div>
               <div className="modal-footer">
                 <button
@@ -89,7 +89,7 @@ class DeleteUserModal extends Component {
                   onClick={this.handleSubmit}
                   className="btn btn-danger"
                 >
-                  Delete
+                  حذف
                 </button>
               </div>
             </div>

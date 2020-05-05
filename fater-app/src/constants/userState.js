@@ -5,4 +5,4 @@ export const userState = {
   Deleted: "Deleted",
 };
 
-export const userStateArray = ["Active", "Suspend", "Unconfirmed", "Deleted"];
+export const userStateArray = ["Active", "Suspend", "Unconfirmed"];

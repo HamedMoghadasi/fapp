@@ -108,9 +108,6 @@ class EditUserModal extends Component {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="editModalLabel">
-                  Edit User
-                </h5>
                 <button
                   type="button"
                   className="close"
@@ -164,7 +161,7 @@ class EditUserModal extends Component {
                   onClick={this.handleSubmit}
                   className="btn btn-warning"
                 >
-                  Save changes
+                  ثبت تغییرات
                 </button>
               </div>
             </div>

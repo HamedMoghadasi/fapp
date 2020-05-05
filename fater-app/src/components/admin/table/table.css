@@ -32,7 +32,7 @@ tr {
 .table-header {
   direction: rtl;
   text-align: center;
-  background: rgba(255, 193, 7, 0.1);
+  background: #dc3545;
   color: black;
   padding: 9px;
   border-radius: 5px;
