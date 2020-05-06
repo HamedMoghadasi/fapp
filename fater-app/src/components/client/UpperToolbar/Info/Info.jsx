@@ -8,7 +8,12 @@ class Info extends Component {
   render() {
     return (
       <>
-        <FontAwesomeIcon icon={faInfoCircle} className="ut-icon" id="info" />
+        <FontAwesomeIcon
+          icon={faInfoCircle}
+          className="ut-icon"
+          id="info"
+          title="Info"
+        />
       </>
     );
   }

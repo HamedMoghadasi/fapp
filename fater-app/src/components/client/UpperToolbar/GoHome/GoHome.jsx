@@ -29,6 +29,7 @@ class GoHome extends Component {
           icon={faHome}
           className="ut-icon"
           id="home"
+          title="Go Home"
           onClick={this.handleHomeClick}
         />
       </>

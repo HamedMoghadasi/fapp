@@ -86,6 +86,7 @@ class Share extends Component {
           icon={faShareAlt}
           className="ut-icon"
           id="share"
+          title="Share"
           data-toggle="collapse"
           data-target="#ShareButtons-container"
         />

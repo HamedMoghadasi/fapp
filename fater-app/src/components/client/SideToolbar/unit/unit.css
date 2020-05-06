@@ -1,0 +1,32 @@
+#unitChanger-container {
+  position: absolute;
+  background: rgba(22, 24, 24, 0.8);
+  top: 84px;
+  right: 33px;
+  padding: 1px;
+  color: white;
+  font-weight: 300;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.unit-item {
+  border: 1px solid;
+  margin: 8px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: ease-in 0.2s;
+}
+
+.unit-item:hover {
+  background: rgba(40, 167, 69, 0.2);
+}
+
+.unit-item.selected:hover {
+  background: rgba(40, 167, 69, 0.8);
+}
+
+.unit-item.selected {
+  background: rgba(40, 167, 69, 0.5);
+}

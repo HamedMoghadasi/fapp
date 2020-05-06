@@ -8,7 +8,12 @@ class Globe extends Component {
   render() {
     return (
       <>
-        <FontAwesomeIcon icon={faGlobeAfrica} className="ut-icon" id="glob" />
+        <FontAwesomeIcon
+          icon={faGlobeAfrica}
+          className="ut-icon"
+          id="glob"
+          title="Projection"
+        />
       </>
     );
   }

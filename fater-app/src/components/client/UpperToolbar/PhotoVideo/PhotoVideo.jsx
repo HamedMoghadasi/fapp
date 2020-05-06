@@ -19,6 +19,7 @@ class PhotoVideo extends Component {
           icon={faPhotoVideo}
           className="ut-icon"
           id="photoVideo"
+          title="Media"
           data-toggle="collapse"
           data-target="#photoVideo-container"
         />
