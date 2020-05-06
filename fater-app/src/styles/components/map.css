@@ -113,7 +113,14 @@
 }
 
 .ol-scale-line {
-  bottom: 89px;
+  bottom: 130px;
   left: auto;
   right: 10px;
+  background: rgba(52, 61, 64, 0.7);
+}
+
+.ol-scale-line-inner {
+  border: 1px solid #a7a7a7;
+  color: #eee;
+  background: #343d40;
 }

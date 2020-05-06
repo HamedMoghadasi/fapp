@@ -14,7 +14,9 @@ import SideToolbar from "../components/client/SideToolbar/SideToolbar";
 import UpperToolbar from "../components/client/UpperToolbar/UpperToolbar";
 import TimelineSlider from "../components/client/Timeline/TimelineSlider/TimelineSlider";
 import TimelineControl from "../components/client/Timeline/TimelineControl/TimelineControl";
+
 import { useLocation } from "react-router";
+import MousePosition from "../components/client/MousePosition/MousePosition";
 
 const Home: React.FC = () => {
   const location = useLocation();
@@ -36,6 +38,7 @@ const Home: React.FC = () => {
       <MapContainer location={location.search} />
       <UpperToolbar />
       <SideToolbar />
+      <MousePosition />
       <TimelineSlider />
       <TimelineControl />
     </IonPage>
