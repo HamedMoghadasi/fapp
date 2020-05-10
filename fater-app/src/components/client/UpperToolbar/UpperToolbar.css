@@ -4,7 +4,7 @@
   right: 0.75em;
   top: 0.3em;
   background-color: rgba(22, 24, 24, 0.8);
-  border-radius: 5px;
+  border-radius: 12px;
   width: 320px;
   height: 37px;
 }
@@ -15,7 +15,7 @@
 #ut-container .ut-icon {
   color: white;
   cursor: pointer;
-  font-size: 28px;
+  font-size: 26.5px;
   margin: 4px 5px 2px 25px;
 }
 

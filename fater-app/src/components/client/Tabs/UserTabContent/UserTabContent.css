@@ -1,0 +1,25 @@
+.userTabItems .userTabItems-data {
+  color: #d4d4d4;
+}
+.userTabItems .userTabItems-label {
+  direction: rtl;
+  float: right;
+  color: #d4d4d4;
+}
+
+.userTabItems {
+  border-bottom: 0.5px dashed #e4b527;
+  padding: 5px;
+  margin: 6px;
+  background: #545b6242;
+  border-radius: 5px;
+}
+
+#userTabsOperation a.btn {
+  margin: 5px 0px;
+  border-radius: 10px;
+}
+
+#userTabsOperation {
+  margin-top: 20px;
+}

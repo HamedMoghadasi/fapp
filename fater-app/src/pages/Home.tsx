@@ -18,29 +18,40 @@ import TimelineControl from "../components/client/Timeline/TimelineControl/Timel
 import { useLocation } from "react-router";
 import MousePosition from "../components/client/MousePosition/MousePosition";
 
-const Home: React.FC = () => {
+import { Protect } from "../utils/Auth";
+import { Redirect } from "react-router-dom";
+
+export interface IHomeProps {
+  needAuthentication: boolean;
+  neededRole: string;
+}
+
+const Home: React.FC<IHomeProps> = (props) => {
   const location = useLocation();
+  var userState = Protect(props);
+  if (userState.isValid) {
+    return (
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <a href="/login" className="btn-login">
+              <IonIcon icon={personOutline} />
+            </a>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent></IonContent>
+        <ManagementArea />
 
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <a href="/login" className="btn-login">
-            <IonIcon icon={personOutline} />
-          </a>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent></IonContent>
-      <ManagementArea />
-
-      <MapContainer location={location.search} />
-      <UpperToolbar />
-      <SideToolbar />
-      <MousePosition />
-      <TimelineSlider />
-      <TimelineControl />
-    </IonPage>
-  );
+        <MapContainer location={location.search} />
+        <UpperToolbar />
+        <SideToolbar />
+        <MousePosition />
+        <TimelineSlider />
+        <TimelineControl />
+      </IonPage>
+    );
+  }
+  return <Redirect to={userState.redirectPath} />;
 };
 
 export default Home;

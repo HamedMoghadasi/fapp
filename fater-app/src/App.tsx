@@ -1,6 +1,6 @@
 /** React */
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { Roles } from "./constants/Roles";
 
 /* ionic/react Components */
@@ -57,11 +57,25 @@ const App: React.FC = () => {
           exact={true}
         />
 
-        <Route path="/home" component={Home} exact={true} />
+        <Route
+          path="/home"
+          component={() => {
+            return <Home needAuthentication={true} neededRole={Roles.User} />;
+          }}
+          exact={true}
+        />
+        <Route
+          exact
+          path="/"
+          component={() => {
+            return <Home needAuthentication={true} neededRole={Roles.User} />;
+          }}
+        />
+
         <Route path="/login" component={Login} exact={true} />
         <Route path="/register" component={Register} exact={true} />
         <Route path="/forgetPassword" component={ForgetPassword} exact={true} />
-        <Route exact path="/" component={Home} />
+
         <Route
           path="/changePassword"
           component={() => {

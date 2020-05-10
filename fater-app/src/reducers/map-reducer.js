@@ -1,7 +1,7 @@
 import { projections } from "../constants/projections";
 import {
   UPDATE_CENTER_AND_ZOOM,
-  INITIAL_OPENLAYERS_MAP
+  INITIAL_OPENLAYERS_MAP,
 } from "../actions/map-action";
 import * as OlProj from "ol/proj";
 
@@ -11,9 +11,9 @@ const initialState = {
     projections.EPSG4326,
     projections.EPSG3857
   ),
-  zoom: 4,
+  zoom: 6,
   projection: projections.EPSG3857,
-  olmap: {}
+  olmap: {},
 };
 
 export const MapReducer = (state = initialState, action) => {
@@ -22,12 +22,12 @@ export const MapReducer = (state = initialState, action) => {
       return {
         ...state,
         center: action.payload.center,
-        zoom: action.payload.zoom
+        zoom: action.payload.zoom,
       };
     case INITIAL_OPENLAYERS_MAP:
       return {
         ...state,
-        olmap: action.payload.olmap
+        olmap: action.payload.olmap,
       };
     default:
       return state;
