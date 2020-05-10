@@ -4,8 +4,11 @@
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 #adminContentContainer {
-  margin-top: 120px;
-  width: 100%;
+  margin: 120px auto;
+  width: 90%;
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0px 0px 16px -1px #bdbdbd;
 }
 
 .modal-footer {

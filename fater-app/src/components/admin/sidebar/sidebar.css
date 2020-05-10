@@ -64,11 +64,11 @@ a:focus {
   color: #fff;
   transition: all 0.3s;
   overflow-y: auto;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 #sidebar.active {
   right: 0;
+  box-shadow: -13px -5px 20px -13px rgba(0, 0, 0, 0.7);
 }
 
 #dismiss {
@@ -81,7 +81,7 @@ a:focus {
   background: #0062cc;
   color: white;
   position: absolute;
-  top: 0px;
+  top: 8px;
   left: 10px;
   cursor: pointer;
   -webkit-transition: all 0.3s;
@@ -109,7 +109,7 @@ a:focus {
 }
 
 #sidebar .sidebar-header {
-  padding: 20px;
+  padding: 27px;
   background: #0062cc;
 }
 
@@ -222,6 +222,7 @@ a.article:hover {
 #content .navbar {
   z-index: 5;
   direction: rtl;
+  background-color: rgba(0, 123, 255, 0.25) !important;
 }
 #content {
   opacity: 0.8;
