@@ -7,8 +7,6 @@ import { IonIcon } from "@ionic/react";
 
 class ManagementArea extends Component {
   handleCollapse = () => {
-    console.log("clicked");
-
     if ($("#ma").hasClass("rollUp")) {
       $("#ma").removeClass("rollUp");
     } else {

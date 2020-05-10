@@ -12,7 +12,6 @@ export default class Tableo extends React.Component {
   constructor(props) {
     super(props);
     this.datatable = null;
-    console.log(this.props);
   }
 
   componentDidMount() {

@@ -62,7 +62,6 @@ class EditUserModal extends Component {
       role: rolesDropDown.options[rolesDropDown.selectedIndex].value,
     };
 
-    console.log(body);
     const notif = this.notify;
     if (window.localStorage.access_token) {
       $.ajax({

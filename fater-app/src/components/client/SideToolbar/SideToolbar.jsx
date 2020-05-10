@@ -5,11 +5,11 @@ import {
   faRuler,
   faDrawPolygon,
   faTrashAlt,
-  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { unByKey } from "ol/Observable";
 import Overlay from "ol/Overlay";
+
 import { getArea, getLength } from "ol/sphere";
 import { LineString, Polygon } from "ol/geom";
 import Draw from "ol/interaction/Draw";
@@ -17,18 +17,15 @@ import { units } from "../../../constants/units";
 
 import $ from "jquery";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
-import { faThinkPeaks } from "@fortawesome/free-brands-svg-icons";
 import Unit from "./unit/unit";
 
 class SideToolbar extends Component {
   drawing = (drawShapeTYpe) => {
     var source = $("#mapContainer").data("drawVector-source");
+    console.log(source.getFeatures());
 
     var map = $("#mapContainer").data("map");
     var mapUnit = $("#mapContainer").data("unit");
-    console.log(mapUnit);
-    console.log($("#mapContainer").data("unit"));
-    console.log($("#mapContainer"));
 
     var sketch;
     var measureTooltipElement;
@@ -38,43 +35,36 @@ class SideToolbar extends Component {
 
     var formatLength = function (line) {
       var length = getLength(line);
-      var output;
+      var output = {};
 
       if (length > 100) {
         const distance = Math.round((length / 1000) * 100) / 100;
-        if (mapUnit === units.KM) {
-          output = `${distance} km`;
-        } else if (mapUnit === units.MILE) {
-          output = `${(distance / 0.621371).toFixed(3)} mile`;
-        }
+        output[`${units.KM}`] = `${distance} km`;
+        output[`${units.MILE}`] = `${(distance / 0.621371).toFixed(3)} mile`;
       } else {
         const distance = Math.round(length * 100) / 100;
-        if (mapUnit === units.KM) {
-          output = `${distance} m`;
-        } else if (mapUnit === units.MILE) {
-          output = `${(distance / 3.28084).toFixed(3)} ft`;
-        }
+        output[`${units.KM}`] = `${distance} m`;
+        output[`${units.MILE}`] = `${(distance / 3.28084).toFixed(3)} ft`;
       }
       return output;
     };
 
     var formatArea = function (polygon) {
       var area = getArea(polygon);
-      var output;
+      var output = {};
       if (area > 10000) {
         const distance = Math.round((area / 1000000) * 100) / 100;
-        if (mapUnit === units.KM) {
-          output = `${distance} km<sup>2</sup>`;
-        } else if (mapUnit === units.MILE) {
-          output = `${(distance / 0.386102).toFixed(3)} mile<sup>2</sup>`;
-        }
+        output[`${units.KM}`] = `${distance} km<sup>2</sup>`;
+        output[`${units.MILE}`] = `${(distance / 0.386102).toFixed(
+          3
+        )} mile<sup>2</sup>`;
       } else {
         const distance = Math.round(area * 100) / 100;
-        if (mapUnit === units.KM) {
-          output = `${distance} m<sup>2</sup>`;
-        } else if (mapUnit === units.MILE) {
-          output = `${(distance / 10.7639).toFixed(3)} ft<sup>2</sup>`;
-        }
+
+        output[`${units.KM}`] = `${distance} m<sup>2</sup>`;
+        output[`${units.MILE}`] = `${(distance / 10.7639).toFixed(
+          3
+        )} ft<sup>2</sup>`;
       }
       return output;
     };
@@ -123,15 +113,21 @@ class SideToolbar extends Component {
             tooltipCoord = geom.getInteriorPoint().getCoordinates();
           } else if (geom instanceof LineString) {
             output = formatLength(geom);
+
             tooltipCoord = geom.getLastCoordinate();
           }
-          measureTooltipElement.innerHTML = output;
+          measureTooltipElement.innerHTML = output[`${mapUnit}`];
+          measureTooltipElement.dataset[`${units.KM}`] = output[`${units.KM}`];
+          measureTooltipElement.dataset[`${units.MILE}`] =
+            output[`${units.MILE}`];
           measureTooltip.setPosition(tooltipCoord);
         });
       });
 
       draw.on("drawend", function () {
-        measureTooltipElement.className = "ol-tooltip ol-tooltip-static";
+        measureTooltipElement.className =
+          "ol-tooltip ol-tooltip-static shapeUnit";
+
         measureTooltip.setOffset([0, -7]);
         // unset sketch
         sketch = null;
@@ -160,7 +156,6 @@ class SideToolbar extends Component {
 
   handleRemoveAllDrawShape = () => {
     var drawVector = $("#mapContainer").data("drawVector");
-    console.log(drawVector);
 
     drawVector.getSource().clear();
     $(".ol-tooltip.ol-tooltip-static").remove();

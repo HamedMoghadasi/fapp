@@ -10,7 +10,7 @@ class AdminTemplate extends Component {
           isSidebarOpen={this.props.isSidebarOpen}
           menu={this.props.menu}
         />
-        <div id="adminContentContainer" className="container">
+        <div id="adminContentContainer" className="">
           <div className="col-lg-12">{this.props.children}</div>
         </div>
       </div>

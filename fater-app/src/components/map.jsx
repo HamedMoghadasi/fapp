@@ -19,7 +19,7 @@ class Map extends Component {
   _olMap = {};
   getView = () => {
     let params = queryString.parse(this.props.location);
-    console.log(params);
+
     var view = new OlView({
       center: this.props.map.center,
       zoom: this.props.map.zoom,
@@ -32,7 +32,7 @@ class Map extends Component {
         projection: params.projection,
       });
     }
-    console.log(view);
+
     return view;
   };
   componentDidMount = () => {

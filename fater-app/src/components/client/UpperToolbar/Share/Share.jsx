@@ -42,7 +42,6 @@ class Share extends Component {
   handleCopy = () => {
     let url = this.generateShareLink(true);
     copy(url);
-    console.log(url);
 
     $("#ShareButtons-container #copiedAlert").addClass("show");
     setTimeout(function () {
@@ -54,7 +53,6 @@ class Share extends Component {
     const url = this.generateShareLink();
 
     const shareLink = `${telegramLink}${url}`;
-    console.log(shareLink);
 
     window.open(shareLink, "_blank");
   };
@@ -64,7 +62,6 @@ class Share extends Component {
     const url = this.generateShareLink();
 
     const shareLink = `${whatsAppLink}${url}`;
-    console.log(shareLink);
 
     window.open(shareLink, "_blank");
   };
@@ -75,7 +72,6 @@ class Share extends Component {
     const url = this.generateShareLink();
 
     const shareLink = `${gmail}${url}`;
-    console.log(shareLink);
 
     window.open(shareLink, "_blank");
   };

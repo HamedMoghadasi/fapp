@@ -7,10 +7,6 @@ import {
 } from "../actions/map-action";
 
 class MapContainer extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props.location);
-  }
   UpdateCenterAndZoom = (center, zoom) => {
     this.props.dispatch(updateCenterAndZoom(center, zoom));
   };

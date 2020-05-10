@@ -7,7 +7,16 @@ import { units } from "../../../../constants/units";
 import "./unit.css";
 
 class Unit extends Component {
+  convertUnits = () => {
+    $(".shapeUnit").each(function (i, object) {
+      var mapUnit = $("#mapContainer").data("unit");
+      var newValue = $(object).data(`${mapUnit}`);
+      $(object).html(newValue);
+    });
+  };
+
   prepareSelectedUnit = () => {
+    this.convertUnits();
     let currentUnit = $("#mapContainer").data("unit");
     $(".unit-item").removeClass("selected");
     if (currentUnit === units.KM) {

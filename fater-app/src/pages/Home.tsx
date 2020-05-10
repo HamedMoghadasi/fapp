@@ -21,8 +21,6 @@ import MousePosition from "../components/client/MousePosition/MousePosition";
 const Home: React.FC = () => {
   const location = useLocation();
 
-  console.log("location", location.search);
-
   return (
     <IonPage>
       <IonHeader>

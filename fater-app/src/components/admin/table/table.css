@@ -32,8 +32,17 @@ tr {
 .table-header {
   direction: rtl;
   text-align: center;
-  background: #dc3545;
+  background: white;
   color: black;
   padding: 9px;
   border-radius: 5px;
+  box-shadow: -1px 1px 4px 4px #efefef;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+  margin-top: 35px;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+  margin-top: 35px;
 }
