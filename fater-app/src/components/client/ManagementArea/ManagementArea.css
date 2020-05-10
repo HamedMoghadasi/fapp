@@ -36,7 +36,7 @@
   width: 46px;
   height: 40px;
   z-index: 10;
-  border-radius: 1px;
+  border-radius: 10px;
   top: 5px;
   left: 10px;
 }

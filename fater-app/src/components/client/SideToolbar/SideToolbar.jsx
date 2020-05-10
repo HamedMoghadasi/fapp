@@ -40,11 +40,11 @@ class SideToolbar extends Component {
       if (length > 100) {
         const distance = Math.round((length / 1000) * 100) / 100;
         output[`${units.KM}`] = `${distance} km`;
-        output[`${units.MILE}`] = `${(distance / 0.621371).toFixed(3)} mile`;
+        output[`${units.MILE}`] = `${(distance * 0.621371).toFixed(3)} mi`;
       } else {
         const distance = Math.round(length * 100) / 100;
         output[`${units.KM}`] = `${distance} m`;
-        output[`${units.MILE}`] = `${(distance / 3.28084).toFixed(3)} ft`;
+        output[`${units.MILE}`] = `${(distance * 3.28084).toFixed(3)} ft`;
       }
       return output;
     };
@@ -55,14 +55,14 @@ class SideToolbar extends Component {
       if (area > 10000) {
         const distance = Math.round((area / 1000000) * 100) / 100;
         output[`${units.KM}`] = `${distance} km<sup>2</sup>`;
-        output[`${units.MILE}`] = `${(distance / 0.386102).toFixed(
+        output[`${units.MILE}`] = `${(distance * 0.386102).toFixed(
           3
-        )} mile<sup>2</sup>`;
+        )} mi<sup>2</sup>`;
       } else {
         const distance = Math.round(area * 100) / 100;
 
         output[`${units.KM}`] = `${distance} m<sup>2</sup>`;
-        output[`${units.MILE}`] = `${(distance / 10.7639).toFixed(
+        output[`${units.MILE}`] = `${(distance * 10.7639).toFixed(
           3
         )} ft<sup>2</sup>`;
       }
