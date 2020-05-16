@@ -12,7 +12,6 @@ import queryString from "query-string";
 import { units } from "../constants/units";
 
 import ImageLayer from "ol/layer/Image";
-import shaderBuilder from "ol/webgl/ShaderBuilder";
 import Projection from "ol/proj/Projection";
 import Static from "ol/source/ImageStatic";
 

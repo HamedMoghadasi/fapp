@@ -1,4 +1,5 @@
-#ut-container svg[aria-expanded="true"] {
+#ut-container svg[aria-expanded="true"],
+#ut-container img[aria-expanded="true"] {
   color: #ffc107;
 }
 
