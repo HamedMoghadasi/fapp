@@ -89,7 +89,6 @@ export default class Tableo extends React.Component {
     return (
       <>
         {this.props.children}
-        <hr />
         <table id="tableo" className="table table-striped " width="100%" />
       </>
     );

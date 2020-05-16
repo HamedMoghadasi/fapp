@@ -46,3 +46,45 @@ div.dataTables_wrapper div.dataTables_info {
 div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   margin-top: 35px;
 }
+
+#tableo {
+  background: #dadada;
+  border-radius: 24px;
+  outline: none;
+}
+
+#tableo td {
+  border: none;
+}
+#tableo th {
+  border: none;
+  outline: none;
+}
+
+#tableo tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 15px;
+}
+#tableo tbody tr:last-child td:last-child {
+  border-radius: 0 0 15px 0;
+}
+
+#tableo_filter label {
+  width: 100%;
+}
+#tableo_filter input {
+  border-radius: 15px;
+  width: 50%;
+  float: right;
+}
+
+#tableo_length select {
+  border-radius: 15px;
+}
+
+#tableo_previous a {
+  border-radius: 24px 0 0 24px;
+}
+
+#tableo_next a {
+  border-radius: 0 24px 24px 0;
+}

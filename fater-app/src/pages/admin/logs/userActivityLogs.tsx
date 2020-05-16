@@ -111,8 +111,11 @@ const UserActivityLogs: React.FC<IUsersActivityLogsProps> = (props) => {
     return (
       <IonPage>
         <IonContent>
-          <AdminTemplateContainer isSidebarOpen="true" menu="logs">
-            <h1 className="table-header">گزارش فعالیت کاربران</h1>
+          <AdminTemplateContainer
+            isSidebarOpen="true"
+            menu="logs"
+            pageTitle="گزارش فعالیت کاربران"
+          >
             <Table configuration={configuration}></Table>
           </AdminTemplateContainer>
         </IonContent>

@@ -4,11 +4,13 @@
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 #adminContentContainer {
+  position: relative;
   margin: 120px auto;
   width: 90%;
   border-radius: 20px;
   padding: 50px;
   box-shadow: 0px 0px 16px -1px #bdbdbd;
+  background: rgba(0, 0, 0, 0.075);
 }
 
 .modal-footer {
@@ -25,4 +27,19 @@
   font-weight: 500;
   line-height: 1.7em;
   color: #777777;
+}
+
+.table-page-header {
+  position: absolute;
+  background: rgba(104, 145, 162, 0.5);
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 15px 15px 0 0;
+  text-align: center;
+  padding: 15px;
+}
+
+.table-conatiner {
+  margin-top: 50px;
 }

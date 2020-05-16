@@ -5,7 +5,7 @@
 
 .timeline-container {
   position: absolute;
-  bottom: 0.5em;
+  bottom: 0;
   background-color: rgba(22, 24, 24, 0.8);
   margin: 10px;
   border-radius: 15px;

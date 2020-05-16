@@ -2,13 +2,7 @@ import React, { Component } from "react";
 
 import "./tabs.css";
 import { IonIcon } from "@ionic/react";
-import {
-  layers,
-  documentTextOutline,
-  downloadOutline,
-  personOutline,
-  cloudDownloadOutline,
-} from "ionicons/icons";
+import { layers, cloudDownload, documentText, person } from "ionicons/icons";
 import LayersTabContent from "./layersTabContent/LayersTabContent";
 import DownloadTabContent from "./DownloadTabContent/DownloadTabContent";
 import ReportsTabContent from "./ReportsTabContent/ReportsTabContent";
@@ -43,7 +37,7 @@ class Tabs extends Component {
               aria-controls="download"
               aria-selected="false"
             >
-              <IonIcon icon={cloudDownloadOutline} />
+              <IonIcon icon={cloudDownload} />
               دانلود
             </a>
           </li>
@@ -57,7 +51,7 @@ class Tabs extends Component {
               aria-controls="reports"
               aria-selected="false"
             >
-              <IonIcon icon={documentTextOutline} />
+              <IonIcon icon={documentText} />
               گزارش‌ها
             </a>
           </li>
@@ -71,7 +65,7 @@ class Tabs extends Component {
               aria-controls="user"
               aria-selected="false"
             >
-              <IonIcon icon={personOutline} />
+              <IonIcon icon={person} />
               کاربر
             </a>
           </li>

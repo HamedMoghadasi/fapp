@@ -14,6 +14,8 @@ import ResetPasswordModal from "../../../components/admin/modal/resetPasswordMod
 import { ToastContainer } from "react-toastify";
 import { HandleModalByKey } from "../../../utils/Helper";
 
+import "./AllUsers.css";
+
 let API_URL = process.env.REACT_APP_API_URL;
 
 export interface IAllUsersProps {
@@ -130,36 +132,42 @@ const AllUsers: React.FC<IAllUsersProps> = (props) => {
           <EditUserModal />
           <DeleteUserModal />
           <ResetPasswordModal />
-          <AdminTemplateContainer isSidebarOpen="false" menu="users">
-            <h1 className="table-header">مدیریت کاربران</h1>
+          <AdminTemplateContainer
+            isSidebarOpen="false"
+            menu="users"
+            pageTitle="مدیریت کاربران"
+          >
             <br />
             <Table configuration={configuration}>
-              <button
-                id="editBtn"
-                className="btn btn-md btn-warning m-1 operatorBtn float-right"
-                data-toggle="modal"
-                data-target="#editModal"
-              >
-                ویرایش
-              </button>
+              <div className="row allusers-operator-container">
+                <button
+                  id="editBtn"
+                  className="btn btn-md btn-warning m-1 operatorBtn float-right"
+                  data-toggle="modal"
+                  data-target="#editModal"
+                >
+                  ویرایش
+                </button>
 
-              <button
-                id="deleteBtn"
-                className="btn btn-md btn-danger m-1 operatorBtn float-right"
-                data-toggle="modal"
-                data-target="#deleteModal"
-              >
-                حذف
-              </button>
+                <button
+                  id="deleteBtn"
+                  className="btn btn-md btn-danger m-1 operatorBtn float-right"
+                  data-toggle="modal"
+                  data-target="#deleteModal"
+                >
+                  حذف
+                </button>
 
-              <button
-                id="resetPasswordBtn"
-                className="btn btn-md btn-primary m-1 operatorBtn "
-                data-toggle="modal"
-                data-target="#resetPasswordModal"
-              >
-                بازیابی رمز
-              </button>
+                <button
+                  id="resetPasswordBtn"
+                  className="btn btn-md btn-primary m-1 operatorBtn "
+                  data-toggle="modal"
+                  data-target="#resetPasswordModal"
+                >
+                  بازیابی رمز
+                </button>
+              </div>
+              <hr />
             </Table>
           </AdminTemplateContainer>
         </IonContent>

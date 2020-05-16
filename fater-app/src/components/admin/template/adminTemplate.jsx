@@ -11,7 +11,8 @@ class AdminTemplate extends Component {
           menu={this.props.menu}
         />
         <div id="adminContentContainer" className="">
-          <div className="col-lg-12">{this.props.children}</div>
+          <h1 className="table-page-header">{this.props.pageTitle}</h1>
+          <div className="col-lg-12 table-conatiner">{this.props.children}</div>
         </div>
       </div>
     );
