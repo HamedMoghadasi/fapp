@@ -12,8 +12,11 @@ import $ from "jquery";
 class UpperToolbar extends Component {
   componentDidMount = () => {
     $("#ut-container").on("click", "svg[data-toggle='collapse']", function () {
+      const currentSvgTarget = $(this).data("target");
+      console.log(currentSvgTarget);
+
       const activeCollapedId = $(".collapse.show").attr("id");
-      if (activeCollapedId) {
+      if (activeCollapedId && currentSvgTarget !== `#${activeCollapedId}`) {
         $(`svg[data-target='#${activeCollapedId}']`)
           .attr("aria-expanded", "false")
           .addClass("collapsed");

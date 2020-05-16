@@ -36,6 +36,7 @@ export default class Tableo extends React.Component {
           search: "",
           lengthMenu: "_MENU_",
           info: "نمایش رکورد های _START_ تا _END_ از مجموع _TOTAL_ داده",
+          searchPlaceholder: "search",
         },
 
         createdRow: function (row, data, dataIndex, cells) {
