@@ -6,13 +6,13 @@
   background-color: rgba(22, 24, 24, 0.8);
   border-radius: 10px;
   width: 29px;
-  height: 141px;
+  height: 150px;
 }
 
 #st-container .st-icon {
   color: white;
   margin-bottom: 10px;
-  margin-top: 6px;
+  margin-top: 7px;
   cursor: pointer;
 }
 

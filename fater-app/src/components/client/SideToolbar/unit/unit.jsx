@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
 import $ from "jquery";
 import { units } from "../../../../constants/units";
 
+import unitIcon from "../../../../assets/Icons/unit.svg";
 import "./unit.css";
 
 class Unit extends Component {
@@ -40,13 +39,14 @@ class Unit extends Component {
   render() {
     return (
       <>
-        <FontAwesomeIcon
-          icon={faCog}
+        <img
           className="st-icon"
-          id="Cog"
+          id="unit"
           title="Unit Manager"
           data-toggle="collapse"
           data-target="#unitChanger-container"
+          src={unitIcon}
+          alt="unit icon"
         />
 
         <div id="unitChanger-container" className="collapse">

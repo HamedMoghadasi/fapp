@@ -11,6 +11,11 @@ import { defaults as defaultControls, ZoomSlider, ScaleLine } from "ol/control";
 import queryString from "query-string";
 import { units } from "../constants/units";
 
+import ImageLayer from "ol/layer/Image";
+import shaderBuilder from "ol/webgl/ShaderBuilder";
+import Projection from "ol/proj/Projection";
+import Static from "ol/source/ImageStatic";
+
 import "ol/ol.css";
 import "./map.css";
 import "../styles/components/map.css";
@@ -64,6 +69,12 @@ class Map extends Component {
       }),
     });
 
+    var extent = [0, 0, 52, 36];
+    var projection = new Projection({
+      code: this.props.map.projection,
+      extent: extent,
+    });
+
     this.olmap = new OlMap({
       target: "mapContainer",
       controls: defaultControls().extend([
@@ -72,7 +83,18 @@ class Map extends Component {
         new ZoomSlider(),
       ]),
       view: view_(),
-      layers: [raster, drawVector],
+      layers: [
+        raster,
+        drawVector,
+        new ImageLayer({
+          source: new Static({
+            attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
+            url: "../assets/images/Redii.png",
+            projection: projection,
+            imageExtent: extent,
+          }),
+        }),
+      ],
     });
 
     $("#mapContainer").data("map", this.olmap);

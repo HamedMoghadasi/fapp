@@ -1,0 +1,66 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+<defs>
+<g id="Layer1_0_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 1955.2 345.85
+L 1961.3 322.65 1942.1 308.45 1923.2 323.8 1931.1 345.85 1955.2 345.85
+M 1956.75 324.25
+L 1952.15 341.85 1933.9 341.85 1927.9 325.1 1942.2 313.5 1956.75 324.25 Z"/>
+</g>
+
+<g id="Layer1_0_MEMBER_0_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 1983.6 322.8
+L 1976.6 322.8 1976.6 329.8 1983.6 329.8 1983.6 322.8 Z"/>
+</g>
+
+<g id="Layer1_0_MEMBER_1_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 1983.55 322.8
+L 1976.55 322.8 1976.55 329.8 1983.55 329.8 1983.55 322.8 Z"/>
+</g>
+
+<g id="Layer1_0_MEMBER_2_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 1983.5 322.8
+L 1976.5 322.8 1976.5 329.8 1983.5 329.8 1983.5 322.8 Z"/>
+</g>
+
+<g id="Layer1_0_MEMBER_3_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 1983.45 322.8
+L 1976.45 322.8 1976.45 329.8 1983.45 329.8 1983.45 322.8 Z"/>
+</g>
+
+<g id="Layer1_0_MEMBER_4_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 1983.4 322.8
+L 1976.4 322.8 1976.4 329.8 1983.4 329.8 1983.4 322.8 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.7099456787109375, 0, 0, 0.7232666015625, -1362.45,-221.2) ">
+<use xlink:href="#Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 0.8763427734375, 0, 0, 0.9118194580078125, -1726.8,-270.05) ">
+<use xlink:href="#Layer1_0_MEMBER_0_FILL"/>
+</g>
+
+<g transform="matrix( 0.8763427734375, 0, 0, 0.9118194580078125, -1711,-270.05) ">
+<use xlink:href="#Layer1_0_MEMBER_1_FILL"/>
+</g>
+
+<g transform="matrix( 0.8763427734375, 0, 0, 0.9118194580078125, -1707.25,-283.85) ">
+<use xlink:href="#Layer1_0_MEMBER_2_FILL"/>
+</g>
+
+<g transform="matrix( 0.8763427734375, 0, 0, 0.9118194580078125, -1718.95,-293.35) ">
+<use xlink:href="#Layer1_0_MEMBER_3_FILL"/>
+</g>
+
+<g transform="matrix( 0.8763427734375, 0, 0, 0.9118194580078125, -1731,-283.95) ">
+<use xlink:href="#Layer1_0_MEMBER_4_FILL"/>
+</g>
+</svg>

@@ -14,7 +14,15 @@ class RangeDate extends Component {
     super(props);
     this.state = { from: moment(), to: moment(), isGeorgian: false };
   }
-
+  componentDidMount = () => {
+    console.log($("#dateRange-container div:nth-child(2)"));
+    $("#dateRange-container div:nth-child(1)").prepend(
+      '<label id="datRange-container-from-lable" class="daterange-label">از تاریخ</label>'
+    );
+    $("#dateRange-container div:nth-child(2)").prepend(
+      '<label id="datRange-container-to-lable" class="daterange-label">تا تاریخ</label>'
+    );
+  };
   render() {
     return (
       <>
@@ -29,6 +37,7 @@ class RangeDate extends Component {
         <div id="dateRange-container" className="collapse">
           <DatePicker
             id="From"
+            className="from"
             onChange={(value) => this.setState({ from: value })}
             isGregorian={this.state.isGeorgian}
             timePicker={false}
