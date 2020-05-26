@@ -24,10 +24,10 @@ class OverLayerList extends Component {
         <div id="overlayer-container">
           <h6>لایه ها</h6>
           <ul id="overlayer-sortable-list">
-            <DragableLayerInfo />
-            <DragableLayerInfo />
-            <DragableLayerInfo />
-            <DragableLayerInfo />
+            <DragableLayerInfo
+              name="draw layer"
+              description="In this layer you drwa shapes"
+            />
           </ul>
         </div>
       </>

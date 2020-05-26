@@ -6,20 +6,47 @@ import {
   settingsOutline,
   informationOutline,
   close,
+  eyeOff,
 } from "ionicons/icons";
 
+import $ from "jquery";
+
 class DragableLayerInfo extends Component {
+  handleVisiblity = (e) => {
+    let map = $("#mapContainer").data("map");
+
+    let targetLayer = map
+      .getLayers()
+      .array_.filter((layer) => layer.ol_uid === $(this)[0].props.ol_uid)[0];
+
+    targetLayer.setVisible(!targetLayer.values_.visible);
+    if (targetLayer.values_.visible) {
+      $(e.target).parent("div").parent("div").removeClass("layer-invisible");
+    } else {
+      $(e.target).parent("div").parent("div").addClass("layer-invisible");
+    }
+  };
+
   render() {
     return (
-      <li className="layers-dragable-li">
-        <div id="layers-dragable-item">
+      <li className="layers-dragable-li" data-oluid={this.props.ol_uid}>
+        <div id="layers-dragable-item" className={this.props.invisible}>
           <div id="layers-dragable-item-display">
-            <IonIcon icon={eye} />
+            <IonIcon
+              icon={eye}
+              id="eye"
+              onClick={(e) => this.handleVisiblity(e)}
+            />
+            <IonIcon
+              icon={eyeOff}
+              id="eyeOff"
+              onClick={(e) => this.handleVisiblity(e)}
+            />
           </div>
           <div id="layers-dragable-item-content">
-            <b>Coast Lines</b>
+            <b>{this.props.name}</b>
             <br />
-            <i>OpenStreetsMap Contributers</i>
+            <i>{this.props.description}</i>
           </div>
           <div id="layers-dragable-item-settings">
             <IonIcon className="item-close" icon={close} />

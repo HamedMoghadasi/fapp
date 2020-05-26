@@ -25,6 +25,7 @@ class SideToolbar extends Component {
     console.log(source.getFeatures());
 
     var map = $("#mapContainer").data("map");
+
     var mapUnit = $("#mapContainer").data("unit");
 
     var sketch;

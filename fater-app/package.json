@@ -1,5 +1,5 @@
 {
-  "name": "fater-app",
+  "name": "fater-web-gis",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -63,7 +63,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:android": "npx cap copy android && npx cap open android"
+    "build:android": "npm run build && npx cap copy android && npx cap open android"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -92,5 +92,5 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5"
   },
-  "description": "An Ionic project"
+  "description": "Fater web GIS, A Web base project for investigate and display stellite data on map"
 }

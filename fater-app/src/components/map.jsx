@@ -14,10 +14,12 @@ import { units } from "../constants/units";
 import ImageLayer from "ol/layer/Image";
 import Projection from "ol/proj/Projection";
 import Static from "ol/source/ImageStatic";
+import BingMaps from "ol/source/BingMaps";
 
 import "ol/ol.css";
 import "./map.css";
 import "../styles/components/map.css";
+import ResetPasswordModal from "./admin/modal/resetPasswordModal";
 
 class Map extends Component {
   _olMap = {};
@@ -42,11 +44,12 @@ class Map extends Component {
   componentDidMount = () => {
     this.getView();
     var view_ = this.getView;
-
+    var layers = [];
     var raster = new OlTileLayer({
       source: new OSM(),
     });
 
+    raster.set("___name", "open street map");
     var drawSource = new VectorSource();
 
     var drawVector = new VectorLayer({
@@ -68,6 +71,34 @@ class Map extends Component {
       }),
     });
 
+    var styles = [
+      "RoadOnDemand",
+      "Aerial",
+      "AerialWithLabelsOnDemand",
+      "CanvasDark",
+      "OrdnanceSurvey",
+    ];
+
+    var i, ii;
+    for (i = 0, ii = styles.length; i < ii; ++i) {
+      layers.push(
+        new OlTileLayer({
+          visible: false,
+          preload: Infinity,
+          source: new BingMaps({
+            key:
+              "AiGYgDvsDKORosaLZhrB-9FUiEk7wJv1BimuscBCDLSunWGKTlDe_ZYUEqHADcU0",
+            imagerySet: styles[i],
+            // use maxZoom 19 to see stretched tiles instead of the BingMaps
+            // "no photos at this zoom level" tiles
+            // maxZoom: 19
+          }),
+        })
+      );
+    }
+    layers.push(raster);
+    layers.push(drawVector);
+
     var extent = [0, 0, 52, 36];
     var projection = new Projection({
       code: this.props.map.projection,
@@ -82,18 +113,7 @@ class Map extends Component {
         new ZoomSlider(),
       ]),
       view: view_(),
-      layers: [
-        raster,
-        drawVector,
-        new ImageLayer({
-          source: new Static({
-            attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
-            url: "../assets/images/Redii.png",
-            projection: projection,
-            imageExtent: extent,
-          }),
-        }),
-      ],
+      layers: layers,
     });
 
     $("#mapContainer").data("map", this.olmap);
@@ -115,6 +135,8 @@ class Map extends Component {
 
       setTimeout(() => {
         var map = $("#mapContainer").data("map");
+        console.log(map);
+
         map.updateSize();
       }, 500);
     });
@@ -126,7 +148,7 @@ class Map extends Component {
     }
   };
   render() {
-    return <div id="mapContainer" data-map="" data-unit={units.KM}></div>;
+    return <div id="mapContainer" data-unit={units.KM}></div>;
   }
 }
 

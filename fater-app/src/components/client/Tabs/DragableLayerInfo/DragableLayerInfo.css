@@ -66,3 +66,19 @@ ul .layers-dragable-li {
 #layers-dragable-item-content {
   color: #505254;
 }
+
+#layers-dragable-item #eyeOff {
+  display: none;
+}
+
+#layers-dragable-item #eye {
+  display: block;
+}
+
+#layers-dragable-item.layer-invisible #eyeOff {
+  display: block;
+}
+
+#layers-dragable-item.layer-invisible #eye {
+  display: none;
+}

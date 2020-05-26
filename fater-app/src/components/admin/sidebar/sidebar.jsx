@@ -98,7 +98,7 @@ class SideBar extends Component {
 
             <ul className="list-unstyled components">
               {/* <p>Hamed Moghadasi</p> */}
-              <li className="active">
+              <li>
                 <Link to="/dashboard" replace>
                   <IonIcon
                     className="sidebar-item-icon"

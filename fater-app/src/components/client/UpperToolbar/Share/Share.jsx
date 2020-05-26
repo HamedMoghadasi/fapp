@@ -58,7 +58,7 @@ class Share extends Component {
   };
 
   handleWhatsApp = () => {
-    const whatsAppLink = "https://wa.me/?text=";
+    const whatsAppLink = "https://api.whatsapp.com/send?text=";
     const url = this.generateShareLink();
 
     const shareLink = `${whatsAppLink}${url}`;
