@@ -27,10 +27,27 @@ class DragableLayerInfo extends Component {
     }
   };
 
+  handleLayerRemove = (e) => {
+    const $targetLayerDom = $(e.target).parent("div").parent("div");
+    const ol_uid = $targetLayerDom.data("oluid");
+    $targetLayerDom.closest("li").remove();
+    let map = $("#mapContainer").data("map");
+
+    map.getLayers().array_ = map.getLayers().array_.filter((layer) => {
+      if (String(layer.ol_uid) !== String(ol_uid)) return layer;
+    });
+
+    map.updateSize();
+  };
+
   render() {
     return (
       <li className="layers-dragable-li" data-oluid={this.props.ol_uid}>
-        <div id="layers-dragable-item" className={this.props.invisible}>
+        <div
+          id="layers-dragable-item"
+          className={this.props.invisible}
+          data-oluid={this.props.ol_uid}
+        >
           <div id="layers-dragable-item-display">
             <IonIcon
               icon={eye}
@@ -43,7 +60,7 @@ class DragableLayerInfo extends Component {
               onClick={(e) => this.handleVisiblity(e)}
             />
           </div>
-          <div id="layers-dragable-item-content">
+          <div className="layers-dragable-item-content">
             <b>
               {this.props.layer && this.props.layer.get("name")
                 ? this.props.layer.get("name")
@@ -57,8 +74,12 @@ class DragableLayerInfo extends Component {
                 : `-- no information --`}
             </i>
           </div>
-          <div id="layers-dragable-item-settings">
-            <IonIcon className="item-close" icon={close} />
+          <div className="layers-dragable-item-settings">
+            <IonIcon
+              className="item-close"
+              onClick={(e) => this.handleLayerRemove(e)}
+              icon={close}
+            />
             <IonIcon className="item-settings" icon={settingsOutline} />
             <IonIcon className="item-info" icon={informationOutline} />
           </div>

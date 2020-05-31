@@ -32,7 +32,7 @@ ul .layers-dragable-li {
   left: 0;
 }
 
-#layers-dragable-item-settings {
+.layers-dragable-item-settings {
   width: 23px;
   height: 100%;
   background-color: rgba(230, 230, 230, 0.8);
@@ -42,28 +42,28 @@ ul .layers-dragable-li {
   right: 0;
 }
 
-#layers-dragable-item-settings ion-icon {
+.layers-dragable-item-settings ion-icon {
   position: absolute;
   color: #545b62;
   cursor: pointer;
 }
 
-#layers-dragable-item-settings ion-icon.item-close {
+.layers-dragable-item-settings ion-icon.item-close {
   right: 3px;
   top: 5px;
 }
 
-#layers-dragable-item-settings ion-icon.item-settings {
+.layers-dragable-item-settings ion-icon.item-settings {
   right: 3px;
   top: 22px;
 }
 
-#layers-dragable-item-settings ion-icon.item-info {
+.layers-dragable-item-settings ion-icon.item-info {
   right: 3px;
   top: 40px;
 }
 
-#layers-dragable-item-content {
+.layers-dragable-item-content {
   color: #505254;
 }
 
@@ -83,6 +83,6 @@ ul .layers-dragable-li {
   display: none;
 }
 
-#layers-dragable-item-content i {
+.layers-dragable-item-content i {
   font-size: 12.5px;
 }
