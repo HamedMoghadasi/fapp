@@ -5,7 +5,7 @@ import OlView from "ol/View";
 import OlTileLayer from "ol/layer/Tile";
 import { Vector as VectorLayer } from "ol/layer";
 import OSM from "ol/source/OSM";
-import { Vector as VectorSource } from "ol/source";
+import { Vector as VectorSource, XYZ } from "ol/source";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 import { defaults as defaultControls, ZoomSlider, ScaleLine } from "ol/control";
 import queryString from "query-string";
@@ -20,6 +20,7 @@ import "ol/ol.css";
 import "./map.css";
 import "../styles/components/map.css";
 import ResetPasswordModal from "./admin/modal/resetPasswordModal";
+import RasterSource from "ol/source/Raster";
 
 class Map extends Component {
   _olMap = {};
@@ -71,33 +72,29 @@ class Map extends Component {
       }),
     });
 
-    var styles = [
-      "RoadOnDemand",
-      "Aerial",
-      "AerialWithLabelsOnDemand",
-      "CanvasDark",
-      "OrdnanceSurvey",
-    ];
+    var key = "nEpI4PLiQ94chsicl5PF";
+    var attributions =
+      '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> ' +
+      '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
 
-    var i, ii;
-    for (i = 0, ii = styles.length; i < ii; ++i) {
-      layers.push(
-        new OlTileLayer({
-          visible: false,
-          preload: Infinity,
-          source: new BingMaps({
-            key:
-              "AiGYgDvsDKORosaLZhrB-9FUiEk7wJv1BimuscBCDLSunWGKTlDe_ZYUEqHADcU0",
-            imagerySet: styles[i],
-            // use maxZoom 19 to see stretched tiles instead of the BingMaps
-            // "no photos at this zoom level" tiles
-            // maxZoom: 19
-          }),
-        })
-      );
-    }
+    var aerial = new XYZ({
+      attributions: attributions,
+      url:
+        "https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=" + key,
+      maxZoom: 20,
+      crossOrigin: "",
+    });
+    var sateliteMap = new OlTileLayer({
+      source: aerial,
+    });
+    raster.set("name", "openStreetMap");
+    raster.set("description", "tiled image provided by @openStreetMap");
     layers.push(raster);
+
     layers.push(drawVector);
+    sateliteMap.set("name", "Satelite");
+    sateliteMap.set("description", "tiled image provided by @mapTiler.net");
+    layers.push(sateliteMap);
 
     var extent = [0, 0, 52, 36];
     var projection = new Projection({

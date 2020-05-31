@@ -82,3 +82,7 @@ ul .layers-dragable-li {
 #layers-dragable-item.layer-invisible #eye {
   display: none;
 }
+
+#layers-dragable-item-content i {
+  font-size: 12.5px;
+}

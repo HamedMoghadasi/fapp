@@ -12,6 +12,10 @@ class UserTabContent extends Component {
     currentUser: GetAuthenticatedUser(),
   };
 
+  handleLogout = () => {
+    localStorage.removeItem("access_token");
+  };
+
   calculateTokenExp = (currentUser) => {
     var jtokenExpDate = jmoment(new Date(currentUser.exp * 1000)).format(
       "jYYYY/jMM/jDD HH:mm"
@@ -97,9 +101,17 @@ class UserTabContent extends Component {
           <a
             href="/dashboard"
             id="userTabsOperation-RedirectToDashboard"
-            className="btn btn-sm btn-danger col col-12"
+            className="btn btn-sm btn-success col col-12"
           >
             پنل مدیریت
+          </a>
+          <a
+            href="/login"
+            id="userTabsOperation-Logout"
+            onClick={this.handleLogout}
+            className="btn btn-sm btn-danger col col-12"
+          >
+            خروج
           </a>
         </div>
       </div>

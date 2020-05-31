@@ -44,9 +44,18 @@ class DragableLayerInfo extends Component {
             />
           </div>
           <div id="layers-dragable-item-content">
-            <b>{this.props.name}</b>
+            <b>
+              {this.props.layer && this.props.layer.get("name")
+                ? this.props.layer.get("name")
+                : `Layer ${this.props.ol_uid}`}
+            </b>
             <br />
-            <i>{this.props.description}</i>
+            <i>
+              {" "}
+              {this.props.layer && this.props.layer.get("description")
+                ? this.props.layer.get("description")
+                : `-- no information --`}
+            </i>
           </div>
           <div id="layers-dragable-item-settings">
             <IonIcon className="item-close" icon={close} />
