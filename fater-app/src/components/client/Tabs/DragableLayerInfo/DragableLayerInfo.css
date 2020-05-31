@@ -86,3 +86,7 @@ ul .layers-dragable-li {
 .layers-dragable-item-content i {
   font-size: 12.5px;
 }
+.layers-dragable-item-content-slider {
+  display: none;
+  margin-top: -8px;
+}

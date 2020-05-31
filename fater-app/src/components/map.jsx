@@ -22,6 +22,8 @@ import "../styles/components/map.css";
 import ResetPasswordModal from "./admin/modal/resetPasswordModal";
 import RasterSource from "ol/source/Raster";
 
+import RangeTouch from "rangetouch";
+
 class Map extends Component {
   _olMap = {};
   getView = () => {
@@ -72,6 +74,7 @@ class Map extends Component {
       }),
     });
 
+    drawVector.setZIndex(10000);
     var key = "nEpI4PLiQ94chsicl5PF";
     var attributions =
       '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> ' +

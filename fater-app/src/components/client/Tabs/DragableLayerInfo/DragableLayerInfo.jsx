@@ -39,7 +39,50 @@ class DragableLayerInfo extends Component {
 
     map.updateSize();
   };
+  handleSettingClick = (e) => {
+    $(e.target)
+      .parent("div")
+      .siblings("div.layers-dragable-item-content")
+      .find("div.layers-dragable-item-content-layerInfo")
+      .toggle("opacity");
 
+    $(e.target)
+      .parent("div")
+      .siblings("div.layers-dragable-item-content")
+      .find("div.layers-dragable-item-content-slider")
+      .toggle("diplay");
+  };
+
+  componentDidMount = () => {
+    $(".opacity-handler").ionRangeSlider({
+      skin: "round",
+      type: "single",
+      hide_min_max: true,
+      min: 0,
+      max: 100,
+      from: 100,
+      hide_from_to: true,
+      onFinish: function (value) {},
+    });
+
+    $(".opacity-handler").on("change", function (e) {
+      const $targetLayerDom = $(e.target)
+        .parent("div")
+        .parent("div")
+        .parent("div");
+      const ol_uid = $targetLayerDom.data("oluid");
+
+      let _map = $("#mapContainer").data("map");
+
+      _map.getLayers().array_.map((layer) => {
+        if (String(layer.ol_uid) === String(ol_uid)) {
+          layer.setOpacity($(this).prop("value") / 100);
+        }
+      });
+
+      _map.updateSize();
+    });
+  };
   render() {
     return (
       <li className="layers-dragable-li" data-oluid={this.props.ol_uid}>
@@ -60,19 +103,25 @@ class DragableLayerInfo extends Component {
               onClick={(e) => this.handleVisiblity(e)}
             />
           </div>
+
           <div className="layers-dragable-item-content">
-            <b>
-              {this.props.layer && this.props.layer.get("name")
-                ? this.props.layer.get("name")
-                : `Layer ${this.props.ol_uid}`}
-            </b>
-            <br />
-            <i>
-              {" "}
-              {this.props.layer && this.props.layer.get("description")
-                ? this.props.layer.get("description")
-                : `-- no information --`}
-            </i>
+            <div className="layers-dragable-item-content-slider">
+              <input type="text" className="opacity-handler" />
+            </div>
+            <div className="layers-dragable-item-content-layerInfo">
+              <b>
+                {this.props.layer && this.props.layer.get("name")
+                  ? this.props.layer.get("name")
+                  : `Layer ${this.props.ol_uid}`}
+              </b>
+              <br />
+              <i>
+                {" "}
+                {this.props.layer && this.props.layer.get("description")
+                  ? this.props.layer.get("description")
+                  : `-- no information --`}
+              </i>
+            </div>
           </div>
           <div className="layers-dragable-item-settings">
             <IonIcon
@@ -80,7 +129,11 @@ class DragableLayerInfo extends Component {
               onClick={(e) => this.handleLayerRemove(e)}
               icon={close}
             />
-            <IonIcon className="item-settings" icon={settingsOutline} />
+            <IonIcon
+              className="item-settings"
+              onClick={(e) => this.handleSettingClick(e)}
+              icon={settingsOutline}
+            />
             <IonIcon className="item-info" icon={informationOutline} />
           </div>
         </div>
