@@ -83,14 +83,14 @@ class Map extends Component {
     var sateliteMap = new OlTileLayer({
       source: aerial,
     });
+    sateliteMap.set("name", "Satelite");
+    sateliteMap.set("description", "tiled image provided by @mapTiler.net");
+    layers.push(sateliteMap);
     raster.set("name", "openStreetMap");
     raster.set("description", "tiled image provided by @openStreetMap");
     layers.push(raster);
 
     layers.push(drawVector);
-    sateliteMap.set("name", "Satelite");
-    sateliteMap.set("description", "tiled image provided by @mapTiler.net");
-    layers.push(sateliteMap);
 
     var extent = [0, 0, 52, 36];
     var projection = new Projection({

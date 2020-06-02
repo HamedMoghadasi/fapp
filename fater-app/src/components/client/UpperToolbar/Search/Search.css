@@ -1,0 +1,89 @@
+.searchArea {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #2f2f2fd6;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+
+.searchArea-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.3fr 2.5fr 0.2fr;
+  grid-template-rows: 0.4fr 1.6fr;
+  gap: 1px 1px;
+  grid-template-areas: ". searchArea-SearchBox ." ". searchArea-SearchResult .";
+  background: #1d1d1d54;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+}
+
+.searchArea-SearchBox {
+  grid-area: searchArea-SearchBox;
+}
+
+.searchArea-SearchResult {
+  grid-area: searchArea-SearchResult;
+  direction: rtl;
+  overflow-y: scroll;
+}
+
+#searchArea-input {
+  margin: 0 auto;
+  width: 80%;
+  height: 58%;
+  border: none;
+  border-bottom: 2px solid #dc3545;
+  outline: none;
+  background: transparent;
+  color: white !important;
+}
+
+.searchArea-SearchResult ul {
+  list-style: none;
+}
+
+.searchResult-ul {
+  margin: 0 auto;
+  width: 80%;
+  padding: 0;
+}
+.searchResult-li {
+  background: #ffffff85;
+  text-align: initial;
+  font-size: 14px;
+  padding: 5px;
+  line-height: 2em;
+  border-radius: 7px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  color: black;
+}
+.searchResult-li:hover {
+  background: gray;
+  color: #cccccc;
+}
+
+.closeSearchArea {
+  font-size: 40px;
+  opacity: 0.6;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  color: white;
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.closeSearchArea:hover {
+  opacity: 1;
+}

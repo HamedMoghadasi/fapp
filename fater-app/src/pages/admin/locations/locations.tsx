@@ -89,7 +89,10 @@ const Locations: React.FC<ILocationsProps> = (props) => {
           <DeleteLocationModal />
           <EditLocationModal />
           <AddLocationModal />
-          <AdminTemplateContainer isSidebarOpen="true" pageTitle="اماکن">
+          <AdminTemplateContainer
+            isSidebarOpen="true"
+            pageTitle="لیست موقعیت ها"
+          >
             <Table configuration={configuration}>
               {" "}
               <br />

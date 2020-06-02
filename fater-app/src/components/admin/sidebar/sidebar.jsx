@@ -162,7 +162,7 @@ class SideBar extends Component {
               <li>
                 <Link to="/dashboard/Locations" replace>
                   <IonIcon className="sidebar-item-icon" icon={location} />
-                  اماکن
+                  موقعیت ها
                 </Link>
               </li>
               <li>

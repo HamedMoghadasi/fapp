@@ -27,8 +27,10 @@ class EditLocationModal extends Component {
     var index = dt.rows({ selected: true }).indexes();
     var row = $(dt.row(index).node());
 
-    var _Name = document.getElementById("editModal-name").value;
-    var _KeyWords = document.getElementById("editModal-keyWords").value;
+    var _Name = document.getElementById("editModal-name").value.toLowerCase();
+    var _KeyWords = document
+      .getElementById("editModal-keyWords")
+      .value.toLowerCase();
     var _lat = document.getElementById("editModal-lat").value;
     var _lon = document.getElementById("editModal-lon").value;
 
@@ -62,11 +64,11 @@ class EditLocationModal extends Component {
 
           dt.row(row).invalidate().draw();
           $("#editModal").modal("hide");
-          notif("Succeful! User Update", "success");
+          notif("Succeful! Location Update", "success");
         },
         error: function (err) {
           $("#editModal").modal("hide");
-          notif("Failed! User did not Update", "error");
+          notif("Failed! Location did not Update", "error");
         },
       });
     }

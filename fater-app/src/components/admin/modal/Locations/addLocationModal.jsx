@@ -25,8 +25,10 @@ class AddLocationModal extends Component {
   handleSubmit = () => {
     const dt = $("#tableo").DataTable();
 
-    var _Name = document.getElementById("addModal-name").value;
-    var _KeyWords = document.getElementById("addModal-keyWords").value;
+    var _Name = document.getElementById("addModal-name").value.toLowerCase();
+    var _KeyWords = document
+      .getElementById("addModal-keyWords")
+      .value.toLowerCase();
     var _lat = document.getElementById("addModal-lat").value;
     var _lon = document.getElementById("addModal-lon").value;
 
@@ -81,11 +83,19 @@ class AddLocationModal extends Component {
             .draw(true);
 
           $("#addModal").modal("hide");
-          notif("Succeful! User Update", "success");
+          document.getElementById("addModal-name").value = "";
+          document.getElementById("addModal-keyWords").value = "";
+          document.getElementById("addModal-lat").value = "";
+          document.getElementById("addModal-lon").value = "";
+          notif("Succeful! Location Added", "success");
         },
         error: function (err) {
           $("#addModal").modal("hide");
-          notif("Failed! User did not Update", "error");
+          document.getElementById("addModal-name").value = "";
+          document.getElementById("addModal-keyWords").value = "";
+          document.getElementById("addModal-lat").value = "";
+          document.getElementById("addModal-lon").value = "";
+          notif("Failed! Location did not Added", "error");
         },
       });
     }

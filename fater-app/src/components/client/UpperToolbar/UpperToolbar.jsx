@@ -5,7 +5,7 @@ import GoHome from "./GoHome/GoHome";
 import Info from "./Info/Info";
 import Capture from "./PhotoVideo/PhotoVideo";
 import Share from "./Share/Share";
-import Globe from "./Globe/Globe";
+import Search from "./Search/Search";
 
 import $ from "jquery";
 
@@ -31,7 +31,7 @@ class UpperToolbar extends Component {
       <>
         <div id="ut-container">
           <Share />
-          <Globe />
+          <Search />
           <Capture />
           <Info />
           <GoHome />
