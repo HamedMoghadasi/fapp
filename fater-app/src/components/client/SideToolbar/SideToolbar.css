@@ -19,3 +19,11 @@
 #st-container .st-icon#polygon {
   font-size: 20px;
 }
+
+#st-container svg.active {
+  color: #e4b527;
+}
+
+#st-container img#unit[aria-expanded="true"] {
+  color: #e4b527;
+}

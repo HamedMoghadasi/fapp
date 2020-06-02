@@ -18,6 +18,7 @@ import {
   remove,
   desktopOutline,
   map,
+  location,
 } from "ionicons/icons";
 
 import "./sidebar.css";
@@ -156,6 +157,12 @@ class SideBar extends Component {
                 <Link to="/dashboard" replace>
                   <IonIcon className="sidebar-item-icon" icon={map} />
                   نقشه ها
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/Locations" replace>
+                  <IonIcon className="sidebar-item-icon" icon={location} />
+                  اماکن
                 </Link>
               </li>
               <li>

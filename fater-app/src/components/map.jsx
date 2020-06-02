@@ -4,6 +4,7 @@ import OlMap from "ol/Map";
 import OlView from "ol/View";
 import OlTileLayer from "ol/layer/Tile";
 import { Vector as VectorLayer } from "ol/layer";
+import { DoubleClickZoom } from "ol/interaction";
 import OSM from "ol/source/OSM";
 import { Vector as VectorSource, XYZ } from "ol/source";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
@@ -115,6 +116,19 @@ class Map extends Component {
       view: view_(),
       layers: layers,
     });
+
+    var dblClickInteraction;
+    // find DoubleClickZoom interaction
+    this.olmap
+      .getInteractions()
+      .getArray()
+      .forEach(function (interaction) {
+        if (interaction instanceof DoubleClickZoom) {
+          dblClickInteraction = interaction;
+        }
+      });
+    // remove from map
+    this.olmap.removeInteraction(dblClickInteraction);
 
     $("#mapContainer").data("map", this.olmap);
     $("#mapContainer").data("drawVector-source", drawSource);

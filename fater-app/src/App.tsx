@@ -42,6 +42,7 @@ import "./theme/variables.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "popper.js";
 import "bootstrap/dist/js/bootstrap.bundle.js";
+import Locations from "./pages/admin/locations/locations";
 
 const App: React.FC = () => {
   return (
@@ -138,6 +139,16 @@ const App: React.FC = () => {
                 needAuthentication={true}
                 neededRole={Roles.Admin}
               />
+            );
+          }}
+          exact={true}
+        />
+
+        <Route
+          path="/dashboard/Locations"
+          component={() => {
+            return (
+              <Locations needAuthentication={true} neededRole={Roles.Admin} />
             );
           }}
           exact={true}

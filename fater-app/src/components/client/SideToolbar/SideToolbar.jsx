@@ -20,9 +20,11 @@ import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 import Unit from "./unit/unit";
 
 class SideToolbar extends Component {
-  drawing = (drawShapeTYpe) => {
+  drawing = (tagetIconDomId, drawShapeType) => {
     var source = $("#mapContainer").data("drawVector-source");
-    console.log(source.getFeatures());
+    const $targetIconDom = $(`svg${tagetIconDomId}`);
+    $targetIconDom.addClass("active");
+    console.log($targetIconDom);
 
     var map = $("#mapContainer").data("map");
 
@@ -73,7 +75,7 @@ class SideToolbar extends Component {
     function addInteraction() {
       draw = new Draw({
         source: source,
-        type: drawShapeTYpe,
+        type: drawShapeType,
         style: new Style({
           fill: new Fill({
             color: "rgba(254, 254, 254, 0.5)",
@@ -134,6 +136,7 @@ class SideToolbar extends Component {
         sketch = null;
 
         unByKey(listener);
+        $targetIconDom.removeClass("active");
         map.removeInteraction(draw);
       });
     }
@@ -171,7 +174,7 @@ class SideToolbar extends Component {
             className="st-icon"
             id="ruler"
             title="Line String"
-            onClick={() => this.drawing("LineString")}
+            onClick={() => this.drawing("#ruler", "LineString")}
           />
 
           <FontAwesomeIcon
@@ -179,7 +182,7 @@ class SideToolbar extends Component {
             className="st-icon"
             id="polygon"
             title="Polygon"
-            onClick={() => this.drawing("Polygon")}
+            onClick={() => this.drawing("#polygon", "Polygon")}
           />
           <FontAwesomeIcon
             icon={faTrashAlt}
