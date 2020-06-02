@@ -12,18 +12,11 @@ import { defaults as defaultControls, ZoomSlider, ScaleLine } from "ol/control";
 import queryString from "query-string";
 import { units } from "../constants/units";
 
-import ImageLayer from "ol/layer/Image";
 import Projection from "ol/proj/Projection";
-import Static from "ol/source/ImageStatic";
-import BingMaps from "ol/source/BingMaps";
 
 import "ol/ol.css";
 import "./map.css";
 import "../styles/components/map.css";
-import ResetPasswordModal from "./admin/modal/resetPasswordModal";
-import RasterSource from "ol/source/Raster";
-
-import RangeTouch from "rangetouch";
 
 class Map extends Component {
   _olMap = {};
@@ -53,7 +46,6 @@ class Map extends Component {
       source: new OSM(),
     });
 
-    raster.set("___name", "open street map");
     var drawSource = new VectorSource();
 
     var drawVector = new VectorLayer({
