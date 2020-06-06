@@ -1,20 +1,30 @@
 import React, { Component } from "react";
 
-import "./aboutUs.css";
+import "./baselayersModal.css";
 
-class AboutUsModal extends Component {
+class BaseLayersModal extends Component {
   render() {
     return (
       <>
         <div
           className="modal fade"
-          id="aboutUsModal"
+          id="baseLayersModal"
           role="dialog"
-          aria-labelledby="aboutUsModalLabel"
+          aria-labelledby="baseLayersModalLabel"
           aria-hidden="true"
         >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
+              <div className="modal-header">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
               <div className="modal-body">
                 <h3>لورم ایپسوم متن ساختگی</h3>
                 <p className="modal-message">
@@ -40,4 +50,4 @@ class AboutUsModal extends Component {
   }
 }
 
-export default AboutUsModal;
+export default BaseLayersModal;
