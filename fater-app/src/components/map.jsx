@@ -13,6 +13,10 @@ import queryString from "query-string";
 import { units } from "../constants/units";
 
 import Projection from "ol/proj/Projection";
+import shp from "shpjs";
+import GeoJSON from "ol/format/GeoJSON";
+import Circle from "ol/geom/Circle";
+import Feature from "ol/Feature";
 
 import "ol/ol.css";
 import "./map.css";
@@ -39,6 +43,7 @@ class Map extends Component {
     return view;
   };
   componentDidMount = () => {
+    var self = this;
     this.getView();
     var view_ = this.getView;
     var layers = [];
@@ -66,31 +71,55 @@ class Map extends Component {
         }),
       }),
     });
-
+    drawVector.set("name", "Draw vector layer");
+    drawVector.set("description", "Vector Tile Layer provided by @Arad Co");
     drawVector.setZIndex(10000);
-    var key = "nEpI4PLiQ94chsicl5PF";
-    var attributions =
-      '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> ' +
-      '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
 
-    var aerial = new XYZ({
-      attributions: attributions,
-      url:
-        "https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=" + key,
-      maxZoom: 20,
-      crossOrigin: "",
-    });
     var sateliteMap = new OlTileLayer({
-      source: aerial,
+      source: new XYZ({
+        url:
+          "https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=" +
+          "nEpI4PLiQ94chsicl5PF",
+        maxZoom: 20,
+        crossOrigin: "",
+      }),
     });
+
+    var offlineMap = new OlTileLayer({
+      source: new XYZ({
+        url: "./assets/map/satelite/{z}/{x}/{y}.png",
+        maxZoom: 5,
+        crossOrigin: "",
+      }),
+    });
+
+    offlineMap.set("name", "offline satelite map");
+    offlineMap.set("description", "tiled image provided by @Arad Co");
+    layers.push(offlineMap);
+
     sateliteMap.set("name", "Satelite");
     sateliteMap.set("description", "tiled image provided by @mapTiler.net");
     layers.push(sateliteMap);
+
     raster.set("name", "openStreetMap");
     raster.set("description", "tiled image provided by @openStreetMap");
     layers.push(raster);
 
     layers.push(drawVector);
+
+    var iranBorderVectorLayer = new VectorLayer({
+      source: new VectorSource({
+        url: "./assets/map/shapefile/iran-border/iran-border.geojson",
+        format: new GeoJSON(),
+      }),
+    });
+    iranBorderVectorLayer.set("name", "Iran border vector");
+    iranBorderVectorLayer.set(
+      "description",
+      "tiled image provided by @Arad Co"
+    );
+    iranBorderVectorLayer.setZIndex("10000");
+    layers.push(iranBorderVectorLayer);
 
     var extent = [0, 0, 52, 36];
     var projection = new Projection({
