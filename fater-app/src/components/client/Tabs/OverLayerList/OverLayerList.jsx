@@ -7,6 +7,9 @@ import "./OverLayerList.css";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
 
+window.jQuery = $;
+require("jquery-ui-touch-punch");
+
 class OverLayerList extends Component {
   state = { map: "" };
   handle = () => {};
@@ -33,7 +36,7 @@ class OverLayerList extends Component {
           .forEach((ol_uid, index) => {
             map.getLayers().forEach((layer) => {
               if (layer.ol_uid === ol_uid) {
-                layer.setZIndex((index + 1) * 10);
+                layer.setZIndex((index + 1) * 100);
               }
             });
           });

@@ -7,6 +7,9 @@ import "./BaseLayerList.css";
 import { layer } from "@fortawesome/fontawesome-svg-core";
 import TileLayer from "ol/layer/Tile";
 
+window.jQuery = $;
+require("jquery-ui-touch-punch");
+
 class BaseLayerList extends Component {
   state = { map: "" };
   handle = () => {};
@@ -15,6 +18,7 @@ class BaseLayerList extends Component {
     setTimeout(() => {
       this.setState({ map: $("#mapContainer").data("map") });
     }, 1000);
+    console.log();
 
     $("#baselayer-sortable-list").sortable({
       axis: "y",

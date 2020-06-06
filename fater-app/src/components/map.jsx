@@ -13,10 +13,7 @@ import queryString from "query-string";
 import { units } from "../constants/units";
 
 import Projection from "ol/proj/Projection";
-import shp from "shpjs";
 import GeoJSON from "ol/format/GeoJSON";
-import Circle from "ol/geom/Circle";
-import Feature from "ol/Feature";
 
 import "ol/ol.css";
 import "./map.css";
@@ -43,7 +40,6 @@ class Map extends Component {
     return view;
   };
   componentDidMount = () => {
-    var self = this;
     this.getView();
     var view_ = this.getView;
     var layers = [];
