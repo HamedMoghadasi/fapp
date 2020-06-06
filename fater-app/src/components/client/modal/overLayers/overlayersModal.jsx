@@ -26,21 +26,56 @@ class OverLayersModal extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <h3>لورم ایپسوم متن ساختگی</h3>
-                <p className="modal-message">
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                  استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و
-                  مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                  تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                  کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و
-                  آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم
-                  افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
-                  طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این
-                  صورت می توان امید داشت که تمام و دشواری موجود در ارائه
-                  راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل
-                  حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای
-                  موجود طراحی اساسا مورد استفاده قرار گیرد.
-                </p>
+                <ul
+                  className="nav nav-tabs nav-justified"
+                  id="myTab"
+                  role="tablist"
+                >
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      id="home-tab"
+                      data-toggle="tab"
+                      href="#home"
+                      role="tab"
+                      aria-controls="home"
+                      aria-selected="true"
+                    >
+                      لایه سفارشی
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active"
+                      id="profile-tab"
+                      data-toggle="tab"
+                      href="#profile"
+                      role="tab"
+                      aria-controls="profile"
+                      aria-selected="false"
+                    >
+                      لایه پیش فرض
+                    </a>
+                  </li>
+                </ul>
+                <div className="tab-content " id="myTabContent">
+                  <div
+                    className="tab-pane fade show active"
+                    id="home"
+                    role="tabpanel"
+                    aria-labelledby="home-tab"
+                  >
+                    home
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="profile"
+                    role="tabpanel"
+                    aria-labelledby="profile-tab"
+                  >
+                    profile
+                  </div>
+                </div>
               </div>
             </div>
           </div>
