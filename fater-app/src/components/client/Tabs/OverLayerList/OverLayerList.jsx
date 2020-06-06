@@ -4,34 +4,86 @@ import $ from "jquery";
 import "jquery-ui-bundle";
 
 import "./OverLayerList.css";
-
-window.jQuery = $;
-require("jquery-ui-touch-punch");
+import TileLayer from "ol/layer/Tile";
+import VectorLayer from "ol/layer/Vector";
 
 class OverLayerList extends Component {
+  state = { map: "" };
+  handle = () => {};
+
   componentDidMount() {
+    setTimeout(() => {
+      this.setState({ map: $("#mapContainer").data("map") });
+    }, 1000);
+
     $("#overlayer-sortable-list").sortable({
       axis: "y",
       delay: 350,
       placeholder: "sortable-placeholder",
+      update: function () {
+        let layerOrder = $(this).sortable("toArray", {
+          attribute: "data-oluid",
+        });
+
+        let map = $("#mapContainer").data("map");
+
+        layerOrder
+          .slice()
+          .reverse()
+          .forEach((ol_uid, index) => {
+            map.getLayers().forEach((layer) => {
+              if (layer.ol_uid === ol_uid) {
+                layer.setZIndex((index + 1) * 10);
+              }
+            });
+          });
+      },
     });
     $("#overlayer-sortable-list").disableSelection();
   }
 
   render() {
-    return (
-      <>
-        <div id="overlayer-container">
-          <h6>لایه ها</h6>
-          <ul id="overlayer-sortable-list">
-            <DragableLayerInfo
-              name="draw layer"
-              description="In this layer you drwa shapes"
-            />
-          </ul>
-        </div>
-      </>
-    );
+    if (this.state.map) {
+      return (
+        <>
+          <div id="overlayer-container">
+            <h6 onClick={this.handle}>لایه ها</h6>
+            <ul id="overlayer-sortable-list">
+              {this.state.map
+                .getLayers()
+                .array_.slice()
+                .reverse()
+                .map((layer, index) => {
+                  if (
+                    layer instanceof VectorLayer &&
+                    layer.get("name") !== "Draw vector layer"
+                  ) {
+                    return (
+                      <DragableLayerInfo
+                        key={index}
+                        ol_uid={layer.ol_uid}
+                        layer={layer}
+                        invisible={
+                          layer.values_.visible ? "" : "layer-invisible"
+                        }
+                      />
+                    );
+                  }
+                })}
+            </ul>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div id="overlayer-container">
+            <h6 onClick={this.handle}>لایه ها</h6>
+            <ul id="overlayer-sortable-list"></ul>
+          </div>
+        </>
+      );
+    }
   }
 }
 
