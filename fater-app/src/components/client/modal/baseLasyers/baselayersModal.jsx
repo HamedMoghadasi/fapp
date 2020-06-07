@@ -26,21 +26,222 @@ class BaseLayersModal extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <h3>لورم ایپسوم متن ساختگی</h3>
-                <p className="modal-message">
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                  استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و
-                  مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                  تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                  کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و
-                  آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم
-                  افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
-                  طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این
-                  صورت می توان امید داشت که تمام و دشواری موجود در ارائه
-                  راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل
-                  حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای
-                  موجود طراحی اساسا مورد استفاده قرار گیرد.
-                </p>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img
+                    className="backgroundi"
+                    src={require("../../../../assets/images/map-image.jpg")}
+                    style={{}}
+                    alt=""
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#a" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

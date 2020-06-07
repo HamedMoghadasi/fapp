@@ -28,18 +28,18 @@ class OverLayersModal extends Component {
               <div className="modal-body">
                 <ul
                   className="nav nav-tabs nav-justified"
-                  id="myTab"
+                  id="overlayersModal-tab"
                   role="tablist"
                 >
                   <li className="nav-item">
                     <a
                       className="nav-link"
-                      id="home-tab"
+                      id="customOverlayers-tab"
                       data-toggle="tab"
-                      href="#home"
+                      href="#customOverlayers"
                       role="tab"
-                      aria-controls="home"
-                      aria-selected="true"
+                      aria-controls="customOverlayers"
+                      aria-selected="false"
                     >
                       لایه سفارشی
                     </a>
@@ -47,33 +47,34 @@ class OverLayersModal extends Component {
                   <li className="nav-item">
                     <a
                       className="nav-link active"
-                      id="profile-tab"
+                      id="defaultOverlayers-tab"
                       data-toggle="tab"
-                      href="#profile"
+                      href="#defaultOverlayers"
                       role="tab"
-                      aria-controls="profile"
-                      aria-selected="false"
+                      aria-controls="defaultOverlayers"
+                      aria-selected="true"
                     >
-                      لایه پیش فرض
+                      لایه های پیش فرض
                     </a>
                   </li>
                 </ul>
-                <div className="tab-content " id="myTabContent">
+                <div className="tab-content" id="overlayersModal-tab-content">
                   <div
                     className="tab-pane fade show active"
-                    id="home"
+                    id="defaultOverlayers"
                     role="tabpanel"
-                    aria-labelledby="home-tab"
+                    aria-labelledby="defaultOverlayers-tab"
                   >
-                    home
+                    پیش فرض
                   </div>
+
                   <div
                     className="tab-pane fade"
-                    id="profile"
+                    id="customOverlayers"
                     role="tabpanel"
-                    aria-labelledby="profile-tab"
+                    aria-labelledby="customOverlayers-tab"
                   >
-                    profile
+                    <input type="file" accept="application/vnd.geo+json" />
                   </div>
                 </div>
               </div>
