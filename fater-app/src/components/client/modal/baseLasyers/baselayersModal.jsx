@@ -26,220 +26,58 @@ class BaseLayersModal extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <div class="card">
+                <div className="card">
                   <img
                     className="backgroundi"
                     src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
                     alt=""
                   />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
+                  <div className="card-body">
+                    <h5 className="card-title">Special title treatment</h5>
+                    <p className="card-text">
                       With supporting text below as a natural lead-in to
                       additional content.
                     </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
+                    <button className="btn btn-primary m-2">
+                      اضافه کردن نقشه
+                    </button>
+                    <button className="btn btn-secondary m-2">بیشتر</button>
                   </div>
                 </div>
-                <div class="card">
+                <div className="card">
                   <img
                     className="backgroundi"
                     src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
                     alt=""
                   />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
+                  <div className="card-body">
+                    <h5 className="card-title">Special title treatment</h5>
+                    <p className="card-text">
                       With supporting text below as a natural lead-in to
                       additional content.
                     </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
+                    <button className="btn btn-primary m-2">
+                      اضافه کردن نقشه
+                    </button>
+                    <button className="btn btn-secondary m-2">بیشتر</button>
                   </div>
                 </div>
-                <div class="card">
+                <div className="card">
                   <img
                     className="backgroundi"
                     src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
                     alt=""
                   />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
+                  <div className="card-body">
+                    <h5 className="card-title">Special title treatment</h5>
+                    <p className="card-text">
                       With supporting text below as a natural lead-in to
                       additional content.
                     </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
-                <div class="card">
-                  <img
-                    className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
-                    style={{}}
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#a" class="btn btn-primary">
-                      Go somewhere
-                    </a>
+                    <button className="btn btn-primary m-2">
+                      اضافه کردن نقشه
+                    </button>
+                    <button className="btn btn-secondary m-2">بیشتر</button>
                   </div>
                 </div>
               </div>
