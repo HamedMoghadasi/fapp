@@ -65,7 +65,7 @@ class BaseLayersModal extends Component {
                 <div className="card">
                   <img
                     className="backgroundi"
-                    src={require("../../../../assets/images/map-image.jpg")}
+                    src="http://localhost:3505/static/images/baselayers/map-image.jpg"
                     alt=""
                   />
                   <div className="card-body">
