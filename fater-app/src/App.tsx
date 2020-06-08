@@ -15,6 +15,8 @@ import ForgetPassword from "./pages/forgetPassword/forgetPassword";
 import ChangePassword from "./pages/changePassword/changePassword";
 import Dashboard from "./pages/admin/template/adminTemplate";
 import AllUsers from "./pages/admin/users/AllUsers";
+import Locations from "./pages/admin/locations/locations";
+import BaseMaps from "./pages/admin/baseMaps/baseMaps";
 import SuspendedUsers from "./pages/admin/users/SuspendedUser";
 import PendingUsers from "./pages/admin/users/PendingUsers";
 import AccessDenied from "./pages/errors/AccessDenied";
@@ -42,7 +44,6 @@ import "./theme/variables.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "popper.js";
 import "bootstrap/dist/js/bootstrap.bundle.js";
-import Locations from "./pages/admin/locations/locations";
 
 const App: React.FC = () => {
   return (
@@ -149,6 +150,16 @@ const App: React.FC = () => {
           component={() => {
             return (
               <Locations needAuthentication={true} neededRole={Roles.Admin} />
+            );
+          }}
+          exact={true}
+        />
+
+        <Route
+          path="/dashboard/BaseMaps"
+          component={() => {
+            return (
+              <BaseMaps needAuthentication={true} neededRole={Roles.Admin} />
             );
           }}
           exact={true}

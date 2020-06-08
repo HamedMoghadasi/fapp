@@ -154,7 +154,7 @@ class SideBar extends Component {
                 </ul>
               </li>
               <li>
-                <Link to="/dashboard" replace>
+                <Link to="/dashboard/BaseMaps" replace>
                   <IonIcon className="sidebar-item-icon" icon={map} />
                   نقشه ها
                 </Link>
