@@ -74,8 +74,7 @@ class Map extends Component {
     var sateliteMap = new OlTileLayer({
       source: new XYZ({
         url:
-          "https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=" +
-          "nEpI4PLiQ94chsicl5PF",
+          "https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=nEpI4PLiQ94chsicl5PF",
         maxZoom: 20,
         crossOrigin: "",
       }),

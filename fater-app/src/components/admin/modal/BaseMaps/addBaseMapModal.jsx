@@ -27,6 +27,7 @@ class AddBaseMapModal extends Component {
 
     var _url = document.getElementById("addModal-url").value.toLowerCase();
     var _name = document.getElementById("addModal-name").value.toLowerCase();
+    var _maxZoom = document.getElementById("addModal-maxZoom").value;
     var _description = document.getElementById("addModal-description").value;
     var _baseMapImage = $("#addModal-baseMapImage")[0].files[0];
 
@@ -35,6 +36,7 @@ class AddBaseMapModal extends Component {
     var formData = new FormData();
     formData.append("url", _url);
     formData.append("name", _name);
+    formData.append("maxZoom", _maxZoom);
     formData.append("description", _description);
     formData.append("baseMapImage", _baseMapImage);
 
@@ -75,6 +77,7 @@ class AddBaseMapModal extends Component {
               id: data.id,
               url: data.url,
               name: data.name,
+              maxZoom: data.maxZoom,
               description: data.description,
               imageName: data.imageName,
               createdAt: data.createdAt,
@@ -87,7 +90,8 @@ class AddBaseMapModal extends Component {
           document.getElementById("addModal-name").value = "";
           document.getElementById("addModal-description").value = "";
           document.getElementById("addModal-baseMapImage").value = "";
-          notif("Succeful! Location Added", "success");
+          document.getElementById("addModal-maxZoom").value = "";
+          notif("Succeful! Base Map Added", "success");
         },
         error: function (err) {
           $("#addModal").modal("hide");
@@ -95,7 +99,8 @@ class AddBaseMapModal extends Component {
           document.getElementById("addModal-name").value = "";
           document.getElementById("addModal-description").value = "";
           document.getElementById("addModal-baseMapImage").value = "";
-          notif("Failed! Location did not Added", "error");
+          document.getElementById("addModal-maxZoom").value = "";
+          notif("Failed! Base Map did not Added", "error");
         },
       });
     }
@@ -147,6 +152,15 @@ class AddBaseMapModal extends Component {
                     <input
                       type="text"
                       id="addModal-description"
+                      className="form-control"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="addModal-maxZoom">Max Zoom</label>
+                    <input
+                      type="text"
+                      id="addModal-maxZoom"
                       className="form-control"
                     />
                   </div>

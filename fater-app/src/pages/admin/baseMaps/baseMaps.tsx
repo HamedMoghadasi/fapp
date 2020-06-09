@@ -7,8 +7,8 @@ import jmoment from "jalali-moment";
 
 import AdminTemplateContainer from "../../../components/admin/template/adminTemplate";
 import Table from "../../../components/admin/table/table";
-// import DeleteLocationModal from "../../../components/admin/modal/Locations/deleteLocationModal";
-// import EditLocationModal from "../../../components/admin/modal/Locations/editLocationModal";
+import DeleteBaseMapModal from "../../../components/admin/modal/BaseMaps/deleteBaseMapModal";
+import EditBaseMapModal from "../../../components/admin/modal/BaseMaps/editBaseMapModal";
 import AddBaseMapModal from "../../../components/admin/modal/BaseMaps/addBaseMapModal";
 import { ToastContainer } from "react-toastify";
 
@@ -63,8 +63,8 @@ function getColumns() {
     { title: "Id", data: "id" },
     { title: "Url", data: "url" },
     { title: "Name", data: "name" },
+    { title: "Max zoom", data: "maxZoom" },
     { title: "Description", data: "description" },
-    { title: "Image", data: "imageName" },
     { title: "Created at", data: "createdAt" },
     { title: "Updated at", data: "updatedAt" },
   ];
@@ -87,6 +87,8 @@ const BaseMaps: React.FC<IBaseMapsProps> = (props) => {
         <IonContent>
           <ToastContainer />
           <AddBaseMapModal />
+          <EditBaseMapModal />
+          <DeleteBaseMapModal />
           <AdminTemplateContainer isSidebarOpen="true" pageTitle="لیست نقشه ها">
             <Table configuration={configuration}>
               {" "}
