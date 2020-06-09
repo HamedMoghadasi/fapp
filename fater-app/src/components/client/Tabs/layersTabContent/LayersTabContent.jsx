@@ -7,11 +7,15 @@ import OverLayersModal from "../../modal/overLayers/overlayersModal";
 import BaseLayersModal from "../../modal/baseLasyers/baselayersModal";
 
 class LayersTabContent extends Component {
+  refreshComponent = () => {
+    this.forceUpdate();
+  };
+
   render() {
     return (
       <>
-        <BaseLayersModal />
-        <OverLayersModal />
+        <BaseLayersModal refreshComponent={this.refreshComponent} />
+        <OverLayersModal refreshComponent={this.refreshComponent} />
 
         <div
           className="tab-pane fade show active"
@@ -36,8 +40,8 @@ class LayersTabContent extends Component {
             </button>
           </div>
           <div id="LayersTabContent-items">
-            <BaseLayerList />
-            <OverLayerList />
+            <BaseLayerList refreshComponent={this.refreshComponent} />
+            <OverLayerList refreshComponent={this.refreshComponent} />
           </div>
         </div>
       </>

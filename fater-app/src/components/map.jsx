@@ -121,7 +121,12 @@ class Map extends Component {
       code: this.props.map.projection,
       extent: extent,
     });
-
+    layers = layers.map((layer, index) => {
+      if (layer instanceof OlTileLayer) {
+        layer.setZIndex((index + 1) * 10);
+      }
+      return layer;
+    });
     this.olmap = new OlMap({
       target: "mapContainer",
       controls: defaultControls().extend([

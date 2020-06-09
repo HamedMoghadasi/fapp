@@ -25,8 +25,8 @@ class AddBaseMapModal extends Component {
   handleSubmit = () => {
     const dt = $("#tableo").DataTable();
 
-    var _url = document.getElementById("addModal-url").value.toLowerCase();
-    var _name = document.getElementById("addModal-name").value.toLowerCase();
+    var _url = document.getElementById("addModal-url").value;
+    var _name = document.getElementById("addModal-name").value;
     var _maxZoom = document.getElementById("addModal-maxZoom").value;
     var _description = document.getElementById("addModal-description").value;
     var _baseMapImage = $("#addModal-baseMapImage")[0].files[0];

@@ -32,8 +32,8 @@ class EditBaseMapModal extends Component {
     var index = dt.rows({ selected: true }).indexes();
     var row = $(dt.row(index).node());
 
-    var _url = document.getElementById("editModal-url").value.toLowerCase();
-    var _name = document.getElementById("editModal-name").value.toLowerCase();
+    var _url = document.getElementById("editModal-url").value;
+    var _name = document.getElementById("editModal-name").value;
     var _maxZoom = document.getElementById("editModal-maxZoom").value;
     var _description = document.getElementById("editModal-description").value;
     var _baseMapImage = $("#editModal-baseMapImage")[0].files[0];

@@ -30,13 +30,16 @@ class DragableLayerInfo extends Component {
   handleLayerRemove = (e) => {
     const $targetLayerDom = $(e.target).parent("div").parent("div");
     const ol_uid = $targetLayerDom.data("oluid");
-    $targetLayerDom.closest("li").remove();
+    // $targetLayerDom.closest("li").remove();
+
     let map = $("#mapContainer").data("map");
 
     map.getLayers().array_ = map.getLayers().array_.filter((layer) => {
       if (String(layer.ol_uid) !== String(ol_uid)) return layer;
     });
 
+    $("#mapContainer").data("map", map);
+    this.props.refreshComponent();
     map.updateSize();
   };
   handleSettingClick = (e) => {
@@ -80,6 +83,7 @@ class DragableLayerInfo extends Component {
         }
       });
 
+      $("#mapContainer").data("map", _map);
       _map.updateSize();
     });
   };
