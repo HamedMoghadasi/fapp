@@ -31,3 +31,8 @@
 #overlayersModal-tab-content div {
   padding: 5px;
 }
+
+#defaultOverlayers #accordionExample .card {
+  margin-top: 0;
+  margin-bottom: 0;
+}

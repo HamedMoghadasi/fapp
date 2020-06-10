@@ -92,13 +92,13 @@ class Map extends Component {
     offlineMap.set("description", "tiled image provided by @Arad Co");
     layers.push(offlineMap);
 
-    sateliteMap.set("name", "Satelite");
-    sateliteMap.set("description", "tiled image provided by @mapTiler.net");
-    layers.push(sateliteMap);
+    // sateliteMap.set("name", "Satelite");
+    // sateliteMap.set("description", "tiled image provided by @mapTiler.net");
+    // layers.push(sateliteMap);
 
-    raster.set("name", "openStreetMap");
-    raster.set("description", "tiled image provided by @openStreetMap");
-    layers.push(raster);
+    // raster.set("name", "openStreetMap");
+    // raster.set("description", "tiled image provided by @openStreetMap");
+    // layers.push(raster);
 
     layers.push(drawVector);
 

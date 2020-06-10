@@ -18,6 +18,10 @@
   height: 100%;
   top: 0;
   left: 0;
-  opacity: 0.2;
+  opacity: 0.5;
   object-fit: cover;
+}
+
+#baseLayersModal .card-text {
+  color: black !important;
 }

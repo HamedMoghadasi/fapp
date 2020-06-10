@@ -25,13 +25,11 @@ class DragableLayerInfo extends Component {
     } else {
       $(e.target).parent("div").parent("div").addClass("layer-invisible");
     }
+
+    map.updateSize();
   };
 
-  handleLayerRemove = (e) => {
-    const $targetLayerDom = $(e.target).parent("div").parent("div");
-    const ol_uid = $targetLayerDom.data("oluid");
-    // $targetLayerDom.closest("li").remove();
-
+  handleLayerRemove = (ol_uid) => {
     let map = $("#mapContainer").data("map");
 
     map.getLayers().array_ = map.getLayers().array_.filter((layer) => {
@@ -42,6 +40,7 @@ class DragableLayerInfo extends Component {
     this.props.refreshComponent();
     map.updateSize();
   };
+
   handleSettingClick = (e) => {
     $(e.target)
       .parent("div")
@@ -130,7 +129,7 @@ class DragableLayerInfo extends Component {
           <div className="layers-dragable-item-settings">
             <IonIcon
               className="item-close"
-              onClick={(e) => this.handleLayerRemove(e)}
+              onClick={() => this.handleLayerRemove(this.props.ol_uid)}
               icon={close}
             />
             <IonIcon

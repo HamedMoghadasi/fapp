@@ -41,6 +41,8 @@ class BaseLayerList extends Component {
               }
             });
           });
+
+        map.updateSize();
       },
     });
     $("#baselayer-sortable-list").disableSelection();

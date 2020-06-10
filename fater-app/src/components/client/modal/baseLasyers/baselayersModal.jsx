@@ -12,12 +12,13 @@ class BaseLayersModal extends Component {
     super(props);
     this.state = {
       baseMaps: [],
+      dataFetched: false,
     };
   }
   getData = () => {
     const self = this;
     let data = [];
-    if (window.localStorage.access_token) {
+    if (this.state.baseMaps.length === 0 && window.localStorage.access_token) {
       $.ajax({
         url: `${API_URL}/api/v1/baseMapServer`,
         type: "GET",
@@ -66,7 +67,12 @@ class BaseLayersModal extends Component {
   };
 
   componentDidMount = () => {
-    this.getData();
+    let self = this;
+    $(document).ready(function () {
+      $("#baseLayersModal").on("show.bs.modal", function () {
+        self.getData();
+      });
+    });
   };
 
   render() {
@@ -102,7 +108,7 @@ class BaseLayersModal extends Component {
                           alt=""
                         />
                         <div className="card-body">
-                          <h5 className="card-title">{item.name}}</h5>
+                          <h5 className="card-title">{item.name}</h5>
                           <p className="card-text">{item.description}</p>
                           <button
                             className="btn btn-primary m-2"

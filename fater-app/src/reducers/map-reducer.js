@@ -11,7 +11,7 @@ const initialState = {
     projections.EPSG4326,
     projections.EPSG3857
   ),
-  zoom: 6,
+  zoom: 5,
   projection: projections.EPSG3857,
   olmap: {},
 };
