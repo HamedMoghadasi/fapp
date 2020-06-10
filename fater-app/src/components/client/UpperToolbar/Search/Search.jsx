@@ -37,6 +37,7 @@ class Search extends Component {
         data: JSON.stringify(body),
         success: function (response) {
           if (response.data) {
+            $("#Search-input").addClass("hasResult");
             self.setState({
               searchedData: response.data.map((location) => {
                 return {
@@ -47,6 +48,7 @@ class Search extends Component {
               }),
             });
           } else {
+            $("#Search-input").removeClass("hasResult");
             self.setState({ searchedData: [] });
           }
         },
@@ -55,6 +57,7 @@ class Search extends Component {
         },
       });
     } else {
+      $("#Search-input").removeClass("hasResult");
       this.setState({ searchedData: [] });
     }
   };
@@ -62,12 +65,17 @@ class Search extends Component {
   handleClose = () => {
     $(".searchArea").addClass("hide");
     $("#searchArea-input").val("");
+    $("#Search-input").val("");
+    $("#Search-input").removeClass("hasResult");
     this.setState({ searchedData: [] });
   };
 
   handleSearchIconClick = () => {
-    $(".searchArea").removeClass("hide");
-    document.getElementById("searchArea-input").focus();
+    // $(".searchArea").removeClass("hide");
+    // document.getElementById("searchArea-input").focus();
+    this.handleClose();
+
+    document.getElementById("Search-input").focus();
   };
 
   handleTransfer = (lat, lon) => {
@@ -96,9 +104,39 @@ class Search extends Component {
           id="searchIcon"
           onClick={this.handleSearchIconClick}
           title="Search a location"
+          data-toggle="collapse"
+          data-target="#Search-container"
         />
-
-        <div className="searchArea hide">
+        <div id="Search-container" className="collapse">
+          <div id="Search-wrapper">
+            <input
+              type="text"
+              id="Search-input"
+              className="form-control shadow-none"
+              placeholder="مکان مورد نظر خود را جستجو کنید"
+              autoComplete="off"
+              onChange={(e) => this.handleSearchInput(e)}
+            />
+            <ul className="searchResult-ul">
+              {this.state.searchedData &&
+                this.state.searchedData.map((location, index) => {
+                  return (
+                    <li
+                      className="searchResult-li"
+                      key={index}
+                      onClick={() =>
+                        this.handleTransfer(location.lat, location.lon)
+                      }
+                    >
+                      {location.Name}
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
+        </div>
+        {/* mobile  */}
+        {/* <div className="searchArea hide">
           <div className="searchArea-wrapper">
             <div className="searchArea-SearchBox">
               <input
@@ -139,7 +177,7 @@ class Search extends Component {
           <div className="closeSearchArea" onClick={this.handleClose}>
             <IonIcon icon={close} />
           </div>
-        </div>
+        </div> */}
       </>
     );
   }

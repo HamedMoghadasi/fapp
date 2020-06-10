@@ -30,8 +30,8 @@ class UpperToolbar extends Component {
     return (
       <>
         <div id="ut-container">
-          <Share />
           <Search />
+          <Share />
           <Capture />
           <Info />
           <GoHome />
