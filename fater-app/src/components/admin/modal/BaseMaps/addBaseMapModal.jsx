@@ -159,7 +159,7 @@ class AddBaseMapModal extends Component {
                   <div className="form-group">
                     <label htmlFor="addModal-maxZoom">Max Zoom</label>
                     <input
-                      type="text"
+                      type="number"
                       id="addModal-maxZoom"
                       className="form-control"
                     />

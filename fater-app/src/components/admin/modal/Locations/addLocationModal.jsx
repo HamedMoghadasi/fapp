@@ -145,7 +145,7 @@ class AddLocationModal extends Component {
                     <div className="form-group col col-6">
                       <label htmlFor="addModal-lat">latitudes </label>
                       <input
-                        type="text"
+                        type="number"
                         id="addModal-lat"
                         className="form-control"
                       />
@@ -153,7 +153,7 @@ class AddLocationModal extends Component {
                     <div className="form-group col col-6">
                       <label htmlFor="addModal-lon">longitudes</label>
                       <input
-                        type="text"
+                        type="number"
                         id="addModal-lon"
                         className="form-control"
                       />

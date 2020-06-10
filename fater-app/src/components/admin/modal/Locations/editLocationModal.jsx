@@ -128,9 +128,9 @@ class EditLocationModal extends Component {
                   </div>
                   <div className="row">
                     <div className="form-group col col-6">
-                      <label htmlFor="editModal-lat">latitudes </label>
+                      <label htmlFor="editModal-lat">latitudes</label>
                       <input
-                        type="text"
+                        type="number"
                         id="editModal-lat"
                         className="form-control"
                       />
@@ -138,7 +138,7 @@ class EditLocationModal extends Component {
                     <div className="form-group col col-6">
                       <label htmlFor="editModal-lon">longitudes</label>
                       <input
-                        type="text"
+                        type="number"
                         id="editModal-lon"
                         className="form-control"
                       />
