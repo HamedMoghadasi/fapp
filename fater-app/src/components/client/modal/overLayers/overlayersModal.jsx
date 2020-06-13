@@ -67,18 +67,18 @@ class OverLayersModal extends Component {
                   >
                     <div className="accordion" id="accordionExample">
                       <div className="card">
-                        <div className="card-header" id="headingOne">
+                        <div
+                          className="card-header collapsed"
+                          id="headingOne"
+                          data-toggle="collapse"
+                          data-target="#collapseOne"
+                          aria-expanded="false"
+                          aria-controls="collapseOne"
+                        >
                           <h5 className="mb-0">
-                            <button
-                              className="btn btn-default  collapsed"
-                              type="button"
-                              data-toggle="collapse"
-                              data-target="#collapseOne"
-                              aria-expanded="false"
-                              aria-controls="collapseOne"
-                            >
+                            <span className="btn btn-default">
                               Vector Layer #1
-                            </button>
+                            </span>
                           </h5>
                         </div>
 
@@ -105,21 +105,23 @@ class OverLayersModal extends Component {
                           </div>
                         </div>
                       </div>
+
                       <div className="card">
-                        <div className="card-header" id="headingTwo">
+                        <div
+                          className="card-header collapsed"
+                          id="headingTwo"
+                          data-toggle="collapse"
+                          data-target="#collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="collapseTwo"
+                        >
                           <h5 className="mb-0">
-                            <button
-                              className="btn btn-default  collapsed"
-                              type="button"
-                              data-toggle="collapse"
-                              data-target="#collapseTwo"
-                              aria-expanded="false"
-                              aria-controls="collapseTwo"
-                            >
+                            <span className="btn btn-default">
                               Vector Layer #2
-                            </button>
+                            </span>
                           </h5>
                         </div>
+
                         <div
                           id="collapseTwo"
                           className="collapse"
@@ -143,21 +145,23 @@ class OverLayersModal extends Component {
                           </div>
                         </div>
                       </div>
+
                       <div className="card">
-                        <div className="card-header" id="headingThree">
+                        <div
+                          className="card-header collapsed"
+                          id="headingThree"
+                          data-toggle="collapse"
+                          data-target="#collapseThree"
+                          aria-expanded="false"
+                          aria-controls="collapseThree"
+                        >
                           <h5 className="mb-0">
-                            <button
-                              className="btn btn-default  collapsed"
-                              type="button"
-                              data-toggle="collapse"
-                              data-target="#collapseThree"
-                              aria-expanded="false"
-                              aria-controls="collapseThree"
-                            >
+                            <span className="btn btn-default">
                               Vector Layer #3
-                            </button>
+                            </span>
                           </h5>
                         </div>
+
                         <div
                           id="collapseThree"
                           className="collapse"

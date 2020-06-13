@@ -5,8 +5,7 @@
 }
 
 #overlayersModal-tab a {
-  padding-bottom: 3px;
-  padding: 5px;
+  padding: 10px;
   font-size: 16px;
   color: white;
   border-radius: 5px 5px 0 0;
@@ -35,4 +34,12 @@
 #defaultOverlayers #accordionExample .card {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+#defaultOverlayers.tab-pane {
+  background: #cecece26 !important;
+}
+
+#overLayersModal .modal-header {
+  padding: 5px 20px !important;
 }

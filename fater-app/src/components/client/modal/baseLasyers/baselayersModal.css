@@ -8,6 +8,9 @@
   object-fit: cover;
 }
 
+#baseLayersModal .card {
+  margin-top: 5px !important;
+}
 #baseLayersModal .card .card-body {
   z-index: 2;
 }
@@ -24,4 +27,8 @@
 
 #baseLayersModal .card-text {
   color: black !important;
+}
+
+#baseLayersModal .modal-header {
+  padding: 5px 20px !important;
 }
