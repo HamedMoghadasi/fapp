@@ -60,11 +60,11 @@
   color: rgba(234, 67, 53, 1);
 }
 
-#ShareButtons-container #copy {
+#ShareButtons-container #copy-url {
   color: rgba(175, 175, 175, 0.8);
   font-size: 27px;
 }
-#ShareButtons-container #copy:hover {
+#ShareButtons-container #copy-url:hover {
   color: rgba(175, 175, 175, 1);
 }
 

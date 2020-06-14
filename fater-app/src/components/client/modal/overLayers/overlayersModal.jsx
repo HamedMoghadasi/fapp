@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import CustomOverLayers from "./customOverLayers/customOverLayers";
 import "./overlayersModal.css";
 
 class OverLayersModal extends Component {
@@ -188,14 +189,9 @@ class OverLayersModal extends Component {
                     </div>
                   </div>
 
-                  <div
-                    className="tab-pane fade"
-                    id="customOverlayers"
-                    role="tabpanel"
-                    aria-labelledby="customOverlayers-tab"
-                  >
-                    <input type="file" accept="application/vnd.geo+json" />
-                  </div>
+                  <CustomOverLayers
+                    refreshComponent={this.props.refreshComponent}
+                  />
                 </div>
               </div>
             </div>

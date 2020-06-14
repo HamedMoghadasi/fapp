@@ -91,7 +91,7 @@ class Share extends Component {
           <div id="copiedAlert">کپی شد</div>
           <FontAwesomeIcon
             icon={faCopy}
-            id="copy"
+            id="copy-url"
             title="Copy link"
             onClick={this.handleCopy}
           />

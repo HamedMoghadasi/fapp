@@ -1,0 +1,15 @@
+#customOverlayers.tab-pane {
+  background: #cecece26 !important;
+}
+
+#customOverlayers-description {
+  font-family: inherit;
+  color: black;
+}
+
+#customOverlayers-description-row {
+  text-align: right;
+  direction: rtl;
+  font-size: 14px;
+  margin: 0 auto;
+}

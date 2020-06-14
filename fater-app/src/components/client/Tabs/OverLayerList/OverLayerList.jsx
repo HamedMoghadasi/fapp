@@ -63,6 +63,7 @@ class OverLayerList extends Component {
                   ) {
                     return (
                       <DragableLayerInfo
+                        refreshComponent={this.props.refreshComponent}
                         key={index}
                         ol_uid={layer.ol_uid}
                         layer={layer}
