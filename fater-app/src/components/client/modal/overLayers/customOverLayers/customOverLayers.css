@@ -6,10 +6,43 @@
   font-family: inherit;
   color: black;
 }
-
+.addFiles-description {
+  font-family: inherit;
+  color: black;
+  font-size: 14px;
+  direction: rtl;
+  text-align: right;
+}
 #customOverlayers-description-row {
   text-align: right;
   direction: rtl;
   font-size: 14px;
   margin: 0 auto;
+}
+#customOverlayers-addBtn {
+  margin-top: 15px;
+}
+#customOverlayers #addedFiles-container {
+  margin-top: 15px;
+}
+
+#customOverlayers #addedFiles-container ul.addedFiles-lists {
+  list-style: none;
+  padding: 0;
+}
+
+#addedFiles-container li.addedFiles-item .addFiles-item-text {
+  float: right;
+  margin-top: 7px;
+}
+#addedFiles-container li.addedFiles-item {
+  border: 1px dashed #a9a9a9;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 10px;
+  text-align: left;
+}
+
+#addedFiles-container li.addedFiles-item button {
+  margin: 0 2.5px;
 }

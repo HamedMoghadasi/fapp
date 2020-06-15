@@ -14,6 +14,7 @@ import SideToolbar from "../components/client/SideToolbar/SideToolbar";
 import UpperToolbar from "../components/client/UpperToolbar/UpperToolbar";
 import TimelineSlider from "../components/client/Timeline/TimelineSlider/TimelineSlider";
 import TimelineControl from "../components/client/Timeline/TimelineControl/TimelineControl";
+import { ToastContainer } from "react-toastify";
 
 import { useLocation } from "react-router";
 import MousePosition from "../components/client/MousePosition/MousePosition";
@@ -41,7 +42,7 @@ const Home: React.FC<IHomeProps> = (props) => {
         </IonHeader>
         <IonContent></IonContent>
         <ManagementArea />
-
+        <ToastContainer />
         <MapContainer location={location.search} />
         <UpperToolbar />
         <SideToolbar />
