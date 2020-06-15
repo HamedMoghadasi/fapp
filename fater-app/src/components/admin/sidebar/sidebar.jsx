@@ -25,8 +25,11 @@ import "./sidebar.css";
 let sidebarClass = false;
 let usersSubmenuClass = "collapse list-unstyled";
 let logsSubmenuClass = "collapse list-unstyled";
+let overLayersSubmenuClass = "collapse list-unstyled";
 let usersAreaExpanded = false;
 let logsAreaExpanded = false;
+let overLayersAreaExpanded = false;
+
 let API_URL = process.env.REACT_APP_API_URL;
 class SideBar extends Component {
   constructor(props) {
@@ -40,6 +43,9 @@ class SideBar extends Component {
       case "logs":
         logsSubmenuClass += " show";
         logsAreaExpanded = true;
+      case "overLayers":
+        overLayersSubmenuClass += " show";
+        overLayersAreaExpanded = true;
       default:
         break;
     }
@@ -189,6 +195,40 @@ class SideBar extends Component {
                   <li>
                     <Link to="/dashboard/Logs/UsersActivity" replace>
                       ورود و خروج کاربر
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a
+                  id="overLayersMenu"
+                  className="masterMenu"
+                  href="#overLayersSubmenu"
+                  data-toggle="collapse"
+                  aria-expanded={overLayersAreaExpanded}
+                >
+                  <IonIcon className="sidebar-item-icon" icon={albums} />
+                  <IonIcon
+                    className="sidebar-masterItem-icon plus"
+                    icon={add}
+                  />
+                  لایه های برداری
+                  <IonIcon
+                    className="sidebar-masterItem-icon minus"
+                    icon={remove}
+                  />
+                </a>
+
+                <ul className={overLayersSubmenuClass} id="overLayersSubmenu">
+                  <li>
+                    <Link to="/dashboard/OverLayers/Customs" replace>
+                      فایل‌ها GeoJSON
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/#" replace>
+                      Heat Maps
                     </Link>
                   </li>
                 </ul>

@@ -17,6 +17,7 @@ import Dashboard from "./pages/admin/template/adminTemplate";
 import AllUsers from "./pages/admin/users/AllUsers";
 import Locations from "./pages/admin/locations/locations";
 import BaseMaps from "./pages/admin/baseMaps/baseMaps";
+import CustomOverLayers from "./pages/admin/overLayers/customOverLayers/customOverLayers";
 import SuspendedUsers from "./pages/admin/users/SuspendedUser";
 import PendingUsers from "./pages/admin/users/PendingUsers";
 import AccessDenied from "./pages/errors/AccessDenied";
@@ -160,6 +161,19 @@ const App: React.FC = () => {
           component={() => {
             return (
               <BaseMaps needAuthentication={true} neededRole={Roles.Admin} />
+            );
+          }}
+          exact={true}
+        />
+
+        <Route
+          path="/dashboard/OverLayers/Customs"
+          component={() => {
+            return (
+              <CustomOverLayers
+                needAuthentication={true}
+                neededRole={Roles.Admin}
+              />
             );
           }}
           exact={true}

@@ -42,6 +42,7 @@ const Home: React.FC<IHomeProps> = (props) => {
         </IonHeader>
         <IonContent></IonContent>
         <ManagementArea />
+
         <ToastContainer />
         <MapContainer location={location.search} />
         <UpperToolbar />
