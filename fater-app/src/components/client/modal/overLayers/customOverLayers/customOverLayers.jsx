@@ -100,6 +100,7 @@ class CustomOverLayers extends Component {
   updateState = (fileId) => {
     console.log("fileId :>> ", fileId);
     this.setState((state) => {
+      // eslint-disable-next-line array-callback-return
       return (state.files = state.files.filter((item) => {
         if (item.id !== fileId) return item;
       }));

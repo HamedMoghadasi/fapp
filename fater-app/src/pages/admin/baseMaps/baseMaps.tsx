@@ -37,6 +37,7 @@ function getData() {
       success: function (response) {
         data = response.data;
         if (data) {
+          // eslint-disable-next-line array-callback-return
           data.map((item: any) => {
             item.createdAt = `${jmoment(item.createdAt).format(
               "jYYYY/jMM/jDD"
