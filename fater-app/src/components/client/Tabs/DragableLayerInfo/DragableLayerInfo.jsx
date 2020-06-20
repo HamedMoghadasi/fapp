@@ -41,18 +41,25 @@ class DragableLayerInfo extends Component {
     map.updateSize();
   };
 
-  handleSettingClick = (e) => {
-    $(e.target)
-      .parent("div")
-      .siblings("div.layers-dragable-item-content")
-      .find("div.layers-dragable-item-content-layerInfo")
-      .toggle("opacity");
+  handleSettingClick = (ol_uid) => {
+    console.log("Draggable e.target :>> ", ol_uid);
 
-    $(e.target)
-      .parent("div")
-      .siblings("div.layers-dragable-item-content")
-      .find("div.layers-dragable-item-content-slider")
-      .toggle("diplay");
+    console.log(
+      " funking div :>> ",
+      $(
+        `#layers-dragable-item[data-oluid="${ol_uid}"] .layers-dragable-item-content .layers-dragable-item-content-slider`
+      )[0]
+    );
+    const sliderDOM = $(
+      `#layers-dragable-item[data-oluid="${ol_uid}"] .layers-dragable-item-content .layers-dragable-item-content-slider`
+    )[0];
+
+    const layerInfoDOM = $(
+      `#layers-dragable-item[data-oluid="${ol_uid}"] .layers-dragable-item-content .layers-dragable-item-content-layerInfo`
+    )[0];
+
+    $(sliderDOM).toggle("opacity");
+    $(layerInfoDOM).toggle("opacity");
   };
 
   componentDidMount = () => {
@@ -134,7 +141,7 @@ class DragableLayerInfo extends Component {
             />
             <IonIcon
               className="item-settings"
-              onClick={(e) => this.handleSettingClick(e)}
+              onClick={() => this.handleSettingClick(this.props.ol_uid)}
               icon={settingsOutline}
             />
             <IonIcon className="item-info" icon={informationOutline} />
