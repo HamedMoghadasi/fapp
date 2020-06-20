@@ -42,14 +42,6 @@ class DragableLayerInfo extends Component {
   };
 
   handleSettingClick = (ol_uid) => {
-    console.log("Draggable e.target :>> ", ol_uid);
-
-    console.log(
-      " funking div :>> ",
-      $(
-        `#layers-dragable-item[data-oluid="${ol_uid}"] .layers-dragable-item-content .layers-dragable-item-content-slider`
-      )[0]
-    );
     const sliderDOM = $(
       `#layers-dragable-item[data-oluid="${ol_uid}"] .layers-dragable-item-content .layers-dragable-item-content-slider`
     )[0];
@@ -60,25 +52,49 @@ class DragableLayerInfo extends Component {
 
     $(sliderDOM).toggle("opacity");
     $(layerInfoDOM).toggle("opacity");
+
+    const isSliderShown = $(sliderDOM).css("opacity") > 0.9;
+
+    if (!isSliderShown) {
+      $(sliderDOM).addClass("sliderIsShown");
+    } else {
+      $(sliderDOM).removeClass("sliderIsShown");
+    }
+  };
+
+  handleSliderDefaultValue = (ol_uid) => {
+    let _map = $("#mapContainer").data("map");
+    const targetLayer = _map.getLayers().array_.filter((layer) => {
+      if (String(layer.ol_uid) === String(ol_uid)) {
+        return layer;
+      }
+    });
+    return targetLayer[0].getOpacity() * 100;
   };
 
   componentDidMount = () => {
-    $(".opacity-handler").ionRangeSlider({
+    const self = this;
+
+    $(`.opacity-handler`).ionRangeSlider({
       skin: "round",
       type: "single",
       hide_min_max: true,
       min: 0,
       max: 100,
-      from: 100,
       hide_from_to: true,
       onFinish: function (value) {},
     });
 
+    var sliderInstance = $(`.opacity-handler`).data("ionRangeSlider");
+    const opacityValue = this.handleSliderDefaultValue(this.props.ol_uid);
+
+    sliderInstance.update({
+      from: opacityValue,
+    });
+
     $(".opacity-handler").on("change", function (e) {
-      const $targetLayerDom = $(e.target)
-        .parent("div")
-        .parent("div")
-        .parent("div");
+      const $targetLayerDom = $(e.target);
+
       const ol_uid = $targetLayerDom.data("oluid");
 
       let _map = $("#mapContainer").data("map");
@@ -116,7 +132,12 @@ class DragableLayerInfo extends Component {
 
           <div className="layers-dragable-item-content">
             <div className="layers-dragable-item-content-slider">
-              <input type="text" className="opacity-handler" />
+              <input
+                type="text"
+                className="opacity-handler"
+                data-oluid={this.props.ol_uid}
+                defaultValue={this.handleSliderDefaultValue(this.props.ol_uid)}
+              />
             </div>
             <div className="layers-dragable-item-content-layerInfo">
               <b>
