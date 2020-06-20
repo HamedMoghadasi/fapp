@@ -58,9 +58,9 @@
 }
 .searchResult-li {
   direction: rtl;
-  background: rgba(255, 255, 255, 0.5);
+  background: #ffffff12;
   text-align: initial;
-  font-size: 14px;
+  font-size: 17px;
   padding: 5px;
   padding-right: 10px;
   line-height: 2em;
@@ -69,10 +69,10 @@
   margin: 0 auto;
   margin-bottom: 6px;
   cursor: pointer;
-  color: black;
+  color: #dedede;
 }
 .searchResult-li:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(150, 150, 150, 0.4);
 }
 
 .closeSearchArea {
@@ -103,7 +103,7 @@
   right: 100%;
   border-radius: 15px;
   padding: 5px;
-  width: 290px;
+  width: 340px;
   font-size: 30px;
   color: white;
 }
@@ -121,7 +121,7 @@
   text-align: right;
   direction: rtl;
   border-radius: 10px;
-  height: 35px;
+  height: 36px;
   background: rgba(22, 24, 24, 0.8);
   border: none;
   color: white;
