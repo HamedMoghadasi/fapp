@@ -92,22 +92,25 @@ class DragableLayerInfo extends Component {
       from: opacityValue,
     });
 
-    $(".opacity-handler").on("change", function (e) {
-      const $targetLayerDom = $(e.target);
+    $(`.opacity-handler[data-oluid="${this.props.ol_uid}"]`).on(
+      "change",
+      function (e) {
+        // const $targetLayerDom = $(e.target);
+        // const ol_uid = $targetLayerDom.data("oluid");
+        const ol_uid = self.props.ol_uid;
 
-      const ol_uid = $targetLayerDom.data("oluid");
+        let _map = $("#mapContainer").data("map");
 
-      let _map = $("#mapContainer").data("map");
+        _map.getLayers().array_.map((layer) => {
+          if (String(layer.ol_uid) === String(ol_uid)) {
+            layer.setOpacity($(this).prop("value") / 100);
+          }
+        });
 
-      _map.getLayers().array_.map((layer) => {
-        if (String(layer.ol_uid) === String(ol_uid)) {
-          layer.setOpacity($(this).prop("value") / 100);
-        }
-      });
-
-      $("#mapContainer").data("map", _map);
-      _map.updateSize();
-    });
+        $("#mapContainer").data("map", _map);
+        _map.updateSize();
+      }
+    );
   };
   render() {
     return (
