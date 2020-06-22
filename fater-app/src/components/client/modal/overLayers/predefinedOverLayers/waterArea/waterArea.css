@@ -1,0 +1,107 @@
+.waterArea-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "waterArea-grid-container-firstItem waterArea-grid-container-secondeItem" "waterArea-grid-container-thirdItem waterArea-grid-container-fourthItem";
+}
+.waterArea-grid-container-Item-ImageWrapper {
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  position: absolute;
+  border-radius: 10px;
+}
+.waterArea-grid-container-firstItem-ImageWrapper {
+  background-image: url("../../../../../../assets/images/map-image.jpg");
+}
+.waterArea-grid-container-secondeItem-ImageWrapper {
+  background-image: url("../../../../../../assets/images/map-image.jpg");
+}
+.waterArea-grid-container-thirdItem-ImageWrapper {
+  background-image: url("../../../../../../assets/images/map-image.jpg");
+}
+.waterArea-grid-container-fourthItem-ImageWrapper {
+  background-image: url("../../../../../../assets/images/map-image.jpg");
+}
+.waterArea-grid-container-Item-ImageWrapper:hover {
+  opacity: 0.35;
+}
+.waterArea-grid-container-firstItem:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.waterArea-grid-container-item span {
+  z-index: 2;
+  font-size: 18px;
+  font-weight: 100;
+}
+.waterArea-grid-container-item {
+  position: relative;
+  margin: 2.5px 7px;
+  height: 150px;
+  display: grid;
+  margin: 2.5px 7px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .waterArea-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 1px 1px;
+    grid-template-areas:
+      "waterArea-grid-container-firstItem"
+      "waterArea-grid-container-secondeItem"
+      "waterArea-grid-container-thirdItem" "waterArea-grid-container-fourthItem";
+  }
+}
+
+.firstItem-sublist {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.secondItem-sublist {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.thirdItem-sublist {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.fourthItem-sublist {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.firstItem-sublist .accordion {
+  text-align: right;
+  direction: rtl;
+}
+.secondItem-sublist .accordion {
+  text-align: right;
+  direction: rtl;
+}
+.thirdItem-sublist .accordion {
+  text-align: right;
+  direction: rtl;
+}
+.fourthItem-sublist .accordion {
+  text-align: right;
+  direction: rtl;
+}
+
+.backToOverLayer {
+  padding: 5px;
+  margin: 0.5px;
+  border-radius: 8px;
+}
