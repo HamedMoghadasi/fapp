@@ -1,0 +1,35 @@
+.MuiTabs-root {
+  background: rgba(23, 162, 184, 0.15) !important;
+  border-radius: 0 8px 8px 0;
+  min-width: 190px !important;
+}
+
+.MuiTypography-root,
+.MuiTab-root {
+  font-family: "byekani", "Helvetica", "Arial", sans-serif !important;
+}
+
+button.MuiTab-root {
+  outline: none !important;
+}
+
+.PrivateTabIndicator-colorSecondary-5 {
+  background-color: #17a2b8 !important;
+}
+
+.PrivateTabIndicator-vertical-6 {
+  left: 0 !important;
+}
+
+div[role="tabpanel"] button.verticalTabAddLayerBtn {
+  position: absolute;
+  left: 21px;
+  bottom: 21px;
+  opacity: 0.9;
+}
+
+div[role="tabpanel"] {
+  overflow-y: scroll;
+  background: rgba(211, 211, 211, 0.25);
+  border-radius: 8px 0 0 8px;
+}
