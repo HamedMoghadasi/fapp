@@ -1,0 +1,302 @@
+.App {
+  width: 100%;
+  height: 0vh;
+  background-color: rgb(129, 129, 129);
+  display: flex;
+  align-items: flex-end;
+  /* background: url('./download.png'); */
+}
+.container {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+  text-align: center;
+}
+/* Counter */
+.counterWrapper {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  padding: 0 5px;
+  position: relative;
+  background-color: rgba(32, 32, 32, 0.85);
+  border-radius: 12px;
+}
+.yearWrapper {
+  width: 30%;
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 0.5px solid rgba(189, 187, 187, 0.377);
+  box-sizing: border-box;
+}
+.up,
+.down {
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.4s;
+  padding: 0px 10px;
+  color: #e9e9e9;
+}
+.up > svg,
+.down > svg {
+  font-size: 1.5em;
+}
+.up:hover,
+.down:hover {
+  color: gray;
+}
+.year {
+  width: 80%;
+  font-size: 20px;
+  text-align: center;
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+  background: rgba(0, 132, 255, 0.3);
+  border-radius: 7px;
+}
+.year:focus {
+  outline: none;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+/* Animation */
+.icon-wrapper > svg {
+  font-size: 3rem !important;
+  color: white;
+}
+.icon-wrapper > .icon-animation {
+  font-size: 1.5rem !important;
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translate(50%, -20%);
+}
+.animationSelection-wrapper {
+  background-color: rgba(32, 32, 32, 0.85) !important;
+  min-height: 100px;
+  margin-bottom: 15px;
+  padding: 25px 20px;
+  position: relative;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.close-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 5px 15px;
+  font-size: 20px !important;
+  color: #fafafa;
+}
+.submitButton {
+  align-self: flex-end;
+  color: white !important;
+  border-color: white !important;
+  font-size: 0.9em !important;
+}
+.date-pickers-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.DatePicker__input {
+  background-color: transparent !important;
+  color: white;
+  font-size: 16px !important;
+}
+.date-pickers-wrapper .DatePicker__input {
+  width: 200px;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+.date-pickers-wrapper .animation-text {
+  color: white;
+  font-size: 16px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+/* Slider */
+.MuiSlider-mark,
+.MuiSlider-mark.MuiSlider-markActive {
+  color: #fff !important;
+  height: 30px !important;
+}
+.MuiTooltip-tooltip {
+  font-size: 13px !important;
+}
+.MuiSlider-markLabel {
+  margin-top: 15px;
+  color: rgb(240, 240, 240) !important;
+}
+.track-blue {
+  background-color: #37aeee2a !important;
+}
+.MuiSlider-thumb::after {
+  content: "|||" !important;
+  transform: rotate(45deg);
+}
+/* .MuiSlider-thumb::before{
+  content: '|';
+  width: 100%;
+  height: 2px;
+  top: 100%;
+  left: 0;
+  transform: rotate(45deg);
+  color : blue;
+  font-size: 30px;
+} */
+
+/* Select */
+.select-wrapper {
+  height: 100%;
+  background-color: transparent;
+  min-width: 50px !important;
+  border-left: 0.5px solid rgba(189, 187, 187, 0.377) !important;
+}
+.select-wrapper .MuiInputBase-root.MuiInput-root {
+  height: 100%;
+}
+.select-wrapper .MuiSelect-icon {
+  top: 0;
+  right: 50%;
+  transform: translate(50%, -20%) rotate(180deg);
+}
+.select-label {
+  color: white !important;
+  direction: rtl !important;
+  text-align: right !important;
+}
+.MuiInputLabel-shrink {
+  transform: translate(0, 1.5px) scale(0.85) !important;
+  transform-origin: top right !important;
+}
+.select-wrapper .MuiInputLabel-formControl {
+  right: 5px;
+}
+#select-time {
+  color: white !important;
+  padding: 10px 0;
+}
+.MuiInput-underline:after {
+  border-color: white !important;
+}
+.select-wrapper .MuiSvgIcon-root.MuiSelect-icon {
+  color: white;
+}
+.image-timeRange {
+  width: 30px;
+  color: white;
+  /* background: white; */
+}
+ul.MuiList-root.MuiMenu-list {
+  background-color: rgba(32, 32, 32, 0.85);
+  padding: 0;
+}
+li.MuiButtonBase-root.MuiListItem-root {
+  background-color: rgba(32, 32, 32, 0.85);
+  padding: 8px 0;
+}
+.image-animation {
+  width: 35px;
+  padding: 0 5px;
+  color: white;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+.container-phone {
+  width: 100%;
+  height: 70px;
+  display: none;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
+}
+.date-picker-mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgba(32, 32, 32, 0.85);
+  padding: 0 12px;
+  border-radius: 10px;
+}
+@media (max-width: 992px) {
+  .container {
+    display: none !important;
+  }
+  .container-phone {
+    display: flex !important;
+  }
+}

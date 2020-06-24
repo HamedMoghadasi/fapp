@@ -12,8 +12,9 @@ import MapContainer from "../containers/map-container";
 import ManagementArea from "../components/client/ManagementArea/ManagementArea";
 import SideToolbar from "../components/client/SideToolbar/SideToolbar";
 import UpperToolbar from "../components/client/UpperToolbar/UpperToolbar";
-import TimelineSlider from "../components/client/Timeline/TimelineSlider/TimelineSlider";
-import TimelineControl from "../components/client/Timeline/TimelineControl/TimelineControl";
+import TimeLine from "../components/client/Moduls/TimeLine/TimeLine";
+// import TimelineSlider from "../components/client/Timeline/TimelineSlider/TimelineSlider";
+// import TimelineControl from "../components/client/Timeline/TimelineControl/TimelineControl";
 import { ToastContainer } from "react-toastify";
 
 import { useLocation } from "react-router";
@@ -48,8 +49,9 @@ const Home: React.FC<IHomeProps> = (props) => {
         <UpperToolbar />
         <SideToolbar />
         <MousePosition />
-        <TimelineSlider />
-        <TimelineControl />
+        <TimeLine
+          onChange={(data: any) => console.log("timeline changed : >> ", data)}
+        />
       </IonPage>
     );
   }

@@ -1,0 +1,109 @@
+import React, { useState, useEffect } from "react";
+import Popper from "@material-ui/core/Popper";
+import Fade from "@material-ui/core/Fade";
+import Paper from "@material-ui/core/Paper";
+import CloseIcon from "@material-ui/icons/Close";
+import Button from "@material-ui/core/Button";
+import DatePicker from "react-modern-calendar-datepicker";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import Tooltip from "@material-ui/core/Tooltip";
+
+const persianDate = require("persian-date");
+
+export default function AnimationBtn(props) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+  const handleClickAnimation = (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpen(!open);
+  };
+
+  const closeAnimation = () => {
+    setOpen(false);
+  };
+  const [selectedDayRange1, setSelectedDayRange1] = useState(null);
+  const [selectedDayRange2, setSelectedDayRange2] = useState(null);
+  const [selectedDayRange, setSelectedDayRange] = useState({
+    from: selectedDayRange1,
+    to: selectedDayRange2,
+  });
+
+  const selectDateRange = (value) => {
+    setSelectedDayRange2(value);
+    props.setDateRange([{ from: selectedDayRange1, to: value }]);
+    setOpen(false);
+    console.log([selectedDayRange]);
+  };
+  // useEffect(() => {
+  //   if (!open) {
+  //     setSelectedDayRange({
+  //       from: null,
+  //       to: null,
+  //     });
+  //     props.setDateRange([]);
+  //   }
+  // }, [open]);
+  return (
+    <>
+      <div
+        className="icon-wrapper"
+        onClick={handleClickAnimation}
+        style={props.disableAnimation === true ? { display: "none " } : {}}
+      >
+        <ArrowDropUpIcon className="icon-animation" />
+        <Tooltip title="بازه زمانی">
+          <img
+            src="timeline/assets/images/calendar.png"
+            alt="بازه زمانی"
+            className="image-animation"
+          />
+        </Tooltip>
+      </div>
+      <Popper open={open} anchorEl={anchorEl} placement={"top"} transition>
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps} timeout={350}>
+            <Paper className="animationSelection-wrapper">
+              <CloseIcon className="close-icon" onClick={closeAnimation} />
+              <div className="date-pickers-wrapper">
+                <span className="animation-text">از</span>
+                <DatePicker
+                  value={selectedDayRange1}
+                  onChange={setSelectedDayRange1}
+                  shouldHighlightWeekends
+                  locale="fa"
+                  placeholder="بازه زمانی انتخاب کنید"
+                  maximumDate={{
+                    year: new persianDate().year(),
+                    month: new persianDate().month(),
+                    day: new persianDate().date(),
+                  }}
+                />
+                <span className="animation-text">تا</span>
+                <DatePicker
+                  value={selectedDayRange2}
+                  onChange={selectDateRange}
+                  shouldHighlightWeekends
+                  locale="fa"
+                  placeholder="بازه زمانی انتخاب کنید"
+                  maximumDate={{
+                    year: new persianDate().year(),
+                    month: new persianDate().month(),
+                    day: new persianDate().date(),
+                  }}
+                />
+              </div>
+              <Button
+                variant="outlined"
+                size="small"
+                className="submitButton"
+                onClick={selectDateRange}
+              >
+                تایید
+              </Button>
+            </Paper>
+          </Fade>
+        )}
+      </Popper>
+    </>
+  );
+}

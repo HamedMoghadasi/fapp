@@ -1,0 +1,1 @@
+npm i @material-ui/core @material-ui/icons react-modern-calendar-datepicker persian-date

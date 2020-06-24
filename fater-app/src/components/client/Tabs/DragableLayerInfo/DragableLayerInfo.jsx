@@ -8,7 +8,8 @@ import {
   close,
   eyeOff,
 } from "ionicons/icons";
-
+import "ion-rangeslider/js/ion.rangeSlider";
+import "ion-rangeslider/css/ion.rangeSlider.css";
 import $ from "jquery";
 
 class DragableLayerInfo extends Component {
