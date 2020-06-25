@@ -13,7 +13,7 @@ class PredefinedOverLayers extends Component {
         role="tabpanel"
         aria-labelledby="defaultOverlayers-tab"
       >
-        <WaterArea />
+        <WaterArea refreshComponent={this.props.refreshComponent} />
         {/* <div className="accordion" id="accordionExample">
           <div className="card">
             <div

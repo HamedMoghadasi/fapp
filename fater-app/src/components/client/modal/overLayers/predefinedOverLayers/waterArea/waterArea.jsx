@@ -17,10 +17,10 @@ class WaterArea extends Component {
   render() {
     return (
       <>
-        <FirstSubList />
-        <SecondSubList />
-        <ThirdSubList />
-        <FourthSubList />
+        <FirstSubList refreshComponent={this.props.refreshComponent} />
+        <SecondSubList refreshComponent={this.props.refreshComponent} />
+        <ThirdSubList refreshComponent={this.props.refreshComponent} />
+        <FourthSubList refreshComponent={this.props.refreshComponent} />
 
         <div className="waterArea-grid-container">
           <div

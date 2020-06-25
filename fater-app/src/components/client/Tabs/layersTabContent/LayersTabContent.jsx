@@ -8,6 +8,7 @@ import BaseLayersModal from "../../modal/baseLasyers/baselayersModal";
 
 class LayersTabContent extends Component {
   refreshComponent = () => {
+    console.log("refresh called");
     this.forceUpdate();
   };
 

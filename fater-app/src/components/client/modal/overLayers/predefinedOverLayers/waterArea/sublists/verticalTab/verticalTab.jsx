@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 import "./verticalTab.css";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, handleAddLayer, ...other } = props;
 
   return (
     <div
@@ -24,7 +24,10 @@ function TabPanel(props) {
           <Typography>{children}</Typography>
         </Box>
       )}
-      <button className="btn btn-success mx-1 mb-1 mt-auto verticalTabAddLayerBtn">
+      <button
+        className="btn btn-success mx-1 mb-1 mt-auto verticalTabAddLayerBtn"
+        onClick={handleAddLayer}
+      >
         + اضافه کردن
       </button>
     </div>
@@ -83,7 +86,12 @@ export default function VerticalTabs(props) {
       </Tabs>
       {props.configuration.tabs.map((tab, index) => {
         return (
-          <TabPanel value={value} index={index} key={index}>
+          <TabPanel
+            value={value}
+            index={index}
+            key={index}
+            handleAddLayer={tab.handleAddLayer}
+          >
             {tab.content}
           </TabPanel>
         );

@@ -61,7 +61,9 @@ class OverLayersModal extends Component {
                   </li>
                 </ul>
                 <div className="tab-content" id="overlayersModal-tab-content">
-                  <PredefinedOverLayers />
+                  <PredefinedOverLayers
+                    refreshComponent={this.props.refreshComponent}
+                  />
                   <CustomOverLayers
                     refreshComponent={this.props.refreshComponent}
                   />

@@ -62,7 +62,10 @@ class DragableLayerInfo extends Component {
       $(sliderDOM).removeClass("sliderIsShown");
     }
   };
-
+  handlerefreshInputChange = () => {
+    console.log("change called");
+    this.props.refreshComponent();
+  };
   handleSliderDefaultValue = (ol_uid) => {
     let _map = $("#mapContainer").data("map");
     const targetLayer = _map.getLayers().array_.filter((layer) => {
@@ -116,6 +119,11 @@ class DragableLayerInfo extends Component {
   render() {
     return (
       <li className="layers-dragable-li" data-oluid={this.props.ol_uid}>
+        <input
+          className="refreshDragables"
+          type="hidden"
+          onKeyPress={this.handlerefreshInputChange}
+        />
         <div
           id="layers-dragable-item"
           className={this.props.invisible}
