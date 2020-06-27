@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import Tooltip from "@material-ui/core/Tooltip";
+const persianDate = require("persian-date");
 
 const useStyles = makeStyles((theme) => ({
   root: {
     // width: 300 + theme.spacing(3) * 2,
-    width: "73%",
+    width: "70%",
     height: "100%",
     // marginTop: "70px",
   },
@@ -16,97 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CustomeThumbComponent(props) {
-  return (
-    <span {...props}>
-      <svg className="dragger-container" width="1128" height="83">
-        <g
-          className="timeline-dragger draggerA react-draggable"
-          transform="translate(0,38) scale(0.7)"
-          style={{
-            touchAction: "none",
-            cursor: "pointer",
-            display: "block",
-          }}
-        >
-          <path
-            fill="#ccc"
-            stroke="#333"
-            stroke-width="1px"
-            d="M5.706 47.781 C2.77 47.781.39 45.402.39 42.467 v-16.592 l11.391-12.255 11.391-12.255 11.391 12.255 11.391 12.255 v16.592 c0 2.935-2.38 5.314-5.316 5.314 h-34.932z"
-          ></path>
-          <rect
-            pointer-events="none"
-            fill="#515151"
-            width="3"
-            height="20"
-            x="15"
-            y="18"
-          ></rect>
-          <rect
-            pointer-events="none"
-            fill="#515151"
-            width="3"
-            height="20"
-            x="21"
-            y="18"
-          ></rect>
-          <rect
-            pointer-events="none"
-            fill="#515151"
-            width="3"
-            height="20"
-            x="27"
-            y="18"
-          ></rect>
-        </g>
-      </svg>
-    </span>
-  );
-}
 const PersianMonth = (value) => {
-  let month = "";
-  switch (value) {
-    case 1:
-      month = "فروردین";
-      break;
-    case 2:
-      month = "اردیبهشت";
-      break;
-    case 3:
-      month = "خرداد";
-      break;
-    case 4:
-      month = "تیر";
-      break;
-    case 5:
-      month = "مرداد";
-      break;
-    case 6:
-      month = "شهریور";
-      break;
-    case 7:
-      month = "مهر";
-      break;
-    case 8:
-      month = "آبان";
-      break;
-    case 9:
-      month = "آذر";
-      break;
-    case 10:
-      month = "دی";
-      break;
-    case 11:
-      month = "بهمن";
-      break;
-    case 12:
-      month = "اسفند";
-      break;
-    default:
-      month = "فروردین";
-      break;
-  }
+  const month = persianDate.rangeName().months[value - 1];
   return month;
 };
 // Style Slider
@@ -161,18 +73,21 @@ let PrettoSlider = withStyles({
 export default function CustomizedSlider(props) {
   const TimeScale = props.timescale;
   const classes = useStyles();
-
   // Slider
   const [sliderValue, setSliderValue] = useState(0);
   useEffect(() => {
-    if (TimeScale === 0) {
-      setSliderValue(props.currentYear);
-    } else if (TimeScale === 1) {
-      setSliderValue(props.currentMonth);
-    } else if (TimeScale === 2) {
-      setSliderValue(props.currentDay);
-    } else if (TimeScale === 3) {
-      setSliderValue(props.currentHour);
+    if (props.DateRange.length !== 0) {
+      return;
+    } else {
+      if (TimeScale === 0) {
+        setSliderValue(props.currentYear);
+      } else if (TimeScale === 1) {
+        setSliderValue(props.currentMonth);
+      } else if (TimeScale === 2) {
+        setSliderValue(props.currentDay);
+      } else if (TimeScale === 3) {
+        setSliderValue(props.currentHour);
+      }
     }
   }, [
     TimeScale,
@@ -181,6 +96,7 @@ export default function CustomizedSlider(props) {
     props.currentDay,
     props.currentMonth,
     props.currentHour,
+    props.DateRange,
   ]);
   // Date Range
   useEffect(() => {
@@ -188,21 +104,70 @@ export default function CustomizedSlider(props) {
       if (TimeScale === 0) {
         setSliderValue([
           props.DateRange[0].from.year,
+          props.DateRange[0].from.year,
           props.DateRange[0].to.year,
         ]);
       } else if (TimeScale === 1) {
         setSliderValue([
+          props.DateRange[0].from.month,
           props.DateRange[0].from.month,
           props.DateRange[0].to.month,
         ]);
       } else if (TimeScale === 2) {
         setSliderValue([
           props.DateRange[0].from.day,
+          props.DateRange[0].from.day,
           props.DateRange[0].to.day,
         ]);
+      } else if (TimeScale === 3) {
+        setSliderValue(props.currentHour);
       }
     }
-  }, [TimeScale, props.DateRange]);
+  }, [TimeScale, props.DateRange, props.currentHour]);
+  // Animation step by step
+  useEffect(() => {
+    if (props.isPlayingAnimation === true) {
+      sliderAnimation();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.isPlayingAnimation]);
+  const sliderAnimation = () => {
+    setTimeout(() => {
+      setSliderValue([
+        sliderValue[0],
+        (sliderValue[1] = sliderValue[1] + 1),
+        sliderValue[2],
+      ]);
+      if (sliderValue[1] < sliderValue[2]) {
+        sliderAnimation();
+      } else {
+        if (props.DateRange.length !== 0) {
+          if (TimeScale === 0) {
+            setSliderValue([
+              props.DateRange[0].from.year,
+              props.DateRange[0].from.year,
+              props.DateRange[0].to.year,
+            ]);
+          } else if (TimeScale === 1) {
+            setSliderValue([
+              props.DateRange[0].from.month,
+              props.DateRange[0].from.month,
+              props.DateRange[0].to.month,
+            ]);
+          } else if (TimeScale === 2) {
+            setSliderValue([
+              props.DateRange[0].from.day,
+              props.DateRange[0].from.day,
+              props.DateRange[0].to.day,
+            ]);
+          } else if (TimeScale === 3) {
+            setSliderValue(props.currentHour);
+          }
+        }
+        props.setIsPlayingAnimation(false);
+      }
+    }, 1000);
+  };
   const changeSliderValue = (value) => {
     if (props.DateRange.length !== 0) {
       setSliderValue(value[1]);
@@ -256,6 +221,7 @@ export default function CustomizedSlider(props) {
   // Tooltip
   function ValueLabelComponent(propsComponent) {
     const { children, open, value } = propsComponent;
+    const dataIndex = Object.entries(children.props)[4][1];
     if (TimeScale === 0) {
       const valueString = value.toString();
       let month = "";
@@ -290,32 +256,86 @@ export default function CustomizedSlider(props) {
         </Tooltip>
       );
     } else if (TimeScale === 2) {
-      return (
-        <Tooltip
-          open={open}
-          enterTouchDelay={0}
-          placement="top"
-          title={props.currentYear + "-" + props.currentMonth + "-" + value}
-        >
-          {children}
-        </Tooltip>
-      );
-    } else if (TimeScale === 3) {
+      let dateRange = 1;
+      if (props.DateRange.length !== 0) {
+        Object.values(props.DateRange[0])
+          .reverse()
+          .filter((date) =>
+            date.day === value ? (dateRange = date.month) : null
+          );
+      }
       return (
         <Tooltip
           open={open}
           enterTouchDelay={0}
           placement="top"
           title={
-            props.currentYear +
-            "-" +
-            props.currentMonth +
-            "-" +
-            props.currentDay +
-            " " +
-            value +
-            ":" +
-            "00"
+            props.DateRange.length === 0 ? (
+              <div style={{ direction: "rtl" }}>
+                {value +
+                  "-" +
+                  PersianMonth(props.currentMonth) +
+                  "-" +
+                  props.currentYear}
+              </div>
+            ) : props.DateRange.length !== 0 && dataIndex !== 1 ? (
+              <div style={{ direction: "rtl" }}>
+                {value +
+                  "-" +
+                  PersianMonth(dateRange) +
+                  "-" +
+                  props.currentYear}
+              </div>
+            ) : (
+              ""
+            )
+          }
+        >
+          {children}
+        </Tooltip>
+      );
+    } else if (TimeScale === 3) {
+      let dateRange = 1;
+      if (props.DateRange.length !== 0) {
+        Object.values(props.DateRange[0])
+          .reverse()
+          .filter((date) =>
+            date.day === value ? (dateRange = date.month) : null
+          );
+      }
+      return (
+        <Tooltip
+          open={open}
+          enterTouchDelay={0}
+          placement="top"
+          title={
+            props.DateRange.length === 0 ? (
+              <div style={{ direction: "rtl" }}>
+                {value +
+                  ":" +
+                  "00" +
+                  " " +
+                  props.currentDay +
+                  "-" +
+                  PersianMonth(props.currentMonth) +
+                  "-" +
+                  props.currentYear}
+              </div>
+            ) : props.DateRange.length !== 0 && dataIndex !== 1 ? (
+              <div style={{ direction: "rtl" }}>
+                {value +
+                  ":" +
+                  "00" +
+                  " " +
+                  props.currentDay +
+                  "-" +
+                  PersianMonth(dateRange) +
+                  "-" +
+                  props.currentYear}
+              </div>
+            ) : (
+              ""
+            )
           }
         >
           {children}
@@ -332,11 +352,14 @@ export default function CustomizedSlider(props) {
     <div className={classes.root}>
       <PrettoSlider
         classes={{
-          track: props.DateRange.length !== 0 ? "track-blue" : "",
+          track:
+            props.DateRange.length !== 0 && TimeScale !== 3
+              ? "track-yellow"
+              : "",
         }}
         // ThumbComponent={CustomeThumbComponent}
         ValueLabelComponent={ValueLabelComponent}
-        valueLabelDisplay="auto"
+        valueLabelDisplay={props.DateRange.length !== 0 ? "on" : "auto"}
         aria-label="custom thumb label"
         min={
           TimeScale === 0
@@ -381,6 +404,7 @@ export default function CustomizedSlider(props) {
             : null
         }
         value={sliderValue}
+        key={sliderValue}
         onChange={(e, value) => changeSliderValue(value)}
       />
     </div>

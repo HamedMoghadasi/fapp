@@ -2,11 +2,14 @@ import React, { Component } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faVideo, faFilm } from "@fortawesome/free-solid-svg-icons";
+import $ from "jquery";
 
 import "./PhotoVideo.css";
+import Snapshot from "./snapshot/snapshot";
 
 class PhotoVideo extends Component {
   state = {};
+
   render() {
     return (
       <>
@@ -114,7 +117,7 @@ class PhotoVideo extends Component {
                 role="tabpanel"
                 aria-labelledby="cropImage-tab"
               >
-                1
+                <Snapshot />
               </div>
               <div
                 className="tab-pane fade"

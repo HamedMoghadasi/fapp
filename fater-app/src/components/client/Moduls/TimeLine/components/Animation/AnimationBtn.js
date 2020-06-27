@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Popper from "@material-ui/core/Popper";
 import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
 import CloseIcon from "@material-ui/icons/Close";
-import Button from "@material-ui/core/Button";
 import DatePicker from "react-modern-calendar-datepicker";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import Tooltip from "@material-ui/core/Tooltip";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 
 const persianDate = require("persian-date");
 
@@ -17,22 +17,19 @@ export default function AnimationBtn(props) {
     setAnchorEl(event.currentTarget);
     setOpen(!open);
   };
-
+  const handlePlayAnimation = () => {
+    props.playAnimation();
+  };
   const closeAnimation = () => {
     setOpen(false);
   };
   const [selectedDayRange1, setSelectedDayRange1] = useState(null);
   const [selectedDayRange2, setSelectedDayRange2] = useState(null);
-  const [selectedDayRange, setSelectedDayRange] = useState({
-    from: selectedDayRange1,
-    to: selectedDayRange2,
-  });
 
   const selectDateRange = (value) => {
     setSelectedDayRange2(value);
     props.setDateRange([{ from: selectedDayRange1, to: value }]);
     setOpen(false);
-    console.log([selectedDayRange]);
   };
   // useEffect(() => {
   //   if (!open) {
@@ -46,17 +43,26 @@ export default function AnimationBtn(props) {
   return (
     <>
       <div
-        className="icon-wrapper"
+        className="icon-wrapper-animation"
         onClick={handleClickAnimation}
         style={props.disableAnimation === true ? { display: "none " } : {}}
       >
         <ArrowDropUpIcon className="icon-animation" />
-        <Tooltip title="بازه زمانی">
+        <Tooltip title="انتخاب بازه زمانی">
           <img
             src="timeline/assets/images/calendar.png"
             alt="بازه زمانی"
             className="image-animation"
           />
+        </Tooltip>
+      </div>
+      <div
+        className="timeline-btn-animation"
+        onClick={handlePlayAnimation}
+        style={props.disableAnimation === true ? { display: "none " } : {}}
+      >
+        <Tooltip title="نمایش بازه زمانی">
+          <PlayCircleOutlineIcon className="btn-animation-icon" />
         </Tooltip>
       </div>
       <Popper open={open} anchorEl={anchorEl} placement={"top"} transition>
@@ -92,14 +98,14 @@ export default function AnimationBtn(props) {
                   }}
                 />
               </div>
-              <Button
+              {/* <Button
                 variant="outlined"
                 size="small"
                 className="submitButton"
                 onClick={selectDateRange}
               >
                 تایید
-              </Button>
+              </Button> */}
             </Paper>
           </Fade>
         )}

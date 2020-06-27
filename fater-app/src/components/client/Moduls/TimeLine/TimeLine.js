@@ -8,35 +8,13 @@ import DateCounter from "./components/DateCounter/DateCounter";
 import DatePickerMobile from "./components/DatePickerMobile/DatePickerMobile";
 
 const persianDate = require("persian-date");
-const daysOfMonth = (value) => {
-  let days = 31;
-  switch (value) {
-    case 7:
-      days = 30;
-      break;
-    case 8:
-      days = 30;
-      break;
-    case 9:
-      days = 30;
-      break;
-    case 10:
-      days = 30;
-      break;
-    case 11:
-      days = 30;
-      break;
-    case 12:
-      days = 29;
-      break;
-    default:
-      break;
-  }
+const daysOfMonth = (year, month) => {
+  const days = new persianDate([year, month]).daysInMonth();
   return days;
 };
 function TimeLine(props) {
   const minYear = 1380;
-  const maxYear = 1399;
+  const maxYear = new persianDate().year();
   // Counter
   const [currentYear, setcurrentYear] = useState(new persianDate().year());
   const [currentMonth, setcurrentMonth] = useState(new persianDate().month());
@@ -54,7 +32,7 @@ function TimeLine(props) {
         setcurrentDay(new persianDate().date());
       }
     }
-  }, [currentDay, currentMonth, currentYear]);
+  }, [currentDay, currentMonth, currentYear, maxYear]);
   // Get value from slider
   const getSliderValue = (value) => {
     if (timeScale === 0) {
@@ -73,12 +51,23 @@ function TimeLine(props) {
   useEffect(() => {
     if (DateRange.length !== 0) {
       setTimeScale(2);
+      const date = DateRange[0].from;
+      setcurrentDay(date.day);
+      setcurrentMonth(date.month);
+      setcurrentYear(date.year);
     }
   }, [DateRange]);
+  const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
+  const playAnimation = () => {
+    if (DateRange.length !== 0) {
+      setIsPlayingAnimation(true);
+      props.onChange(DateRange);
+    }
+  };
   // Select Time
   const [timeScale, setTimeScale] = useState(2);
-  const handleChange = (event) => {
-    setTimeScale(event.target.value);
+  const handleChange = (value) => {
+    setTimeScale(value);
   };
   // Component
   useEffect(() => {
@@ -90,9 +79,9 @@ function TimeLine(props) {
     });
   }, [currentYear, currentMonth, currentDay, props, currentHour]);
   return (
-    <div className="App">
-      <div className="container">
-        <div className="counterWrapper">
+    <div className="timeline-app">
+      <div className="timeline-container">
+        <div className="timeline-counterWrapper">
           {/* Date Counter */}
           <DateCounter
             daysOfMonth={daysOfMonth}
@@ -110,6 +99,7 @@ function TimeLine(props) {
           <AnimationBtn
             setDateRange={setDateRange}
             disableAnimation={props.disableAnimation}
+            playAnimation={playAnimation}
           />
           {/* Select Time */}
           <SelectTimeRange
@@ -126,7 +116,7 @@ function TimeLine(props) {
           countMonths={currentYear < maxYear ? 12 : new persianDate().month()}
           countDays={
             currentYear < maxYear || currentMonth < new persianDate().month()
-              ? daysOfMonth(currentMonth)
+              ? daysOfMonth(currentYear, currentMonth)
               : new persianDate().date()
           }
           currentMonth={currentMonth}
@@ -134,13 +124,17 @@ function TimeLine(props) {
           currentHour={currentHour}
           getSliderValue={getSliderValue}
           DateRange={DateRange}
+          isPlayingAnimation={isPlayingAnimation}
+          setIsPlayingAnimation={setIsPlayingAnimation}
         />
       </div>
-      <div className="container-phone">
+      <div className="timeline-container-phone">
         <DatePickerMobile
           setcurrentYear={setcurrentYear}
           setcurrentMonth={setcurrentMonth}
           setcurrentDay={setcurrentDay}
+          daysOfMonth={daysOfMonth}
+          minYear={minYear}
         />
       </div>
     </div>

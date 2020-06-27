@@ -1,12 +1,50 @@
-.App {
+/* body{
+  margin: 0;
+  box-sizing: border-box;
+} */
+
+/*
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.App-link {
+  color: #61dafb;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+.timeline-app {
   width: 100%;
   height: 0vh;
-  background-color: rgb(129, 129, 129);
   display: flex;
   align-items: flex-end;
-  /* background: url('./download.png'); */
+  box-sizing: border-box;
 }
-.container {
+
+.timeline-container {
   width: 100%;
   height: 70px;
   display: flex;
@@ -17,8 +55,8 @@
   text-align: center;
 }
 /* Counter */
-.counterWrapper {
-  width: 20%;
+.timeline-counterWrapper {
+  width: 26%;
   height: 100%;
   display: flex;
   padding: 0 5px;
@@ -37,23 +75,23 @@
   border-right: 0.5px solid rgba(189, 187, 187, 0.377);
   box-sizing: border-box;
 }
-.up,
-.down {
+.yearWrapper .up,
+.yearWrapper .down {
   cursor: pointer;
   font-size: 14px;
   transition: 0.4s;
   padding: 0px 10px;
   color: #e9e9e9;
 }
-.up > svg,
-.down > svg {
+.yearWrapper .up > svg,
+.yearWrapper .down > svg {
   font-size: 1.5em;
 }
-.up:hover,
-.down:hover {
+.yearWrapper .up:hover,
+.yearWrapper .down:hover {
   color: gray;
 }
-.year {
+.yearWrapper .year {
   width: 80%;
   font-size: 20px;
   text-align: center;
@@ -63,11 +101,11 @@
   background: rgba(0, 132, 255, 0.3);
   border-radius: 7px;
 }
-.year:focus {
+.yearWrapper .year:focus {
   outline: none;
 }
 
-.icon-wrapper {
+.icon-wrapper-animation {
   display: flex;
   align-items: center;
   height: 100%;
@@ -78,11 +116,11 @@
   left: 0;
 }
 /* Animation */
-.icon-wrapper > svg {
+.icon-wrapper-animation > svg {
   font-size: 3rem !important;
   color: white;
 }
-.icon-wrapper > .icon-animation {
+.icon-wrapper-animation > .icon-animation {
   font-size: 1.5rem !important;
   color: white;
   position: absolute;
@@ -101,7 +139,7 @@
   flex-direction: column;
   align-items: center;
 }
-.close-icon {
+.animationSelection-wrapper .close-icon {
   position: absolute;
   top: 0;
   right: 0;
@@ -110,7 +148,7 @@
   font-size: 20px !important;
   color: #fafafa;
 }
-.submitButton {
+.animationSelection-wrapper .submitButton {
   align-self: flex-end;
   color: white !important;
   border-color: white !important;
@@ -163,8 +201,8 @@ input[type="number"] {
   margin-top: 15px;
   color: rgb(240, 240, 240) !important;
 }
-.track-blue {
-  background-color: #37aeee2a !important;
+.track-yellow {
+  background-color: #ffd9002d !important;
 }
 .MuiSlider-thumb::after {
   content: "|||" !important;
@@ -180,23 +218,32 @@ input[type="number"] {
   color : blue;
   font-size: 30px;
 } */
+.MuiSlider-thumb[data-index="1"] {
+  background-color: rgb(241, 201, 20) !important;
+}
 
 /* Select */
-.select-wrapper {
+.timeline-select-wrapper {
   height: 100%;
   background-color: transparent;
   min-width: 50px !important;
   border-left: 0.5px solid rgba(189, 187, 187, 0.377) !important;
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.select-wrapper .MuiInputBase-root.MuiInput-root {
+.timeline-select-wrapper .MuiInputBase-root.MuiInput-root {
   height: 100%;
 }
-.select-wrapper .MuiSelect-icon {
+.timeline-select-wrapper .MuiSelect-icon {
   top: 0;
   right: 50%;
   transform: translate(50%, -20%) rotate(180deg);
 }
-.select-label {
+.timeline-select-wrapper .select-label {
   color: white !important;
   direction: rtl !important;
   text-align: right !important;
@@ -205,7 +252,7 @@ input[type="number"] {
   transform: translate(0, 1.5px) scale(0.85) !important;
   transform-origin: top right !important;
 }
-.select-wrapper .MuiInputLabel-formControl {
+.timeline-select-wrapper .MuiInputLabel-formControl {
   right: 5px;
 }
 #select-time {
@@ -215,7 +262,7 @@ input[type="number"] {
 .MuiInput-underline:after {
   border-color: white !important;
 }
-.select-wrapper .MuiSvgIcon-root.MuiSelect-icon {
+.timeline-select-wrapper .MuiSvgIcon-root.MuiSelect-icon {
   color: white;
 }
 .image-timeRange {
@@ -229,51 +276,30 @@ ul.MuiList-root.MuiMenu-list {
 }
 li.MuiButtonBase-root.MuiListItem-root {
   background-color: rgba(32, 32, 32, 0.85);
-  padding: 8px 0;
+  padding: 8px 10px;
 }
-.image-animation {
+.icon-wrapper-animation .image-animation {
   width: 35px;
   padding: 0 5px;
   color: white;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8 {
+  top: 0;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.timeline-btn-animation {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  padding: 0 4px;
+  cursor: pointer;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.timeline-btn-animation .btn-animation-icon {
+  font-size: 37px !important;
+  color: rgb(241, 201, 2);
 }
 
 /* Responsive */
-.container-phone {
+.timeline-container-phone {
   width: 100%;
   height: 70px;
   display: none;
@@ -293,10 +319,20 @@ li.MuiButtonBase-root.MuiListItem-root {
   border-radius: 10px;
 }
 @media (max-width: 992px) {
-  .container {
+  .timeline-container {
     display: none !important;
   }
-  .container-phone {
+  .timeline-container-phone {
     display: flex !important;
   }
+}
+.change-date-mobile-wrapper {
+  display: flex;
+  align-items: center;
+}
+.change-date-mobile-wrapper .change-icon-mobile {
+  color: white;
+  font-size: 32px;
+  margin-left: 10px;
+  cursor: pointer;
 }
