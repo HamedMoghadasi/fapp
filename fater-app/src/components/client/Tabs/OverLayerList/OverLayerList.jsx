@@ -41,6 +41,8 @@ class OverLayerList extends Component {
               }
             });
           });
+
+        map.updateSize();
       },
     });
     $("#overlayer-sortable-list").disableSelection();

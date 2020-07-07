@@ -18,7 +18,6 @@ class BaseLayerList extends Component {
     setTimeout(() => {
       this.setState({ map: $("#mapContainer").data("map") });
     }, 1000);
-    console.log();
 
     $("#baselayer-sortable-list").sortable({
       axis: "y",
