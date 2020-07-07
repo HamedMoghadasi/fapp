@@ -37,6 +37,7 @@ class BaseLayerList extends Component {
           .forEach((ol_uid, index) => {
             map.getLayers().forEach((layer) => {
               if (layer.ol_uid === ol_uid) {
+                console.log("layer :>> ", layer);
                 layer.setZIndex((index + 1) * 10);
               }
             });

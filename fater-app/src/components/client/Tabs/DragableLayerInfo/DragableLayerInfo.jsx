@@ -12,6 +12,22 @@ import "ion-rangeslider/js/ion.rangeSlider";
 import "ion-rangeslider/css/ion.rangeSlider.css";
 import $ from "jquery";
 
+import chroma from "chroma-js";
+
+function getColors() {
+  return [chroma.random(), chroma.random(), chroma.random(), chroma.random()];
+}
+
+function getColorsPalet() {
+  var scale = chroma.scale(getColors()).colors(254);
+
+  var _palet = scale.map((element, index) => {
+    return chroma(scale[index]).rgba();
+  });
+
+  return _palet;
+}
+
 class DragableLayerInfo extends Component {
   handleVisiblity = (e) => {
     let map = $("#mapContainer").data("map");
@@ -62,10 +78,12 @@ class DragableLayerInfo extends Component {
       $(sliderDOM).removeClass("sliderIsShown");
     }
   };
+
   handlerefreshInputChange = () => {
     console.log("change called");
     this.props.refreshComponent();
   };
+
   handleSliderDefaultValue = (ol_uid) => {
     let _map = $("#mapContainer").data("map");
     const targetLayer = _map.getLayers().array_.filter((layer) => {
@@ -76,8 +94,106 @@ class DragableLayerInfo extends Component {
     return targetLayer[0].getOpacity() * 100;
   };
 
+  hasColors = () => {
+    if (this.props.layer && this.props.layer.get("colors")) {
+      return true;
+    }
+    return false;
+  };
+
+  dragableItemClass = () => {
+    return this.hasColors()
+      ? `${this.props.invisible} heatmap`
+      : `${this.props.invisible}`;
+  };
+
+  handleChangeColorDOM = () => {
+    let _map = $("#mapContainer").data("map");
+    var rasterSource = this.props.layer.getSource();
+    // const layer = this.props.layer;
+    // console.log("this.props.layer :>> ", layer.values_["colors"]);
+    // layer.values_["colors"] = ["green", "#ffffff", "red", "blue"];
+    // console.log("this.props.layer :>> ", layer.values_["colors"]);
+    rasterSource.listeners_.beforeoperations = [];
+    rasterSource.on("beforeoperations", function (event) {
+      event.data.colors = getColorsPalet();
+    });
+
+    rasterSource.refresh();
+    _map.updateSize();
+  };
+
+  handleColorChange = (e, index, id) => {
+    var colors = this.props.layer.get("colors");
+    // console.log("e.target.value :>> ", e.target.value);
+    // document.getElementById(id).value = e.target.value;
+    // console.log("id :>> ", id);
+    colors[index] = $(e.target).val();
+    this.props.layer.set("colors", colors);
+    console.log("colors :>> ", colors);
+  };
+
+  handleColorPicker = () => {
+    if (this.props.layer && this.props.layer.get("colors")) {
+      let colors = this.props.layer.get("colors");
+      console.log("---colors :>> ", colors);
+      let ol_uid = this.props.layer.ol_uid;
+      return (
+        <div className="heatmap-colorpicker">
+          {colors.map((color, index) => {
+            let id = `heatmap-colorpicker-${ol_uid}-${index}`;
+            return (
+              <input
+                type="color"
+                key={index}
+                onChange={(e) => this.handleColorChange(e, index, id)}
+                onLoad={() => console.log("loaded")}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+  };
+
+  handleColorbar = () => {
+    if (this.props.layer && this.props.layer.get("colors")) {
+      const colors = this.props.layer.get("colors");
+      console.log("====colors :>> ", colors);
+      var scale = chroma.scale(colors).colors(254);
+      return (
+        <div className="heatmap-colorbar">
+          {scale.map((color, index) => {
+            return (
+              <span
+                key={index}
+                className="heatmap-colorbar-step"
+                style={{ backgroundColor: `${color}` }}
+              ></span>
+            );
+          })}
+          <span className="domain-min">0</span>
+          <span className="domain-med">0.5</span>
+          <span className="domain-max">1</span>
+
+          <button id="changeColor" onClick={this.handleChangeColorDOM}>
+            Change it
+          </button>
+        </div>
+      );
+    }
+  };
+
   componentDidMount = () => {
     const self = this;
+
+    console.log("umad :>> ", this.props.layer);
+    if (this.props.layer && this.props.layer.get("colors")) {
+      const colors = this.props.layer.get("colors");
+      colors.map((color, index) => {
+        console.log(color);
+      });
+    }
 
     $(`.opacity-handler`).ionRangeSlider({
       skin: "round",
@@ -116,6 +232,7 @@ class DragableLayerInfo extends Component {
       }
     );
   };
+
   render() {
     return (
       <li className="layers-dragable-li" data-oluid={this.props.ol_uid}>
@@ -126,7 +243,7 @@ class DragableLayerInfo extends Component {
         />
         <div
           id="layers-dragable-item"
-          className={this.props.invisible}
+          className={this.dragableItemClass()}
           data-oluid={this.props.ol_uid}
         >
           <div id="layers-dragable-item-display">
@@ -150,6 +267,9 @@ class DragableLayerInfo extends Component {
                 data-oluid={this.props.ol_uid}
                 defaultValue={this.handleSliderDefaultValue(this.props.ol_uid)}
               />
+              <div className="layer-dragable-item-colorPicker">
+                {this.handleColorPicker()}
+              </div>
             </div>
             <div className="layers-dragable-item-content-layerInfo">
               <b>
@@ -164,8 +284,10 @@ class DragableLayerInfo extends Component {
                   ? this.props.layer.get("description")
                   : `-- no information --`}
               </i>
+              <i>{this.handleColorbar()}</i>
             </div>
           </div>
+
           <div className="layers-dragable-item-settings">
             <IonIcon
               className="item-close"

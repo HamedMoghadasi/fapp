@@ -13,10 +13,11 @@ class First extends Component {
     $(parentDOM).slideDown("fast");
     $(currentDOM).slideUp("fast");
   };
+
   configuration = {
     tabs: [
       {
-        label: "دریای خزر",
+        label: "CO",
         content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
       استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
       در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
@@ -26,200 +27,188 @@ class First extends Component {
       دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
         handleAddLayer: () => {
           const mapContainer = $("#mapContainer").data("map");
-          console.log("دریای خزر اضافه شد");
-
-          var minVgi = 0;
-          var maxVgi = 0.25;
-          var bins = 10;
-
-          var palet = chroma.scale(["yellow", "008ae5"]);
-
-          /**
-           * Calculate the Vegetation Greenness Index (VGI) from an input pixel.  This
-           * is a rough estimate assuming that pixel values correspond to reflectance.
-           * @param {Array<number>} pixel An array of [R, G, B, A] values.
-           * @return {number} The VGI value for the given pixel.
-           */
-          function vgi(pixel) {
-            var r = pixel[0] / 255;
-            var g = pixel[1] / 255;
-            var b = pixel[2] / 255;
-            return (2 * g - r - b) / (2 * g + r + b);
-          }
-          var scale = chroma
-            .scale(["red", "orange", "yellow", "green", "blue", "purple"])
-            .colors(25);
-
-          function summarize(value, counts) {
-            var min = counts.min;
-            var max = counts.max;
-            var num = counts.values.length;
-            if (value < min) {
-              // do nothing
-            } else if (value >= max) {
-              counts.values[num - 1] += 1;
-            } else {
-              var index = Math.floor((value - min) / counts.delta);
-              counts.values[index] += 1;
-            }
-          }
-
-          /**
-           * Use aerial imagery as the input data for the raster source.
-           */
-
-          var key = "nEpI4PLiQ94chsicl5PF";
-          var attributions =
-            '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> ' +
-            '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
-
           var aerial = new XYZ({
-            attributions: attributions,
             url:
-              "https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=" +
-              key,
-            maxZoom: 20,
+              "http://192.168.21.2/qweasd/wgis/heat/sentinel-5p_No2/{z}/{x}/{-y}.png",
+            maxZoom: 15,
             crossOrigin: "",
           });
 
-          var aerial2 = new XYZ({
-            attributions: attributions,
-            url:
-              "http://192.168.21.2/qweasd/heat/sentinel-5p_No2/{z}/{x}/{-y}.png",
-            maxZoom: 5,
-            crossOrigin: "",
-          });
-          /**
-           * Create a raster source where pixels with VGI values above a threshold will
-           * be colored green.
-           */
           var raster = new RasterSource({
             sources: [aerial],
-            /**
-             * Run calculations on pixel data.
-             * @param {Array} pixels List of pixels (one per source).
-             * @param {Object} data User data object.
-             * @return {Array} The output pixel.
-             */
             operation: function (pixels, data) {
               var pixel = pixels[0];
+              var colors = data.colors;
 
-              // if (pixel[0] !== 0 || pixel[1] !== 0 || pixel[2] !== 0 || pixel[3] !== 0) {
-              //   console.log("pixel :>> ", pixel);
-              // }
-              var value = vgi(pixel);
-              summarize(value, data.counts);
-
-              // if (pixel[0] !== 0 || pixel[1] !== 0 || pixel[2] !== 0 || pixel[3] !== 0) {
-              //   const pixel2 = pixel;
-
-              //   // var t =
-              //   //   (pixel2[0] +
-              //   //     256 * pixel2[1] +
-              //   //     256 * 256 * pixel2[2] +
-              //   //     256 * 256 * 256 * pixel2[3]) /
-              //   //   10000000000;
-              //   // console.log("pixel :>> ", pixel);
-              //   // pixel[0] = t * 255;
-              //   // pixel[1] = 0;
-              //   // pixel[2] = 0;
-              //   // pixel[3] = 255;
-
-              //   // pixel[0] = 255;
-              //   // pixel[1] = 0;
-              //   // pixel[2] = 0;
-              //   // pixel[3] = pixel2[0];
-              // }
-
-              if (value >= data.threshold) {
-                if (value >= 0.1 && value < 0.2) {
-                  pixel[0] = 255;
-                  pixel[1] = 0;
-                  pixel[2] = 0;
-                  pixel[3] = 127.5;
-                } else if (value >= 0.2 && value < 0.3) {
-                  pixel[0] = 0;
-                  pixel[1] = 0;
-                  pixel[2] = 255;
-                  pixel[3] = 127.5;
-                } else if (value >= 0.3) {
-                  pixel[0] = 0;
-                  pixel[1] = 255;
-                  pixel[2] = 0;
-                  pixel[3] = 127.5;
+              if (
+                pixel[0] !== 0 ||
+                pixel[1] !== 0 ||
+                pixel[2] !== 0 ||
+                pixel[3] !== 0
+              ) {
+                const pixel2 = pixel;
+                const color = colors[255 - pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
                 } else {
-                  // console.log(value);
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
                 }
               } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
                 pixel[3] = 0;
               }
+
               return pixel;
             },
-            lib: {
-              vgi: vgi,
-              summarize: summarize,
-            },
           });
-          raster.set("threshold", 0.1);
 
-          function createCounts(min, max, num) {
-            var values = new Array(num);
-            for (var i = 0; i < num; ++i) {
-              values[i] = 0;
-            }
-            return {
-              min: min,
-              max: max,
-              values: values,
-              delta: (max - min) / num,
-            };
+          function getColors() {
+            var scale = chroma
+              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
           }
 
           raster.on("beforeoperations", function (event) {
-            event.data.counts = createCounts(minVgi, maxVgi, bins);
-            event.data.threshold = raster.get("threshold");
+            event.data.colors = getColors();
           });
 
-          console.log(
-            "mapContainer.getLayers().array_ :>> ",
-            mapContainer.getLayers().array_
-          );
-          mapContainer.getLayers().array_.push(
-            new TileLayer({
-              source: aerial,
-              // opacity: 0.1,
-            })
-          );
-          mapContainer.getLayers().array_.push(
-            new ImageLayer({
-              source: raster,
-            })
-          );
-          console.log(
-            "mapContainer.getLayers().array_ :>> ",
-            mapContainer.getLayers().array_
-          );
+          raster.on("afteroperations", function (event) {});
 
-          console.log("this.props :>> ", this.props);
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "CO -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
+          heatmap.setZIndex(10000);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
           this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 3) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
         },
       },
       {
-        label: "دریاچه مهارلو",
+        label: "HCHO",
         content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
       استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
       در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
       نیاز، و خت تایپ به پایان رسد و
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
-        handleAddLayer: function () {
-          console.log("دریاچه مهارلو  اضافه شد");
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "http://192.168.21.2/qweasd/wgis/HCHO_map/hcho_1587254400/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (
+                pixel[0] !== 0 ||
+                pixel[1] !== 0 ||
+                pixel[2] !== 0 ||
+                pixel[3] !== 0
+              ) {
+                const pixel2 = pixel;
+                const color = colors[255 - pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#80ff80", "#85d4d5", "#0066cc", "#ffffff"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "HCHO -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#80ff80", "#85d4d5", "#0066cc", "#ffffff"]);
+
+          heatmap.setZIndex(10000);
+
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
         },
       },
       {
-        label: "دریاچه ارومیه",
+        label: "NO2",
         content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
       استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
       در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
@@ -231,12 +220,87 @@ class First extends Component {
       دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
-        handleAddLayer: function () {
-          console.log("دریاچه ارومیه اضافه شد");
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "http://192.168.21.2/qweasd/wgis/NO2_map/no2_1586908800/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (
+                pixel[0] !== 0 ||
+                pixel[1] !== 0 ||
+                pixel[2] !== 0 ||
+                pixel[3] !== 0
+              ) {
+                const pixel2 = pixel;
+                const color = colors[255 - pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {
+            console.log("operation finished :>>");
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "NO2 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
+          heatmap.setZIndex(10000);
+
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
         },
       },
       {
-        label: "دریاچه تار",
+        label: "O3",
         content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
       استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
       در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
@@ -244,24 +308,172 @@ class First extends Component {
       کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شنا ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
-        handleAddLayer: function () {
-          console.log("دریاچه تار اضافه شد");
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "http://192.168.21.2/qweasd/wgis/O3_map/o3_1587081600/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (
+                pixel[0] !== 0 ||
+                pixel[1] !== 0 ||
+                pixel[2] !== 0 ||
+                pixel[3] !== 0
+              ) {
+                const pixel2 = pixel;
+                const color = colors[255 - pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {
+            console.log("operation finished :>>");
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "O3 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.setZIndex(10000);
+
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
         },
       },
       {
-        label: "دریاچه حوض سلطان",
+        label: "SO2",
         content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
       استفاده از طراحان گرافیک است، چاپگرها و متونی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
       زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
       دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
-        handleAddLayer: function () {
-          console.log("دریاچه حوض سلطان اضافه شد");
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "http://192.168.21.2/qweasd/wgis/SO2_map/so2_1587081600/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (
+                pixel[0] !== 0 ||
+                pixel[1] !== 0 ||
+                pixel[2] !== 0 ||
+                pixel[3] !== 0
+              ) {
+                const pixel2 = pixel;
+                const color = colors[255 - pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {
+            console.log("operation finished :>>");
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SO2 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.setZIndex(10000);
+
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
         },
       },
       {
-        label: "دریاچه گهر",
+        label: "Soil Moisture",
         content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
       استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
       در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
@@ -271,12 +483,86 @@ class First extends Component {
       دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
-        handleAddLayer: function () {
-          console.log("دریاچه گهر اضافه شد");
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "http://192.168.21.2/qweasd/wgis/Soil_moisture/sm_bu_1588277393/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (
+                pixel[0] !== 0 ||
+                pixel[1] !== 0 ||
+                pixel[2] !== 0 ||
+                pixel[3] !== 0
+              ) {
+                const pixel2 = pixel;
+                const color = colors[255 - pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {
+            console.log("operation finished :>>");
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "Soil Moisture -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.setZIndex(10000);
+
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
         },
       },
       {
-        label: "دریاچه میقان اراک",
+        label: "UV AI",
         content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
       استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
       در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
@@ -285,8 +571,82 @@ class First extends Component {
       جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را
       برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
       زبان فارسی ایجاد کرد، در این ص`,
-        handleAddLayer: function () {
-          console.log("دریاچه میقان اراک اضافه شد");
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "http://192.168.21.2/qweasd/wgis/UV_AI/uvai_1586908800/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (
+                pixel[0] !== 0 ||
+                pixel[1] !== 0 ||
+                pixel[2] !== 0 ||
+                pixel[3] !== 0
+              ) {
+                const pixel2 = pixel;
+                const color = colors[255 - pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {
+            console.log("operation finished :>>");
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "UV AI -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.setZIndex(10000);
+
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
         },
       },
     ],

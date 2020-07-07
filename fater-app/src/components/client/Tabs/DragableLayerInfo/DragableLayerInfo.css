@@ -8,7 +8,9 @@
   margin-bottom: 5px;
   height: 60px;
 }
-
+#layers-dragable-item.heatmap {
+  height: 90px;
+}
 ul .layers-dragable-li {
   list-style: none;
   padding-left: 0;
@@ -89,4 +91,45 @@ ul .layers-dragable-li {
 .layers-dragable-item-content-slider {
   display: none;
   margin-top: -8px;
+}
+.heatmap-colorbar .domain-min {
+  position: absolute;
+  left: 0;
+  font-size: 11px;
+  bottom: 3px;
+  font-weight: 600;
+}
+.heatmap-colorbar .domain-med {
+  position: absolute;
+  right: 25%;
+  left: 25%;
+  text-align: center;
+  font-size: 11px;
+  bottom: 3px;
+  font-weight: 600;
+}
+.heatmap-colorbar .domain-max {
+  position: absolute;
+  right: 0;
+  font-size: 11px;
+  bottom: 3px;
+  font-weight: 600;
+}
+.heatmap-colorbar {
+  width: 102%;
+  white-space: nowrap;
+  position: relative;
+  display: inline-block;
+  top: 4px;
+  padding-bottom: 15px;
+}
+
+.heatmap-colorbar-step {
+  display: inline-block;
+  height: 12px;
+  width: 0.4%;
+}
+
+.heatmap-colorpicker > input {
+  margin: 10px 10px;
 }

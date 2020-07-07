@@ -5,6 +5,7 @@ import "jquery-ui-bundle";
 
 import "./OverLayerList.css";
 import TileLayer from "ol/layer/Tile";
+import { Image as ImageLayer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 
 window.jQuery = $;
@@ -58,9 +59,11 @@ class OverLayerList extends Component {
                 .reverse()
                 .map((layer, index) => {
                   if (
-                    layer instanceof VectorLayer &&
+                    (layer instanceof VectorLayer ||
+                      layer instanceof ImageLayer) &&
                     layer.get("name") !== "Draw vector layer"
                   ) {
+                    console.log("layer :>> ", layer);
                     return (
                       <DragableLayerInfo
                         refreshComponent={this.props.refreshComponent}
