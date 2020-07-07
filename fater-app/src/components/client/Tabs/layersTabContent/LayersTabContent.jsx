@@ -7,8 +7,12 @@ import OverLayersModal from "../../modal/overLayers/overlayersModal";
 import BaseLayersModal from "../../modal/baseLasyers/baselayersModal";
 
 class LayersTabContent extends Component {
+  state = { refresh: 0 };
   refreshComponent = () => {
     console.log("refresh called");
+    this.setState((state) => ({
+      refresh: state.refresh + 1,
+    }));
     this.forceUpdate();
   };
 

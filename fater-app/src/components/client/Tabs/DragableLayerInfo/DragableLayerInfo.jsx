@@ -59,18 +59,18 @@ class DragableLayerInfo extends Component {
   };
 
   handleSettingClick = (ol_uid) => {
-    const sliderDOM = $(
+    let sliderDOM = $(
       `#layers-dragable-item[data-oluid="${ol_uid}"] .layers-dragable-item-content .layers-dragable-item-content-slider`
     )[0];
 
-    const layerInfoDOM = $(
+    let layerInfoDOM = $(
       `#layers-dragable-item[data-oluid="${ol_uid}"] .layers-dragable-item-content .layers-dragable-item-content-layerInfo`
     )[0];
 
     $(sliderDOM).toggle("opacity");
     $(layerInfoDOM).toggle("opacity");
 
-    const isSliderShown = $(sliderDOM).css("opacity") > 0.9;
+    let isSliderShown = $(sliderDOM).css("opacity") > 0.9;
 
     if (!isSliderShown) {
       $(sliderDOM).addClass("sliderIsShown");
@@ -80,7 +80,6 @@ class DragableLayerInfo extends Component {
   };
 
   handlerefreshInputChange = () => {
-    console.log("change called");
     this.props.refreshComponent();
   };
 
@@ -110,10 +109,6 @@ class DragableLayerInfo extends Component {
   handleChangeColorDOM = () => {
     let _map = $("#mapContainer").data("map");
     var rasterSource = this.props.layer.getSource();
-    // const layer = this.props.layer;
-    // console.log("this.props.layer :>> ", layer.values_["colors"]);
-    // layer.values_["colors"] = ["green", "#ffffff", "red", "blue"];
-    // console.log("this.props.layer :>> ", layer.values_["colors"]);
     rasterSource.listeners_.beforeoperations = [];
     rasterSource.on("beforeoperations", function (event) {
       event.data.colors = getColorsPalet();
@@ -130,13 +125,11 @@ class DragableLayerInfo extends Component {
     // console.log("id :>> ", id);
     colors[index] = $(e.target).val();
     this.props.layer.set("colors", colors);
-    console.log("colors :>> ", colors);
   };
 
   handleColorPicker = () => {
     if (this.props.layer && this.props.layer.get("colors")) {
       let colors = this.props.layer.get("colors");
-      console.log("---colors :>> ", colors);
       let ol_uid = this.props.layer.ol_uid;
       return (
         <div className="heatmap-colorpicker">
@@ -147,7 +140,6 @@ class DragableLayerInfo extends Component {
                 type="color"
                 key={index}
                 onChange={(e) => this.handleColorChange(e, index, id)}
-                onLoad={() => console.log("loaded")}
               />
             );
           })}
@@ -159,7 +151,6 @@ class DragableLayerInfo extends Component {
   handleColorbar = () => {
     if (this.props.layer && this.props.layer.get("colors")) {
       const colors = this.props.layer.get("colors");
-      console.log("====colors :>> ", colors);
       var scale = chroma.scale(colors).colors(254);
       return (
         <div className="heatmap-colorbar">
@@ -176,26 +167,16 @@ class DragableLayerInfo extends Component {
           <span className="domain-med">0.5</span>
           <span className="domain-max">1</span>
 
-          <button id="changeColor" onClick={this.handleChangeColorDOM}>
+          {/* <button id="changeColor" onClick={this.handleChangeColorDOM}>
             Change it
-          </button>
+          </button> */}
         </div>
       );
     }
   };
 
-  componentDidMount = () => {
-    const self = this;
-
-    console.log("umad :>> ", this.props.layer);
-    if (this.props.layer && this.props.layer.get("colors")) {
-      const colors = this.props.layer.get("colors");
-      colors.map((color, index) => {
-        console.log(color);
-      });
-    }
-
-    $(`.opacity-handler`).ionRangeSlider({
+  componentDidUpdate = () => {
+    $(`#opacityhandler-${this.props.ol_uid}`).ionRangeSlider({
       skin: "round",
       type: "single",
       hide_min_max: true,
@@ -205,32 +186,36 @@ class DragableLayerInfo extends Component {
       onFinish: function (value) {},
     });
 
-    var sliderInstance = $(`.opacity-handler`).data("ionRangeSlider");
+    var sliderInstance = $(`#opacityhandler-${this.props.ol_uid}`).data(
+      "ionRangeSlider"
+    );
+
     const opacityValue = this.handleSliderDefaultValue(this.props.ol_uid);
 
     sliderInstance.update({
       from: opacityValue,
     });
+  };
 
-    $(`.opacity-handler[data-oluid="${this.props.ol_uid}"]`).on(
-      "change",
-      function (e) {
-        // const $targetLayerDom = $(e.target);
-        // const ol_uid = $targetLayerDom.data("oluid");
-        const ol_uid = self.props.ol_uid;
+  componentDidMount = () => {
+    const self = this;
 
-        let _map = $("#mapContainer").data("map");
+    $(`#opacityhandler-${this.props.ol_uid}`).on("change", function (e) {
+      // const $targetLayerDom = $(e.target);
+      // const ol_uid = $targetLayerDom.data("oluid");
+      const ol_uid = self.props.ol_uid;
 
-        _map.getLayers().array_.map((layer) => {
-          if (String(layer.ol_uid) === String(ol_uid)) {
-            layer.setOpacity($(this).prop("value") / 100);
-          }
-        });
+      let _map = $("#mapContainer").data("map");
 
-        $("#mapContainer").data("map", _map);
-        _map.updateSize();
-      }
-    );
+      _map.getLayers().array_.map((layer) => {
+        if (String(layer.ol_uid) === String(ol_uid)) {
+          layer.setOpacity($(this).prop("value") / 100);
+        }
+      });
+
+      $("#mapContainer").data("map", _map);
+      _map.updateSize();
+    });
   };
 
   render() {
@@ -263,13 +248,13 @@ class DragableLayerInfo extends Component {
             <div className="layers-dragable-item-content-slider">
               <input
                 type="text"
+                id={`opacityhandler-${this.props.ol_uid}`}
                 className="opacity-handler"
                 data-oluid={this.props.ol_uid}
-                defaultValue={this.handleSliderDefaultValue(this.props.ol_uid)}
               />
-              <div className="layer-dragable-item-colorPicker">
+              {/* <div className="layer-dragable-item-colorPicker">
                 {this.handleColorPicker()}
-              </div>
+              </div> */}
             </div>
             <div className="layers-dragable-item-content-layerInfo">
               <b>
