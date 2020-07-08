@@ -14,12 +14,12 @@ import $ from "jquery";
 
 import chroma from "chroma-js";
 
-function getColors() {
-  return [chroma.random(), chroma.random(), chroma.random(), chroma.random()];
+function getColors(layer) {
+  return layer.get("colors");
 }
 
-function getColorsPalet() {
-  var scale = chroma.scale(getColors()).colors(254);
+function getColorsPalet(layer) {
+  var scale = chroma.scale(getColors(layer)).colors(254);
 
   var _palet = scale.map((element, index) => {
     return chroma(scale[index]).rgba();
@@ -120,29 +120,73 @@ class DragableLayerInfo extends Component {
     _map.updateSize();
   };
 
-  handleColorChange = (e, index, id) => {
+  handleColorChange = (e, index, inputId) => {
+    document.getElementById(`${inputId}`).value = $(e.target).val();
+
+    $(`#${inputId}`).parent("span").css("background-color", $(e.target).val());
     var colors = this.props.layer.get("colors");
-    // document.getElementById(id).value = e.target.value;
     colors[index] = $(e.target).val();
     this.props.layer.set("colors", colors);
   };
 
+  handleColorContainerClick = (inputId) => {
+    $(`#${inputId}`).click();
+  };
+  handleChangeColorSubmit = (ol_uid) => {
+    let _map = $("#mapContainer").data("map");
+    var rasterSource = this.props.layer.getSource();
+    rasterSource.listeners_.beforeoperations = [];
+    var layer = this.props.layer;
+    rasterSource.on("beforeoperations", function (event) {
+      event.data.colors = getColorsPalet(layer);
+    });
+
+    var i = 0;
+    var _refreshComponent = this.props.refreshComponent;
+    var timer = setInterval(function () {
+      if (i === 5) clearInterval(timer);
+      rasterSource.refresh();
+      _map.updateSize();
+      _refreshComponent();
+      i++;
+    }, 500);
+  };
   handleColorPicker = () => {
     if (this.props.layer && this.props.layer.get("colors")) {
       let colors = this.props.layer.get("colors");
+
       let ol_uid = this.props.layer.ol_uid;
+
       return (
         <div className="heatmap-colorpicker">
           {colors.map((color, index) => {
-            let id = `heatmap-colorpicker-${ol_uid}-${index}`;
+            let inputId = `heatmap-colorpicker-${ol_uid}-${index}`;
             return (
-              <input
-                type="color"
-                key={index}
-                onChange={(e) => this.handleColorChange(e, index, id)}
-              />
+              <>
+                <span
+                  class="heatmap-colorpicker-container"
+                  id={`heatmap-colorpicker-container-${ol_uid}-${index}`}
+                  onClick={() => this.handleColorContainerClick(inputId)}
+                  style={{ backgroundColor: `${color}` }}
+                >
+                  <input
+                    type="color"
+                    key={index}
+                    id={inputId}
+                    onChange={(e) => this.handleColorChange(e, index, inputId)}
+                    value={color}
+                  />
+                </span>
+              </>
             );
           })}
+          <input
+            type="button"
+            className="heatmap-colorpicker-applyBtn"
+            id={`heatmap-colorpicker-applyBtn-${ol_uid}`}
+            value="اعمال تغییرات"
+            onClick={() => this.handleChangeColorSubmit(ol_uid)}
+          />
         </div>
       );
     }
@@ -271,9 +315,9 @@ class DragableLayerInfo extends Component {
                 data-oluid={this.props.ol_uid}
                 defaultValue={this.handleSliderDefaultValue(this.props.ol_uid)}
               />
-              {/* <div className="layer-dragable-item-colorPicker">
+              <div className="layer-dragable-item-colorPicker">
                 {this.handleColorPicker()}
-              </div> */}
+              </div>
             </div>
             <div className="layers-dragable-item-content-layerInfo">
               <b>
