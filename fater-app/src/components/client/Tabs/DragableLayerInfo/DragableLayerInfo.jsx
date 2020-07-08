@@ -176,19 +176,7 @@ class DragableLayerInfo extends Component {
   };
 
   componentDidUpdate = () => {
-    $(`#opacityhandler-${this.props.ol_uid}`).ionRangeSlider({
-      skin: "round",
-      type: "single",
-      hide_min_max: true,
-      min: 0,
-      max: 100,
-      hide_from_to: true,
-      onFinish: function (value) {},
-    });
-
-    var sliderInstance = $(`#opacityhandler-${this.props.ol_uid}`).data(
-      "ionRangeSlider"
-    );
+    var sliderInstance = $(`.opacity-handler`).data("ionRangeSlider");
 
     const opacityValue = this.handleSliderDefaultValue(this.props.ol_uid);
 
@@ -199,8 +187,16 @@ class DragableLayerInfo extends Component {
 
   componentDidMount = () => {
     const self = this;
-
-    $(`#opacityhandler-${this.props.ol_uid}`).on("change", function (e) {
+    $(`.opacity-handler`).ionRangeSlider({
+      skin: "round",
+      type: "single",
+      hide_min_max: true,
+      min: 0,
+      max: 100,
+      hide_from_to: true,
+      onFinish: function (value) {},
+    });
+    $(`.opacity-handler`).on("change", function (e) {
       // const $targetLayerDom = $(e.target);
       // const ol_uid = $targetLayerDom.data("oluid");
       const ol_uid = self.props.ol_uid;
@@ -251,6 +247,7 @@ class DragableLayerInfo extends Component {
                 id={`opacityhandler-${this.props.ol_uid}`}
                 className="opacity-handler"
                 data-oluid={this.props.ol_uid}
+                defaultValue={this.handleSliderDefaultValue(this.props.ol_uid)}
               />
               {/* <div className="layer-dragable-item-colorPicker">
                 {this.handleColorPicker()}
