@@ -4,8 +4,8 @@ import $ from "jquery";
 import "jquery-ui-bundle";
 
 import "./BaseLayerList.css";
-import { layer } from "@fortawesome/fontawesome-svg-core";
 import TileLayer from "ol/layer/Tile";
+import _ from "lodash";
 
 window.jQuery = $;
 require("jquery-ui-touch-punch");
@@ -36,7 +36,6 @@ class BaseLayerList extends Component {
           .forEach((ol_uid, index) => {
             map.getLayers().forEach((layer) => {
               if (layer.ol_uid === ol_uid) {
-                console.log("layer :>> ", layer);
                 layer.setZIndex((index + 1) * 10);
               }
             });
@@ -49,31 +48,30 @@ class BaseLayerList extends Component {
   }
 
   render() {
-    if (this.state.map) {
+    let map = $("#mapContainer").data("map");
+    if (map) {
+      let layers = map.getLayers().array_;
+      var ordered = _.orderBy(layers, (layer) => layer.values_.zIndex, [
+        "desc",
+      ]);
       return (
         <>
           <div id="baselayer-container">
             <h6 onClick={this.handle}>نقشه ها</h6>
             <ul id="baselayer-sortable-list">
-              {this.state.map
-                .getLayers()
-                .array_.slice()
-                .reverse()
-                .map((layer, index) => {
-                  if (layer instanceof TileLayer) {
-                    return (
-                      <DragableLayerInfo
-                        refreshComponent={this.props.refreshComponent}
-                        key={index}
-                        ol_uid={layer.ol_uid}
-                        layer={layer}
-                        invisible={
-                          layer.values_.visible ? "" : "layer-invisible"
-                        }
-                      />
-                    );
-                  }
-                })}
+              {ordered.map((layer, index) => {
+                if (layer instanceof TileLayer) {
+                  return (
+                    <DragableLayerInfo
+                      refreshComponent={this.props.refreshComponent}
+                      key={index}
+                      ol_uid={layer.ol_uid}
+                      layer={layer}
+                      invisible={layer.values_.visible ? "" : "layer-invisible"}
+                    />
+                  );
+                }
+              })}
             </ul>
           </div>
         </>

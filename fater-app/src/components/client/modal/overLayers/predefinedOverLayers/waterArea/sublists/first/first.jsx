@@ -102,7 +102,8 @@ class First extends Component {
           heatmap.set("name", "CO -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
-          heatmap.setZIndex(10000);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
 
           // mapContainer.getLayers().array_.push(tilelayer);
           mapContainer.getLayers().array_.push(heatmap);
@@ -193,7 +194,8 @@ class First extends Component {
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#80ff80", "#85d4d5", "#0066cc", "#ffffff"]);
 
-          heatmap.setZIndex(10000);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
 
           mapContainer.getLayers().array_.push(heatmap);
 
@@ -292,7 +294,8 @@ class First extends Component {
           heatmap.set("name", "NO2 -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
-          heatmap.setZIndex(10000);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
 
           mapContainer.getLayers().array_.push(heatmap);
 
@@ -379,7 +382,8 @@ class First extends Component {
 
           heatmap.set("name", "O3 -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
-          heatmap.setZIndex(10000);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
 
           mapContainer.getLayers().array_.push(heatmap);
 
@@ -465,7 +469,8 @@ class First extends Component {
 
           heatmap.set("name", "SO2 -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
-          heatmap.setZIndex(10000);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
 
           mapContainer.getLayers().array_.push(heatmap);
 
@@ -554,7 +559,8 @@ class First extends Component {
 
           heatmap.set("name", "Soil Moisture -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
-          heatmap.setZIndex(10000);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
 
           mapContainer.getLayers().array_.push(heatmap);
 
@@ -642,7 +648,8 @@ class First extends Component {
 
           heatmap.set("name", "UV AI -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
-          heatmap.setZIndex(10000);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
 
           mapContainer.getLayers().array_.push(heatmap);
 
