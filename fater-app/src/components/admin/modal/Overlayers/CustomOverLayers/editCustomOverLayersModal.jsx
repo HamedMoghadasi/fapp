@@ -45,8 +45,6 @@ class EditBaseMapModal extends Component {
     var _description = document.getElementById("editModal-description").value;
     var _geoJsonFile = $("#editModal-customVectorFile")[0].files[0];
 
-    console.log("file :>> ", _geoJsonFile);
-
     var formData = new FormData();
     formData.append("name", _name);
     formData.append("description", _description);

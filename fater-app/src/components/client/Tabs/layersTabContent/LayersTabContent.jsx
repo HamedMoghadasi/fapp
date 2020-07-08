@@ -5,6 +5,7 @@ import OverLayerList from "../OverLayerList/OverLayerList";
 import BaseLayerList from "../BaseLayerList/BaseLayerList";
 import OverLayersModal from "../../modal/overLayers/overlayersModal";
 import BaseLayersModal from "../../modal/baseLasyers/baselayersModal";
+import $ from "jquery";
 
 class LayersTabContent extends Component {
   state = { refresh: 0 };
@@ -14,6 +15,21 @@ class LayersTabContent extends Component {
       refresh: state.refresh + 1,
     }));
     this.forceUpdate();
+  };
+
+  toggleAllShownSlider = () => {
+    var shownSliders = $(".sliderIsShown").toArray();
+    var shownSliders_content = $(".sliderIsShown-content").toArray();
+
+    shownSliders.forEach((item) => {
+      $(item).toggle("opacity");
+      $(item).removeClass("sliderIsShown");
+    });
+
+    shownSliders_content.forEach((item) => {
+      $(item).toggle("opacity");
+      $(item).removeClass("sliderIsShown-content");
+    });
   };
 
   render() {
@@ -33,6 +49,7 @@ class LayersTabContent extends Component {
               className="btn btn-sm btn-primary"
               data-toggle="modal"
               data-target="#baseLayersModal"
+              onClick={this.toggleAllShownSlider}
             >
               نقشه جدید
             </button>
@@ -40,6 +57,7 @@ class LayersTabContent extends Component {
               className="btn btn-sm btn-primary"
               data-toggle="modal"
               data-target="#overLayersModal"
+              onClick={this.toggleAllShownSlider}
             >
               لایه جدید
             </button>

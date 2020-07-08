@@ -133,3 +133,13 @@ ul .layers-dragable-li {
 .heatmap-colorpicker > input {
   margin: 10px 10px;
 }
+
+.irs-bar.irs-bar--single,
+.irs-line {
+  cursor: pointer;
+}
+
+.irs-handle.single {
+  cursor: -webkit-grab;
+  cursor: grab;
+}

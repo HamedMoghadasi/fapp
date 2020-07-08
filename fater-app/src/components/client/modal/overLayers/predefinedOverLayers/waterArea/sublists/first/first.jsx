@@ -283,9 +283,7 @@ class First extends Component {
             event.data.colors = getColors();
           });
 
-          raster.on("afteroperations", function (event) {
-            console.log("operation finished :>>");
-          });
+          raster.on("afteroperations", function (event) {});
 
           var heatmap = new ImageLayer({
             source: raster,
@@ -372,9 +370,7 @@ class First extends Component {
             event.data.colors = getColors();
           });
 
-          raster.on("afteroperations", function (event) {
-            console.log("operation finished :>>");
-          });
+          raster.on("afteroperations", function (event) {});
 
           var heatmap = new ImageLayer({
             source: raster,
@@ -459,9 +455,7 @@ class First extends Component {
             event.data.colors = getColors();
           });
 
-          raster.on("afteroperations", function (event) {
-            console.log("operation finished :>>");
-          });
+          raster.on("afteroperations", function (event) {});
 
           var heatmap = new ImageLayer({
             source: raster,
@@ -549,9 +543,7 @@ class First extends Component {
             event.data.colors = getColors();
           });
 
-          raster.on("afteroperations", function (event) {
-            console.log("operation finished :>>");
-          });
+          raster.on("afteroperations", function (event) {});
 
           var heatmap = new ImageLayer({
             source: raster,
@@ -638,9 +630,7 @@ class First extends Component {
             event.data.colors = getColors();
           });
 
-          raster.on("afteroperations", function (event) {
-            console.log("operation finished :>>");
-          });
+          raster.on("afteroperations", function (event) {});
 
           var heatmap = new ImageLayer({
             source: raster,

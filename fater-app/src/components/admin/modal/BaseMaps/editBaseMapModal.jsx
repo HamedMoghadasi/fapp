@@ -38,15 +38,12 @@ class EditBaseMapModal extends Component {
     var _description = document.getElementById("editModal-description").value;
     var _baseMapImage = $("#editModal-baseMapImage")[0].files[0];
 
-    console.log("file :>> ", _baseMapImage);
-
     var formData = new FormData();
     formData.append("url", _url);
     formData.append("name", _name);
     formData.append("maxZoom", _maxZoom);
     formData.append("description", _description);
     if (_baseMapImage) {
-      console.log("111 :>> ", 111);
       formData.append("baseMapImage", _baseMapImage);
     }
 
@@ -67,8 +64,6 @@ class EditBaseMapModal extends Component {
           );
         },
         success: function (response) {
-          console.log("response :>> ", response);
-          console.log("data :>> ", data);
           data.url = response.data.url;
           data.name = response.data.name;
           data.maxZoom = response.data.maxZoom;

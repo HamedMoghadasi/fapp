@@ -11,7 +11,6 @@ class Snapshot extends Component {
     const map = $("#mapContainer").data("map");
     map.once("rendercomplete", function () {
       var mapCanvas = document.createElement("canvas");
-      console.log("mapCanvas :>> ", mapCanvas);
       var size = map.getSize();
       mapCanvas.width = size[0];
       mapCanvas.height = size[1];

@@ -62,8 +62,6 @@ class BaseLayersModal extends Component {
 
     this.props.refreshComponent();
     map.updateSize();
-    console.log("map data :>> ", map.getLayers().array_);
-    console.log(" map added ;) ");
   };
 
   componentDidMount = () => {

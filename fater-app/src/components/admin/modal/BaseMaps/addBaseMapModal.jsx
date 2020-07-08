@@ -31,8 +31,6 @@ class AddBaseMapModal extends Component {
     var _description = document.getElementById("addModal-description").value;
     var _baseMapImage = $("#addModal-baseMapImage")[0].files[0];
 
-    console.log("file :>> ", _baseMapImage);
-
     var formData = new FormData();
     formData.append("url", _url);
     formData.append("name", _name);

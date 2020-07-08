@@ -34,8 +34,6 @@ class SaveCustomLayerModal extends Component {
     ).value;
     var _file = $("#saveCustomLayerModal").data("file");
 
-    console.log("_file :>> ", _file);
-
     var formData = new FormData();
     formData.append("name", _name);
     formData.append("description", _description);
@@ -60,7 +58,6 @@ class SaveCustomLayerModal extends Component {
           );
         },
         success: function (response) {
-          console.log("response :>> ", response);
           self.props.updateCustomOverLayersListState(_file.id);
           $("#saveCustomLayerModal").modal("hide");
           notif("Succefully saved!", "success");

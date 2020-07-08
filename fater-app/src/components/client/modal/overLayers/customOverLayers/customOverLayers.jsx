@@ -49,7 +49,6 @@ class CustomOverLayers extends Component {
       );
 
       let extension = this.getFileExtension(file);
-      console.log("ext :>> ", this.getFileExtension(file));
       if (this.isGeoJson(extension)) {
         var reader = new FileReader();
         reader.onload = function () {
@@ -98,7 +97,6 @@ class CustomOverLayers extends Component {
     $("#saveCustomLayerModal").modal("show");
   };
   updateState = (fileId) => {
-    console.log("fileId :>> ", fileId);
     this.setState((state) => {
       // eslint-disable-next-line array-callback-return
       return (state.files = state.files.filter((item) => {

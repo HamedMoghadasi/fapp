@@ -74,8 +74,10 @@ class DragableLayerInfo extends Component {
 
     if (!isSliderShown) {
       $(sliderDOM).addClass("sliderIsShown");
+      $(layerInfoDOM).addClass("sliderIsShown-content");
     } else {
       $(sliderDOM).removeClass("sliderIsShown");
+      $(layerInfoDOM).removeClass("sliderIsShown-content");
     }
   };
 
@@ -120,9 +122,7 @@ class DragableLayerInfo extends Component {
 
   handleColorChange = (e, index, id) => {
     var colors = this.props.layer.get("colors");
-    // console.log("e.target.value :>> ", e.target.value);
     // document.getElementById(id).value = e.target.value;
-    // console.log("id :>> ", id);
     colors[index] = $(e.target).val();
     this.props.layer.set("colors", colors);
   };
@@ -196,22 +196,44 @@ class DragableLayerInfo extends Component {
       hide_from_to: true,
       onFinish: function (value) {},
     });
-    $(`.opacity-handler`).on("change", function (e) {
-      // const $targetLayerDom = $(e.target);
-      // const ol_uid = $targetLayerDom.data("oluid");
-      const ol_uid = self.props.ol_uid;
 
-      let _map = $("#mapContainer").data("map");
+    var sliderInstance = $(`.opacity-handler`).data("ionRangeSlider");
 
-      _map.getLayers().array_.map((layer) => {
-        if (String(layer.ol_uid) === String(ol_uid)) {
-          layer.setOpacity($(this).prop("value") / 100);
-        }
-      });
+    const opacityValue = this.handleSliderDefaultValue(this.props.ol_uid);
 
-      $("#mapContainer").data("map", _map);
-      _map.updateSize();
+    sliderInstance.update({
+      from: opacityValue,
     });
+
+    // $(`.irs-handle.single`).on("mousedown", function () {
+    //   $("#overlayer-sortable-list").sortable("disable");
+    //   $("#baselayer-sortable-list").sortable("disable");
+    // });
+
+    // $(document).on("mouseup", function () {
+    //   $("#overlayer-sortable-list").sortable("enable");
+    //   $("#baselayer-sortable-list").sortable("enable");
+    // });
+
+    $(`.opacity-handler[data-oluid="${this.props.ol_uid}"]`).on(
+      "change",
+      function (e) {
+        // const $targetLayerDom = $(e.target);
+        // const ol_uid = $targetLayerDom.data("oluid");
+        const ol_uid = self.props.ol_uid;
+
+        let _map = $("#mapContainer").data("map");
+
+        _map.getLayers().array_.map((layer) => {
+          if (String(layer.ol_uid) === String(ol_uid)) {
+            layer.setOpacity($(this).prop("value") / 100);
+          }
+        });
+
+        $("#mapContainer").data("map", _map);
+        _map.updateSize();
+      }
+    );
   };
 
   render() {
