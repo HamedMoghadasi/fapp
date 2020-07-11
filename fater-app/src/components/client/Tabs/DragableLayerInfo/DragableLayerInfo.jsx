@@ -238,7 +238,6 @@ class DragableLayerInfo extends Component {
       min: 0,
       max: 100,
       hide_from_to: true,
-      onFinish: function (value) {},
     });
 
     var sliderInstance = $(`.opacity-handler`).data("ionRangeSlider");
@@ -249,15 +248,15 @@ class DragableLayerInfo extends Component {
       from: opacityValue,
     });
 
-    // $(`.irs-handle.single`).on("mousedown", function () {
-    //   $("#overlayer-sortable-list").sortable("disable");
-    //   $("#baselayer-sortable-list").sortable("disable");
-    // });
+    $(`.irs-handle.single`).on("mousedown", function () {
+      $("#overlayer-sortable-list").sortable("disable");
+      $("#baselayer-sortable-list").sortable("disable");
+    });
 
-    // $(document).on("mouseup", function () {
-    //   $("#overlayer-sortable-list").sortable("enable");
-    //   $("#baselayer-sortable-list").sortable("enable");
-    // });
+    $(document).on("mouseup", function () {
+      $("#overlayer-sortable-list").sortable("enable");
+      $("#baselayer-sortable-list").sortable("enable");
+    });
 
     $(`.opacity-handler[data-oluid="${this.props.ol_uid}"]`).on(
       "change",
