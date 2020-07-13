@@ -6,9 +6,11 @@ import { menuOutline } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 
 import { verifyUser } from "../../../utils/Auth";
+import { applicationTypes } from "../../../constants/ApplicationType";
 import { Roles } from "../../../constants/Roles";
 
 const USER = verifyUser();
+let ApplicationType = process.env.REACT_APP_APPLICATION_TYPE;
 
 class ManagementArea extends Component {
   handleCollapse = () => {
@@ -35,6 +37,18 @@ class ManagementArea extends Component {
 
     return false;
   };
+
+  handleTitle = () => {
+    if (ApplicationType === applicationTypes.karaneh) {
+      return (
+        <span className="ma-header-title karaneh">سامانه پایشی کرانه</span>
+      );
+    } else if (ApplicationType === applicationTypes.amvaj) {
+      return <span className="ma-header-title amvaj">سامانه پایشی امواج</span>;
+    }
+
+    return false;
+  };
   render() {
     return (
       <>
@@ -42,6 +56,7 @@ class ManagementArea extends Component {
         {this.handleSuperManagerDOM()}
         <div id="ma" className="rollUp">
           <div id="ma-header">
+            {this.handleTitle()}
             <IonIcon
               icon={menuOutline}
               id="ma-header-menu"

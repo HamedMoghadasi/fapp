@@ -134,3 +134,23 @@
   text-align: center;
   font-size: 18px;
 }
+
+.ma-header-title.karaneh {
+  color: #d0d0d0;
+  font-size: 25px;
+  float: right;
+  margin: 0px 10px 7px;
+  font-weight: 100;
+}
+
+.ma-header-title.amvaj {
+  color: #d0d0d0;
+  font-size: 25px;
+  float: right;
+  margin: 0px 10px 7px;
+  font-weight: 100;
+}
+
+.rollUp > #ma-header > .ma-header-title {
+  display: none !important;
+}
