@@ -114,3 +114,23 @@
 #ma-header-menu {
   cursor: pointer;
 }
+
+.user-managerConatainer {
+  position: absolute;
+  background: rgba(220, 53, 69, 0.7);
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+
+.user-superManagerConatainer {
+  position: absolute;
+  background: rgba(255, 193, 7, 0.7);
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
