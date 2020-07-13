@@ -14,7 +14,7 @@ import AdminTemplateContainer from "../../../components/admin/template/adminTemp
 
 export interface IAdminTemplateProps {
   needAuthentication: boolean;
-  neededRole: string;
+  neededRole: string[];
 }
 
 const AdminTemplate: React.FC<IAdminTemplateProps> = (props) => {

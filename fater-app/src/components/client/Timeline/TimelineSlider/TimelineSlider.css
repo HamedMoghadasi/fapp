@@ -66,5 +66,5 @@
 .irs-grid-text {
   direction: rtl;
   font-family: "byekani", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
 }

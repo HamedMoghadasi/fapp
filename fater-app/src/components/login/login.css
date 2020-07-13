@@ -12,7 +12,7 @@ html {
   max-width: 350px;
   padding: 40px 40px;
   font-family: "byekani", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
 }
 
 .btn {
@@ -116,7 +116,7 @@ html {
   margin: 0 auto;
   min-width: 350px;
   font-family: "byekani", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
 }
 .btn.btn-signin {
   padding: 0px;

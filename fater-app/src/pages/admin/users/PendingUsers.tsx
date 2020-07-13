@@ -7,7 +7,7 @@ import AdminTemplateContainer from "../../../components/admin/template/adminTemp
 
 export interface IPendingUsersProps {
   needAuthentication: boolean;
-  neededRole: string;
+  neededRole: string[];
 }
 
 const PendingUsers: React.FC<IPendingUsersProps> = (props) => {

@@ -13,7 +13,7 @@ let API_URL = process.env.REACT_APP_API_URL;
 
 export interface IUsersActivityLogsProps {
   needAuthentication: boolean;
-  neededRole: string;
+  neededRole: string[];
 }
 
 const styleActionCell = (action: any) => {

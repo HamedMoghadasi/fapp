@@ -63,7 +63,17 @@ const App: React.FC = () => {
         <Route
           path="/home"
           component={() => {
-            return <Home needAuthentication={true} neededRole={Roles.User} />;
+            return (
+              <Home
+                needAuthentication={true}
+                neededRole={[
+                  Roles.Admin,
+                  Roles.User,
+                  Roles.Manager,
+                  Roles.SuperManager,
+                ]}
+              />
+            );
           }}
           exact={true}
         />
@@ -71,7 +81,17 @@ const App: React.FC = () => {
           exact
           path="/"
           component={() => {
-            return <Home needAuthentication={true} neededRole={Roles.User} />;
+            return (
+              <Home
+                needAuthentication={true}
+                neededRole={[
+                  Roles.Admin,
+                  Roles.User,
+                  Roles.Manager,
+                  Roles.SuperManager,
+                ]}
+              />
+            );
           }}
         />
 
@@ -85,7 +105,12 @@ const App: React.FC = () => {
             return (
               <ChangePassword
                 needAuthentication={true}
-                neededRole={Roles.User}
+                neededRole={[
+                  Roles.Admin,
+                  Roles.User,
+                  Roles.Manager,
+                  Roles.SuperManager,
+                ]}
               />
             );
           }}
@@ -95,7 +120,7 @@ const App: React.FC = () => {
           path="/dashboard"
           component={() => {
             return (
-              <Dashboard needAuthentication={true} neededRole={Roles.Admin} />
+              <Dashboard needAuthentication={true} neededRole={[Roles.Admin]} />
             );
           }}
           exact={true}
@@ -104,7 +129,7 @@ const App: React.FC = () => {
           path="/dashboard/Users/All"
           component={() => {
             return (
-              <AllUsers needAuthentication={true} neededRole={Roles.Admin} />
+              <AllUsers needAuthentication={true} neededRole={[Roles.Admin]} />
             );
           }}
           exact={true}
@@ -115,7 +140,7 @@ const App: React.FC = () => {
             return (
               <SuspendedUsers
                 needAuthentication={true}
-                neededRole={Roles.Admin}
+                neededRole={[Roles.Admin]}
               />
             );
           }}
@@ -127,7 +152,7 @@ const App: React.FC = () => {
             return (
               <PendingUsers
                 needAuthentication={true}
-                neededRole={Roles.Admin}
+                neededRole={[Roles.Admin]}
               />
             );
           }}
@@ -139,7 +164,7 @@ const App: React.FC = () => {
             return (
               <UserActivityLogs
                 needAuthentication={true}
-                neededRole={Roles.Admin}
+                neededRole={[Roles.Admin]}
               />
             );
           }}
@@ -150,7 +175,7 @@ const App: React.FC = () => {
           path="/dashboard/Locations"
           component={() => {
             return (
-              <Locations needAuthentication={true} neededRole={Roles.Admin} />
+              <Locations needAuthentication={true} neededRole={[Roles.Admin]} />
             );
           }}
           exact={true}
@@ -160,7 +185,7 @@ const App: React.FC = () => {
           path="/dashboard/BaseMaps"
           component={() => {
             return (
-              <BaseMaps needAuthentication={true} neededRole={Roles.Admin} />
+              <BaseMaps needAuthentication={true} neededRole={[Roles.Admin]} />
             );
           }}
           exact={true}
@@ -172,7 +197,7 @@ const App: React.FC = () => {
             return (
               <CustomOverLayers
                 needAuthentication={true}
-                neededRole={Roles.Admin}
+                neededRole={[Roles.Admin]}
               />
             );
           }}

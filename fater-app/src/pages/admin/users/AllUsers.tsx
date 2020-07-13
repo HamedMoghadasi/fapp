@@ -20,7 +20,7 @@ let API_URL = process.env.REACT_APP_API_URL;
 
 export interface IAllUsersProps {
   needAuthentication: boolean;
-  neededRole: string;
+  neededRole: string[];
 }
 
 const styleUserStateCell = (state: any) => {

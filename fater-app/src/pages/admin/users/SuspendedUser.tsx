@@ -7,7 +7,7 @@ import AdminTemplateContainer from "../../../components/admin/template/adminTemp
 
 export interface ISuspendedUsersProps {
   needAuthentication: boolean;
-  neededRole: string;
+  neededRole: string[];
 }
 
 const SuspendedUsers: React.FC<ISuspendedUsersProps> = (props) => {

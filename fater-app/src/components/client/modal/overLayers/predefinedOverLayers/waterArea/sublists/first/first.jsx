@@ -17,7 +17,7 @@ class First extends Component {
   configuration = {
     tabs: [
       {
-        label: "CO",
+        label: "CO 1593752671",
         content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
       استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
       در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
@@ -32,7 +32,103 @@ class First extends Component {
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
-              "http://192.168.21.2/qweasd/wgis/heat/sentinel-5p_No2/{z}/{x}/{-y}.png",
+              "./assets/qweasd/wgis/map/CO_map/co_1593752671/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "CO 1593752671 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 3) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "CO 1593752971",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/CO_map/co_1593752971/{z}/{x}/{-y}.png",
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -99,7 +195,7 @@ class First extends Component {
             source: raster,
           });
 
-          heatmap.set("name", "CO -- heatmap");
+          heatmap.set("name", "CO 1593752971 -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
@@ -129,7 +225,7 @@ class First extends Component {
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
-              "http://192.168.21.2/qweasd/wgis/HCHO_map/hcho_1587254400/{z}/{x}/{-y}.png",
+              "./assets/qweasd/wgis/map/HCHO_map/hcho_1587254400/{z}/{x}/{-y}.png",
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -226,7 +322,7 @@ class First extends Component {
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
-              "http://192.168.21.2/qweasd/wgis/NO2_map/no2_1586908800/{z}/{x}/{-y}.png",
+              "./assets/qweasd/wgis/map/NO2_map/no2_1586908800/{z}/{x}/{-y}.png",
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -269,7 +365,7 @@ class First extends Component {
 
           function getColors() {
             var scale = chroma
-              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .scale(["#A30016", "#feaf39", "#58fe7c", "#394dfe"])
               .colors(254);
 
             var _palet = scale.map((element, index) => {
@@ -285,19 +381,30 @@ class First extends Component {
 
           raster.on("afteroperations", function (event) {});
 
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
           var heatmap = new ImageLayer({
             source: raster,
           });
 
-          heatmap.set("name", "NO2 -- heatmap");
+          heatmap.set("name", "UV AI -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
-          heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
+          heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
           heatmap.setZIndex(zIndex);
 
+          // mapContainer.getLayers().array_.push(tilelayer);
           mapContainer.getLayers().array_.push(heatmap);
 
           this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
         },
       },
       {
@@ -313,7 +420,7 @@ class First extends Component {
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
-              "http://192.168.21.2/qweasd/wgis/O3_map/o3_1587081600/{z}/{x}/{-y}.png",
+              "./assets/qweasd/wgis/map/O3_map/o3_1587081600/{z}/{x}/{-y}.png",
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -356,7 +463,7 @@ class First extends Component {
 
           function getColors() {
             var scale = chroma
-              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .scale(["#A30016", "#feaf39", "#58fe7c", "#394dfe"])
               .colors(254);
 
             var _palet = scale.map((element, index) => {
@@ -372,18 +479,30 @@ class First extends Component {
 
           raster.on("afteroperations", function (event) {});
 
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
           var heatmap = new ImageLayer({
             source: raster,
           });
 
-          heatmap.set("name", "O3 -- heatmap");
+          heatmap.set("name", "UV AI -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
           heatmap.setZIndex(zIndex);
 
+          // mapContainer.getLayers().array_.push(tilelayer);
           mapContainer.getLayers().array_.push(heatmap);
 
           this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
         },
       },
       {
@@ -398,7 +517,7 @@ class First extends Component {
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
-              "http://192.168.21.2/qweasd/wgis/SO2_map/so2_1587081600/{z}/{x}/{-y}.png",
+              "./assets/qweasd/wgis/map/SO2_map/so2_1587081600/{z}/{x}/{-y}.png",
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -441,7 +560,7 @@ class First extends Component {
 
           function getColors() {
             var scale = chroma
-              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .scale(["#A30016", "#feaf39", "#58fe7c", "#394dfe"])
               .colors(254);
 
             var _palet = scale.map((element, index) => {
@@ -457,18 +576,30 @@ class First extends Component {
 
           raster.on("afteroperations", function (event) {});
 
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
           var heatmap = new ImageLayer({
             source: raster,
           });
 
-          heatmap.set("name", "SO2 -- heatmap");
+          heatmap.set("name", "UV AI -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
           heatmap.setZIndex(zIndex);
 
+          // mapContainer.getLayers().array_.push(tilelayer);
           mapContainer.getLayers().array_.push(heatmap);
 
           this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
         },
       },
       {
@@ -486,11 +617,10 @@ class First extends Component {
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
-              "http://192.168.21.2/qweasd/wgis/Soil_moisture/sm_bu_1588277393/{z}/{x}/{-y}.png",
+              "./assets/qweasd/wgis/map/Soil_moisture/sm_bu_1588277393/{z}/{x}/{-y}.png",
             maxZoom: 15,
             crossOrigin: "",
           });
-
           var raster = new RasterSource({
             sources: [aerial],
             operation: function (pixels, data) {
@@ -529,7 +659,7 @@ class First extends Component {
 
           function getColors() {
             var scale = chroma
-              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .scale(["#A30016", "#feaf39", "#58fe7c", "#394dfe"])
               .colors(254);
 
             var _palet = scale.map((element, index) => {
@@ -545,18 +675,30 @@ class First extends Component {
 
           raster.on("afteroperations", function (event) {});
 
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
           var heatmap = new ImageLayer({
             source: raster,
           });
 
-          heatmap.set("name", "Soil Moisture -- heatmap");
+          heatmap.set("name", "UV AI -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
           heatmap.setZIndex(zIndex);
 
+          // mapContainer.getLayers().array_.push(tilelayer);
           mapContainer.getLayers().array_.push(heatmap);
 
           this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
         },
       },
       {
@@ -573,7 +715,7 @@ class First extends Component {
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
-              "http://192.168.21.2/qweasd/wgis/UV_AI/uvai_1586908800/{z}/{x}/{-y}.png",
+              "./assets/qweasd/wgis/map/UV_AI/uvai_1586908800/{z}/{x}/{-y}.png",
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -616,7 +758,7 @@ class First extends Component {
 
           function getColors() {
             var scale = chroma
-              .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+              .scale(["#A30016", "#feaf39", "#58fe7c", "#394dfe"])
               .colors(254);
 
             var _palet = scale.map((element, index) => {
@@ -632,18 +774,1013 @@ class First extends Component {
 
           raster.on("afteroperations", function (event) {});
 
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
           var heatmap = new ImageLayer({
             source: raster,
           });
 
           heatmap.set("name", "UV AI -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
           heatmap.setZIndex(zIndex);
 
+          // mapContainer.getLayers().array_.push(tilelayer);
           mapContainer.getLayers().array_.push(heatmap);
 
           this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "AOT 1593675000",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url: "./assets/qweasd/wgis/map/AOT/AOT_1593675000/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "AOT 1593675000 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "AOT 1593761400",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url: "./assets/qweasd/wgis/map/AOT/AOT_1593761400/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "AOT 1593761400 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "SSC Khalije-Fars 1",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/Sea_surface_current/ssc_1593519925474_Khalije-Fars/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SSC Khalije-Fars 1 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "SSC Khalije-Fars 2",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/Sea_surface_current/ssc_1593840073862_Khalije-Fars/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SSC Khalije-Fars 2 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "SSC Oman 1",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+          نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/Sea_surface_current/ssc_1593519925474_Oman/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SSC Oman 1 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "SSC Oman 2",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/Sea_surface_current/ssc_1593840073862_Oman/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SSC Oman 2 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "SSTH Khalije Fars 1",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/Sea_surface_temperature_hourly/ssth_1594236600_Khalije-Fars/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SSTH Khalije Fars 1 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "SSTH Khalije Fars 2",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/Sea_surface_temperature_hourly/ssth_1593840073862_Khalije-Fars/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SSTH Khalije Fars 2 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "SSTH Oman 1",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/Sea_surface_temperature_hourly/ssth_1594236600_Oman/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SSTH Oman 1 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "SSTH Oman 2",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+      استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+      در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+      نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+ علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+      زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+      زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+      پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+
+        handleAddLayer: () => {
+          const mapContainer = $("#mapContainer").data("map");
+          var aerial = new XYZ({
+            url:
+              "./assets/qweasd/wgis/map/Sea_surface_temperature_hourly/ssth_1593840073862_Oman/{z}/{x}/{-y}.png",
+            maxZoom: 15,
+            crossOrigin: "",
+          });
+
+          var raster = new RasterSource({
+            sources: [aerial],
+            operation: function (pixels, data) {
+              var pixel = pixels[0];
+              var colors = data.colors;
+
+              if (pixel[0] !== 0) {
+                const pixel2 = pixel;
+                const color = colors[pixel2[0]];
+                if (color) {
+                  pixel[0] = color[0];
+                  pixel[1] = color[1];
+                  pixel[2] = color[2];
+                  pixel[3] = 255;
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+              } else {
+                pixel[0] = 0;
+                pixel[1] = 0;
+                pixel[2] = 0;
+                pixel[3] = 0;
+              }
+
+              return pixel;
+            },
+          });
+
+          function getColors() {
+            var scale = chroma
+              .scale(["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"])
+              .colors(254);
+
+            var _palet = scale.map((element, index) => {
+              return chroma(scale[index]).rgba();
+            });
+
+            return _palet;
+          }
+
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
+          var tilelayer = new TileLayer({
+            source: aerial,
+          });
+
+          var heatmap = new ImageLayer({
+            source: raster,
+          });
+
+          heatmap.set("name", "SSTH Oman21 -- heatmap");
+          heatmap.set("description", "heatmap data provided by @Arad Co.");
+          heatmap.set("colors", ["#1c4ee3", "#fec97c", "#45e8dd", "#00ff7b"]);
+          const zIndex = mapContainer.getLayers().array_.length * 10000;
+          heatmap.setZIndex(zIndex);
+
+          // mapContainer.getLayers().array_.push(tilelayer);
+          mapContainer.getLayers().array_.push(heatmap);
+
+          this.props.refreshComponent();
+          var i = 0;
+          var timer = setInterval(function () {
+            if (i === 5) clearInterval(timer);
+            mapContainer.updateSize();
+            i++;
+          }, 500);
+        },
+      },
+      {
+        label: "سد البرز",
+        content: `سد لفوربنابر اعلام شرکت مدیریت منابع آب ایران با نام رسمی سد البرز )پاشاکلا(، همچنین شناختهشده
+          با نام سهد صهالحی مازندرانی، سهدی است در استان مازندران که در دهستان لفور در شهرستان سوادکوه
+          شهمالی واقع شهدهاسهت. این سهد در 45 کیلومتری جنوب شرقی بابل قرار دارد`,
+
+        handleAddLayer: () => {
+          console.log("Alborz Dam");
+        },
+      },
+
+      {
+        label: "سد امیرکبیر",
+        content: `سههد امیرکبیر بر روی رودخانه کرج در شههمال شهههر کرج و در 25 کیلومتری جاده کرج به چالوس قرار
+        دارد. این سهد اولین سهد چند منظوره کشهور ایران است، و یکی از منابع تامین آب شهر تهران میباشد.
+        دریاچه این سد یکی از مراکز طبیعی مهم پرورش ماهیهای قزلآلای رنگین کمان و قزلآلای خالقرمز و
+        ماهی سهفید و ماهی سیاه است. انباشه شدن آب رودخانه کرج در پشت سد امیرکبیر علاوه بر کارایی آن
+        در تولید انرژی برقابی و تامین بخشههی از آب آشههامیدنی شهههر تهران، باعد بوجود آمدن دریاچهای زیبا
+        گردیدهاسهت که موجب اسهتفادههای گردشهگری و تفریحی ورزشهی از سهد کرج شهدهاست. این سد در
+        حوضه آبریز درجه یک مرکزی و حوضه آبریز درجه دو دریاچه نمک قرار دارد. `,
+
+        handleAddLayer: () => {
+          console.log("Amir kabir Dam");
         },
       },
     ],

@@ -313,6 +313,6 @@ a.masterMenu[aria-expanded="false"] .sidebar-masterItem-icon.minus {
 
 #navbarSupportedContent {
   font-family: "byekani", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
   font-size: 14px;
 }

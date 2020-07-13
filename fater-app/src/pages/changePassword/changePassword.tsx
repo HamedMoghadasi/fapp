@@ -9,7 +9,7 @@ import ChangePasswordContainer from "../../components/changePassword/changePassw
 
 export interface IChangePasswordProps {
   needAuthentication: boolean;
-  neededRole: string;
+  neededRole: string[];
 }
 
 const ChangePassword: React.FC<IChangePasswordProps> = (props) => {

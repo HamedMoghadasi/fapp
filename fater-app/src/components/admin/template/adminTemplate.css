@@ -1,7 +1,7 @@
 #adminContentContainer,
 .wrapper {
   font-family: "byekani", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
 }
 #adminContentContainer {
   position: relative;
@@ -17,11 +17,11 @@
   direction: rtl;
 }
 .modal {
-  font-family: "byekani", sans-serif;
+  font-family: "byekani", sans-serif !important;
 }
 
 .modal-message {
-  font-family: "byekani", sans-serif;
+  font-family: "byekani", sans-serif !important;
   text-align: right;
   font-size: 1em;
   font-weight: 500;

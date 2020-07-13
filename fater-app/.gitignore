@@ -5,12 +5,15 @@
 /node_modules
 /.pnp
 .pnp.js
+/build
+/android
 
 # testing
 /coverage
 
 # production
 /build
+/android
 
 # misc
 .DS_Store

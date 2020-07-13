@@ -25,7 +25,7 @@ import { Redirect } from "react-router-dom";
 
 export interface IHomeProps {
   needAuthentication: boolean;
-  neededRole: string;
+  neededRole: string[];
 }
 
 const Home: React.FC<IHomeProps> = (props) => {

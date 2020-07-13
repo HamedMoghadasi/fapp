@@ -20,6 +20,22 @@ const result = {
   isValid: false,
 };
 
+const isGranted = (userRole, neededRoles) => {
+  let isPermitted = false;
+
+  neededRoles.forEach((neededRole) => {
+    if (userRole === neededRole) {
+      isPermitted = true;
+    }
+  });
+
+  if (userRole === Roles.Admin) {
+    isPermitted = true;
+  }
+
+  return isPermitted;
+};
+
 export const Protect = (props) => {
   var verifyResponse = verifyUser();
   if (verifyResponse) {
@@ -28,10 +44,7 @@ export const Protect = (props) => {
 
     if (props.needAuthentication) {
       if (userState.isAuthentication) {
-        if (
-          userState.role === props.neededRole ||
-          userState.role === Roles.Admin
-        ) {
+        if (isGranted(userState.role, props.neededRole)) {
           result.isValid = true;
           result.redirectPath = "";
         } else {
@@ -48,7 +61,7 @@ export const Protect = (props) => {
   return result;
 };
 
-const verifyUser = function () {
+export const verifyUser = function () {
   try {
     if (!window.localStorage.access_token) {
       console.log("Token not founded");
@@ -78,7 +91,7 @@ const verifyUser = function () {
         },
       });
     }
-
+    console.log("temp :>> ", temp);
     return temp;
   } catch (error) {
     console.log(error);
