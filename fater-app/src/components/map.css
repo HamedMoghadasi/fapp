@@ -4,7 +4,8 @@
 
 @media only screen and (max-device-width: 480px) {
   .ol-zoom,
-  .ol-zoomslider {
+  .ol-zoomslider,
+  .ol-scale-line {
     display: none;
   }
 }

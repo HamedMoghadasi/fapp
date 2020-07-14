@@ -64,7 +64,6 @@ code {
 
 @media only screen and (max-width: 992px) {
   #mousePosition-container,
-  #ut-container,
   #timeline-slider,
   #timeline-control,
   .ol-zoom,
@@ -74,9 +73,5 @@ code {
 
   .ol-scale-line {
     bottom: 10px !important ;
-  }
-
-  #st-container {
-    top: 10px !important;
   }
 }

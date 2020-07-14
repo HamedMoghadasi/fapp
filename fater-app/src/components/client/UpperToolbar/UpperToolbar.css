@@ -128,3 +128,16 @@
 #InfoButton-container ul li:first-child:hover {
   border-radius: 10px 10px 0 0;
 }
+
+@media only screen and (max-width: 992px) {
+  #ut-container {
+    right: 0.2em;
+    top: 5px;
+    width: 297px;
+    height: 40px;
+  }
+
+  #ut-container .ut-icon {
+    margin: 4px 5px 2px 20px;
+  }
+}

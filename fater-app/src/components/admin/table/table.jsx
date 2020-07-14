@@ -66,6 +66,10 @@ export default class Tableo extends React.Component {
       this.dataTable.on("deselect", function () {
         $(".operatorBtn").prop("disabled", true);
       });
+      console.log("this.dataTable :>> ", this.dataTable);
+
+      const tableContainer = $("#tableo").parent("div").toArray();
+      $(tableContainer[0]).addClass("tabelo-wrapper");
 
       if (operators.length) {
         operators.forEach((operator) => {

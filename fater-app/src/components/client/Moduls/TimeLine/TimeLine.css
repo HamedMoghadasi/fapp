@@ -308,6 +308,7 @@ li.MuiButtonBase-root.MuiListItem-root {
   justify-content: center;
   align-items: flex-end;
   text-align: center;
+  z-index: 2;
 }
 .date-picker-mobile {
   display: flex;

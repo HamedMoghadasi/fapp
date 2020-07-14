@@ -44,3 +44,15 @@
 .table-conatiner {
   margin-top: 50px;
 }
+
+@media only screen and (max-device-width: 994px) {
+  #adminContentContainer {
+    padding-right: 5px;
+    padding-left: 5px;
+    width: 96%;
+  }
+
+  #adminContentContainer h1 {
+    font-size: 25px;
+  }
+}

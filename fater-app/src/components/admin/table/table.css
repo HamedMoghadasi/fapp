@@ -88,3 +88,26 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 #tableo_next a {
   border-radius: 0 24px 24px 0;
 }
+
+.tabelo-wrapper {
+  overflow: scroll;
+}
+
+@media only screen and (max-device-width: 994px) {
+  #tableo_filter input {
+    width: 100%;
+  }
+
+  .allusers-operator-container {
+    margin: 0;
+    justify-content: center;
+  }
+
+  #tableo_info {
+    display: none;
+  }
+
+  #tableo_paginate ul {
+    justify-content: center;
+  }
+}

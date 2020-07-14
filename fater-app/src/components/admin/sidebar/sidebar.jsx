@@ -272,7 +272,7 @@ class SideBar extends Component {
                 <IonIcon icon={menu} />
               </button>
               <button
-                className="btn btn-link d-inline-block d-lg-none ml-auto"
+                className="btn btn-link d-inline-block d-lg-none"
                 type="button"
                 id="rightMenuToggle"
                 data-toggle="collapse"
@@ -294,7 +294,7 @@ class SideBar extends Component {
                   </li>
                   <li className="nav-item">
                     <span
-                      className="nav-link"
+                      className="nav-link nav-logoutItem"
                       style={{ cursor: "pointer" }}
                       onClick={this.Logout}
                     >

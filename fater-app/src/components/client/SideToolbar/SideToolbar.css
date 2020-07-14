@@ -27,3 +27,10 @@
 #st-container img#unit[aria-expanded="true"] {
   color: #e4b527;
 }
+
+@media only screen and (max-width: 992px) {
+  #st-container {
+    top: 54px !important;
+    right: 5px;
+  }
+}
