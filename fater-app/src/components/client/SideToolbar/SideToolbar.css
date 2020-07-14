@@ -30,7 +30,7 @@
 
 @media only screen and (max-width: 992px) {
   #st-container {
-    top: 54px !important;
+    top: 50px;
     right: 5px;
   }
 }

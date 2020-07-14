@@ -130,10 +130,9 @@
 
 @media only screen and (max-width: 992px) {
   #Search-container {
-    top: 45px;
-    right: 0;
-    width: 300px;
+    top: 40px;
+    right: 35px;
+    width: 265px;
     z-index: 3;
-    background: rgba(22, 24, 24, 1);
   }
 }

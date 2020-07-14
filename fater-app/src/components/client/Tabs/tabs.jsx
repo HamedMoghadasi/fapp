@@ -24,6 +24,7 @@ class Tabs extends Component {
               aria-selected="true"
             >
               <IonIcon icon={layers} />
+              <br />
               لایه‌ها
             </a>
           </li>
@@ -38,6 +39,7 @@ class Tabs extends Component {
               aria-selected="false"
             >
               <IonIcon icon={cloudDownload} />
+              <br />
               دانلود
             </a>
           </li>
@@ -52,6 +54,7 @@ class Tabs extends Component {
               aria-selected="false"
             >
               <IonIcon icon={documentText} />
+              <br />
               گزارش‌ها
             </a>
           </li>
@@ -66,6 +69,7 @@ class Tabs extends Component {
               aria-selected="false"
             >
               <IonIcon icon={person} />
+              <br />
               کاربر
             </a>
           </li>
