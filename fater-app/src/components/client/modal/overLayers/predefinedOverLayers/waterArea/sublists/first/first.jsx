@@ -6,6 +6,7 @@ import { Image as ImageLayer, Tile as TileLayer } from "ol/layer";
 import XYZ from "ol/source/XYZ";
 import RasterSource from "ol/source/Raster";
 import chroma from "chroma-js";
+import { getHeatMapUrl } from "../../../../../../../../utils/HeatMapServerUtils";
 
 class First extends Component {
   state = {};
@@ -29,6 +30,28 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          // var year = $(
+          //   ".timeline-counterWrapper .yearWrapper:nth-child(1) #year"
+          // ).val();
+          // var month = $(
+          //   ".timeline-counterWrapper .yearWrapper:nth-child(2) #year"
+          // ).val();
+          // var day = $(
+          //   ".timeline-counterWrapper .yearWrapper:nth-child(3) #year"
+          // ).val();
+
+          // console.log("year :>> ", year);
+          // console.log("month :>> ", month);
+          // console.log("day :>> ", day);
+
+          let heatmapUrl = getHeatMapUrl(1572251400, {
+            parameter: "AOT",
+            location: "world",
+            satellite: "",
+          });
+
+          console.log("heatmapUrl :>> ", heatmapUrl);
+
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -68,6 +91,12 @@ class First extends Component {
             },
           });
 
+          raster.on("beforeoperations", function (event) {
+            event.data.colors = getColors();
+          });
+
+          raster.on("afteroperations", function (event) {});
+
           function getColors() {
             var scale = chroma
               .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
@@ -80,12 +109,6 @@ class First extends Component {
             return _palet;
           }
 
-          raster.on("beforeoperations", function (event) {
-            event.data.colors = getColors();
-          });
-
-          raster.on("afteroperations", function (event) {});
-
           var tilelayer = new TileLayer({
             source: aerial,
           });
@@ -97,6 +120,7 @@ class First extends Component {
           heatmap.set("name", "CO 1593752671 -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
+          heatmap.set("params", ["AOT", "world", ""]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
           heatmap.setZIndex(zIndex);
 

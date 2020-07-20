@@ -165,6 +165,7 @@ class DragableLayerInfo extends Component {
               <>
                 <span
                   className="heatmap-colorpicker-container"
+                  key={index}
                   id={`heatmap-colorpicker-container-${ol_uid}-${index}`}
                   onClick={() => this.handleColorContainerClick(inputId)}
                   style={{ backgroundColor: `${color}` }}

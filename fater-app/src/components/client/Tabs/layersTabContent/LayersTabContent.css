@@ -9,3 +9,23 @@
   padding: 5px 30px 5px 30px;
   border-radius: 10px;
 }
+
+/* width */
+div#ma-wrapper #layers::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+div#ma-wrapper #layers::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+div#ma-wrapper #layers::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+div#ma-wrapper #layers::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

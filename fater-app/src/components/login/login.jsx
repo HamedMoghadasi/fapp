@@ -80,14 +80,14 @@ class Login extends Component {
             disableSpiner();
             refreshCaptcha();
             $("#password").val("");
-            const msg = err.responseJSON.message;
-            if (msg) {
-              notif(msg, "error");
+
+            if (err) {
+              notif(err, "error");
             } else {
               notif("check you internet connection.", "error");
             }
 
-            console.error(msg);
+            console.error(err);
           },
         });
       } else {
@@ -142,6 +142,7 @@ class Login extends Component {
         this.renderCaptcha(jsonBody.data);
       } else {
         console.error(error);
+        $("#captcha-input").val(error);
       }
     });
     return body;

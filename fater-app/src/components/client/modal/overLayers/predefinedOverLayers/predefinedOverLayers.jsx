@@ -11,9 +11,9 @@ class PredefinedOverLayers extends Component {
   handleTypeOfOverLayer = () => {
     if (ApplicationType === applicationTypes.karaneh) {
       return <WaterArea refreshComponent={this.props.refreshComponent} />;
-    } else if (ApplicationType === applicationTypes.amvaj) {
+    } else if (ApplicationType === applicationTypes.afagh) {
       return (
-        <div style={{ textAlign: "center" }}>لایه های پیش فرض سامانه امواج</div>
+        <div style={{ textAlign: "center" }}>لایه های پیش فرض سامانه آفاق</div>
       );
     }
 

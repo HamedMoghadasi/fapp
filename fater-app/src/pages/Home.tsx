@@ -22,6 +22,7 @@ import MousePosition from "../components/client/MousePosition/MousePosition";
 
 import { Protect } from "../utils/Auth";
 import { Redirect } from "react-router-dom";
+import Loading from "../components/client/Loading/Loading";
 
 export interface IHomeProps {
   needAuthentication: boolean;
@@ -50,6 +51,7 @@ const Home: React.FC<IHomeProps> = (props) => {
         <SideToolbar />
         <MousePosition />
         <TimeLine />
+        <Loading />
       </IonPage>
     );
   }
