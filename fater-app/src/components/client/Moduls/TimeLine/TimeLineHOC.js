@@ -18,9 +18,6 @@ class TimeLineWrapper extends Component {
       "jYYYY/jM/jD HH:mm:ss"
     ).format("YYYY-M-D HH:mm:ss");
 
-    console.log("Date : >> ", date);
-    console.log("Timestamp : >> ", new Date(`${date}`).getTime() / 1000);
-
     const mapContainer = $("#mapContainer").data("map");
     mapContainer
       .getLayers()
@@ -28,7 +25,6 @@ class TimeLineWrapper extends Component {
       .map((layer) => {
         if (layer instanceof ImageLayer) {
           $(".loader-wrapper").toggle();
-          console.log("colors", layer.get("params"));
           let heatmapUrl = getHeatMapUrl(1572251400, {
             parameter: "AOT",
             location: "world",
@@ -36,8 +32,6 @@ class TimeLineWrapper extends Component {
           });
 
           console.log("heatmapUrl :>> ", heatmapUrl);
-          console.log("colors", layer.get("colors"));
-          console.log("layer :>> ", layer);
           var aerial = new XYZ({
             url:
               "./assets/qweasd/wgis/map/HCHO_map/hcho_1587254400/{z}/{x}/{-y}.png",

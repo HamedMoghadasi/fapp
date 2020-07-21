@@ -91,7 +91,6 @@ export const verifyUser = function () {
         },
       });
     }
-    console.log("temp :>> ", temp);
     return temp;
   } catch (error) {
     console.log(error);
