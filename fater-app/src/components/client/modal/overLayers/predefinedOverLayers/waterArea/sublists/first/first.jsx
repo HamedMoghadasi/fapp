@@ -14,8 +14,14 @@ class First extends Component {
     $(parentDOM).slideDown("fast");
     $(currentDOM).slideUp("fast");
   };
+  displayLoader = (time) => {
+    $(".loader-wrapper").toggle();
+    setTimeout(() => {
+      $(".loader-wrapper").toggle();
+    }, time);
+  };
 
-  configuration = {
+  firstConfiguration = {
     tabs: [
       {
         label: "CO 1593752671",
@@ -30,6 +36,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           // var year = $(
           //   ".timeline-counterWrapper .yearWrapper:nth-child(1) #year"
           // ).val();
@@ -130,7 +137,7 @@ class First extends Component {
           this.props.refreshComponent();
           var i = 0;
           var timer = setInterval(function () {
-            if (i === 3) clearInterval(timer);
+            if (i === 6) clearInterval(timer);
             mapContainer.updateSize();
             i++;
           }, 500);
@@ -149,6 +156,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -246,6 +254,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -343,6 +352,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -413,7 +423,7 @@ class First extends Component {
             source: raster,
           });
 
-          heatmap.set("name", "UV AI -- heatmap");
+          heatmap.set("name", "NO2 -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
@@ -441,6 +451,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -511,7 +522,7 @@ class First extends Component {
             source: raster,
           });
 
-          heatmap.set("name", "UV AI -- heatmap");
+          heatmap.set("name", "O3 -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
@@ -538,6 +549,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -608,7 +620,7 @@ class First extends Component {
             source: raster,
           });
 
-          heatmap.set("name", "UV AI -- heatmap");
+          heatmap.set("name", "SO2 -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
@@ -638,6 +650,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -707,7 +720,7 @@ class First extends Component {
             source: raster,
           });
 
-          heatmap.set("name", "UV AI -- heatmap");
+          heatmap.set("name", "Soil Moisture -- heatmap");
           heatmap.set("description", "heatmap data provided by @Arad Co.");
           heatmap.set("colors", ["#A30016", "#feaf39", "#58fe7c", "#394dfe"]);
           const zIndex = mapContainer.getLayers().array_.length * 10000;
@@ -736,6 +749,7 @@ class First extends Component {
       برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
       زبان فارسی ایجاد کرد، در این ص`,
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -837,6 +851,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: "./assets/qweasd/wgis/map/AOT/AOT_1593675000/{z}/{x}/{-y}.png",
@@ -932,6 +947,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: "./assets/qweasd/wgis/map/AOT/AOT_1593761400/{z}/{x}/{-y}.png",
@@ -1027,6 +1043,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1123,6 +1140,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1219,6 +1237,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1315,6 +1334,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1411,6 +1431,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1507,6 +1528,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1603,6 +1625,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1699,6 +1722,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1789,10 +1813,10 @@ class First extends Component {
           شهمالی واقع شهدهاسهت. این سهد در 45 کیلومتری جنوب شرقی بابل قرار دارد`,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           console.log("Alborz Dam");
         },
       },
-
       {
         label: "سد امیرکبیر",
         content: `سههد امیرکبیر بر روی رودخانه کرج در شههمال شهههر کرج و در 25 کیلومتری جاده کرج به چالوس قرار
@@ -1804,6 +1828,7 @@ class First extends Component {
         حوضه آبریز درجه یک مرکزی و حوضه آبریز درجه دو دریاچه نمک قرار دارد. `,
 
         handleAddLayer: () => {
+          this.displayLoader(5000);
           console.log("Amir kabir Dam");
         },
       },
@@ -1845,7 +1870,7 @@ class First extends Component {
               data-parent="#waterArea-first-accordion"
             >
               <div className="card-body">
-                <VerticalTabs configuration={this.configuration} />
+                <VerticalTabs configuration={this.firstConfiguration} />
               </div>
             </div>
           </div>

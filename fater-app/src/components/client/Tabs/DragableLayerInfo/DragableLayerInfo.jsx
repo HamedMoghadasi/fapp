@@ -132,7 +132,14 @@ class DragableLayerInfo extends Component {
   handleColorContainerClick = (inputId) => {
     $(`#${inputId}`).click();
   };
+  displayLoader = (time) => {
+    $(".loader-wrapper").toggle();
+    setTimeout(() => {
+      $(".loader-wrapper").toggle();
+    }, time);
+  };
   handleChangeColorSubmit = (ol_uid) => {
+    this.displayLoader(3000);
     let _map = $("#mapContainer").data("map");
     var rasterSource = this.props.layer.getSource();
     rasterSource.listeners_.beforeoperations = [];

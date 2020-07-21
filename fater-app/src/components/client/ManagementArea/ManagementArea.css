@@ -174,4 +174,7 @@
     border-radius: 0;
     background-color: rgba(33, 37, 41, 0.95);
   }
+  #ma-wrapper {
+    height: 95%;
+  }
 }

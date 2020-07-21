@@ -160,3 +160,15 @@ ul .layers-dragable-li {
   cursor: -webkit-grab;
   cursor: grab;
 }
+
+.layer-invisible {
+  background: #a0a0a09e !important;
+}
+
+.layer-invisible > .layers-dragable-item-settings {
+  background: #a0a0a09e !important;
+}
+
+.layer-invisible > #layers-dragable-item-display {
+  background: #a0a0a09e !important;
+}
