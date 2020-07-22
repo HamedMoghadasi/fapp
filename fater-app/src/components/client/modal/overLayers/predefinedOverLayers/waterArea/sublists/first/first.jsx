@@ -37,26 +37,16 @@ class First extends Component {
 
         handleAddLayer: () => {
           this.displayLoader(5000);
-          // var year = $(
-          //   ".timeline-counterWrapper .yearWrapper:nth-child(1) #year"
-          // ).val();
-          // var month = $(
-          //   ".timeline-counterWrapper .yearWrapper:nth-child(2) #year"
-          // ).val();
-          // var day = $(
-          //   ".timeline-counterWrapper .yearWrapper:nth-child(3) #year"
-          // ).val();
 
-          // console.log("year :>> ", year);
-          // console.log("month :>> ", month);
-          // console.log("day :>> ", day);
-
-          let heatmapUrl = getHeatMapUrl(1593568800, {
-            parameter: "aod",
-            location: "world",
-            satellite: "default",
-          });
-
+          let heatmapUrl = getHeatMapUrl(
+            { start: "1572251500", end: "1593568800" },
+            {
+              parameter: "aod",
+              location: "world",
+              satellite: "default",
+            }
+          );
+          console.log("heatmapUrl :>> ", heatmapUrl);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
@@ -1231,7 +1221,7 @@ class First extends Component {
           const zIndex = mapContainer.getLayers().array_.length * 10000;
           heatmap.setZIndex(zIndex);
 
-          // mapContainer.getLayers().array_.push(tilelayer);
+          //mapContainer.getLayers().array_.push(tilelayer);
           mapContainer.getLayers().array_.push(heatmap);
 
           this.props.refreshComponent();

@@ -1,9 +1,16 @@
 /* body{
   margin: 0;
   box-sizing: border-box;
-} */
-
-/*
+}
+.App {
+  width: 100%; 
+  height: 100vh;
+  background-color: rgb(129, 129, 129);
+  display: flex;
+  align-items: flex-end;
+  background: url('./download.png');
+  box-sizing: border-box;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -43,7 +50,6 @@
   align-items: flex-end;
   box-sizing: border-box;
 }
-
 .timeline-container {
   width: 100%;
   height: 70px;
@@ -53,6 +59,7 @@
   justify-content: space-around;
   align-items: flex-end;
   text-align: center;
+  z-index: 2;
 }
 /* Counter */
 .timeline-counterWrapper {
@@ -104,7 +111,7 @@
 .yearWrapper .year:focus {
   outline: none;
 }
-
+/* Animation */
 .icon-wrapper-animation {
   display: flex;
   align-items: center;
@@ -115,12 +122,12 @@
   top: 0;
   left: 0;
 }
-/* Animation */
 .icon-wrapper-animation > svg {
   font-size: 3rem !important;
   color: white;
 }
-.icon-wrapper-animation > .icon-animation {
+.icon-wrapper-animation > .icon-animation,
+.timeline-select-wrapper .icon-timeline-select {
   font-size: 1.5rem !important;
   color: white;
   position: absolute;
@@ -138,6 +145,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 12px;
 }
 .animationSelection-wrapper .close-icon {
   position: absolute;
@@ -154,6 +162,7 @@
   border-color: white !important;
   font-size: 0.9em !important;
 }
+/* Date Picker */
 .date-pickers-wrapper {
   width: 100%;
   height: 100%;
@@ -176,6 +185,41 @@
 .date-pickers-wrapper .animation-text {
   color: white;
   font-size: 16px;
+}
+.DatePicker .animation-datePicker {
+  background-color: rgba(32, 32, 32, 0.85) !important;
+}
+.DatePicker .animation-datePicker .Calendar__monthText,
+.DatePicker .animation-datePicker .Calendar__yearText {
+  color: white !important;
+}
+.DatePicker .animation-datePicker .Calendar__monthText:hover,
+.DatePicker .animation-datePicker .Calendar__yearText:hover {
+  color: black !important;
+}
+.DatePicker .animation-datePicker-selectDay {
+  color: black !important;
+}
+.DatePicker button[aria-label="Previous Month"] > .Calendar__monthArrow {
+  background-image: url("./components/assets/Images/left.svg") !important;
+}
+.DatePicker button[aria-label="Next Month"] > .Calendar__monthArrow {
+  background-image: url("./components/assets/Images/left.svg") !important;
+}
+.DatePicker .animation-datePicker .Calendar__day {
+  color: white;
+}
+.DatePicker .animation-datePicker .Calendar__day.-today {
+  color: rgb(231, 231, 231) !important;
+}
+.DatePicker .animation-datePicker .Calendar__day.-today:hover {
+  color: black !important;
+}
+.DatePicker .animation-datePicker .Calendar__day.-today::after {
+  background: rgb(224, 224, 224) !important;
+}
+.DatePicker .animation-datePicker .Calendar__day.-disabled {
+  color: rgb(83, 83, 83) !important;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -279,8 +323,8 @@ li.MuiButtonBase-root.MuiListItem-root {
   padding: 8px 10px;
 }
 .icon-wrapper-animation .image-animation {
-  width: 35px;
-  padding: 0 5px;
+  width: 35px !important;
+  padding: 0 5px !important;
   color: white;
 }
 .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8 {
@@ -294,8 +338,12 @@ li.MuiButtonBase-root.MuiListItem-root {
   cursor: pointer;
 }
 .timeline-btn-animation .btn-animation-icon {
-  font-size: 37px !important;
+  font-size: 41px !important;
   color: rgb(241, 201, 2);
+  border-radius: 50%;
+  box-shadow: 0 0 5px 1px;
+  padding: 5px;
+  margin: 0 5px;
 }
 
 /* Responsive */

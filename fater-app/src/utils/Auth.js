@@ -6,7 +6,7 @@ let API_URL = process.env.REACT_APP_API_URL;
 
 export default class AuthHelper {
   static async isAuthenticated() {
-    const token = window.localStorage.getItem("access_token");
+    return window.localStorage.getItem("access_token");
   }
 }
 

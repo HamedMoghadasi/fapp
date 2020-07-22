@@ -30,10 +30,9 @@ export const getHeatMapUrl = (timespan, params) => {
         console.error(msg);
       },
     });
-    console.log("temp :>> ", temp);
     return temp;
   } catch (error) {
     console.log(error);
-    return { isValid: false, role: "" };
+    return { isValid: false };
   }
 };

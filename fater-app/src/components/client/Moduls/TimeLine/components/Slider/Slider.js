@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     // width: 300 + theme.spacing(3) * 2,
     width: "70%",
     height: "100%",
+    backgroundColor: "rgba(32, 32, 32, 0.85)",
+    padding: "0 17px",
+    borderRadius: 12,
     // marginTop: "70px",
   },
   margin: {
@@ -24,7 +27,8 @@ const PersianMonth = (value) => {
 // Style Slider
 let PrettoSlider = withStyles({
   root: {
-    color: "rgba(40,40,40,0.85)",
+    color: "transparent",
+    borderRadius: 12,
     height: "100%",
     padding: 0,
   },
@@ -66,11 +70,10 @@ let PrettoSlider = withStyles({
   },
   rail: {
     height: "100%",
-    borderRadius: 4,
     opacity: 1,
   },
 })(Slider);
-export default function CustomizedSlider(props) {
+const CustomizedSlider = (props) => {
   const TimeScale = props.timescale;
   const classes = useStyles();
   // Slider
@@ -126,7 +129,7 @@ export default function CustomizedSlider(props) {
   }, [TimeScale, props.DateRange, props.currentHour]);
   // Animation step by step
   useEffect(() => {
-    if (props.isPlayingAnimation === true) {
+    if (props.isPlayingAnimation === true && props.playAnimation === true) {
       sliderAnimation();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -213,7 +216,7 @@ export default function CustomizedSlider(props) {
   }
   let marksHours = [];
   if (TimeScale === 3) {
-    for (let i = 1; i <= 24 && i > 0; i++) {
+    for (let i = 1; i <= props.countHours && i > 0; i++) {
       marksHours.push({ value: i, label: i });
     }
   }
@@ -360,7 +363,8 @@ export default function CustomizedSlider(props) {
         // ThumbComponent={CustomeThumbComponent}
         ValueLabelComponent={ValueLabelComponent}
         valueLabelDisplay={props.DateRange.length !== 0 ? "on" : "auto"}
-        aria-label="custom thumb label"
+        // aria-label="custom thumb label slider"
+        getAriaValueText={() => "custom thumb label slider"}
         min={
           TimeScale === 0
             ? marksYears[0].value
@@ -404,9 +408,11 @@ export default function CustomizedSlider(props) {
             : null
         }
         value={sliderValue}
-        key={sliderValue}
+        defaultValue={10}
         onChange={(e, value) => changeSliderValue(value)}
       />
     </div>
   );
-}
+};
+
+export default CustomizedSlider;

@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import TimeLine from "./TimeLine";
-import jamoment from "moment-jalaali";
 import XYZ from "ol/source/XYZ";
 import RasterSource from "ol/source/Raster";
 import $ from "jquery";
 import { Image as ImageLayer } from "ol/layer";
 import chroma from "chroma-js";
-import { getHeatMapUrl } from "../../../../../src/utils/HeatMapServerUtils";
+import { getHeatMapUrl } from "../../../../utils/HeatMapServerUtils";
+import { calculateTimespan } from "../../../../utils/TimeHelper";
+import { scale, format } from "../../../../constants/timeline";
 
 class TimeLineWrapper extends Component {
-  state = {};
+  state = {
+    lang: format.fa,
+    playAnimation: false,
+    rangeValues: [],
+    timescale: scale.day,
+  };
 
   handleChange = (data) => {
+    console.log("this.state :>> ", this.state);
     console.log("timeline changed : >> ", data);
-    let date = jamoment(
-      `${data.year}/${data.month}/${data.day} ${data.hour}:00:00`,
-      "jYYYY/jM/jD HH:mm:ss"
-    ).format("YYYY-M-D HH:mm:ss");
 
     const mapContainer = $("#mapContainer").data("map");
     mapContainer
@@ -99,8 +102,36 @@ class TimeLineWrapper extends Component {
       });
   };
 
+  handleRange = (rangeValues) => {
+    let self = this;
+    console.log("rangeValues :>> ", rangeValues);
+    this.setState({ rangeValues: rangeValues });
+    this.setState({ playAnimation: true });
+
+    var rangeTimespans = rangeValues.map((date) => {
+      return calculateTimespan(date, self.state.timescale, self.state.lang);
+    });
+
+    console.log("rangeTimespans :>> ", rangeTimespans);
+  };
+
+  handleTimespan = (value) => {
+    console.log("timescale :>> ", value);
+    this.setState({ timescale: value });
+  };
+
   render() {
-    return <TimeLine onChange={(data) => this.handleChange(data)} />;
+    return (
+      <TimeLine
+        onChange={(data) => this.handleChange(data)}
+        lang={this.state.lang}
+        getAnimationRangeValues={(rangeValues) => this.handleRange(rangeValues)}
+        playAnimation={this.state.playAnimation}
+        timeScale={(value) => {
+          this.handleTimespan(value);
+        }}
+      />
+    );
   }
 }
 

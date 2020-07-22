@@ -6,7 +6,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import DatePicker from "react-modern-calendar-datepicker";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import Tooltip from "@material-ui/core/Tooltip";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
 const persianDate = require("persian-date");
 
@@ -62,7 +62,7 @@ export default function AnimationBtn(props) {
         style={props.disableAnimation === true ? { display: "none " } : {}}
       >
         <Tooltip title="نمایش بازه زمانی">
-          <PlayCircleOutlineIcon className="btn-animation-icon" />
+          <PlayArrowIcon className="btn-animation-icon" />
         </Tooltip>
       </div>
       <Popper open={open} anchorEl={anchorEl} placement={"top"} transition>
@@ -73,10 +73,13 @@ export default function AnimationBtn(props) {
               <div className="date-pickers-wrapper">
                 <span className="animation-text">از</span>
                 <DatePicker
+                  calendarClassName="animation-datePicker"
+                  calendarSelectedDayClassName="animation-datePicker-selectDay"
+                  colorPrimary="#fff"
                   value={selectedDayRange1}
                   onChange={setSelectedDayRange1}
                   shouldHighlightWeekends
-                  locale="fa"
+                  locale={props.lang === "eng" ? "en" : "fa"}
                   placeholder="بازه زمانی انتخاب کنید"
                   maximumDate={{
                     year: new persianDate().year(),
@@ -86,10 +89,13 @@ export default function AnimationBtn(props) {
                 />
                 <span className="animation-text">تا</span>
                 <DatePicker
+                  calendarClassName="animation-datePicker"
+                  calendarSelectedDayClassName="animation-datePicker-selectDay"
+                  colorPrimary="#fff"
                   value={selectedDayRange2}
                   onChange={selectDateRange}
                   shouldHighlightWeekends
-                  locale="fa"
+                  locale={props.lang === "eng" ? "en" : "fa"}
                   placeholder="بازه زمانی انتخاب کنید"
                   maximumDate={{
                     year: new persianDate().year(),

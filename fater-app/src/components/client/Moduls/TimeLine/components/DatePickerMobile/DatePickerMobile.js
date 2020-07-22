@@ -83,10 +83,13 @@ export default function AnimationBtn(props) {
   return (
     <div className="date-picker-mobile">
       <DatePicker
+        calendarClassName="animation-datePicker"
+        calendarSelectedDayClassName="animation-datePicker-selectDay"
+        colorPrimary="#fff"
         value={selectedDate}
         onChange={(value) => setDate(value)}
         shouldHighlightWeekends
-        locale="fa"
+        locale={props.lang === "eng" ? "en" : "fa"}
         placeholder="تاریخ را انتخاب کنید"
         maximumDate={{
           year: new persianDate().year(),
@@ -100,8 +103,8 @@ export default function AnimationBtn(props) {
         }}
       />
       <div className="change-date-mobile-wrapper">
-        <ChevronLeftIcon className="change-icon-mobile" onClick={dayInc} />
-        <ChevronRightIcon className="change-icon-mobile" onClick={dayDec} />
+        <ChevronLeftIcon className="change-icon-mobile" onClick={dayDec} />
+        <ChevronRightIcon className="change-icon-mobile" onClick={dayInc} />
       </div>
     </div>
   );

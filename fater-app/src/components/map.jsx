@@ -168,11 +168,12 @@ class Map extends Component {
       $(".error-container").remove();
       $(".ol-attribution").remove();
 
-      setTimeout(() => {
-        var map = $("#mapContainer").data("map");
-        console.log(map);
-
+      var map = $("#mapContainer").data("map");
+      var i = 0;
+      var timer = setInterval(function () {
+        if (i === 5) clearInterval(timer);
         map.updateSize();
+        i++;
       }, 500);
     });
   };

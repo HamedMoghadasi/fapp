@@ -4,6 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 
 export default function SelectTimeRange(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,6 +24,7 @@ export default function SelectTimeRange(props) {
       className="timeline-select-wrapper"
       style={props.disableTimeScale === true ? { display: "none" } : {}}
     >
+      <ArrowDropUpIcon className="icon-timeline-select" />
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -40,7 +42,7 @@ export default function SelectTimeRange(props) {
         ) : props.timeScale === 3 ? (
           <Tooltip title="ساعت">
             <img
-              src="timeline/assets/images/hour.png"
+              src="timeline//hour.png"
               alt="ساعت"
               className="image-timeRange"
             />
@@ -74,6 +76,7 @@ export default function SelectTimeRange(props) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        style={{ marginTop: -62 }}
       >
         <MenuItem
           style={{ justifyContent: "center" }}
