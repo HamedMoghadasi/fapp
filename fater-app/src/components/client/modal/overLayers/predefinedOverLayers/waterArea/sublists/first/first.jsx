@@ -7,6 +7,7 @@ import XYZ from "ol/source/XYZ";
 import RasterSource from "ol/source/Raster";
 import chroma from "chroma-js";
 import { getHeatMapUrl } from "../../../../../../../../utils/HeatMapServerUtils";
+import { heatMapUrls } from "../../../../../../../../constants/Urls";
 
 class First extends Component {
   state = {};
@@ -49,8 +50,7 @@ class First extends Component {
           console.log("heatmapUrl :>> ", heatmapUrl);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/aod/world/default/1593568800/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.aod}`,
             maxZoom: 11,
             crossOrigin: "",
           });
@@ -167,8 +167,7 @@ class First extends Component {
 
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/CO_map/co_1593752671/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.CO_1593752671}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -265,8 +264,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/CO_map/co_1593752971/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.CO_1593752971}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -363,8 +361,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/HCHO_map/hcho_1587254400/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.HCHO}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -461,8 +458,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/NO2_map/no2_1586908800/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.NO2}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -560,8 +556,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/O3_map/o3_1587081600/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.O3}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -658,8 +653,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/SO2_map/so2_1587081600/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.SO2}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -759,8 +753,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/Soil_moisture/sm_bu_1588277393/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.Soil_Moisture}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -858,8 +851,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/UV_AI/uvai_1586908800/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.UV_AI}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -960,7 +952,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url: "./assets/qweasd/wgis/map/AOT/AOT_1593675000/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.AOT_1593675000}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -1056,7 +1048,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url: "./assets/qweasd/wgis/map/AOT/AOT_1593761400/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.AOT_1593761400}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -1152,8 +1144,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/Sea_surface_current/ssc_1593519925474_Khalije-Fars/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.SSC_Khalije_Fars_1}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -1249,8 +1240,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/Sea_surface_current/ssc_1593840073862_Khalije-Fars/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.SSC_Khalije_Fars_2}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -1346,8 +1336,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/Sea_surface_current/ssc_1593519925474_Oman/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.SSC_Oman_1}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -1443,8 +1432,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/Sea_surface_current/ssc_1593840073862_Oman/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.SSC_Oman_2}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -1540,8 +1528,7 @@ class First extends Component {
           this.displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
-            url:
-              "./assets/qweasd/wgis/map/Sea_surface_temperature_hourly/ssth_1594236600_Khalije-Fars/{z}/{x}/{-y}.png",
+            url: `${heatMapUrls.SSTH_Khalije_Fars_1}`,
             maxZoom: 15,
             crossOrigin: "",
           });
@@ -1735,7 +1722,7 @@ class First extends Component {
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url:
-              "./assets/qweasd/wgis/map/Sea_surface_temperature_hourly/ssth_1594236600_Oman/{z}/{x}/{-y}.png",
+            `${heatMapUrls.SSTH_Oman_1}`,
             maxZoom: 15,
             crossOrigin: "",
           });
