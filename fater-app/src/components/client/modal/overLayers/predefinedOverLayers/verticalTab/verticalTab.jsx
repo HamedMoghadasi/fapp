@@ -9,27 +9,70 @@ import Box from "@material-ui/core/Box";
 import "./verticalTab.css";
 
 function TabPanel(props) {
-  const { children, value, index, handleAddLayer, ...other } = props;
+  const {
+    children,
+    value,
+    index,
+    handleAddLayer,
+    satellites,
+    ...other
+  } = props;
 
+  const [selectedSatellites, setSelectedSatellites] = React.useState([]);
+  const handleChecked = (event) => {
+    if (event.target.checked) {
+      setSelectedSatellites([...selectedSatellites, event.target.value]);
+    } else {
+      var remainSatellites = selectedSatellites.filter(
+        (sat) => sat !== event.target.value
+      );
+      setSelectedSatellites(remainSatellites);
+    }
+  };
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
+      className="vertical-tabpanel"
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
+      <div className="vertical-tabpanel-controller">
+        <button
+          className="btn btn-success btn-sm mx-1 mb-1 mt-auto "
+          onClick={() => {
+            if (selectedSatellites.length) {
+              handleAddLayer(selectedSatellites);
+            } else {
+              handleAddLayer(["default"]);
+            }
+          }}
+        >
+          + اضافه کردن
+        </button>
+        {satellites.map((satellite, index) => {
+          return (
+            <div
+              key={index}
+              className="form-check form-check-inline vertical-tabpanel-controller-checkboxLabel"
+            >
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value={satellite.value}
+                onChange={handleChecked}
+              />
+              <label className="form-check-label">{satellite.label}</label>
+            </div>
+          );
+        })}
+      </div>
       {value === index && (
         <Box p={3}>
           <Typography>{children}</Typography>
         </Box>
       )}
-      <button
-        className="btn btn-success mx-1 mb-1 mt-auto verticalTabAddLayerBtn"
-        onClick={handleAddLayer}
-      >
-        + اضافه کردن
-      </button>
     </div>
   );
 }
@@ -91,6 +134,7 @@ export default function VerticalTabs(props) {
             index={index}
             key={index}
             handleAddLayer={tab.handleAddLayer}
+            satellites={tab.satellites ? tab.satellites : []}
           >
             {tab.content}
           </TabPanel>

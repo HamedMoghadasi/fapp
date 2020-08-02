@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     // marginTop: "70px",
   },
+  wrapper: {
+    position: "relative",
+    height: "100%",
+  },
   margin: {
     height: theme.spacing(3),
   },
@@ -27,10 +31,12 @@ const PersianMonth = (value) => {
 // Style Slider
 let PrettoSlider = withStyles({
   root: {
+    position: "relative",
     color: "transparent",
     borderRadius: 12,
     height: "100%",
     padding: 0,
+    zIndex: 1,
   },
   thumb: {
     height: 27,
@@ -45,6 +51,9 @@ let PrettoSlider = withStyles({
     // marginLeft: -17.2,
     "&:focus, &:hover, &$active": {
       boxShadow: "inherit",
+    },
+    "&:nth-child(1)": {
+      background: "red",
     },
     "&:after": {
       content: "|||",
@@ -73,11 +82,53 @@ let PrettoSlider = withStyles({
     opacity: 1,
   },
 })(Slider);
+let PrettoSlider2 = withStyles({
+  root: {
+    width: "100%",
+    padding: 0,
+    left: "0px",
+    color: "transparent",
+    borderRadius: 12,
+    height: "100%",
+    position: "absolute",
+    top: "0",
+  },
+  thumb: {
+    height: 20,
+    width: 20,
+    backgroundColor: "#ffd400",
+    border: "1.5px solid white",
+    marginTop: -14,
+    marginLeft: -9.2,
+    borderRadius: "0% 0% 50% 50%",
+    "&:focus, &:hover, &$active": {
+      boxShadow: "inherit",
+    },
+  },
+  active: {
+    color: "transparent",
+  },
+  valueLabel: {
+    left: "calc(-50% + 4px)",
+  },
+  track: {
+    height: "100%",
+    borderRadius: 4,
+    left: "17px !important",
+    background: "transparent",
+    // background: props.DateRange.length !== 0 ? "#37aeee2a" : "transparent",
+  },
+  rail: {
+    height: "100%",
+    opacity: 1,
+  },
+})(Slider);
 const CustomizedSlider = (props) => {
   const TimeScale = props.timescale;
   const classes = useStyles();
   // Slider
   const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue2, setSliderValue2] = useState(0);
   useEffect(() => {
     if (props.DateRange.length !== 0) {
       return;
@@ -105,28 +156,29 @@ const CustomizedSlider = (props) => {
   useEffect(() => {
     if (props.DateRange.length !== 0) {
       if (TimeScale === 0) {
-        setSliderValue([
-          props.DateRange[0].from.year,
+        setSliderValue2([
           props.DateRange[0].from.year,
           props.DateRange[0].to.year,
         ]);
       } else if (TimeScale === 1) {
-        setSliderValue([
-          props.DateRange[0].from.month,
+        setSliderValue2([
           props.DateRange[0].from.month,
           props.DateRange[0].to.month,
         ]);
       } else if (TimeScale === 2) {
-        setSliderValue([
-          props.DateRange[0].from.day,
+        setSliderValue2([
           props.DateRange[0].from.day,
           props.DateRange[0].to.day,
         ]);
       } else if (TimeScale === 3) {
-        setSliderValue(props.currentHour);
+        setSliderValue2([
+          props.DateRange[0].from.hour,
+          props.DateRange[0].to.hour,
+        ]);
       }
     }
   }, [TimeScale, props.DateRange, props.currentHour]);
+
   // Animation step by step
   useEffect(() => {
     if (props.isPlayingAnimation === true && props.playAnimation === true) {
@@ -134,55 +186,37 @@ const CustomizedSlider = (props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.isPlayingAnimation]);
+  // Play Action Animation
+  let demoValue = sliderValue2[0] ? sliderValue2[0] : 0;
+  let firstValueSlider = sliderValue;
   const sliderAnimation = () => {
     setTimeout(() => {
-      setSliderValue([
-        sliderValue[0],
-        (sliderValue[1] = sliderValue[1] + 1),
-        sliderValue[2],
-      ]);
-      if (sliderValue[1] < sliderValue[2]) {
+      setSliderValue(demoValue);
+      demoValue += 1;
+      if (demoValue - 1 <= sliderValue2[1]) {
         sliderAnimation();
       } else {
-        if (props.DateRange.length !== 0) {
-          if (TimeScale === 0) {
-            setSliderValue([
-              props.DateRange[0].from.year,
-              props.DateRange[0].from.year,
-              props.DateRange[0].to.year,
-            ]);
-          } else if (TimeScale === 1) {
-            setSliderValue([
-              props.DateRange[0].from.month,
-              props.DateRange[0].from.month,
-              props.DateRange[0].to.month,
-            ]);
-          } else if (TimeScale === 2) {
-            setSliderValue([
-              props.DateRange[0].from.day,
-              props.DateRange[0].from.day,
-              props.DateRange[0].to.day,
-            ]);
-          } else if (TimeScale === 3) {
-            setSliderValue(props.currentHour);
-          }
-        }
+        setSliderValue(firstValueSlider);
         props.setIsPlayingAnimation(false);
       }
     }, 1000);
   };
   const changeSliderValue = (value) => {
-    if (props.DateRange.length !== 0) {
-      setSliderValue(value[1]);
-      props.getSliderValue(value[1]);
-      return;
-    }
+    // if (props.DateRange.length !== 0) {
+    //   setSliderValue(value[1]);
+    //   props.getSliderValue(value[1]);
+    //   return;
+    // }
     if (TimeScale === 0) {
       setSliderValue(value);
     } else {
       setSliderValue(value);
     }
     props.getSliderValue(value);
+  };
+  const changeSliderValue2 = (value) => {
+    setSliderValue2(value);
+    props.getSliderValue2(value);
   };
   // Marks
   let marksYears = [];
@@ -281,7 +315,7 @@ const CustomizedSlider = (props) => {
                   "-" +
                   props.currentYear}
               </div>
-            ) : props.DateRange.length !== 0 && dataIndex !== 1 ? (
+            ) : props.DateRange.length !== 0 ? (
               <div style={{ direction: "rtl" }}>
                 {value +
                   "-" +
@@ -298,14 +332,6 @@ const CustomizedSlider = (props) => {
         </Tooltip>
       );
     } else if (TimeScale === 3) {
-      let dateRange = 1;
-      if (props.DateRange.length !== 0) {
-        Object.values(props.DateRange[0])
-          .reverse()
-          .filter((date) =>
-            date.day === value ? (dateRange = date.month) : null
-          );
-      }
       return (
         <Tooltip
           open={open}
@@ -324,17 +350,27 @@ const CustomizedSlider = (props) => {
                   "-" +
                   props.currentYear}
               </div>
-            ) : props.DateRange.length !== 0 && dataIndex !== 1 ? (
+            ) : props.DateRange.length !== 0 ? (
               <div style={{ direction: "rtl" }}>
-                {value +
-                  ":" +
-                  "00" +
-                  " " +
-                  props.currentDay +
-                  "-" +
-                  PersianMonth(dateRange) +
-                  "-" +
-                  props.currentYear}
+                {dataIndex !== 1
+                  ? value +
+                    ":" +
+                    "00" +
+                    " " +
+                    props.DateRange[0].from.day +
+                    "-" +
+                    PersianMonth(props.DateRange[0].from.month) +
+                    "-" +
+                    props.DateRange[0].from.year
+                  : value +
+                    ":" +
+                    "00" +
+                    " " +
+                    props.DateRange[0].to.day +
+                    "-" +
+                    PersianMonth(props.DateRange[0].to.month) +
+                    "-" +
+                    props.DateRange[0].to.year}
               </div>
             ) : (
               ""
@@ -353,64 +389,115 @@ const CustomizedSlider = (props) => {
   };
   return (
     <div className={classes.root}>
-      <PrettoSlider
-        classes={{
-          track:
-            props.DateRange.length !== 0 && TimeScale !== 3
-              ? "track-yellow"
-              : "",
-        }}
-        // ThumbComponent={CustomeThumbComponent}
-        ValueLabelComponent={ValueLabelComponent}
-        valueLabelDisplay={props.DateRange.length !== 0 ? "on" : "auto"}
-        // aria-label="custom thumb label slider"
-        getAriaValueText={() => "custom thumb label slider"}
-        min={
-          TimeScale === 0
-            ? marksYears[0].value
-            : TimeScale === 1
-            ? marksMonths[0].value
-            : TimeScale === 2
-            ? marksDays[0].value
-            : TimeScale === 3
-            ? marksHours[0].value
-            : null
-        }
-        max={
-          TimeScale === 0
-            ? marksYears[marksYears.length - 1].value
-            : TimeScale === 1
-            ? marksMonths[marksMonths.length - 1].value
-            : TimeScale === 2
-            ? marksDays[marksDays.length - 1].value
-            : TimeScale === 3
-            ? marksHours[marksHours.length - 1].value
-            : null
-        }
-        step={TimeScale === 0 ? 0.5 : TimeScale === 1 ? 1 : 1}
-        marks={
-          TimeScale === 0
-            ? marksYears.length !== 0
-              ? marksYears
+      <div className={classes.wrapper}>
+        <PrettoSlider
+          // ThumbComponent={CustomeThumbComponent}
+          ValueLabelComponent={ValueLabelComponent}
+          valueLabelDisplay={props.DateRange.length !== 0 ? "on" : "auto"}
+          // aria-label="custom thumb label slider"
+          getAriaValueText={() => "custom thumb label slider"}
+          min={
+            TimeScale === 0
+              ? marksYears[0].value
+              : TimeScale === 1
+              ? marksMonths[0].value
+              : TimeScale === 2
+              ? marksDays[0].value
+              : TimeScale === 3
+              ? marksHours[0].value
               : null
-            : TimeScale === 1
-            ? marksMonths.length !== 0
-              ? marksMonths
+          }
+          max={
+            TimeScale === 0
+              ? marksYears[marksYears.length - 1].value
+              : TimeScale === 1
+              ? marksMonths[marksMonths.length - 1].value
+              : TimeScale === 2
+              ? marksDays[marksDays.length - 1].value
+              : TimeScale === 3
+              ? marksHours[marksHours.length - 1].value
               : null
-            : TimeScale === 2
-            ? marksDays.length !== 0
-              ? marksDays
+          }
+          step={1}
+          marks={
+            TimeScale === 0
+              ? marksYears.length !== 0
+                ? marksYears
+                : null
+              : TimeScale === 1
+              ? marksMonths.length !== 0
+                ? marksMonths
+                : null
+              : TimeScale === 2
+              ? marksDays.length !== 0
+                ? marksDays
+                : null
+              : TimeScale === 3
+              ? marksHours.length !== 0
+                ? marksHours
+                : null
               : null
-            : TimeScale === 3
-            ? marksHours.length !== 0
-              ? marksHours
+          }
+          value={sliderValue}
+          defaultValue={10}
+          onChange={(e, value) => changeSliderValue(value)}
+        />
+        <PrettoSlider2
+          // classes={{
+          //   track:
+          //     props.DateRange.length !== 0 && TimeScale !== 3
+          //       ? "track-yellow"
+          //       : "",
+          // }}
+          ValueLabelComponent={ValueLabelComponent}
+          valueLabelDisplay={props.DateRange.length !== 0 ? "on" : "auto"}
+          getAriaValueText={() => "custom thumb label slider"}
+          min={
+            TimeScale === 0
+              ? marksYears[0].value
+              : TimeScale === 1
+              ? marksMonths[0].value
+              : TimeScale === 2
+              ? marksDays[0].value
+              : TimeScale === 3
+              ? marksHours[0].value
               : null
-            : null
-        }
-        value={sliderValue}
-        defaultValue={10}
-        onChange={(e, value) => changeSliderValue(value)}
-      />
+          }
+          max={
+            TimeScale === 0
+              ? marksYears[marksYears.length - 1].value
+              : TimeScale === 1
+              ? marksMonths[marksMonths.length - 1].value
+              : TimeScale === 2
+              ? marksDays[marksDays.length - 1].value
+              : TimeScale === 3
+              ? marksHours[marksHours.length - 1].value
+              : null
+          }
+          step={1}
+          marks={
+            TimeScale === 0
+              ? marksYears.length !== 0
+                ? marksYears
+                : null
+              : TimeScale === 1
+              ? marksMonths.length !== 0
+                ? marksMonths
+                : null
+              : TimeScale === 2
+              ? marksDays.length !== 0
+                ? marksDays
+                : null
+              : TimeScale === 3
+              ? marksHours.length !== 0
+                ? marksHours
+                : null
+              : null
+          }
+          value={props.DateRange.length !== 0 ? sliderValue2 : sliderValue}
+          onChange={(e, value) => changeSliderValue2(value)}
+        />
+      </div>
     </div>
   );
 };

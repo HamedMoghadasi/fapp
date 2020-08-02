@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./predefinedOverLayers.css";
 import WaterArea from "./waterArea/waterArea";
 import { applicationTypes } from "../../../../../constants/ApplicationType";
+import AirState from "./airState/airState";
 let ApplicationType = process.env.REACT_APP_APPLICATION_TYPE;
 
 class PredefinedOverLayers extends Component {
@@ -10,11 +11,9 @@ class PredefinedOverLayers extends Component {
 
   handleTypeOfOverLayer = () => {
     if (ApplicationType === applicationTypes.karaneh) {
+      return <AirState refreshComponent={this.props.refreshComponent} />;
+    } else if (ApplicationType === applicationTypes.amvaj) {
       return <WaterArea refreshComponent={this.props.refreshComponent} />;
-    } else if (ApplicationType === applicationTypes.afagh) {
-      return (
-        <div style={{ textAlign: "center" }}>لایه های پیش فرض سامانه آفاق</div>
-      );
     }
 
     return false;

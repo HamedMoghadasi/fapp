@@ -1,0 +1,6 @@
+.progressBar-container .progress {
+  height: 4px;
+}
+.progressBar-container {
+  display: none;
+}

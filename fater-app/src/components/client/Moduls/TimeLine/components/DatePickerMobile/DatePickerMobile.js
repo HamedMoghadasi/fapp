@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-modern-calendar-datepicker";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-
-const persianDate = require("persian-date");
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import moment from "moment";
+import jMoment from "moment-jalaali";
+import JalaliUtils from "@date-io/jalaali";
+import MomentUtils from "@date-io/moment";
+import { TimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+let persianDate = require("persian-date");
 
 export default function AnimationBtn(props) {
+  // Time
+  props.lang === "eng"
+    ? jMoment.locale("en")
+    : jMoment.loadPersian({
+        dialect: "persian-modern",
+        usePersianDigits: true,
+      });
+  // Lang
+  if (props.lang === "eng") {
+    persianDate.toCalendar("gregorian");
+  } else {
+    persianDate.toCalendar("persian");
+  }
   const [selectedDate, setSelectedDate] = useState({
     year: new persianDate().year(),
     month: new persianDate().month(),
@@ -79,7 +95,19 @@ export default function AnimationBtn(props) {
     props.setcurrentYear(value.year);
     props.setcurrentMonth(value.month);
     props.setcurrentDay(value.day);
+    props.setcurrentHour(hour);
   };
+
+  // Time
+  const [timePick1, settimePick1] = useState(moment());
+  const hour = Number(timePick1.format("HH:mm").split(":")[0]);
+  useEffect(() => {
+    props.setcurrentYear(selectedDate.year);
+    props.setcurrentMonth(selectedDate.month);
+    props.setcurrentDay(selectedDate.day);
+    props.setcurrentHour(hour);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDate, hour]);
   return (
     <div className="date-picker-mobile">
       <DatePicker
@@ -101,10 +129,34 @@ export default function AnimationBtn(props) {
           month: 1,
           day: 1,
         }}
+        renderFooter={() => (
+          <div className="time-picker">
+            <MuiPickersUtilsProvider
+              utils={props.lang === "eng" ? MomentUtils : JalaliUtils}
+              locale="fa"
+            >
+              <TimePicker
+                // clearable
+                variant="inline"
+                // oklabel="تأیید"
+                // cancellabel="لغو"
+                // clearlabel="پاک کردن"
+                labelFunc={(date) => (date ? date.format("hh:mm A") : "")}
+                // minutesStep={5}
+                value={timePick1}
+                onChange={settimePick1}
+              />
+            </MuiPickersUtilsProvider>
+          </div>
+        )}
       />
       <div className="change-date-mobile-wrapper">
-        <ChevronLeftIcon className="change-icon-mobile" onClick={dayDec} />
-        <ChevronRightIcon className="change-icon-mobile" onClick={dayInc} />
+        <PlayArrowIcon
+          className="change-icon-mobile"
+          style={{ transform: "rotate(180deg)" }}
+          onClick={dayDec}
+        />
+        <PlayArrowIcon className="change-icon-mobile" onClick={dayInc} />
       </div>
     </div>
   );

@@ -64,7 +64,8 @@ class OverLayerList extends Component {
                 if (
                   (layer instanceof VectorLayer ||
                     layer instanceof ImageLayer) &&
-                  layer.get("name") !== "Draw vector layer"
+                  layer.get("name") !== "Draw vector layer" &&
+                  !layer.get("isTimelineLayer")
                 ) {
                   return (
                     <DragableLayerInfo

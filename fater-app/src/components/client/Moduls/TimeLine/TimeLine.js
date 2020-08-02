@@ -62,27 +62,47 @@ function TimeLine(props) {
     } else if (timeScale === 3) {
       setcurrentHour(value);
     }
-    setDateRange([]);
-    setAnimationRangeValue([]);
+    // setDateRange([]);
+    // setAnimationRangeValue([]);
   };
+  const getSliderValue2 = (value) => {
+    const newDateRange = [...DateRange];
+    if (timeScale === 0) {
+      newDateRange[0].from.year = value[0];
+      newDateRange[0].to.year = value[1];
+    } else if (timeScale === 1) {
+      newDateRange[0].from.month = value[0];
+      newDateRange[0].to.month = value[1];
+    } else if (timeScale === 2) {
+      newDateRange[0].from.day = value[0];
+      newDateRange[0].to.day = value[1];
+    } else if (timeScale === 3) {
+      newDateRange[0].from.hour = value[0];
+      newDateRange[0].to.hour = value[1];
+    }
+    setDateRange(newDateRange);
+  };
+
   // Animation
   const [DateRange, setDateRange] = useState([]);
-  useEffect(() => {
-    if (DateRange.length !== 0) {
-      if (timeScale === 3) {
-        setTimeScale(2);
-      }
-      const date = DateRange[0].from;
-      if (date) {
-        setcurrentDay(date.day);
-        setcurrentMonth(date.month);
-        setcurrentYear(date.year);
-      }
-    }
-  }, [DateRange, timeScale]);
+  // useEffect(() => {
+  //   if (DateRange.length !== 0) {
+  //     if (timeScale === 3) {
+  //       setTimeScale(2);
+  //     }
+  //     const date = DateRange[0].from;
+  //     if (date) {
+  //       setcurrentDay(date.day);
+  //       setcurrentMonth(date.month);
+  //       setcurrentYear(date.year);
+  //     }
+  //   }
+  // }, [DateRange, timeScale]);
+  // Plat Animation Button
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
   const playAnimation = () => {
-    if (DateRange.length !== 0) {
+    if (DateRange.length !== 0 && props.playAnimation) {
+      props.onPlayAnimation();
       setIsPlayingAnimation(true);
       props.onChange(DateRange);
     }
@@ -92,28 +112,34 @@ function TimeLine(props) {
   useEffect(() => {
     const DateRangeVlaue = [];
     if (DateRange.length !== 0) {
-      if (timeScale === 0) {
-        for (let i = DateRange[0].from.year; i <= DateRange[0].to.year; i++) {
+      let fromDate = new persianDate([
+        DateRange[0].from.year,
+        DateRange[0].from.month,
+        DateRange[0].from.day,
+        DateRange[0].from.hour,
+      ]);
+      let toDate = new persianDate([
+        DateRange[0].to.year,
+        DateRange[0].to.month,
+        DateRange[0].to.day,
+        DateRange[0].to.hour,
+      ]);
+      if (timeScale !== 3) {
+        for (let i = 1; i - 1 <= toDate.diff(fromDate, "days"); i++) {
           DateRangeVlaue.push({
-            day: DateRange[0].from.day,
-            month: DateRange[0].from.month,
-            year: i,
+            year: fromDate.subtract("days", 3).add("days", i).year(),
+            month: fromDate.subtract("days", 3).add("days", i).month(),
+            day: fromDate.subtract("days", 3).add("days", i).date(),
+            hour: fromDate.hour(),
           });
         }
-      } else if (timeScale === 1) {
-        for (let i = DateRange[0].from.month; i <= DateRange[0].to.month; i++) {
+      } else if (timeScale === 3) {
+        for (let i = 1; i - 1 <= toDate.diff(fromDate, "hour"); i++) {
           DateRangeVlaue.push({
-            day: DateRange[0].from.day,
-            month: i,
-            year: DateRange[0].from.year,
-          });
-        }
-      } else if (timeScale === 2) {
-        for (let i = DateRange[0].from.day; i <= DateRange[0].to.day; i++) {
-          DateRangeVlaue.push({
-            day: i,
-            month: DateRange[0].from.month,
-            year: DateRange[0].from.year,
+            year: fromDate.add("hour", i).year(),
+            month: fromDate.add("hour", i).month(),
+            day: fromDate.add("hour", i).date(),
+            hour: fromDate.add("hour", i).hour(),
           });
         }
       }
@@ -177,6 +203,10 @@ function TimeLine(props) {
             disableAnimation={props.disableAnimation}
             playAnimation={playAnimation}
             lang={props.lang}
+            propsPlayAnimation={props.playAnimation}
+            currentHour={currentHour}
+            setAnimationRangeValue={setAnimationRangeValue}
+            timescale={timeScale}
           />
           {/* Select Time */}
           <SelectTimeRange
@@ -207,6 +237,7 @@ function TimeLine(props) {
           currentDay={currentDay}
           currentHour={currentHour}
           getSliderValue={getSliderValue}
+          getSliderValue2={getSliderValue2}
           DateRange={DateRange}
           isPlayingAnimation={isPlayingAnimation}
           setIsPlayingAnimation={setIsPlayingAnimation}
@@ -218,6 +249,7 @@ function TimeLine(props) {
           setcurrentYear={setcurrentYear}
           setcurrentMonth={setcurrentMonth}
           setcurrentDay={setcurrentDay}
+          setcurrentHour={setcurrentHour}
           daysOfMonth={daysOfMonth}
           minYear={minYear}
           lang={props.lang}

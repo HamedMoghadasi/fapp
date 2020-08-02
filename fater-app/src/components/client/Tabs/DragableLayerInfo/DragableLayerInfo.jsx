@@ -49,9 +49,12 @@ class DragableLayerInfo extends Component {
   handleLayerRemove = (ol_uid) => {
     let map = $("#mapContainer").data("map");
 
+    let isHeatMap = false;
     map.getLayers().array_ = map.getLayers().array_.filter((layer) => {
       if (String(layer.ol_uid) !== String(ol_uid)) return layer;
     });
+
+    $(".date-pickers-wrapper div:nth-child(4) input").change();
 
     $("#mapContainer").data("map", map);
     this.props.refreshComponent();
@@ -132,12 +135,14 @@ class DragableLayerInfo extends Component {
   handleColorContainerClick = (inputId) => {
     $(`#${inputId}`).click();
   };
+
   displayLoader = (time) => {
     $(".loader-wrapper").toggle();
     setTimeout(() => {
       $(".loader-wrapper").toggle();
     }, time);
   };
+
   handleChangeColorSubmit = (ol_uid) => {
     this.displayLoader(3000);
     let _map = $("#mapContainer").data("map");
@@ -158,6 +163,7 @@ class DragableLayerInfo extends Component {
       i++;
     }, 500);
   };
+
   handleColorPicker = () => {
     if (this.props.layer && this.props.layer.get("colors")) {
       let colors = this.props.layer.get("colors");

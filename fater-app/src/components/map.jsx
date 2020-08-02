@@ -152,6 +152,7 @@ class Map extends Component {
     this.olmap.removeInteraction(dblClickInteraction);
 
     $("#mapContainer").data("map", this.olmap);
+    console.log("Map :>> ", this.olmap);
     $("#mapContainer").data("drawVector-source", drawSource);
     $("#mapContainer").data("drawVector", drawVector);
     this.olmap.on("moveend", () => {

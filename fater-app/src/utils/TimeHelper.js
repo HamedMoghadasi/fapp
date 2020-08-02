@@ -16,45 +16,56 @@ export const calculateTimespan = (date, timeScale, _format) => {
     case scale.year:
       timespan.start = moment(new Date(date.year, 0, 1))
         .startOf("years")
+        .locale("en")
         .format("YYYY-MM-DD HH:mm");
       timespan.end = moment(new Date(date.year, 0, 1))
         .endOf("years")
+        .locale("en")
         .format("YYYY-MM-DD HH:mm");
       break;
     case scale.month:
       timespan.start = moment(new Date(date.year, date.month, 1))
         .startOf("months")
+        .locale("en")
         .format("YYYY-MM-DD HH:mm");
       timespan.end = moment(new Date(date.year, date.month, 1))
         .endOf("months")
+        .locale("en")
         .format("YYYY-MM-DD HH:mm");
       break;
     case scale.day:
       timespan.start = moment(new Date(date.year, date.month, date.day))
-        .startOf("months")
+        .startOf("days")
+        .locale("en")
         .format("YYYY-MM-DD HH:mm");
       timespan.end = moment(new Date(date.year, date.month, date.day))
-        .endOf("months")
+        .endOf("days")
+        .locale("en")
         .format("YYYY-MM-DD HH:mm");
+      console.log("timespan :>> ", timespan);
       break;
+
     case scale.hour:
       timespan.start = moment(
         new Date(date.year, date.month, date.day, date.hour)
       )
         .startOf("hours")
+        .locale("en")
         .format("YYYY-MM-DD HH:mm");
       timespan.end = moment(
         new Date(date.year, date.month, date.day, date.hour)
       )
         .endOf("hours")
+        .locale("en")
         .format("YYYY-MM-DD HH:mm");
       break;
-
     default:
       break;
   }
+
   timespan.startTimespan = new Date(timespan.start).getTime();
   timespan.endTimespan = new Date(timespan.end).getTime();
+
   return timespan;
 };
 

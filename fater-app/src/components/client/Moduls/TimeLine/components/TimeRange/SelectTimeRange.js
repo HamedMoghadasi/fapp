@@ -42,7 +42,7 @@ export default function SelectTimeRange(props) {
         ) : props.timeScale === 3 ? (
           <Tooltip title="ساعت">
             <img
-              src="timeline//hour.png"
+              src="timeline/assets/images/hour.png"
               alt="ساعت"
               className="image-timeRange"
             />
@@ -100,7 +100,7 @@ export default function SelectTimeRange(props) {
           {/* روز */}
           <Tooltip title="روز">
             <img
-              src="timeline/assets/images/day.png"
+              src="timeline/ssets/images/day.png"
               alt="روز"
               className="image-timeRange"
             />

@@ -13,6 +13,7 @@ import ManagementArea from "../components/client/ManagementArea/ManagementArea";
 import SideToolbar from "../components/client/SideToolbar/SideToolbar";
 import UpperToolbar from "../components/client/UpperToolbar/UpperToolbar";
 import TimeLine from "../components/client/Moduls/TimeLine/TimeLineHOC";
+import ProgressBar from "../components/client/ProgressBar/ProgressBar";
 // import TimelineSlider from "../components/client/Timeline/TimelineSlider/TimelineSlider";
 // import TimelineControl from "../components/client/Timeline/TimelineControl/TimelineControl";
 import { ToastContainer } from "react-toastify";
@@ -44,6 +45,7 @@ const Home: React.FC<IHomeProps> = (props) => {
         </IonHeader>
         <IonContent></IonContent>
         <ManagementArea />
+        <ProgressBar />
 
         <ToastContainer />
         <MapContainer location={location.search} />

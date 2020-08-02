@@ -21,17 +21,17 @@ div#ma-wrapper #layers::-webkit-scrollbar {
 
 /* Track */
 div#ma-wrapper #layers::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #80808087;
 }
 
 /* Handle */
 div#ma-wrapper #layers::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #f1f1f1;
 }
 
 /* Handle on hover */
 div#ma-wrapper #layers::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #fde8a7;
 }
 
 @media only screen and (max-width: 500px) {
