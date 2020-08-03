@@ -43,8 +43,8 @@ class ManagementArea extends Component {
       return (
         <span className="ma-header-title karaneh">سامانه پایشی کرانه</span>
       );
-    } else if (ApplicationType === applicationTypes.amvaj) {
-      return <span className="ma-header-title afagh">سامانه پایشی امواج</span>;
+    } else if (ApplicationType === applicationTypes.afagh) {
+      return <span className="ma-header-title afagh">سامانه پایشی آفاق</span>;
     }
 
     return false;

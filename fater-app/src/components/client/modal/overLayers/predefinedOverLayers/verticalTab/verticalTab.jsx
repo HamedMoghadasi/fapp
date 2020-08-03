@@ -111,22 +111,32 @@ export default function VerticalTabs(props) {
     setValue(newValue);
   };
 
+  const handleTabs = () => {
+    if (props.hasTabs) {
+      return (
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          className={classes.tabs}
+        >
+          {props.configuration.tabs.map((tab, index) => {
+            return (
+              <Tab key={index} label={tab.label} {...a11yProps(tab, index)} />
+            );
+          })}
+        </Tabs>
+      );
+    } else {
+      return;
+    }
+  };
+
   return (
     <div className={classes.root}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        className={classes.tabs}
-      >
-        {props.configuration.tabs.map((tab, index) => {
-          return (
-            <Tab key={index} label={tab.label} {...a11yProps(tab, index)} />
-          );
-        })}
-      </Tabs>
+      {handleTabs()}
       {props.configuration.tabs.map((tab, index) => {
         return (
           <TabPanel

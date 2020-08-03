@@ -18,6 +18,7 @@ class Second extends Component {
         >
           ← بازگشت
         </button>
+        <span className="sublist-title">پارامترهای فیزیکی بدنه‌های آبی</span>
         <hr />
         <div className="accordion" id="waterArea-second-accordion">
           <div className="card">

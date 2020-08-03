@@ -12,18 +12,13 @@ import {
   satellites,
   getSatelliteLableByValue,
 } from "../../../../../../../../constants/satellites";
+import { displayLoader } from "../../../../../../../../utils/LoadingHelper";
 
 class First extends Component {
   state = {};
   handleBack = (parentDOM, currentDOM) => {
     $(parentDOM).slideDown("fast");
     $(currentDOM).slideUp("fast");
-  };
-  displayLoader = (time) => {
-    $(".loader-wrapper").toggle();
-    setTimeout(() => {
-      $(".loader-wrapper").toggle();
-    }, time);
   };
 
   firstConfiguration = {
@@ -43,7 +38,7 @@ class First extends Component {
         handleAddLayer: (selectedSatellites) => {
           console.log("satellites :>> ", selectedSatellites);
           selectedSatellites.map((satellite) => {
-            this.displayLoader(5000);
+            displayLoader(5000);
 
             let heatmapUrl = getHeatMapUrl(
               { start: "1572251500", end: "1593568800" },
@@ -154,7 +149,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         satellites: [satellites.modis, satellites.sentinel3, satellites.viirs],
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
 
           let heatmapUrl = getHeatMapUrl(
             { start: "1572251500", end: "1593568800" },
@@ -261,7 +256,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         satellites: [],
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.HCHO}`,
@@ -358,7 +353,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.NO2}`,
@@ -457,7 +452,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.O3}`,
@@ -555,7 +550,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.SO2}`,
@@ -656,7 +651,7 @@ class First extends Component {
       زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.Soil_Moisture}`,
@@ -755,7 +750,7 @@ class First extends Component {
       برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
       زبان فارسی ایجاد کرد، در این ص`,
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.UV_AI}`,
@@ -857,7 +852,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.SSC_Khalije_Fars_1}`,
@@ -954,7 +949,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.SSC_Oman_1}`,
@@ -1051,7 +1046,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.SSTH_Khalije_Fars_1}`,
@@ -1148,7 +1143,7 @@ class First extends Component {
       پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
 
         handleAddLayer: () => {
-          this.displayLoader(5000);
+          displayLoader(5000);
           const mapContainer = $("#mapContainer").data("map");
           var aerial = new XYZ({
             url: `${heatMapUrls.SSTH_Oman_1}`,
@@ -1236,6 +1231,361 @@ class First extends Component {
     tabPanel: [{}],
   };
 
+  tempratureConfiguration = {
+    tabs: [
+      {
+        label: "Anzali",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+    استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+    در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+    نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+    زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+    دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+    زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+    پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+        satellites: [],
+        handleAddLayer: (selectedSatellites) => {
+          console.log("satellites :>> ", selectedSatellites);
+          selectedSatellites.map((satellite) => {
+            displayLoader(5000);
+
+            let heatmapUrl = getHeatMapUrl(
+              { start: "1572251500", end: "1593568800" },
+              {
+                parameter: "at",
+                location: "anzali",
+                satellite: satellite,
+              }
+            );
+            console.log("heatmapUrl :>> ", heatmapUrl);
+            const mapContainer = $("#mapContainer").data("map");
+            var aerial = new XYZ({
+              url: `${heatMapUrls.aod}`,
+              maxZoom: 11,
+              crossOrigin: "",
+            });
+            var raster = new RasterSource({
+              sources: [aerial],
+              operation: function (pixels, data) {
+                var pixel = pixels[0];
+                var colors = data.colors;
+
+                if (pixel[0] !== 0) {
+                  const pixel2 = pixel;
+                  const color = colors[pixel2[0]];
+                  if (color) {
+                    pixel[0] = color[0];
+                    pixel[1] = color[1];
+                    pixel[2] = color[2];
+                    pixel[3] = 255;
+                  } else {
+                    pixel[0] = 0;
+                    pixel[1] = 0;
+                    pixel[2] = 0;
+                    pixel[3] = 0;
+                  }
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+
+                return pixel;
+              },
+            });
+            raster.on("beforeoperations", function (event) {
+              event.data.colors = getColors();
+            });
+
+            raster.on("afteroperations", function (event) {});
+
+            function getColors() {
+              var scale = chroma
+                .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+                .colors(254);
+
+              var _palet = scale.map((element, index) => {
+                return chroma(scale[index]).rgba();
+              });
+
+              return _palet;
+            }
+
+            var tilelayer = new TileLayer({
+              source: aerial,
+            });
+
+            var heatmap = new ImageLayer({
+              source: raster,
+            });
+
+            const heatmapName =
+              satellite === "default"
+                ? "Air temperature"
+                : `Air temperature -- ${getSatelliteLableByValue[satellite]}`;
+            heatmap.set("name", heatmapName);
+            heatmap.set("description", `location: ANZALI `);
+            heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
+            heatmap.set("params", ["at", "world", `${satellite}`]);
+            heatmap.set("isHeatMap", true);
+            const zIndex = mapContainer.getLayers().array_.length * 10000;
+            heatmap.setZIndex(zIndex);
+
+            //mapContainer.getLayers().array_.push(tilelayer);
+            mapContainer.getLayers().array_.push(heatmap);
+
+            this.props.refreshComponent();
+            var i = 0;
+            var timer = setInterval(function () {
+              if (i === 6) clearInterval(timer);
+              mapContainer.updateSize();
+              i++;
+            }, 500);
+          });
+        },
+      },
+    ],
+    tabPanel: [{}],
+  };
+  humidityConfiguration = {
+    tabs: [
+      {
+        label: "ANZALI",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+    استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+    در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+    نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+    زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+    دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+    زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+    پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+        satellites: [],
+        handleAddLayer: (selectedSatellites) => {
+          console.log("satellites :>> ", selectedSatellites);
+          selectedSatellites.map((satellite) => {
+            displayLoader(5000);
+
+            let heatmapUrl = getHeatMapUrl(
+              { start: "1572251500", end: "1593568800" },
+              {
+                parameter: "rh",
+                location: "anzali",
+                satellite: satellite,
+              }
+            );
+            console.log("heatmapUrl :>> ", heatmapUrl);
+            const mapContainer = $("#mapContainer").data("map");
+            var aerial = new XYZ({
+              url: `${heatMapUrls.aod}`,
+              maxZoom: 11,
+              crossOrigin: "",
+            });
+            var raster = new RasterSource({
+              sources: [aerial],
+              operation: function (pixels, data) {
+                var pixel = pixels[0];
+                var colors = data.colors;
+
+                if (pixel[0] !== 0) {
+                  const pixel2 = pixel;
+                  const color = colors[pixel2[0]];
+                  if (color) {
+                    pixel[0] = color[0];
+                    pixel[1] = color[1];
+                    pixel[2] = color[2];
+                    pixel[3] = 255;
+                  } else {
+                    pixel[0] = 0;
+                    pixel[1] = 0;
+                    pixel[2] = 0;
+                    pixel[3] = 0;
+                  }
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+
+                return pixel;
+              },
+            });
+            raster.on("beforeoperations", function (event) {
+              event.data.colors = getColors();
+            });
+
+            raster.on("afteroperations", function (event) {});
+
+            function getColors() {
+              var scale = chroma
+                .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+                .colors(254);
+
+              var _palet = scale.map((element, index) => {
+                return chroma(scale[index]).rgba();
+              });
+
+              return _palet;
+            }
+
+            var tilelayer = new TileLayer({
+              source: aerial,
+            });
+
+            var heatmap = new ImageLayer({
+              source: raster,
+            });
+
+            const heatmapName =
+              satellite === "default"
+                ? "Relative humidity"
+                : `Relative humidity -- ${getSatelliteLableByValue[satellite]}`;
+            heatmap.set("name", heatmapName);
+            heatmap.set("description", `location: ANZALI `);
+            heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
+            heatmap.set("params", ["rh", "world", `${satellite}`]);
+            heatmap.set("isHeatMap", true);
+            const zIndex = mapContainer.getLayers().array_.length * 10000;
+            heatmap.setZIndex(zIndex);
+
+            //mapContainer.getLayers().array_.push(tilelayer);
+            mapContainer.getLayers().array_.push(heatmap);
+
+            this.props.refreshComponent();
+            var i = 0;
+            var timer = setInterval(function () {
+              if (i === 6) clearInterval(timer);
+              mapContainer.updateSize();
+              i++;
+            }, 500);
+          });
+        },
+      },
+    ],
+    tabPanel: [{}],
+  };
+  windConfiguration = {
+    tabs: [
+      {
+        label: "ANZALI",
+        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+    استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+    در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+    نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
+    زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
+    دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
+    زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+    پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+        satellites: [],
+        handleAddLayer: (selectedSatellites) => {
+          console.log("satellites :>> ", selectedSatellites);
+          selectedSatellites.map((satellite) => {
+            displayLoader(5000);
+
+            let heatmapUrl = getHeatMapUrl(
+              { start: "1572251500", end: "1593568800" },
+              {
+                parameter: "wu",
+                location: "anzali",
+                satellite: satellite,
+              }
+            );
+            console.log("heatmapUrl :>> ", heatmapUrl);
+            const mapContainer = $("#mapContainer").data("map");
+            var aerial = new XYZ({
+              url: `${heatMapUrls.aod}`,
+              maxZoom: 11,
+              crossOrigin: "",
+            });
+            var raster = new RasterSource({
+              sources: [aerial],
+              operation: function (pixels, data) {
+                var pixel = pixels[0];
+                var colors = data.colors;
+
+                if (pixel[0] !== 0) {
+                  const pixel2 = pixel;
+                  const color = colors[pixel2[0]];
+                  if (color) {
+                    pixel[0] = color[0];
+                    pixel[1] = color[1];
+                    pixel[2] = color[2];
+                    pixel[3] = 255;
+                  } else {
+                    pixel[0] = 0;
+                    pixel[1] = 0;
+                    pixel[2] = 0;
+                    pixel[3] = 0;
+                  }
+                } else {
+                  pixel[0] = 0;
+                  pixel[1] = 0;
+                  pixel[2] = 0;
+                  pixel[3] = 0;
+                }
+
+                return pixel;
+              },
+            });
+            raster.on("beforeoperations", function (event) {
+              event.data.colors = getColors();
+            });
+
+            raster.on("afteroperations", function (event) {});
+
+            function getColors() {
+              var scale = chroma
+                .scale(["#b21227", "#fec97c", "#dff1e3", "#353f9a"])
+                .colors(254);
+
+              var _palet = scale.map((element, index) => {
+                return chroma(scale[index]).rgba();
+              });
+
+              return _palet;
+            }
+
+            var tilelayer = new TileLayer({
+              source: aerial,
+            });
+
+            var heatmap = new ImageLayer({
+              source: raster,
+            });
+
+            const heatmapName =
+              satellite === "default"
+                ? "Wind"
+                : `Wind -- ${getSatelliteLableByValue[satellite]}`;
+            heatmap.set("name", heatmapName);
+            heatmap.set("description", `location: ANZALI `);
+            heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
+            heatmap.set("params", ["wu", "world", `${satellite}`]);
+            heatmap.set("isHeatMap", true);
+            const zIndex = mapContainer.getLayers().array_.length * 10000;
+            heatmap.setZIndex(zIndex);
+
+            //mapContainer.getLayers().array_.push(tilelayer);
+            mapContainer.getLayers().array_.push(heatmap);
+
+            this.props.refreshComponent();
+            var i = 0;
+            var timer = setInterval(function () {
+              if (i === 6) clearInterval(timer);
+              mapContainer.updateSize();
+              i++;
+            }, 500);
+          });
+        },
+      },
+    ],
+    tabPanel: [{}],
+  };
+
   render() {
     return (
       <div className="firstItem-sublist">
@@ -1247,6 +1597,7 @@ class First extends Component {
         >
           ← بازگشت
         </button>
+        <span className="sublist-title">پارامترهای هوا شناسی</span>
         <hr />
         <div className="accordion" id="airState-first-accordion">
           <div className="card">
@@ -1270,7 +1621,10 @@ class First extends Component {
               data-parent="#airState-first-accordion"
             >
               <div className="card-body">
-                <VerticalTabs configuration={this.firstConfiguration} />
+                <VerticalTabs
+                  configuration={this.tempratureConfiguration}
+                  hasTabs={true}
+                />
               </div>
             </div>
           </div>
@@ -1296,17 +1650,10 @@ class First extends Component {
               data-parent="#airState-first-accordion"
             >
               <div className="card-body">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-                استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-                در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-                نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-                کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-                جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را
-                برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
-                زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
-                دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
-                زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
-                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                <VerticalTabs
+                  configuration={this.humidityConfiguration}
+                  hasTabs={true}
+                />
               </div>
             </div>
           </div>
@@ -1332,17 +1679,10 @@ class First extends Component {
               data-parent="#airState-first-accordion"
             >
               <div className="card-body">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-                استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-                در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-                نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-                کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-                جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را
-                برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
-                زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
-                دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
-                زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
-                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                <VerticalTabs
+                  configuration={this.windConfiguration}
+                  hasTabs={true}
+                />
               </div>
             </div>
           </div>

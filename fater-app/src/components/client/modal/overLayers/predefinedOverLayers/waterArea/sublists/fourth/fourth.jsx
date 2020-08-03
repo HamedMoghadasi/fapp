@@ -18,6 +18,7 @@ class Fourth extends Component {
         >
           ← بازگشت
         </button>
+        <span className="sublist-title">رویداد</span>
         <hr />
         <div className="accordion" id="waterArea-fourth-accordion">
           <div className="card">

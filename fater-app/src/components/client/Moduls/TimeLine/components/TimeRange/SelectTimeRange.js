@@ -100,7 +100,7 @@ export default function SelectTimeRange(props) {
           {/* روز */}
           <Tooltip title="روز">
             <img
-              src="timeline/ssets/images/day.png"
+              src="timeline/assets/images/day.png"
               alt="روز"
               className="image-timeRange"
             />
