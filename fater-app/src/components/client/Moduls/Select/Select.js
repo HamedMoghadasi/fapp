@@ -11,9 +11,14 @@ class SelectModule extends Component {
 
   formatGroupLabel = (data) => (
     <div style={this.groupStyles}>
-      <span style={{ fontSize: "20px", color: "gray" }}>{data.label}</span>
+      <span>{data.label}</span>
     </div>
   );
+  customStyles = {
+    option: (provided, state) => ({
+      color: "black",
+    }),
+  };
   render() {
     return (
       <Select
@@ -24,6 +29,8 @@ class SelectModule extends Component {
         formatGroupLabel={this.formatGroupLabel}
         isRtl={true}
         onChange={this.props.handleChange}
+        maxMenuHeight={130}
+        styles={this.customStyles}
       />
     );
   }

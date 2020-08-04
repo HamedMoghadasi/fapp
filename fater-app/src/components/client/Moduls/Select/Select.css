@@ -1,10 +1,37 @@
 .select-module {
-  padding: 0 !important;
+  margin-bottom: 5px;
 }
 
 .select-module div {
   direction: rtl;
+  text-align: right;
+}
+
+.react-select__control,
+.react-select__value-container {
+  direction: rtl;
   padding: 0 !important;
   text-align: right;
   padding-right: 5px;
+}
+
+.react-select__menu {
+  margin: 0 2px !important;
+  padding: 0 !important;
+}
+
+.react-select__menu-list {
+  padding: 0 !important;
+}
+.react-select__group-heading > div > span {
+  font-size: 20px;
+  color: black;
+}
+
+.react-select__group-heading {
+  padding: 0 !important;
+  background-color: #6c757d1f;
+}
+.react-select__group div {
+  padding: 1px !important;
 }

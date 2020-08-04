@@ -65,6 +65,7 @@ function TabPanel(props) {
       {...other}
     >
       <div className="vertical-tabpanel-controller">
+        {handleSelect()}
         <button
           className="btn btn-success btn-sm mx-1 mb-1 mt-auto "
           onClick={() => {
@@ -96,7 +97,6 @@ function TabPanel(props) {
             </div>
           );
         })}
-        {handleSelect()}
       </div>
       {value === index && (
         <Box p={3}>
