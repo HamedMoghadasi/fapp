@@ -1,4 +1,4 @@
-.vertical-tabpanel {
+.vertical-tabpanelwithlist {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -44,14 +44,14 @@ div[role="tabpanel"] {
   width: 100%;
 }
 
-.vertical-tabpanel-controller {
+.vertical-tabpanelwithlist-controller {
   text-align: left;
   direction: ltr;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
   margin-bottom: 10px;
 }
 
-.vertical-tabpanel-controller-checkboxLabel {
+.vertical-tabpanelwithlist-controller-checkboxLabel {
   margin-right: -11px !important;
   margin-left: 16px !important;
 }

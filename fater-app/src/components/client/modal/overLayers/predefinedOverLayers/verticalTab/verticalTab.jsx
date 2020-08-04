@@ -5,6 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import SelectModule from "../../../../Moduls/Select/Select";
 
 import "./verticalTab.css";
 
@@ -14,11 +15,22 @@ function TabPanel(props) {
     value,
     index,
     handleAddLayer,
+    handelDescriptionChange,
     satellites,
+    defaultValue,
+    options,
+    content,
     ...other
   } = props;
 
   const [selectedSatellites, setSelectedSatellites] = React.useState([]);
+
+  var [location, setLocation] = React.useState({
+    value: defaultValue ? defaultValue.value : "",
+    label: defaultValue ? defaultValue.lable : "",
+    description: defaultValue ? defaultValue.description : "",
+  });
+
   const handleChecked = (event) => {
     if (event.target.checked) {
       setSelectedSatellites([...selectedSatellites, event.target.value]);
@@ -27,6 +39,20 @@ function TabPanel(props) {
         (sat) => sat !== event.target.value
       );
       setSelectedSatellites(remainSatellites);
+    }
+  };
+
+  const handleSelect = () => {
+    if (options && defaultValue) {
+      return (
+        <SelectModule
+          defaultValue={defaultValue}
+          options={options}
+          handleChange={(data) => {
+            setLocation(data);
+          }}
+        />
+      );
     }
   };
   return (
@@ -42,10 +68,13 @@ function TabPanel(props) {
         <button
           className="btn btn-success btn-sm mx-1 mb-1 mt-auto "
           onClick={() => {
+            console.log("location :>> ", location);
+            const locationValue = location.value ? location.value : "world";
+            console.log("locationValue :>> ", locationValue);
             if (selectedSatellites.length) {
-              handleAddLayer(selectedSatellites);
+              handleAddLayer(selectedSatellites, locationValue);
             } else {
-              handleAddLayer(["default"]);
+              handleAddLayer(["default"], locationValue);
             }
           }}
         >
@@ -67,10 +96,13 @@ function TabPanel(props) {
             </div>
           );
         })}
+        {handleSelect()}
       </div>
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography>
+            {location.description !== "" ? location.description : content}
+          </Typography>
         </Box>
       )}
     </div>
@@ -144,10 +176,11 @@ export default function VerticalTabs(props) {
             index={index}
             key={index}
             handleAddLayer={tab.handleAddLayer}
-            satellites={tab.satellites ? tab.satellites : []}
-          >
-            {tab.content}
-          </TabPanel>
+            options={tab.options}
+            defaultValue={tab.optionsDefaultValue}
+            satellites={tab.satellites ? tab.satellites : ["default"]}
+            content={tab.content}
+          ></TabPanel>
         );
       })}
     </div>
