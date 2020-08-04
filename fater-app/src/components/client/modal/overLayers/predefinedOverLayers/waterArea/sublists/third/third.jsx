@@ -17,7 +17,7 @@ import {
 import {
   grouped_lakesAndDams_Options,
   lakesOptions,
-} from "../../configuration/waters";
+} from "../../../configuration/locations";
 
 class Third extends Component {
   state = {};

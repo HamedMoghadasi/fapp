@@ -14,7 +14,7 @@ import { getSatelliteLableByValue } from "../../../../../../../../constants/sate
 import {
   grouped_lakesAndDams_Options,
   lakesOptions,
-} from "../../configuration/waters";
+} from "../../../configuration/locations";
 
 class Second extends Component {
   state = {};

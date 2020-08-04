@@ -14,6 +14,10 @@ import {
   getSatelliteLableByValue,
 } from "../../../../../../../../constants/satellites";
 import { displayLoader } from "../../../../../../../../utils/LoadingHelper";
+import {
+  grouped_cities_Options,
+  cityOptions,
+} from "../../../configuration/locations";
 
 class Third extends Component {
   state = {};
@@ -24,19 +28,14 @@ class Third extends Component {
   soilMoistureConfiguration = {
     tabs: [
       {
-        label: "ANZALI",
-        content: `رم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-    استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-    در ستون و سطرآنچان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-    نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
-    زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
-    دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
-    زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
-    پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`,
+        label: "Soil moisture",
+        content: cityOptions[0].description,
+        options: grouped_cities_Options,
+        optionsDefaultValue: cityOptions[0],
         satellites: [satellites.amsr2, satellites.gfs],
-        handleAddLayer: (selectedSatellites) => {
+        handleAddLayer: (selectedSatellites, location) => {
           console.log("satellites :>> ", selectedSatellites);
+          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -44,7 +43,7 @@ class Third extends Component {
               { start: "1572251500", end: "1593568800" },
               {
                 parameter: "sm",
-                location: "anzali",
+                location: location,
                 satellite: satellite,
               }
             );
@@ -116,9 +115,9 @@ class Third extends Component {
                 ? "Soil moisture"
                 : `Soil moisture -- ${getSatelliteLableByValue[satellite]}`;
             heatmap.set("name", heatmapName);
-            heatmap.set("description", `location: ANZALI `);
+            heatmap.set("description", `location: ${location} `);
             heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
-            heatmap.set("params", ["sm", "anzali", `${satellite}`]);
+            heatmap.set("params", ["sm", `${location}`, `${satellite}`]);
             heatmap.set("isHeatMap", true);
             const zIndex = mapContainer.getLayers().array_.length * 10000;
             heatmap.setZIndex(zIndex);
@@ -176,7 +175,7 @@ class Third extends Component {
               <div className="card-body">
                 <VerticalTabs
                   configuration={this.soilMoistureConfiguration}
-                  hasTabs={true}
+                  hasTabs={false}
                 />
               </div>
             </div>

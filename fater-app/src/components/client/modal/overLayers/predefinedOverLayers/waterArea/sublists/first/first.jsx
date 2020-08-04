@@ -13,7 +13,7 @@ import { getSatelliteLableByValue } from "../../../../../../../../constants/sate
 import {
   grouped_lakesAndDams_Options,
   lakesOptions,
-} from "../../configuration/waters";
+} from "../../../configuration/locations";
 
 console.log("lakesOptions[0].description :>> ", lakesOptions[0].description);
 class First extends Component {
