@@ -31,6 +31,7 @@ class SelectModule extends Component {
         onChange={this.props.handleChange}
         maxMenuHeight={130}
         styles={this.customStyles}
+        noOptionsMessage={() => "موردی یافت نشد."}
       />
     );
   }
