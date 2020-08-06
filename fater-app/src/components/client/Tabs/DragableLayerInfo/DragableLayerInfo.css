@@ -18,7 +18,6 @@ ul .layers-dragable-li {
 
 #layers-dragable-item-display ion-icon {
   font-size: 23px;
-  position: absolute;
   top: 19px;
   left: 3px;
   cursor: pointer;
@@ -45,9 +44,12 @@ ul .layers-dragable-li {
 }
 
 .layers-dragable-item-settings ion-icon {
-  position: absolute;
   color: #545b62;
   cursor: pointer;
+}
+
+.heatmap > .layers-dragable-item-settings ion-icon {
+  margin: 5px 0;
 }
 
 .layers-dragable-item-settings ion-icon.item-close {
@@ -171,4 +173,30 @@ ul .layers-dragable-li {
 
 .layer-invisible > #layers-dragable-item-display {
   background: #a0a0a09e !important;
+}
+
+.layers-dragable-item-settings-flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.layers-dragable-item-display-flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+div.heatmap.layer-invisible
+  > .layers-dragable-item-content
+  > .layers-dragable-item-content-layerInfo
+  > .colorbar-container {
+  opacity: 0.3;
+}
+
+.heatmap-colorbar span:nth-child(1) {
+  border-radius: 50px 0 0 50px;
 }

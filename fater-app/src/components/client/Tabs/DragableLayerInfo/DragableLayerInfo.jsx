@@ -38,9 +38,17 @@ class DragableLayerInfo extends Component {
 
     targetLayer.setVisible(!targetLayer.values_.visible);
     if (targetLayer.values_.visible) {
-      $(e.target).parent("div").parent("div").removeClass("layer-invisible");
+      $(e.target)
+        .parent("div")
+        .parent("div")
+        .parent("div")
+        .removeClass("layer-invisible");
     } else {
-      $(e.target).parent("div").parent("div").addClass("layer-invisible");
+      $(e.target)
+        .parent("div")
+        .parent("div")
+        .parent("div")
+        .addClass("layer-invisible");
     }
 
     map.updateSize();
@@ -307,16 +315,18 @@ class DragableLayerInfo extends Component {
           data-oluid={this.props.ol_uid}
         >
           <div id="layers-dragable-item-display">
-            <IonIcon
-              icon={eye}
-              id="eye"
-              onClick={(e) => this.handleVisiblity(e)}
-            />
-            <IonIcon
-              icon={eyeOff}
-              id="eyeOff"
-              onClick={(e) => this.handleVisiblity(e)}
-            />
+            <div className="layers-dragable-item-display-flexContainer">
+              <IonIcon
+                icon={eye}
+                id="eye"
+                onClick={(e) => this.handleVisiblity(e)}
+              />
+              <IonIcon
+                icon={eyeOff}
+                id="eyeOff"
+                onClick={(e) => this.handleVisiblity(e)}
+              />
+            </div>
           </div>
 
           <div className="layers-dragable-item-content">
@@ -345,22 +355,24 @@ class DragableLayerInfo extends Component {
                   ? this.props.layer.get("description")
                   : `-- no information --`}
               </i>
-              <i>{this.handleColorbar()}</i>
+              <i className="colorbar-container">{this.handleColorbar()}</i>
             </div>
           </div>
 
           <div className="layers-dragable-item-settings">
-            <IonIcon
-              className="item-close"
-              onClick={() => this.handleLayerRemove(this.props.ol_uid)}
-              icon={close}
-            />
-            <IonIcon
-              className="item-settings"
-              onClick={() => this.handleSettingClick(this.props.ol_uid)}
-              icon={settingsOutline}
-            />
-            <IonIcon className="item-info" icon={informationOutline} />
+            <div className="layers-dragable-item-settings-flexContainer">
+              <IonIcon
+                className="item-close"
+                onClick={() => this.handleLayerRemove(this.props.ol_uid)}
+                icon={close}
+              />
+              <IonIcon
+                className="item-settings"
+                onClick={() => this.handleSettingClick(this.props.ol_uid)}
+                icon={settingsOutline}
+              />
+              <IonIcon className="item-info" icon={informationOutline} />
+            </div>
           </div>
         </div>
       </li>
