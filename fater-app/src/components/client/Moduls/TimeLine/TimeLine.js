@@ -127,9 +127,18 @@ function TimeLine(props) {
       if (timeScale !== 3) {
         for (let i = 1; i - 1 <= toDate.diff(fromDate, "days"); i++) {
           DateRangeVlaue.push({
-            year: fromDate.subtract("days", 3).add("days", i).year(),
-            month: fromDate.subtract("days", 3).add("days", i).month(),
-            day: fromDate.subtract("days", 3).add("days", i).date(),
+            year: fromDate
+              .subtract("days", props.lang === "eng" ? 1 : 2)
+              .add("days", i)
+              .year(),
+            month: fromDate
+              .subtract("days", props.lang === "eng" ? 1 : 2)
+              .add("days", i)
+              .month(),
+            day: fromDate
+              .subtract("days", props.lang === "eng" ? 1 : 2)
+              .add("days", i)
+              .date(),
             hour: fromDate.hour(),
           });
         }
@@ -157,7 +166,11 @@ function TimeLine(props) {
       day: currentDay,
       hour: currentHour,
     };
-    props.onChange(date);
+    if (props.playAnimation) {
+      props.onPlayAnimation(date);
+    } else {
+      props.onChange(date);
+    }
     sessionStorage.setItem("date", JSON.stringify(date));
   }, [currentYear, currentMonth, currentDay, props, currentHour, timeScale]);
   useEffect(() => {

@@ -203,7 +203,6 @@
 .DatePicker .animation-datePicker-selectDay {
   color: black !important;
 }
-
 .DatePicker .animation-datePicker .Calendar__day {
   color: white;
 }
@@ -316,6 +315,10 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.timeline-select-wrapper button {
+  outline: none !important;
+  border: 0 !important;
 }
 .timeline-select-wrapper .MuiInputBase-root.MuiInput-root {
   height: 100%;

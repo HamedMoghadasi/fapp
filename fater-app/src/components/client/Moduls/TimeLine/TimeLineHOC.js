@@ -219,7 +219,7 @@ class TimeLineWrapper extends Component {
   };
 
   handleRange = (rangeValues) => {
-    console.log("2 :>> ");
+    console.log("rangeValues :>> ", rangeValues);
     console.log("start :>> ", new Date());
     let self = this;
     var mapContainer = $("#mapContainer").data("map");
@@ -256,7 +256,8 @@ class TimeLineWrapper extends Component {
   render() {
     return (
       <TimeLine
-        onChange={(data) => this.handleChange(data)}
+        // onChange={(data) => this.handleChange(data)}
+        onChange={(data) => console.log("on change", data)}
         lang={this.state.lang}
         getAnimationRangeValues={(rangeValues) => this.handleRange(rangeValues)}
         playAnimation={this.state.playAnimation}

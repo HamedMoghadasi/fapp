@@ -194,6 +194,7 @@ const CustomizedSlider = (props) => {
       setSliderValue(demoValue);
       demoValue += 1;
       if (demoValue - 1 <= sliderValue2[1]) {
+        props.getSliderValue(demoValue - 1);
         sliderAnimation();
       } else {
         setSliderValue(firstValueSlider);

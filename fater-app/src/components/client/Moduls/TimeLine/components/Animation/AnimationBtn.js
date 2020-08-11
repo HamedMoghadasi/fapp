@@ -66,8 +66,12 @@ export default function AnimationBtn(props) {
   // }, [open]);
 
   // Time
-  const [timePick1, settimePick1] = useState(moment());
-  const [timePick2, settimePick2] = useState(moment());
+  const [timePick1, settimePick1] = useState(
+    props.lang === "eng" ? moment() : jMoment()
+  );
+  const [timePick2, settimePick2] = useState(
+    props.lang === "eng" ? moment() : jMoment()
+  );
   useEffect(() => {
     if (selectedDayRange1) {
       const newRange = selectedDayRange1;
@@ -84,11 +88,35 @@ export default function AnimationBtn(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timePick1, timePick2]);
-  const hour1 = Number(timePick1.format("HH:mm").split(":")[0]);
-  const minute1 = Number(timePick1.format("h:mm").split(":")[1]);
-  const hour2 = Number(timePick2.format("HH:mm").split(":")[0]);
-  const minute2 = Number(timePick2.format("h:mm").split(":")[1]);
+  const hour1 =
+    props.lang === "eng"
+      ? Number(timePick1.format("HH:mm").split(":")[0])
+      : parsePersianNum(timePick1.format("HH:mm").split(":")[0]);
+  const minute1 =
+    props.lang === "eng"
+      ? Number(timePick1.format("h:mm").split(":")[1])
+      : parsePersianNum(timePick1.format("h:mm").split(":")[1]);
+  const hour2 =
+    props.lang === "eng"
+      ? Number(timePick2.format("HH:mm").split(":")[0])
+      : parsePersianNum(timePick2.format("HH:mm").split(":")[0]);
+  const minute2 =
+    props.lang === "eng"
+      ? Number(timePick2.format("h:mm").split(":")[1])
+      : parsePersianNum(timePick2.format("h:mm").split(":")[1]);
 
+  // Convert Persian Digit To Eng
+  function parsePersianNum(str) {
+    return Number(
+      str
+        .replace(/[٠١٢٣٤٥٦٧٨٩]/g, function (d) {
+          return d.charCodeAt(0) - 1632; // Convert Arabic numbers
+        })
+        .replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function (d) {
+          return d.charCodeAt(0) - 1776; // Convert Persian numbers
+        })
+    );
+  }
   // Send Data
   useEffect(() => {
     if (selectedDayRange1 && selectedDayRange2) {
@@ -242,8 +270,8 @@ export default function AnimationBtn(props) {
                   props.setAnimationRangeValue([]);
                   setSelectedDayRange1(null);
                   setSelectedDayRange2(null);
-                  settimePick1(moment());
-                  settimePick2(moment());
+                  settimePick1(props.lang === "eng" ? moment() : jMoment());
+                  settimePick2(props.lang === "eng" ? moment() : jMoment());
                 }}
               >
                 پاک کردن
