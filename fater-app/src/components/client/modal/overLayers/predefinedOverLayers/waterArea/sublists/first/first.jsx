@@ -20,7 +20,6 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-console.log("lakesOptions[0].description :>> ", lakesOptions[0].description);
 class First extends Component {
   notify = (message, type) => {
     if (type === "error") {

@@ -11,17 +11,18 @@ import { getCountOfHeatMaps } from "../../../../utils/Map";
 import { scale, format } from "../../../../constants/timeline";
 
 import { heatMapUrls } from "../../../../constants/Urls";
+import {
+  satellites,
+  getSatelliteLableByValue,
+} from "../../../../constants/satellites";
 
 class TimeLineWrapper extends Component {
   state = {
-    lang: format.fa,
-    playAnimation: false,
+    lang: format.eng,
+    hasRange: false,
+    isPlayingAnimation: false,
     rangeValues: [],
     timescale: scale.day,
-  };
-
-  componentWillUpdate = () => {
-    const mapContainer = $("#mapContainer").data("map");
   };
 
   handleChange = (data) => {
@@ -109,13 +110,32 @@ class TimeLineWrapper extends Component {
       });
   };
 
-  addTimelineLayer = (layer) => {
+  getRandomColor = () => {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  addTimelineLayer = (layer, range) => {
+    var _parameter = layer.get("params")[0];
+    var _location = layer.get("params")[1];
+    var _satellite = layer.get("params")[2];
+    var _name = layer.get("name");
+    let timespan = calculateTimespan(
+      range,
+      this.state.timescale,
+      this.state.lang
+    );
+
     let heatmapUrl = getHeatMapUrl(
       { start: "1572251500", end: "1593568800" },
       {
-        parameter: "aod", //layer.get(params).parameter
-        location: "world", //layer.get(params).parameter
-        satellite: "default", //layer.get(params).satellite
+        parameter: "aod", //layer.get("params")[0]
+        location: "world", //layer.get("params")[1]
+        satellite: "default", //layer.get("params")[2]
       }
     );
     const mapContainer = $("#mapContainer").data("map");
@@ -183,22 +203,32 @@ class TimeLineWrapper extends Component {
       source: raster,
     });
 
-    heatmap.set("name", "aod -- heatmap");
-    heatmap.set("description", "heatmap data provided by @Arad Co.");
-    heatmap.set("colors", ["#b21227", "#fec97c", "#dff1e3", "#353f9a"]);
-    heatmap.set("params", ["AOT", "world", ""]);
+    const heatmapName =
+      _satellite === "default"
+        ? `${_name}`
+        : `${_name} -- ${getSatelliteLableByValue[_satellite]}`;
+    heatmap.set("name", heatmapName);
+    heatmap.set("description", `location: ${_location} `);
+    heatmap.set("colors", [
+      this.getRandomColor(),
+      this.getRandomColor(),
+      this.getRandomColor(),
+      this.getRandomColor(),
+    ]);
+    heatmap.set("params", [`${_parameter}`, `${_location}`, `${_satellite}`]);
+    heatmap.set("identity", timespan.startTimespan);
     heatmap.set("isTimelineLayer", true);
-    heatmap.setVisible(false);
-    const zIndex = mapContainer.getLayers().array_.length * 10000;
+    // heatmap.setVisible(false);
+    const zIndex = mapContainer.getLayers().array_.length * 10000 * -1;
     heatmap.setZIndex(zIndex);
 
     //mapContainer.getLayers().array_.push(tilelayer);
-    console.log("heatmap :>> ", heatmap);
+
     mapContainer.getLayers().array_.push(heatmap);
 
     var i = 0;
     var timer = setInterval(function () {
-      if (i === 6) clearInterval(timer);
+      if (i === 20) clearInterval(timer);
       mapContainer.updateSize();
       i++;
     }, 500);
@@ -218,53 +248,104 @@ class TimeLineWrapper extends Component {
     return layers;
   };
 
+  getAllTimelineLayers = () => {
+    const mapContainer = $("#mapContainer").data("map");
+    let layers = mapContainer
+      .getLayers()
+      .getArray()
+      .filter((layer) => {
+        if (layer.get("isTimelineLayer")) {
+          return layer;
+        }
+      });
+
+    return layers;
+  };
+
   handleRange = (rangeValues) => {
-    console.log("rangeValues :>> ", rangeValues);
-    console.log("start :>> ", new Date());
-    let self = this;
     var mapContainer = $("#mapContainer").data("map");
     //remove previous timeline layers
     mapContainer.getLayers().array_ = this.getAllLayersWithoutTimelineLayers();
 
-    var timespanRangeValues = rangeValues.map((date) => {
-      return calculateTimespan(date, this.state.timescale, this.state.lang);
-    });
-
-    console.log("timespanRangeValues :>> ", timespanRangeValues);
-
-    rangeValues.map((item) => {
+    rangeValues.map((range) => {
       mapContainer
         .getLayers()
         .getArray()
         .map((layer, index) => {
           if (layer instanceof ImageLayer && layer.get("isHeatMap")) {
-            this.addTimelineLayer(layer);
+            this.addTimelineLayer(layer, range);
           }
         });
     });
-    console.log("rangeValues :>> ", rangeValues);
-    this.setState({ rangeValues: rangeValues });
-    this.setState({ playAnimation: true });
 
-    console.log("end :>> ", new Date());
+    this.setState({ rangeValues: rangeValues });
+    this.setState({ hasRange: true });
   };
 
   handleTimespan = (value) => {
     this.setState({ timescale: value });
   };
 
+  handlePlayAnimation = (date) => {
+    if (this.state.isPlayingAnimation) {
+      let timespan = calculateTimespan(
+        date,
+        this.state.timescale,
+        this.state.lang
+      );
+      const mapContainer = $("#mapContainer").data("map");
+      let timelineLayers = this.getAllTimelineLayers();
+
+      timelineLayers.map((layer) => {
+        var isTargetLayer = layer.get("identity") === timespan.startTimespan;
+        if (isTargetLayer) {
+          let zIndex = layer.getZIndex() * -1;
+          layer.setZIndex(zIndex);
+        } else {
+          let zIndex = layer.getZIndex();
+          if (zIndex > 0) {
+            layer.setZIndex(zIndex * -1);
+          }
+        }
+        var i = 0;
+        var timer = setInterval(function () {
+          if (i === 10) clearInterval(timer);
+          mapContainer.updateSize();
+          i++;
+        }, 500);
+      });
+    } else {
+      this.setState({ isPlayingAnimation: true });
+      setTimeout(() => {
+        this.setState({ isPlayingAnimation: false });
+      }, 150000);
+    }
+
+    //this.setState({ hasRange: true });
+  };
+
   render() {
     return (
       <TimeLine
-        // onChange={(data) => this.handleChange(data)}
-        onChange={(data) => console.log("on change", data)}
+        onChange={(data) => this.handleChange(data)}
+        //onChange={(data) => console.log("on change", data)}
         lang={this.state.lang}
         getAnimationRangeValues={(rangeValues) => this.handleRange(rangeValues)}
-        playAnimation={this.state.playAnimation}
-        onPlayAnimation={(data) => console.log("on play animation: >>", data)}
-        timeScale={(value) => {
-          this.handleTimespan(value);
-        }}
+        //getAnimationRangeValues={(rangeValues) =>
+        //console.log("rangeValues :>> ", rangeValues)
+        //}
+        hasRange={this.state.hasRange}
+        isPlayingAnimation={this.state.isPlayingAnimation}
+        onPlayAnimation={(data) => this.handlePlayAnimation(data)}
+        //onPlayAnimation={(data) => console.log("onPlayAnimation :>> ", data)}
+        timeScale={
+          (value) => {
+            this.handleTimespan(value);
+          }
+          // timeScale={(value) => {
+          //   console.log("value :>> ", value);
+          // }
+        }
       />
     );
   }

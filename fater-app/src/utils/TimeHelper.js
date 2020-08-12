@@ -3,6 +3,9 @@ import jamoment from "moment-jalaali";
 import moment from "moment";
 
 export const calculateTimespan = (date, timeScale, _format) => {
+  if (!date) {
+    date = { year: "2020", month: "01", day: "01", hour: "10" };
+  }
   date = adjustDateFormat(date, _format);
 
   let timespan = {
@@ -42,7 +45,6 @@ export const calculateTimespan = (date, timeScale, _format) => {
         .endOf("days")
         .locale("en")
         .format("YYYY-MM-DD HH:mm");
-      console.log("timespan :>> ", timespan);
       break;
 
     case scale.hour:

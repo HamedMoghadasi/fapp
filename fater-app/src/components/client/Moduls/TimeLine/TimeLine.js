@@ -101,7 +101,7 @@ function TimeLine(props) {
   // Plat Animation Button
   const [isPlayingAnimation, setIsPlayingAnimation] = useState(false);
   const playAnimation = () => {
-    if (DateRange.length !== 0 && props.playAnimation) {
+    if (DateRange.length !== 0 && props.hasRange) {
       props.onPlayAnimation();
       setIsPlayingAnimation(true);
       props.onChange(DateRange);
@@ -128,15 +128,15 @@ function TimeLine(props) {
         for (let i = 1; i - 1 <= toDate.diff(fromDate, "days"); i++) {
           DateRangeVlaue.push({
             year: fromDate
-              .subtract("days", props.lang === "eng" ? 1 : 2)
+              .subtract("days", props.lang === "eng" ? 1 : 1)
               .add("days", i)
               .year(),
             month: fromDate
-              .subtract("days", props.lang === "eng" ? 1 : 2)
+              .subtract("days", props.lang === "eng" ? 1 : 1)
               .add("days", i)
               .month(),
             day: fromDate
-              .subtract("days", props.lang === "eng" ? 1 : 2)
+              .subtract("days", props.lang === "eng" ? 1 : 1)
               .add("days", i)
               .date(),
             hour: fromDate.hour(),
@@ -166,7 +166,7 @@ function TimeLine(props) {
       day: currentDay,
       hour: currentHour,
     };
-    if (props.playAnimation) {
+    if (props.isPlayingAnimation) {
       props.onPlayAnimation(date);
     } else {
       props.onChange(date);
@@ -216,7 +216,7 @@ function TimeLine(props) {
             disableAnimation={props.disableAnimation}
             playAnimation={playAnimation}
             lang={props.lang}
-            propsPlayAnimation={props.playAnimation}
+            propsPlayAnimation={props.hasRange}
             currentHour={currentHour}
             setAnimationRangeValue={setAnimationRangeValue}
             timescale={timeScale}
@@ -254,7 +254,7 @@ function TimeLine(props) {
           DateRange={DateRange}
           isPlayingAnimation={isPlayingAnimation}
           setIsPlayingAnimation={setIsPlayingAnimation}
-          playAnimation={props.playAnimation}
+          playAnimation={props.hasRange}
         />
       </div>
       <div className="timeline-container-phone">
