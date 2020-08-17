@@ -5,15 +5,19 @@ import "./snapshot.css";
 
 class Snapshot extends Component {
   handleSnapshot = () => {
+    let selectedArea = document
+      .getElementById("mediaAreaSelector-container")
+      .getBoundingClientRect();
+
     const extension = $("#snapshot-extension")
       .children("option:selected")
       .val();
     const map = $("#mapContainer").data("map");
+
     map.once("rendercomplete", function () {
       var mapCanvas = document.createElement("canvas");
-      var size = map.getSize();
-      mapCanvas.width = size[0];
-      mapCanvas.height = size[1];
+      mapCanvas.width = selectedArea.width;
+      mapCanvas.height = selectedArea.height;
       var mapContext = mapCanvas.getContext("2d");
       Array.prototype.forEach.call(
         document.querySelectorAll(".ol-layer canvas"),
@@ -21,6 +25,7 @@ class Snapshot extends Component {
         function (canvas) {
           if (canvas.width > 0) {
             var opacity = canvas.parentNode.style.opacity;
+            let currentDate = JSON.parse(window.sessionStorage.date);
             mapContext.globalAlpha = opacity === "" ? 1 : Number(opacity);
             var transform = canvas.style.transform;
             // Get the transform parameters from the style's transform matrix
@@ -34,7 +39,31 @@ class Snapshot extends Component {
               mapContext,
               matrix
             );
-            mapContext.drawImage(canvas, 0, 0);
+
+            mapContext.drawImage(
+              canvas,
+              selectedArea.x,
+              selectedArea.y,
+              selectedArea.width,
+              selectedArea.height,
+              0,
+              0,
+              selectedArea.width,
+              selectedArea.height
+            );
+
+            mapContext.font = "12px Arial";
+            mapContext.fillStyle = "red";
+            mapContext.fillText("Karaneh", 0, 15);
+            if (currentDate) {
+              mapContext.fillText(
+                `${currentDate.year}-${currentDate.month}-${currentDate.day}  ${currentDate.hour}`,
+                0,
+                30
+              );
+            } else {
+              mapContext.fillText(`${Date.now()}`, 0, 30);
+            }
           }
         }
       );
@@ -48,6 +77,7 @@ class Snapshot extends Component {
         var link = document.getElementById("image-download");
         link.download = `snapshot-${Date.now()}.${extension}`;
         link.href = mapCanvas.toDataURL();
+        //console.log("link.href :>> ", link.href);
         link.click();
       }
     });
@@ -56,19 +86,24 @@ class Snapshot extends Component {
 
   render() {
     return (
-      <div className="cropImage-wrapper">
-        <select
-          id="snapshot-extension"
-          className="custom-select custom-select-sm"
-        >
-          <option value="png">png</option>
-          <option value="jpg">jpg</option>
-        </select>
-        <button className="btn btn-danger btn-sm" onClick={this.handleSnapshot}>
-          Snapshot
-        </button>
-        <a id="image-download"></a>
-      </div>
+      <>
+        <div className="cropImage-wrapper">
+          <select
+            id="snapshot-extension"
+            className="custom-select custom-select-sm"
+          >
+            <option value="png">PNG</option>
+            <option value="jpeg">JPEG</option>
+          </select>
+          <button
+            className="btn btn-danger btn-sm mt-3"
+            onClick={this.handleSnapshot}
+          >
+            take a snapshot
+          </button>
+          <a id="image-download"></a>
+        </div>
+      </>
     );
   }
 }

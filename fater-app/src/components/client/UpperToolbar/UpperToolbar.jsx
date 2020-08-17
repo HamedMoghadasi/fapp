@@ -6,6 +6,7 @@ import Info from "./Info/Info";
 import Capture from "./PhotoVideo/PhotoVideo";
 import Share from "./Share/Share";
 import Search from "./Search/Search";
+import MediaAreaSelector from "../MediaAreaSelector/MediaAreaSelector";
 
 import $ from "jquery";
 
@@ -35,6 +36,7 @@ class UpperToolbar extends Component {
           <Capture />
           <Info />
           <GoHome />
+          <MediaAreaSelector />
         </div>
       </>
     );

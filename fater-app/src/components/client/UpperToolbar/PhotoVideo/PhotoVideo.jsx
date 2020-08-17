@@ -6,10 +6,21 @@ import $ from "jquery";
 
 import "./PhotoVideo.css";
 import Snapshot from "./snapshot/snapshot";
+import Video from "./video/video";
+import AnimationGif from "./AnimationGif/AnimationGif";
 
 class PhotoVideo extends Component {
   state = {};
-
+  componentDidMount = () => {
+    $("#photoVideo").on("click", function () {
+      const wasClosed = $(this).attr("aria-expanded") === "false";
+      if (wasClosed) {
+        $("#mediaAreaSelector-container").removeClass("hide");
+      } else {
+        $("#mediaAreaSelector-container").addClass("hide");
+      }
+    });
+  };
   render() {
     return (
       <>
@@ -29,6 +40,7 @@ class PhotoVideo extends Component {
           title="Media"
           data-toggle="collapse"
           data-target="#photoVideo-container"
+          aria-expanded="false"
         >
           <defs>
             <g id="Layer1_0_FILL">
@@ -125,7 +137,8 @@ class PhotoVideo extends Component {
                 role="tabpanel"
                 aria-labelledby="sreenCast-tab"
               >
-                2
+                <Video />
+                <AnimationGif />
               </div>
               <div
                 className="tab-pane fade"
