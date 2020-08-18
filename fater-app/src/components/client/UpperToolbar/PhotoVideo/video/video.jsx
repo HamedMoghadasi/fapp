@@ -8,6 +8,15 @@ import "./video.css";
 
 class Video extends Component {
   state = { images: [], dates: [] };
+  reseteState = () => {
+    this.setState((state) => ({
+      dates: [],
+    }));
+
+    this.setState((state) => ({
+      images: [],
+    }));
+  };
   handleVideo = () => {
     const self = this;
     let selectedArea = document
@@ -71,7 +80,7 @@ class Video extends Component {
             mapContext.fillText("Karaneh", 0, 15);
             if (currentDate) {
               mapContext.fillText(
-                `${currentDate.year}-${currentDate.month}-${currentDate.day}  ${currentDate.hour}`,
+                `${currentDate.year}-${currentDate.month}-${currentDate.day}  ${currentDate.hour}:00`,
                 0,
                 30
               );
@@ -89,20 +98,18 @@ class Video extends Component {
           `video-${Date.now()}.${extension}`
         );
       } else {
-        var link = document.getElementById("video-download");
-        link.download = `video-${Date.now()}.${extension}`;
-        link.href = mapCanvas.toDataURL();
+        // var link = document.getElementById("video-download");
+        // link.download = `video-${Date.now()}.${extension}`;
+        // link.href = mapCanvas.toDataURL();
         //console.log("link.href :>> ", link.href);
         // link.click();
-
-        console.log("link.href :>> ", link.href);
 
         self.setState((state) => ({
           dates: [...self.state.dates, currentDate_Timespan],
         }));
 
         self.setState((state) => ({
-          images: [...self.state.images, link.href],
+          images: [...self.state.images, mapCanvas.toDataURL()],
         }));
 
         console.log("self.state.images :>> ", self.state.images);
@@ -111,60 +118,47 @@ class Video extends Component {
     map.renderSync();
   };
   createGif = () => {
+    const self = this;
     let selectedArea = document
       .getElementById("mediaAreaSelector-container")
       .getBoundingClientRect();
 
-    // console.log("umad tu create gif");
-    // console.log("GIF : >> this.state.images :>> ", this.state.images);
-    // gifshot.createGIF(
-    //   {
-    //     gifWidth:  selectedArea.width,
-    //     gifHeight: selectedArea.height,
-    //     images: this.state.images,
-    //     interval: 1,
-    //     numFrames: 10,
-    //     frameDuration: 1,
-    //     text: "",
-    //     fontWeight: "normal",
-    //     fontSize: "16px",
-    //     fontFamily: "sans-serif",
-    //     fontColor: "#ffffff",
-    //     textAlign: "left",
-    //     textBaseline: "bottom",
-    //     sampleInterval: 10,
-    //     numWorkers: 2,
-    //   },
-    //   function (obj) {
-    //     if (!obj.error) {
-    //       var image = obj.image,
-    //         animatedImage = document.createElement("img");
-    //       animatedImage.src = image;
-    //       console.log("link :>> ", image);
-    //       document.body.appendChild(animatedImage);
-    //     }
-    //   }
-    // );
-    var gif = new GIF({
-      width: selectedArea.width,
-      height: selectedArea.height,
-      workers: 2,
-      quality: 10,
-    });
-    this.state.images.map((image) => {
-      console.log("umad umad");
-      let animatedImage = document.createElement("img");
-      animatedImage.src = image;
-      // add an image element
-      gif.addFrame(animatedImage);
-    });
+    gifshot.createGIF(
+      {
+        gifWidth: selectedArea.width,
+        gifHeight: selectedArea.height,
+        images: this.state.images,
+        interval: 1,
+        numFrames: 10,
+        frameDuration: 1,
+        text: "",
+        fontWeight: "normal",
+        fontSize: "16px",
+        fontFamily: "sans-serif",
+        fontColor: "#ffffff",
+        textAlign: "left",
+        textBaseline: "bottom",
+        sampleInterval: 10,
+        numWorkers: 2,
+      },
+      function (obj) {
+        if (!obj.error) {
+          if (document.getElementById("animationGifResult")) {
+            document.getElementById("animationGifResult").remove();
+          }
 
-    gif.on("finished", function (blob) {
-      alert();
-      window.open(URL.createObjectURL(blob));
-    });
-
-    gif.render();
+          var image = obj.image,
+            animatedImage = document.createElement("a");
+          animatedImage.href = image;
+          animatedImage.download = `animationGif-${new Date().getTime()}.gif`;
+          animatedImage.id = "animationGifResult";
+          animatedImage.click();
+          console.log("link :>> ", image);
+          document.body.appendChild(animatedImage);
+          self.reseteState();
+        }
+      }
+    );
   };
   render() {
     return (
@@ -195,7 +189,7 @@ class Video extends Component {
           >
             make a GIF
           </button>
-          <a id="video-download"></a>
+          {/* <a id="video-download"></a> */}
         </div>
       </>
     );

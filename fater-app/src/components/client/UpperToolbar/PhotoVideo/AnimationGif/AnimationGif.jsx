@@ -22,15 +22,15 @@ class AnimationGif extends Component {
       var isStoppedRecording = false;
 
       const looper = () => {
-        let selectedArea = document
-          .getElementById("mediaAreaSelector-container")
-          .getBoundingClientRect();
-
-        document.getElementById("tcanvas").width = selectedArea.width;
-        document.getElementById("tcanvas").height = selectedArea.height;
-
         if (isRecordingStarted) {
+          let selectedArea = document
+            .getElementById("mediaAreaSelector-container")
+            .getBoundingClientRect();
+
+          document.getElementById("tcanvas").width = selectedArea.width;
+          document.getElementById("tcanvas").height = selectedArea.height;
           console.log("map_canvas :>> ", map_canvas);
+
           _context.drawImage(
             map_canvas,
             selectedArea.x,
@@ -69,7 +69,6 @@ class AnimationGif extends Component {
         recorder.stopRecording(function () {
           isRecordingStarted = false;
           isStoppedRecording = true;
-          console.log("recorder :>> ", recorder);
           var blob = recorder.getBlob();
           //recorder.save(`animationGif-${new Date().getTime()}.${extension}`);
 

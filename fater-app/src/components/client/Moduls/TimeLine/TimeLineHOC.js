@@ -326,27 +326,31 @@ class TimeLineWrapper extends Component {
 
   render() {
     return (
-      <TimeLine
-        onChange={(data) => this.handleChange(data)}
-        //onChange={(data) => console.log("on change", data)}
-        lang={this.state.lang}
-        getAnimationRangeValues={(rangeValues) => this.handleRange(rangeValues)}
-        //getAnimationRangeValues={(rangeValues) =>
-        //console.log("rangeValues :>> ", rangeValues)
-        //}
-        hasRange={this.state.hasRange}
-        isPlayingAnimation={this.state.isPlayingAnimation}
-        onPlayAnimation={(data) => this.handlePlayAnimation(data)}
-        //onPlayAnimation={(data) => console.log("onPlayAnimation :>> ", data)}
-        timeScale={
-          (value) => {
-            this.handleTimespan(value);
+      <>
+        <TimeLine
+          onChange={(data) => this.handleChange(data)}
+          //onChange={(data) => console.log("on change", data)}
+          lang={this.state.lang}
+          getAnimationRangeValues={(rangeValues) =>
+            this.handleRange(rangeValues)
           }
-          // timeScale={(value) => {
-          //   console.log("value :>> ", value);
-          // }
-        }
-      />
+          //getAnimationRangeValues={(rangeValues) =>
+          //console.log("rangeValues :>> ", rangeValues)
+          //}
+          hasRange={this.state.hasRange}
+          isPlayingAnimation={this.state.isPlayingAnimation}
+          onPlayAnimation={(data) => this.handlePlayAnimation(data)}
+          //onPlayAnimation={(data) => console.log("onPlayAnimation :>> ", data)}
+          timeScale={
+            (value) => {
+              this.handleTimespan(value);
+            }
+            // timeScale={(value) => {
+            //   console.log("value :>> ", value);
+            // }
+          }
+        />
+      </>
     );
   }
 }
