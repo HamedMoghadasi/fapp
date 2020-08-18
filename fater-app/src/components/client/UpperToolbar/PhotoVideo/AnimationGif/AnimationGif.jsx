@@ -1,92 +1,77 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import html2canvas from "html2canvas";
-import htmlToImage from "html-to-image";
 import RecordRTC from "recordrtc";
 
 import "./AnimationGif.css";
 
 class AnimationGif extends Component {
-  state = {};
+  state = { refresh: new Date().getTime() };
 
   componentDidMount = () => {
     setTimeout(() => {
-      var elementToRecord = document.getElementById("canvasi");
-      var canvas2d = document.getElementById("background-canvas");
-      var context = canvas2d.getContext("2d");
-      var tc_canvas = document.getElementById("tcanvas");
-      console.log("tc_canvas :>> ", tc_canvas);
-      var tc_context = tc_canvas.getContext("2d");
-      console.log("tc_context :>> ", tc_context);
-      var map_canvas = $("#mapContainer canvas")[0];
-      console.log("map_canvas :>> ", map_canvas);
+      document.getElementById("btn-start-recording").disabled = false;
 
-      canvas2d.width = elementToRecord.clientWidth;
-      canvas2d.height = elementToRecord.clientHeight;
+      var _canvas = document.getElementById("tcanvas");
+      var _context = _canvas.getContext("2d");
+      var map_canvas = $("#mapContainer canvas")[0];
+      const extension = $("#animationGif-extension")
+        .children("option:selected")
+        .val();
 
       var isRecordingStarted = false;
       var isStoppedRecording = false;
-      let mapContainer = $("#mapContainer").data("map");
 
-      (function looper() {
-        console.log("isRecordingStarted :>> ", isRecordingStarted);
-        if (!isRecordingStarted) {
-          return setTimeout(looper, 10);
+      const looper = () => {
+        let selectedArea = document
+          .getElementById("mediaAreaSelector-container")
+          .getBoundingClientRect();
+
+        document.getElementById("tcanvas").width = selectedArea.width;
+        document.getElementById("tcanvas").height = selectedArea.height;
+
+        if (isRecordingStarted) {
+          console.log("map_canvas :>> ", map_canvas);
+          _context.drawImage(
+            map_canvas,
+            selectedArea.x,
+            selectedArea.y,
+            selectedArea.width,
+            selectedArea.height,
+            0,
+            0,
+            selectedArea.width,
+            selectedArea.height
+          );
+          requestAnimationFrame(looper);
         }
+      };
 
-        // htmlToImage
-        //   .toCanvas(document.getElementById("canvasi"))
-        //   .then(function (canvas) {
-        //     console.log(canvas);
-        //     context.clearRect(0, 0, canvas2d.width, canvas2d.height);
-        //     context.drawImage(canvas, 0, 0, canvas2d.width, canvas2d.height);
-
-        //     if (isStoppedRecording) {
-        //       return;
-        //     }
-
-        //     requestAnimationFrame(looper);
-        //   });
-        console.log("tc_context :>> ", tc_context);
-        console.log("map_canvas :>> ", map_canvas);
-        tc_context.drawImage(map_canvas, 160, 160, 350, 350, 0, 0, 751, 751);
-        requestAnimationFrame(looper);
-      })();
-
-      var recorder = new RecordRTC(tc_context, {
+      var recorder = new RecordRTC(_context, {
         type: "canvas",
       });
 
       document.getElementById("btn-start-recording").onclick = function () {
-        document.getElementById("btn-stop-recording").disabled = false;
-        // if (true) {
-        //   let tc_canvas = document.getElementById("tcanvas");
-        //   let tc_context = tc_canvas.getContext("2d");
-        //   let map_canvas = $("#mapContainer canvas")[0];
-        //   var i = 0;
-        //   var timer = setInterval(function () {
-        //     if (isStoppedRecording) clearInterval(timer);
-        //     tc_context.drawImage(map_canvas, 160, 160, 350, 350, 0, 0, 751, 751);
-        //     i++;
-        //   }, 16.666);
-        // }
+        document.getElementById("btn-stop-recording").hidden = false;
 
-        this.disabled = true;
+        this.hidden = true;
 
         isStoppedRecording = false;
         isRecordingStarted = true;
+        looper();
+        recorder.reset();
         recorder.startRecording();
       };
 
       document.getElementById("btn-stop-recording").onclick = function () {
-        this.disabled = true;
-        document.getElementById("btn-start-recording").disabled = false;
+        this.hidden = true;
+        document.getElementById("btn-start-recording").hidden = false;
 
         recorder.stopRecording(function () {
           isRecordingStarted = false;
           isStoppedRecording = true;
-          console.log("stop e");
+          console.log("recorder :>> ", recorder);
           var blob = recorder.getBlob();
+          //recorder.save(`animationGif-${new Date().getTime()}.${extension}`);
 
           // document.getElementById('preview-video').srcObject = null;
 
@@ -96,7 +81,6 @@ class AnimationGif extends Component {
 
           //elementToRecord.style.display = "none";
 
-          console.log(URL.createObjectURL(blob));
           window.open(URL.createObjectURL(blob));
         });
       };
@@ -106,25 +90,41 @@ class AnimationGif extends Component {
   render() {
     return (
       <>
-        <button id="btn-start-recording">Start Recording</button>
-        <button id="btn-stop-recording" disabled>
-          Stop Recording
-        </button>
+        <div className="animationGif-wrapper">
+          <select
+            id="animationGif-extension"
+            className="custom-select custom-select-sm"
+          >
+            <option value="mp4">MP4</option>
+            <option value="mkv">MKV</option>
+          </select>
+          <hr />
 
-        <hr />
-        <div className="canvasi" id="canvasi">
-          <div id="canvasi-title">Karaneh</div>
-          <div id="canvasi-logo">
-            <img src="./logo.jpg" alt="logo" />
+          <button
+            id="btn-start-recording"
+            className="btn btn-success btn-sm"
+            disabled
+          >
+            Start Recording
+          </button>
+          <button
+            id="btn-stop-recording"
+            className="btn btn-danger btn-sm"
+            hidden
+          >
+            Stop Recording
+          </button>
+
+          <div className="canvasi" id="canvasi">
+            <canvas id="tcanvas"></canvas>
           </div>
-          <canvas id="tcanvas" width="751" height="751"></canvas>
-        </div>
 
-        <div id="video-element">
-          <video controls autoPlay playsInline id="preview-video"></video>
-        </div>
+          <div id="video-element">
+            <video controls autoPlay playsInline id="preview-video"></video>
+          </div>
 
-        <canvas id="background-canvas"></canvas>
+          <canvas id="background-canvas"></canvas>
+        </div>
       </>
     );
   }

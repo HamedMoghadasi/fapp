@@ -95,11 +95,12 @@ class Snapshot extends Component {
             <option value="png">PNG</option>
             <option value="jpeg">JPEG</option>
           </select>
+          <hr />
           <button
-            className="btn btn-danger btn-sm mt-3"
+            className="btn btn-danger btn-sm"
             onClick={this.handleSnapshot}
           >
-            take a snapshot
+            Take a snapshot
           </button>
           <a id="image-download"></a>
         </div>

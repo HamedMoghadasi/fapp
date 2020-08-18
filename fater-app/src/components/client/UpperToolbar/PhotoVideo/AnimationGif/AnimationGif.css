@@ -8,28 +8,20 @@
   left: -9999999999px;
 }
 
-#canvasi-title {
-  position: absolute;
-  top: 5;
-  left: 5;
-}
-#canvasi-logo img {
-  width: 50px;
-  opacity: 0.5;
-}
-#canvasi-logo {
-  position: absolute;
-  right: 15;
-  bottom: 15;
-}
 .canvasi {
   height: 751px;
   width: 751px;
   position: absolute;
-  right: 100;
+  top: -99999999px;
+  left: -9999999999px;
+  z-index: 0;
 }
 #draggable {
   width: 150px;
   height: 150px;
   padding: 0.5em;
+}
+
+.animationGif-wrapper {
+  margin: 15px;
 }

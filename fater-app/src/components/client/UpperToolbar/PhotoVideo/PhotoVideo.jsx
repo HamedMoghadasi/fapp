@@ -137,7 +137,7 @@ class PhotoVideo extends Component {
                 role="tabpanel"
                 aria-labelledby="sreenCast-tab"
               >
-                <Video />
+                {/* <Video /> */}
                 <AnimationGif />
               </div>
               <div
