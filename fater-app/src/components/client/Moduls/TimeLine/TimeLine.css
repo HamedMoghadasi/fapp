@@ -50,7 +50,7 @@
   align-items: flex-end;
   box-sizing: border-box;
   z-index: 2;
-  /* margin-top: 600px; */
+  /* margin-top: 700px; */
 }
 .timeline-container {
   width: 100%;
@@ -217,6 +217,41 @@
 }
 .DatePicker .animation-datePicker .Calendar__day.-disabled {
   color: rgb(83, 83, 83) !important;
+}
+/* Month & Year Selector */
+.DatePicker .animation-datePicker .Calendar__monthSelector,
+.DatePicker .animation-datePicker .Calendar__yearSelector {
+  background-color: rgba(32, 32, 32) !important;
+}
+.DatePicker .animation-datePicker .Calendar__monthSelector > li > button,
+.DatePicker .animation-datePicker .Calendar__yearSelector > li > button {
+  color: white !important;
+}
+.DatePicker
+  .animation-datePicker
+  .Calendar__monthSelector
+  > li.-active
+  > button,
+.DatePicker
+  .animation-datePicker
+  .Calendar__yearSelector
+  > li.-active
+  > button {
+  color: rgba(32, 32, 32) !important;
+}
+.DatePicker .animation-datePicker .Calendar__monthSelector > li > button:hover,
+.DatePicker .animation-datePicker .Calendar__yearSelector > li > button:hover {
+  background-color: white !important;
+  color: rgba(32, 32, 32) !important;
+}
+.DatePicker .animation-datePicker .Calendar__yearSelectorWrapper.-faded:after,
+.DatePicker .animation-datePicker .Calendar__yearSelectorWrapper.-faded:before {
+  background-image: linear-gradient(
+    180deg,
+    rgb(32 32 32 / 1),
+    rgb(32 32 32 / 1) 10%,
+    hsla(0, 0%, 96.1%, 0)
+  ) !important;
 }
 /* Time Picker */
 .time-text {

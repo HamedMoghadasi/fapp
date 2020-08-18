@@ -268,6 +268,7 @@ export default function AnimationBtn(props) {
                 onClick={() => {
                   props.setDateRange([]);
                   props.setAnimationRangeValue([]);
+                  props.hasRangeFunction(false);
                   setSelectedDayRange1(null);
                   setSelectedDayRange2(null);
                   settimePick1(props.lang === "eng" ? moment() : jMoment());

@@ -57,7 +57,7 @@ class Snapshot extends Component {
             mapContext.fillText("Karaneh", 0, 15);
             if (currentDate) {
               mapContext.fillText(
-                `${currentDate.year}-${currentDate.month}-${currentDate.day}  ${currentDate.hour}`,
+                `${currentDate.year}-${currentDate.month}-${currentDate.day}  ${currentDate.hour}:00`,
                 0,
                 30
               );

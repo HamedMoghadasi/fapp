@@ -16,13 +16,174 @@ import {
   getSatelliteLableByValue,
 } from "../../../../constants/satellites";
 
-class TimeLineWrapper extends Component {
+import gifshot from "gifshot";
+
+import "./TimeLineHOC.css";
+
+class TimeLineHOC extends Component {
   state = {
     lang: format.eng,
     hasRange: false,
     isPlayingAnimation: false,
     rangeValues: [],
     timescale: scale.day,
+    isRecording: false,
+  };
+  images = [];
+  dates = [];
+  reseteState = () => {
+    this.images = [];
+    this.dates = [];
+  };
+
+  CaptureVideo = () => {
+    const self = this;
+
+    let selectedArea = document
+      .getElementById("mediaAreaSelector-container")
+      .getBoundingClientRect();
+
+    // const extension = $("#video-extension").children("option:selected").val();
+    const extension = "png";
+    const map = $("#mapContainer").data("map");
+    map.once("rendercomplete", function () {
+      console.log("rendercomplete :>> ");
+
+      var mapCanvas = document.createElement("canvas");
+
+      let currentDate = JSON.parse(window.sessionStorage.date);
+      let currentDate_Timespan = new Date(
+        currentDate.year,
+        currentDate.month,
+        currentDate.day,
+        currentDate.hour
+      ).getTime();
+
+      mapCanvas.width = selectedArea.width;
+      mapCanvas.height = selectedArea.height;
+      var mapContext = mapCanvas.getContext("2d");
+      Array.prototype.forEach.call(
+        document.querySelectorAll(".ol-layer canvas"),
+
+        function (canvas) {
+          if (canvas.width > 0) {
+            var opacity = canvas.parentNode.style.opacity;
+
+            console.log("currentDate_Timespan :>> ", currentDate_Timespan);
+            mapContext.globalAlpha = opacity === "" ? 1 : Number(opacity);
+            var transform = canvas.style.transform;
+            // Get the transform parameters from the style's transform matrix
+            var matrix = transform
+              .match(/^matrix\(([^\(]*)\)$/)[1]
+              .split(",")
+              .map(Number);
+
+            // Apply the transform to the export map context
+            CanvasRenderingContext2D.prototype.setTransform.apply(
+              mapContext,
+              matrix
+            );
+
+            mapContext.drawImage(
+              canvas,
+              selectedArea.x,
+              selectedArea.y,
+              selectedArea.width,
+              selectedArea.height,
+              0,
+              0,
+              selectedArea.width,
+              selectedArea.height
+            );
+
+            mapContext.font = "12px Arial";
+            mapContext.fillStyle = "red";
+            mapContext.fillText("Karaneh", 0, 15);
+            if (currentDate) {
+              mapContext.fillText(
+                `${currentDate.year}-${currentDate.month}-${currentDate.day}  ${currentDate.hour}:00`,
+                0,
+                30
+              );
+            } else {
+              mapContext.fillText(`${Date.now()}`, 0, 30);
+            }
+          }
+        }
+      );
+
+      if (navigator.msSaveBlob) {
+        // link download attribuute does not work on MS browsers
+        navigator.msSaveBlob(
+          mapCanvas.msToBlob(),
+          `video-${Date.now()}.${extension}`
+        );
+      } else {
+        // var link = document.getElementById("video-download");
+        // link.download = `video-${Date.now()}.${extension}`;
+        // link.href = mapCanvas.toDataURL();
+        //console.log("link.href :>> ", link.href);
+        // link.click();
+
+        // self.setState((state) => ({
+        //   dates: [...self.state.dates, currentDate_Timespan],
+        // }));
+
+        // self.setState((state) => ({
+        //   images: [...self.state.images, mapCanvas.toDataURL()],
+        // }));
+
+        console.log("self.state.images :>> ", mapCanvas.toDataURL());
+        self.images.push(mapCanvas.toDataURL());
+      }
+    });
+    map.renderSync();
+
+    console.log("self.images :>> ", self.images);
+  };
+
+  createGif = () => {
+    const self = this;
+    let selectedArea = document
+      .getElementById("mediaAreaSelector-container")
+      .getBoundingClientRect();
+
+    gifshot.createGIF(
+      {
+        gifWidth: selectedArea.width,
+        gifHeight: selectedArea.height,
+        images: this.images,
+        interval: 1,
+        numFrames: 10,
+        frameDuration: 1,
+        text: "",
+        fontWeight: "normal",
+        fontSize: "16px",
+        fontFamily: "sans-serif",
+        fontColor: "#ffffff",
+        textAlign: "left",
+        textBaseline: "bottom",
+        sampleInterval: 10,
+        numWorkers: 2,
+      },
+      function (obj) {
+        if (!obj.error) {
+          if (document.getElementById("animationGifResult")) {
+            document.getElementById("animationGifResult").remove();
+          }
+
+          var image = obj.image,
+            animatedImage = document.createElement("a");
+          animatedImage.href = image;
+          animatedImage.download = `animationGif-${new Date().getTime()}.gif`;
+          animatedImage.id = "animationGifResult";
+          animatedImage.click();
+          console.log("link :>> ", image);
+          document.body.appendChild(animatedImage);
+          self.reseteState();
+        }
+      }
+    );
   };
 
   handleChange = (data) => {
@@ -288,6 +449,7 @@ class TimeLineWrapper extends Component {
 
   handlePlayAnimation = (date) => {
     if (this.state.isPlayingAnimation) {
+      console.log("handlePlayAnimation");
       let timespan = calculateTimespan(
         date,
         this.state.timescale,
@@ -309,24 +471,90 @@ class TimeLineWrapper extends Component {
         }
         var i = 0;
         var timer = setInterval(function () {
-          if (i === 10) clearInterval(timer);
+          if (i === 5) clearInterval(timer);
           mapContainer.updateSize();
           i++;
         }, 500);
       });
-    } else {
+
+      if (this.state.isRecording) {
+        console.log("Record");
+        this.CaptureVideo();
+      }
+    }
+    //this.setState({ hasRange: true });
+  };
+
+  handleIsPlayingAnimation = (value) => {
+    console.log("isPlayingAnimation : >>", value);
+
+    if (value && !this.state.isPlayingAnimation) {
       this.setState({ isPlayingAnimation: true });
-      setTimeout(() => {
-        this.setState({ isPlayingAnimation: false });
-      }, 150000);
+    } else if (!value) {
+      console.log("this.images.length  :>> ", this.images.length);
+
+      console.log("this.state.isRecording :>> ", this.state.isRecording);
+      if (this.images.length && this.state.isRecording) {
+        console.log("create gif");
+        this.createGif();
+        this.setState({ isRecording: false });
+      }
+      this.setState({ isPlayingAnimation: false });
+      this.setState({ isRecording: false });
+    }
+  };
+
+  handleHasRange = (value) => {
+    console.log("hasRange : >>", value);
+
+    if (value && !this.state.hasRange) {
+      this.setState({ hasRange: true });
+    } else if (!value) {
+      this.setState({ hasRange: false });
+    }
+  };
+
+  handleRecorder = () => {
+    //set record state true here
+    if (!this.state.isRecording) {
+      this.setState({ isRecording: true });
+      document.getElementsByClassName("timeline-btn-animation")[0].click();
     }
 
-    //this.setState({ hasRange: true });
+    // setTimeout(() => {
+    //   console.log(
+    //     "this.state.isPlayingAnimation :>> ",
+    //     this.state.isPlayingAnimation
+    //   );
+    //   console.log("this.state.hasRange :>> ", this.state.hasRange);
+    //   var i,
+    //     j = 0;
+    //   while (this.state.isPlayingAnimation && this.state.hasRange) {
+    //     if (i === 0) {
+    //       console.log("capturing ...");
+    //       i++;
+    //     }
+    //     this.CaptureVideo();
+    //   }
+    //   if (!this.state.isPlayingAnimation && this.state.hasRange) {
+    //     if (j === 0) {
+    //       console.log("generating gif ...");
+    //       j++;
+    //     }
+    //     this.createGif();
+    //   }
+    // }, 2000);
   };
 
   render() {
     return (
       <>
+        <div className="timeline-recorder-manager">
+          <button
+            id="btn-timeline-recorder"
+            onClick={this.handleRecorder}
+          ></button>
+        </div>
         <TimeLine
           onChange={(data) => this.handleChange(data)}
           //onChange={(data) => console.log("on change", data)}
@@ -337,8 +565,14 @@ class TimeLineWrapper extends Component {
           //getAnimationRangeValues={(rangeValues) =>
           //console.log("rangeValues :>> ", rangeValues)
           //}
-          hasRange={this.state.hasRange}
-          isPlayingAnimation={this.state.isPlayingAnimation}
+          hasRange={[
+            this.state.hasRange,
+            (value) => this.handleHasRange(value),
+          ]}
+          isPlayingAnimation={[
+            this.state.isPlayingAnimation,
+            (value) => this.handleIsPlayingAnimation(value),
+          ]}
           onPlayAnimation={(data) => this.handlePlayAnimation(data)}
           //onPlayAnimation={(data) => console.log("onPlayAnimation :>> ", data)}
           timeScale={
@@ -355,4 +589,4 @@ class TimeLineWrapper extends Component {
   }
 }
 
-export default TimeLineWrapper;
+export default TimeLineHOC;

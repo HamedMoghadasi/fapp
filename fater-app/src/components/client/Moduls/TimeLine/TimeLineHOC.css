@@ -1,0 +1,7 @@
+.timeline-recorder-manager {
+  position: absolute;
+}
+
+#btn-timeline-recorder {
+  opacity: 0;
+}
