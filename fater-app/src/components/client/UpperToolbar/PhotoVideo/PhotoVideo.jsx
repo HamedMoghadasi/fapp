@@ -42,6 +42,7 @@ class PhotoVideo extends Component {
           data-target="#photoVideo-container"
           aria-expanded="false"
         >
+          <title>Capture Media</title>
           <defs>
             <g id="Layer1_0_FILL">
               <path
