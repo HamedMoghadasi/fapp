@@ -21,141 +21,147 @@ import Unit from "./unit/unit";
 
 class SideToolbar extends Component {
   drawing = (tagetIconDomId, drawShapeType) => {
-    var source = $("#mapContainer").data("drawVector-source");
-    const $targetIconDom = $(`svg${tagetIconDomId}`);
-    $targetIconDom.addClass("active");
-    console.log($targetIconDom);
+    let isActive = $("#st-container svg.active");
+    if (isActive.length) {
+      return;
+    } else {
+      var source = $("#mapContainer").data("drawVector-source");
+      const $targetIconDom = $(`svg${tagetIconDomId}`);
+      $targetIconDom.addClass("active");
+      console.log($targetIconDom);
 
-    var map = $("#mapContainer").data("map");
+      var map = $("#mapContainer").data("map");
 
-    var mapUnit = $("#mapContainer").data("unit");
+      var mapUnit = $("#mapContainer").data("unit");
 
-    var sketch;
-    var measureTooltipElement;
-    var measureTooltip;
+      var sketch;
+      var measureTooltipElement;
+      var measureTooltip;
 
-    var draw; // global so we can remove it later
+      var draw; // global so we can remove it later
 
-    var formatLength = function (line) {
-      var length = getLength(line);
-      var output = {};
+      var formatLength = function (line) {
+        var length = getLength(line);
+        var output = {};
 
-      if (length > 100) {
-        const distance = Math.round((length / 1000) * 100) / 100;
-        output[`${units.KM}`] = `${distance} km`;
-        output[`${units.MILE}`] = `${(distance * 0.621371).toFixed(3)} mi`;
-      } else {
-        const distance = Math.round(length * 100) / 100;
-        output[`${units.KM}`] = `${distance} m`;
-        output[`${units.MILE}`] = `${(distance * 3.28084).toFixed(3)} ft`;
-      }
-      return output;
-    };
+        if (length > 100) {
+          const distance = Math.round((length / 1000) * 100) / 100;
+          output[`${units.KM}`] = `${distance} km`;
+          output[`${units.MILE}`] = `${(distance * 0.621371).toFixed(3)} mi`;
+        } else {
+          const distance = Math.round(length * 100) / 100;
+          output[`${units.KM}`] = `${distance} m`;
+          output[`${units.MILE}`] = `${(distance * 3.28084).toFixed(3)} ft`;
+        }
+        return output;
+      };
 
-    var formatArea = function (polygon) {
-      var area = getArea(polygon);
-      var output = {};
-      if (area > 10000) {
-        const distance = Math.round((area / 1000000) * 100) / 100;
-        output[`${units.KM}`] = `${distance} km<sup>2</sup>`;
-        output[`${units.MILE}`] = `${(distance * 0.386102).toFixed(
-          3
-        )} mi<sup>2</sup>`;
-      } else {
-        const distance = Math.round(area * 100) / 100;
+      var formatArea = function (polygon) {
+        var area = getArea(polygon);
+        var output = {};
+        if (area > 10000) {
+          const distance = Math.round((area / 1000000) * 100) / 100;
+          output[`${units.KM}`] = `${distance} km<sup>2</sup>`;
+          output[`${units.MILE}`] = `${(distance * 0.386102).toFixed(
+            3
+          )} mi<sup>2</sup>`;
+        } else {
+          const distance = Math.round(area * 100) / 100;
 
-        output[`${units.KM}`] = `${distance} m<sup>2</sup>`;
-        output[`${units.MILE}`] = `${(distance * 10.7639).toFixed(
-          3
-        )} ft<sup>2</sup>`;
-      }
-      return output;
-    };
+          output[`${units.KM}`] = `${distance} m<sup>2</sup>`;
+          output[`${units.MILE}`] = `${(distance * 10.7639).toFixed(
+            3
+          )} ft<sup>2</sup>`;
+        }
+        return output;
+      };
 
-    function addInteraction() {
-      draw = new Draw({
-        source: source,
-        type: drawShapeType,
-        style: new Style({
-          fill: new Fill({
-            color: "rgba(254, 254, 254, 0.5)",
-          }),
-          stroke: new Stroke({
-            color: "rgba(0, 0, 0, 0.5)",
-            lineDash: [10, 10],
-            width: 2,
-          }),
-          image: new CircleStyle({
-            radius: 5,
-            stroke: new Stroke({
-              color: "rgba(0, 0, 0, 0.7)",
-            }),
+      function addInteraction() {
+        draw = new Draw({
+          source: source,
+          type: drawShapeType,
+          style: new Style({
             fill: new Fill({
-              color: "rgba(255, 255, 255, 0.2)",
+              color: "rgba(254, 254, 254, 0.5)",
+            }),
+            stroke: new Stroke({
+              color: "rgba(0, 0, 0, 0.5)",
+              lineDash: [10, 10],
+              width: 2,
+            }),
+            image: new CircleStyle({
+              radius: 5,
+              stroke: new Stroke({
+                color: "rgba(0, 0, 0, 0.7)",
+              }),
+              fill: new Fill({
+                color: "rgba(255, 255, 255, 0.2)",
+              }),
             }),
           }),
-        }),
-      });
-
-      map.addInteraction(draw);
-
-      createMeasureTooltip();
-
-      var listener;
-      draw.on("drawstart", function (evt) {
-        // set sketch
-        sketch = evt.feature;
-
-        var tooltipCoord = evt.coordinate;
-
-        listener = sketch.getGeometry().on("change", function (evt) {
-          var geom = evt.target;
-          var output;
-          if (geom instanceof Polygon) {
-            output = formatArea(geom);
-            tooltipCoord = geom.getInteriorPoint().getCoordinates();
-          } else if (geom instanceof LineString) {
-            output = formatLength(geom);
-
-            tooltipCoord = geom.getLastCoordinate();
-          }
-          measureTooltipElement.innerHTML = output[`${mapUnit}`];
-          measureTooltipElement.dataset[`${units.KM}`] = output[`${units.KM}`];
-          measureTooltipElement.dataset[`${units.MILE}`] =
-            output[`${units.MILE}`];
-          measureTooltip.setPosition(tooltipCoord);
         });
-      });
 
-      draw.on("drawend", function () {
-        measureTooltipElement.className =
-          "ol-tooltip ol-tooltip-static shapeUnit";
+        map.addInteraction(draw);
 
-        measureTooltip.setOffset([0, -7]);
-        // unset sketch
-        sketch = null;
+        createMeasureTooltip();
 
-        unByKey(listener);
-        $targetIconDom.removeClass("active");
-        map.removeInteraction(draw);
-      });
-    }
+        var listener;
+        draw.on("drawstart", function (evt) {
+          // set sketch
+          sketch = evt.feature;
 
-    function createMeasureTooltip() {
-      if (measureTooltipElement) {
-        measureTooltipElement.parentNode.removeChild(measureTooltipElement);
+          var tooltipCoord = evt.coordinate;
+
+          listener = sketch.getGeometry().on("change", function (evt) {
+            var geom = evt.target;
+            var output;
+            if (geom instanceof Polygon) {
+              output = formatArea(geom);
+              tooltipCoord = geom.getInteriorPoint().getCoordinates();
+            } else if (geom instanceof LineString) {
+              output = formatLength(geom);
+
+              tooltipCoord = geom.getLastCoordinate();
+            }
+            measureTooltipElement.innerHTML = output[`${mapUnit}`];
+            measureTooltipElement.dataset[`${units.KM}`] =
+              output[`${units.KM}`];
+            measureTooltipElement.dataset[`${units.MILE}`] =
+              output[`${units.MILE}`];
+            measureTooltip.setPosition(tooltipCoord);
+          });
+        });
+
+        draw.on("drawend", function () {
+          measureTooltipElement.className =
+            "ol-tooltip ol-tooltip-static shapeUnit";
+
+          measureTooltip.setOffset([0, -7]);
+          // unset sketch
+          sketch = null;
+
+          unByKey(listener);
+          $targetIconDom.removeClass("active");
+          map.removeInteraction(draw);
+        });
       }
-      measureTooltipElement = document.createElement("div");
-      measureTooltipElement.className = "ol-tooltip ol-tooltip-measure";
-      measureTooltip = new Overlay({
-        element: measureTooltipElement,
-        offset: [0, -15],
-        positioning: "bottom-center",
-      });
-      map.addOverlay(measureTooltip);
-    }
 
-    addInteraction();
+      function createMeasureTooltip() {
+        if (measureTooltipElement) {
+          measureTooltipElement.parentNode.removeChild(measureTooltipElement);
+        }
+        measureTooltipElement = document.createElement("div");
+        measureTooltipElement.className = "ol-tooltip ol-tooltip-measure";
+        measureTooltip = new Overlay({
+          element: measureTooltipElement,
+          offset: [0, -15],
+          positioning: "bottom-center",
+        });
+        map.addOverlay(measureTooltip);
+      }
+
+      addInteraction();
+    }
   };
 
   handleRemoveAllDrawShape = () => {
