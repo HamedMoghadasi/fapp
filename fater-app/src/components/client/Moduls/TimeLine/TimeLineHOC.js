@@ -20,6 +20,7 @@ import gifshot from "gifshot";
 
 import "./TimeLineHOC.css";
 
+let ApplicationType = process.env.REACT_APP_APPLICATION_TYPE;
 class TimeLineHOC extends Component {
   state = {
     lang: format.eng,
@@ -32,8 +33,17 @@ class TimeLineHOC extends Component {
   images = [];
   dates = [];
   reseteState = () => {
-    this.images = [];
-    this.dates = [];
+    $("#animationGifModal").modal("hide");
+
+    setTimeout(() => {
+      var firstImageDom = document.getElementById("animationGif-firstImageDom");
+      firstImageDom.src = "./";
+
+      var animatedGifLink = document.getElementById("animationGifResult");
+      animatedGifLink.href = "./";
+      this.images = [];
+      this.dates = [];
+    }, 3000);
   };
 
   CaptureVideo = () => {
@@ -98,7 +108,7 @@ class TimeLineHOC extends Component {
 
             mapContext.font = "12px Arial";
             mapContext.fillStyle = "red";
-            mapContext.fillText("Karaneh", 0, 15);
+            mapContext.fillText(`${ApplicationType}`, 0, 15);
             if (currentDate) {
               mapContext.fillText(
                 `${currentDate.year}-${currentDate.month}-${currentDate.day}  ${currentDate.hour}:00`,
@@ -148,6 +158,7 @@ class TimeLineHOC extends Component {
       .getElementById("mediaAreaSelector-container")
       .getBoundingClientRect();
 
+    var firstImage = this.images[0];
     gifshot.createGIF(
       {
         gifWidth: selectedArea.width,
@@ -168,19 +179,22 @@ class TimeLineHOC extends Component {
       },
       function (obj) {
         if (!obj.error) {
-          if (document.getElementById("animationGifResult")) {
-            document.getElementById("animationGifResult").remove();
-          }
+          $("#animationGifModal").modal("toggle");
+          var generatedGif = obj.image;
 
-          var image = obj.image,
-            animatedImage = document.createElement("a");
-          animatedImage.href = image;
-          animatedImage.download = `animationGif-${new Date().getTime()}.gif`;
-          animatedImage.id = "animationGifResult";
-          animatedImage.click();
-          console.log("link :>> ", image);
-          document.body.appendChild(animatedImage);
-          self.reseteState();
+          var firstImageDom = document.getElementById(
+            "animationGif-firstImageDom"
+          );
+          firstImageDom.src = firstImage;
+
+          var animatedGifLink = document.getElementById("animationGifResult");
+          animatedGifLink.href = generatedGif;
+          animatedGifLink.download = `animationGif-${new Date().getTime()}.gif`;
+          animatedGifLink.onclick = self.reseteState;
+          //animatedGifLink.click();
+          //console.log("link :>> ", generatedGif);
+          // document.body.appendChild(firstImageDom);
+          // document.body.appendChild(animatedGifLink);
         }
       }
     );

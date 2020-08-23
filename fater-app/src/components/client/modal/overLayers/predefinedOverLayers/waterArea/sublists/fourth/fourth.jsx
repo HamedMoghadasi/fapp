@@ -39,8 +39,6 @@ class Fourth extends Component {
           satellites.sentinel2,
         ],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 

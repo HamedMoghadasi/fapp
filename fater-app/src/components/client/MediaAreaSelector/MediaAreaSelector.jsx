@@ -25,16 +25,16 @@ class MediaAreaSelector extends Component {
     return xyToCoordinateEPSG4326;
   };
   updateCoordinate = () => {
-    let selectedArea = document
+    const selectedArea = document
       .getElementById("mediaAreaSelector-container")
       .getBoundingClientRect();
 
-    let top_coordinate = this.calculateCoordinate(
+    const top_coordinate = this.calculateCoordinate(
       selectedArea.x,
       selectedArea.y
     );
 
-    let bottom_coordinate = this.calculateCoordinate(
+    const bottom_coordinate = this.calculateCoordinate(
       selectedArea.x + selectedArea.width,
       selectedArea.y + selectedArea.height
     );
@@ -54,8 +54,8 @@ class MediaAreaSelector extends Component {
 
     $("#mediaAreaSelector-container")
       .resizable({
-        minHeight: 50,
-        minWidth: 50,
+        minHeight: 150,
+        minWidth: 150,
         handles: "n, e, s, w,ne,se,nw,sw",
 
         create: function (event, ui) {
@@ -63,18 +63,18 @@ class MediaAreaSelector extends Component {
             .removeClass("ui-icon-gripsmall-diagonal-se")
             .removeClass("ui-icon");
         },
-        stop: function () {
-          updateCoordinate();
-        },
+        // stop: function () {
+        //   updateCoordinate();
+        // },
         resize: function () {
           updateCoordinate();
         },
       })
       .draggable({
         containment: "#mapContainer",
-        stop: function () {
-          updateCoordinate();
-        },
+        // stop: function () {
+        //   updateCoordinate();
+        // },
         drag: function () {
           updateCoordinate();
         },

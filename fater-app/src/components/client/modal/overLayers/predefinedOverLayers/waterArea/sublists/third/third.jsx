@@ -39,8 +39,6 @@ class Third extends Component {
           satellites.landsat,
         ],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -156,8 +154,6 @@ class Third extends Component {
           satellites.landsat,
         ],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -273,8 +269,6 @@ class Third extends Component {
           satellites.landsat,
         ],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -386,8 +380,6 @@ class Third extends Component {
         optionsDefaultValue: lakesOptions[0],
         satellites: [],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -504,8 +496,6 @@ class Third extends Component {
           satellites.sentinel3,
         ],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -621,8 +611,6 @@ class Third extends Component {
           satellites.sentinel3,
         ],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 

@@ -69,7 +69,6 @@ function TabPanel(props) {
         <button
           className="btn btn-success btn-sm mx-1 mb-1 mt-auto "
           onClick={() => {
-            console.log("location :>> ", location);
             const locationValue = location.value ? location.value : "world";
             console.log("locationValue :>> ", locationValue);
             if (selectedSatellites.length) {

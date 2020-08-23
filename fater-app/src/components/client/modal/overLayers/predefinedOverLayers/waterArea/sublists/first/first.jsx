@@ -1984,8 +1984,6 @@ class First extends Component {
         optionsDefaultValue: lakesOptions[0],
         satellites: [],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -2097,8 +2095,6 @@ class First extends Component {
         optionsDefaultValue: lakesOptions[0],
         satellites: [],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -2214,8 +2210,6 @@ class First extends Component {
         optionsDefaultValue: lakesOptions[0],
         satellites: [],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 
@@ -2327,9 +2321,6 @@ class First extends Component {
         optionsDefaultValue: lakesOptions[0],
         satellites: [],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
-
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 

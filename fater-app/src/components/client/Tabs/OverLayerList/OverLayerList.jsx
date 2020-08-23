@@ -7,6 +7,7 @@ import "./OverLayerList.css";
 import { Image as ImageLayer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 import _ from "lodash";
+import { WindLayer } from "ol-wind";
 
 window.jQuery = $;
 require("jquery-ui-touch-punch");
@@ -63,6 +64,7 @@ class OverLayerList extends Component {
               {ordered.map((layer, index) => {
                 if (
                   (layer instanceof VectorLayer ||
+                    layer instanceof WindLayer ||
                     layer instanceof ImageLayer) &&
                   layer.get("name") !== "Draw vector layer" &&
                   !layer.get("isTimelineLayer")

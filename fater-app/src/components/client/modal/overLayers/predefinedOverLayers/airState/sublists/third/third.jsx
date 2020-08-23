@@ -34,8 +34,6 @@ class Third extends Component {
         optionsDefaultValue: cityOptions[0],
         satellites: [satellites.amsr2, satellites.gfs],
         handleAddLayer: (selectedSatellites, location) => {
-          console.log("satellites :>> ", selectedSatellites);
-          console.log("location :>> ", location);
           selectedSatellites.map((satellite) => {
             displayLoader(5000);
 

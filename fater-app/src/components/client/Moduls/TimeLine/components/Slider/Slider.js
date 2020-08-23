@@ -8,7 +8,7 @@ const persianDate = require("persian-date");
 const useStyles = makeStyles((theme) => ({
   root: {
     // width: 300 + theme.spacing(3) * 2,
-    width: "70%",
+    width: "72%",
     height: "100%",
     backgroundColor: "rgba(32, 32, 32, 0.85)",
     padding: "0 17px",

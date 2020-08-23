@@ -3,6 +3,8 @@ import $ from "jquery";
 
 import "./snapshot.css";
 
+let ApplicationType = process.env.REACT_APP_APPLICATION_TYPE;
+
 class Snapshot extends Component {
   handleSnapshot = () => {
     let selectedArea = document
@@ -52,9 +54,9 @@ class Snapshot extends Component {
               selectedArea.height
             );
 
-            mapContext.font = "12px Arial";
+            mapContext.font = `12px Arial`;
             mapContext.fillStyle = "red";
-            mapContext.fillText("Karaneh", 0, 15);
+            mapContext.fillText(`${ApplicationType}`, 0, 15);
             if (currentDate) {
               mapContext.fillText(
                 `${currentDate.year}-${currentDate.month}-${currentDate.day}  ${currentDate.hour}:00`,

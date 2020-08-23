@@ -51,6 +51,7 @@
     "malihu-custom-scrollbar-plugin": "^3.1.5",
     "moment": "^2.25.3",
     "moment-jalaali": "^0.9.2",
+    "ol-wind": "^1.0.0-alpha.10",
     "persian-date": "^1.1.0",
     "popper.js": "^1.16.1",
     "query-string": "^6.12.1",

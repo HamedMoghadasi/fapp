@@ -57,7 +57,6 @@ class DragableLayerInfo extends Component {
   handleLayerRemove = (ol_uid) => {
     let map = $("#mapContainer").data("map");
 
-    let isHeatMap = false;
     map.getLayers().array_ = map.getLayers().array_.filter((layer) => {
       if (String(layer.ol_uid) !== String(ol_uid)) return layer;
     });
@@ -173,7 +172,11 @@ class DragableLayerInfo extends Component {
   };
 
   handleColorPicker = () => {
-    if (this.props.layer && this.props.layer.get("colors")) {
+    if (
+      this.props.layer &&
+      this.props.layer.get("colors") &&
+      this.props.layer.get("isHeatMap")
+    ) {
       let colors = this.props.layer.get("colors");
 
       let ol_uid = this.props.layer.ol_uid;
