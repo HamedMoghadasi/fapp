@@ -53,11 +53,20 @@ class SideBar extends Component {
 
   componentDidMount = () => {
     $(document).ready(function () {
+      $("body").on("click", function (e) {
+        var $tgt = $(e.target);
+        var isSidebarActive = $("#sidebar").hasClass("active");
+        if (!$tgt.closest("#sidebar").length && isSidebarActive) {
+          $("#sidebar").removeClass("active");
+        }
+      });
+
       $("#dismiss, .overlay").on("click", function () {
         $("#sidebar").removeClass("active");
       });
 
-      $("#sidebarCollapse").on("click", function () {
+      $("#sidebarCollapse").on("click", function (e) {
+        e.stopPropagation();
         $("#sidebar").addClass("active");
         $(".collapse.in").toggleClass("in");
         $("a[aria-expanded=true]").attr("aria-expanded", "false");

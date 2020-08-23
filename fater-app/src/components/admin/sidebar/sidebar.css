@@ -251,7 +251,9 @@ a.article:hover {
   padding-left: 0;
   color: #545454;
 }
-
+#sidebarCollapse:hover {
+  color: black;
+}
 #rightMenuToggle {
   padding-right: 0;
   font-size: 24px;
