@@ -51,7 +51,15 @@ class MediaAreaSelector extends Component {
 
   componentDidMount = () => {
     const updateCoordinate = this.updateCoordinate;
-
+    const mapContainer = $("#mapContainer").data("map");
+    mapContainer.on("moveend", function () {
+      let isAreaSelectorHidden = $("#mediaAreaSelector-container").hasClass(
+        "hide"
+      );
+      if (!isAreaSelectorHidden) {
+        updateCoordinate();
+      }
+    });
     $("#mediaAreaSelector-container")
       .resizable({
         minHeight: 150,
