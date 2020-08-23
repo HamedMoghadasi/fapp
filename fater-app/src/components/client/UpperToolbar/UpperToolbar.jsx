@@ -17,12 +17,20 @@ class UpperToolbar extends Component {
       console.log(currentSvgTarget);
 
       const activeCollapedId = $(".collapse.show").attr("id");
+      console.log("activeCollapedId :>> ", activeCollapedId);
       if (activeCollapedId && currentSvgTarget !== `#${activeCollapedId}`) {
         $(`svg[data-target='#${activeCollapedId}']`)
           .attr("aria-expanded", "false")
           .addClass("collapsed");
 
         $(".collapse.show").removeClass("show");
+        console.log(
+          'activeCollapedId === "photoVideo-container" :>> ',
+          activeCollapedId === "photoVideo-container"
+        );
+        if (activeCollapedId === "photoVideo-container") {
+          $("#mediaAreaSelector-container").addClass("hide");
+        }
       }
     });
   };
