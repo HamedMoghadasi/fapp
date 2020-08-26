@@ -171,7 +171,7 @@ class Map extends Component {
       this.props.handleUpdatingCenterAndZoom(center, zoom);
     });
 
-    //this.removeZoomWithDoubleClickEvent(map);
+    this.removeZoomWithDoubleClickEvent(map);
 
     $("#mapContainer").data("map", map);
     console.log("Map :>> ", map);
