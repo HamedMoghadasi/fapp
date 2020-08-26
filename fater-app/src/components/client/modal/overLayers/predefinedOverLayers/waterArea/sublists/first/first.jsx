@@ -78,7 +78,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.aod}`,
             maxZoom: 11,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
           var raster = new RasterSource({
             sources: [aerial],
@@ -199,7 +199,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.CO_1593752671}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -297,7 +297,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.CO_1593752971}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -395,7 +395,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.HCHO}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -492,7 +492,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.NO2}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -591,7 +591,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.O3}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -689,7 +689,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.SO2}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -790,7 +790,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.Soil_Moisture}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
           var raster = new RasterSource({
             sources: [aerial],
@@ -889,7 +889,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.UV_AI}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -991,7 +991,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.AOT_1593675000}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1088,7 +1088,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.AOT_1593761400}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1185,7 +1185,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.SSC_Khalije_Fars_1}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1282,7 +1282,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.SSC_Khalije_Fars_2}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1379,7 +1379,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.SSC_Oman_1}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1476,7 +1476,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.SSC_Oman_2}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1573,7 +1573,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.SSTH_Khalije_Fars_1}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1671,7 +1671,7 @@ class First extends Component {
             url:
               "./assets/qweasd/wgis/map/Sea_surface_temperature_hourly/ssth_1593840073862_Khalije-Fars/{z}/{x}/{-y}.png",
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1768,7 +1768,7 @@ class First extends Component {
           var aerial = new XYZ({
             url: `${heatMapUrls.SSTH_Oman_1}`,
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -1866,7 +1866,7 @@ class First extends Component {
             url:
               "./assets/qweasd/wgis/map/Sea_surface_temperature_hourly/ssth_1593840073862_Oman/{z}/{x}/{-y}.png",
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -2000,7 +2000,7 @@ class First extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],
@@ -2111,7 +2111,7 @@ class First extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],
@@ -2226,7 +2226,7 @@ class First extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],
@@ -2349,7 +2349,7 @@ class First extends Component {
               let aerial_change = new XYZ({
                 url: `${heatMapUrls.aod}`,
                 maxZoom: 11,
-                crossOrigin: "",
+                crossOrigin: "Anonymous",
               });
               let raster_change = new RasterSource({
                 sources: [aerial_change],
@@ -2442,7 +2442,7 @@ class First extends Component {
               var aerial = new XYZ({
                 url: `${heatMapUrls.aod}`,
                 maxZoom: 11,
-                crossOrigin: "",
+                crossOrigin: "Anonymous",
               });
               var raster = new RasterSource({
                 sources: [aerial],

@@ -52,7 +52,7 @@ class BaseLayersModal extends Component {
       source: new XYZ({
         url: item.url,
         maxZoom: item.maxZoom,
-        crossOrigin: "",
+        crossOrigin: "Anonymous",
       }),
     });
     newMap.set("name", item.name);

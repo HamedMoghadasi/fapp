@@ -48,7 +48,7 @@ class Second extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],
@@ -159,7 +159,7 @@ class Second extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],
@@ -277,7 +277,7 @@ class Second extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],
@@ -396,7 +396,7 @@ class Second extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],

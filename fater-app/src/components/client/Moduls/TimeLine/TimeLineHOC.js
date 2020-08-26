@@ -222,7 +222,7 @@ class TimeLineHOC extends Component {
             url:
               "./assets/qweasd/wgis/map/HCHO_map/hcho_1587254400/{z}/{x}/{-y}.png",
             maxZoom: 15,
-            crossOrigin: "",
+            crossOrigin: "Anonymous",
           });
 
           var raster = new RasterSource({
@@ -318,7 +318,7 @@ class TimeLineHOC extends Component {
     var aerial = new XYZ({
       url: `${heatMapUrls.aod}`, //heatmapUrl
       maxZoom: 11,
-      crossOrigin: "",
+      crossOrigin: "Anonymous",
     });
 
     var raster = new RasterSource({

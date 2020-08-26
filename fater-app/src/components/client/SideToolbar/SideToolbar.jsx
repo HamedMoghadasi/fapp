@@ -20,7 +20,9 @@ import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 import Unit from "./unit/unit";
 
 class SideToolbar extends Component {
+  inProgressOverLayer = null;
   drawing = (tagetIconDomId, drawShapeType) => {
+    var self = this;
     let isActive = $("#st-container svg.active");
     if (isActive.length) {
       return;
@@ -136,7 +138,6 @@ class SideToolbar extends Component {
           measureTooltipElement.className =
             "ol-tooltip ol-tooltip-static shapeUnit";
 
-          measureTooltip.setOffset([0, -7]);
           // unset sketch
           sketch = null;
 
@@ -144,9 +145,20 @@ class SideToolbar extends Component {
           $targetIconDom.removeClass("active");
           map.removeInteraction(draw);
         });
+
+        $(document).keyup(function (e) {
+          if (e.key === "Escape") {
+            // unset sketch
+            sketch = null;
+
+            unByKey(listener);
+            $targetIconDom.removeClass("active");
+            map.removeInteraction(draw);
+          }
+        });
       }
 
-      function createMeasureTooltip() {
+        function createMeasureTooltip() {
         if (measureTooltipElement) {
           measureTooltipElement.parentNode.removeChild(measureTooltipElement);
         }
@@ -154,10 +166,17 @@ class SideToolbar extends Component {
         measureTooltipElement.className = "ol-tooltip ol-tooltip-measure";
         measureTooltip = new Overlay({
           element: measureTooltipElement,
-          offset: [0, -15],
+          offset: [0, -25],
           positioning: "bottom-center",
         });
+        self.inProgressOverLayer = measureTooltip;
         map.addOverlay(measureTooltip);
+
+        $(document).keyup(function (e) {
+          if (e.key === "Escape") {
+            $(".ol-tooltip.ol-tooltip-measure").remove();
+          }
+        });
       }
 
       addInteraction();
@@ -166,6 +185,7 @@ class SideToolbar extends Component {
 
   handleRemoveAllDrawShape = () => {
     var drawVector = $("#mapContainer").data("drawVector");
+    $(document).unbind("keyup", null);
 
     drawVector.getSource().clear();
     $(".ol-tooltip.ol-tooltip-static").remove();

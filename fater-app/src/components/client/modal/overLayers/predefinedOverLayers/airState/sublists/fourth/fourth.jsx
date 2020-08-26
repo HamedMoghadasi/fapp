@@ -51,7 +51,7 @@ class Fourth extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],
@@ -170,7 +170,7 @@ class Fourth extends Component {
             var aerial = new XYZ({
               url: `${heatMapUrls.aod}`,
               maxZoom: 11,
-              crossOrigin: "",
+              crossOrigin: "Anonymous",
             });
             var raster = new RasterSource({
               sources: [aerial],
