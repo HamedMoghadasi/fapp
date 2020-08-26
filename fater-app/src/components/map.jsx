@@ -19,9 +19,11 @@ import "ol/ol.css";
 import "./map.css";
 import "../styles/components/map.css";
 
+import TileWMS from "ol/source/TileWMS";
+
 class Map extends Component {
   _olMap = {};
-  getView = () => {
+  getMapView = () => {
     let params = queryString.parse(this.props.location);
 
     var view = new OlView({
@@ -39,17 +41,9 @@ class Map extends Component {
 
     return view;
   };
-  componentDidMount = () => {
-    this.getView();
-    var view_ = this.getView;
-    var layers = [];
-    var raster = new OlTileLayer({
-      source: new OSM(),
-    });
 
-    var drawSource = new VectorSource();
-
-    var drawVector = new VectorLayer({
+  createDrawVectorLayer = (drawSource) => {
+    let drawVector = new VectorLayer({
       source: drawSource,
       style: new Style({
         fill: new Fill({
@@ -71,37 +65,25 @@ class Map extends Component {
     drawVector.set("description", "Vector Tile Layer provided by @Arad Co");
     drawVector.setZIndex(10000);
 
-    var sateliteMap = new OlTileLayer({
-      source: new XYZ({
-        url:
-          "https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=nEpI4PLiQ94chsicl5PF",
-        maxZoom: 20,
-        crossOrigin: "",
-      }),
-    });
+    return drawVector;
+  };
 
+  createOfflineMapLayer = () => {
     var offlineMap = new OlTileLayer({
       source: new XYZ({
         url: "./assets/map/satelite/{z}/{x}/{y}.png",
         maxZoom: 5,
-        crossOrigin: "",
+        crossOrigin: "Anonymous",
       }),
     });
 
     offlineMap.set("name", "offline satelite map");
     offlineMap.set("description", "tiled image provided by @Arad Co");
-    layers.push(offlineMap);
 
-    // sateliteMap.set("name", "Satelite");
-    // sateliteMap.set("description", "tiled image provided by @mapTiler.net");
-    // layers.push(sateliteMap);
+    return offlineMap;
+  };
 
-    // raster.set("name", "openStreetMap");
-    // raster.set("description", "tiled image provided by @openStreetMap");
-    // layers.push(raster);
-
-    layers.push(drawVector);
-
+  createIranBorderVectorLayer = () => {
     var iranBorderVectorLayer = new VectorLayer({
       source: new VectorSource({
         url: "./assets/map/shapefile/iran-border/iran-border.geojson",
@@ -114,57 +96,36 @@ class Map extends Component {
       "tiled image provided by @Arad Co"
     );
     iranBorderVectorLayer.setZIndex("10000");
-    layers.push(iranBorderVectorLayer);
 
-    var extent = [0, 0, 52, 36];
-    var projection = new Projection({
-      code: this.props.map.projection,
-      extent: extent,
+    return iranBorderVectorLayer;
+  };
+
+  createIranHighwaysWmsLayer = () => {
+    var wmsLayers = new OlTileLayer({
+      source: new TileWMS({
+        url: "http://192.168.11.28:8080/geoserver/Iran/wms",
+        params: { LAYERS: "Iran:highway_line", TILED: true },
+        serverType: "geoserver",
+        cacheSize: 0,
+      }),
     });
-    layers = layers.map((layer, index) => {
+    wmsLayers.set("name", "Iran highways wms");
+    wmsLayers.set("description", "wms image provided by @Arad Co");
+    wmsLayers.setZIndex("10000000");
+
+    return wmsLayers;
+  };
+
+  adjustLayersZIndex = (layers) => {
+    return layers.map((layer, index) => {
       if (layer instanceof OlTileLayer) {
         layer.setZIndex((index + 1) * 10);
       }
       return layer;
     });
-    this.olmap = new OlMap({
-      target: "mapContainer",
-      controls: defaultControls().extend([
-        new ScaleLine(),
-        // new FullScreen(),
-        new ZoomSlider(),
-      ]),
-      view: view_(),
-      layers: layers,
-    });
-
-    var dblClickInteraction;
-    // find DoubleClickZoom interaction
-    this.olmap
-      .getInteractions()
-      .getArray()
-      .forEach(function (interaction) {
-        if (interaction instanceof DoubleClickZoom) {
-          dblClickInteraction = interaction;
-        }
-      });
-    // remove from map
-    this.olmap.removeInteraction(dblClickInteraction);
-
-    $("#mapContainer").data("map", this.olmap);
-    console.log("Map :>> ", this.olmap);
-    $("#mapContainer").data("drawVector-source", drawSource);
-    $("#mapContainer").data("drawVector", drawVector);
-    this.olmap.on("moveend", () => {
-      let center = this.olmap.getView().getCenter();
-      let zoom = this.olmap.getView().getZoom();
-      this.props.handleUpdatingCenterAndZoom(center, zoom);
-    });
-
-    this.removeAttribute();
   };
 
-  removeAttribute = () => {
+  removeMapAttributeSection = () => {
     $(document).ready(() => {
       $(".error-container").remove();
       $(".ol-attribution").remove();
@@ -179,11 +140,79 @@ class Map extends Component {
     });
   };
 
+  removeZoomWithDoubleClickEvent = (map) => {
+    let dblClickInteraction;
+
+    // find DoubleClickZoom interaction
+    map
+      .getInteractions()
+      .getArray()
+      .forEach(function (interaction) {
+        if (interaction instanceof DoubleClickZoom) {
+          dblClickInteraction = interaction;
+        }
+      });
+
+    // remove from map
+    map.removeInteraction(dblClickInteraction);
+  };
+
+  createMapObject = (mapView, layers) => {
+    let map = new OlMap({
+      target: "mapContainer",
+      controls: defaultControls().extend([new ScaleLine(), new ZoomSlider()]),
+      view: mapView,
+      layers: layers,
+    });
+
+    map.on("moveend", () => {
+      let center = this.olmap.getView().getCenter();
+      let zoom = this.olmap.getView().getZoom();
+      this.props.handleUpdatingCenterAndZoom(center, zoom);
+    });
+
+    //this.removeZoomWithDoubleClickEvent(map);
+
+    $("#mapContainer").data("map", map);
+    console.log("Map :>> ", map);
+
+    return map;
+  };
+
+  initialLayers = () => {
+    var layers = [];
+
+    var drawSource = new VectorSource();
+    var drawVector = this.createDrawVectorLayer(drawSource);
+    var offlineMap = this.createOfflineMapLayer();
+    var iranBorderVectorLayer = this.createIranBorderVectorLayer();
+    //var wmsLayers = this.createIranHighwaysWmsLayer();
+
+    layers.push(offlineMap);
+    layers.push(drawVector);
+    layers.push(iranBorderVectorLayer);
+    //layers.push(wmsLayers);
+
+    layers = this.adjustLayersZIndex(layers);
+    $("#mapContainer").data("drawVector-source", drawSource);
+    $("#mapContainer").data("drawVector", drawVector);
+
+    return layers;
+  };
+
+  componentDidMount = () => {
+    let layers = this.initialLayers();
+    this.olmap = this.createMapObject(this.getMapView(), layers);
+
+    this.removeMapAttributeSection();
+  };
+
   componentDidUpdate = () => {
     if (!Object.keys(this.props.map.olmap).length) {
       this.props.initOpenLayers(this.olmap);
     }
   };
+
   render() {
     return <div id="mapContainer" data-unit={units.KM}></div>;
   }
