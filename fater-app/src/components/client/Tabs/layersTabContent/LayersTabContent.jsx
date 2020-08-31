@@ -11,6 +11,10 @@ class LayersTabContent extends Component {
   state = { refresh: 0 };
   refreshComponent = () => {
     console.log("refresh called");
+
+    //refresh-timeLineLayers
+    $("#timeline-refreshLayer-trigger").click();
+
     this.setState((state) => ({
       refresh: state.refresh + 1,
     }));

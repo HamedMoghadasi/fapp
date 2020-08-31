@@ -46,7 +46,7 @@ class TimeLineHOC extends Component {
     }, 3000);
   };
 
-  CaptureVideo = () => {
+  captureVideo = () => {
     const self = this;
 
     let selectedArea = document
@@ -438,6 +438,8 @@ class TimeLineHOC extends Component {
   };
 
   handleRange = (rangeValues) => {
+    console.log("range selected");
+
     var mapContainer = $("#mapContainer").data("map");
     //remove previous timeline layers
     mapContainer.getLayers().array_ = this.getAllLayersWithoutTimelineLayers();
@@ -457,7 +459,28 @@ class TimeLineHOC extends Component {
     this.setState({ hasRange: true });
   };
 
-  handleTimespan = (value) => {
+  refreshTimelineLayers = () => {
+    let rangeValues = this.state.rangeValues;
+
+    var mapContainer = $("#mapContainer").data("map");
+    //remove previous timeline layers
+    mapContainer.getLayers().array_ = this.getAllLayersWithoutTimelineLayers();
+
+    rangeValues.map((range) => {
+      mapContainer
+        .getLayers()
+        .getArray()
+        .map((layer, index) => {
+          if (layer instanceof ImageLayer && layer.get("isHeatMap")) {
+            this.addTimelineLayer(layer, range);
+          }
+        });
+    });
+
+    this.setState({ rangeValues: rangeValues });
+  };
+
+  setTimescaleValueInState = (value) => {
     this.setState({ timescale: value });
   };
 
@@ -493,7 +516,7 @@ class TimeLineHOC extends Component {
 
       if (this.state.isRecording) {
         console.log("Record");
-        this.CaptureVideo();
+        this.captureVideo();
       }
     }
     //this.setState({ hasRange: true });
@@ -519,12 +542,14 @@ class TimeLineHOC extends Component {
   };
 
   handleHasRange = (value) => {
-    console.log("hasRange : >>", value);
-
     if (value && !this.state.hasRange) {
       this.setState({ hasRange: true });
     } else if (!value) {
       this.setState({ hasRange: false });
+
+      var mapContainer = $("#mapContainer").data("map");
+      //remove previous timeline layers
+      mapContainer.getLayers().array_ = this.getAllLayersWithoutTimelineLayers();
     }
   };
 
@@ -563,6 +588,10 @@ class TimeLineHOC extends Component {
   render() {
     return (
       <>
+        <div
+          id="timeline-refreshLayer-trigger"
+          onClick={() => this.refreshTimelineLayers()}
+        ></div>
         <div className="timeline-recorder-manager">
           <button
             id="btn-timeline-recorder"
@@ -571,14 +600,10 @@ class TimeLineHOC extends Component {
         </div>
         <TimeLine
           onChange={(data) => this.handleChange(data)}
-          //onChange={(data) => console.log("on change", data)}
           lang={this.state.lang}
           getAnimationRangeValues={(rangeValues) =>
             this.handleRange(rangeValues)
           }
-          //getAnimationRangeValues={(rangeValues) =>
-          //console.log("rangeValues :>> ", rangeValues)
-          //}
           hasRange={[
             this.state.hasRange,
             (value) => this.handleHasRange(value),
@@ -588,15 +613,9 @@ class TimeLineHOC extends Component {
             (value) => this.handleIsPlayingAnimation(value),
           ]}
           onPlayAnimation={(data) => this.handlePlayAnimation(data)}
-          //onPlayAnimation={(data) => console.log("onPlayAnimation :>> ", data)}
-          timeScale={
-            (value) => {
-              this.handleTimespan(value);
-            }
-            // timeScale={(value) => {
-            //   console.log("value :>> ", value);
-            // }
-          }
+          timeScale={(value) => {
+            this.setTimescaleValueInState(value);
+          }}
         />
       </>
     );

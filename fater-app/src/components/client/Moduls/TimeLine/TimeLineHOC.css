@@ -5,3 +5,7 @@
 #btn-timeline-recorder {
   opacity: 0;
 }
+
+#timeline-refreshLayer-trigger {
+  position: absolute;
+}

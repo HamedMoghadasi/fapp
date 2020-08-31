@@ -56,15 +56,17 @@ class DragableLayerInfo extends Component {
 
   handleLayerRemove = (ol_uid) => {
     let map = $("#mapContainer").data("map");
-
     map.getLayers().array_ = map.getLayers().array_.filter((layer) => {
-      if (String(layer.ol_uid) !== String(ol_uid)) return layer;
+      if (String(layer.ol_uid) !== String(ol_uid)) {
+        return layer;
+      }
     });
 
     $(".date-pickers-wrapper div:nth-child(4) input").change();
 
     $("#mapContainer").data("map", map);
     this.props.refreshComponent();
+
     map.updateSize();
   };
 
