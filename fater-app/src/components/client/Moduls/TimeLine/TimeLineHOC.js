@@ -23,7 +23,7 @@ import "./TimeLineHOC.css";
 let ApplicationType = process.env.REACT_APP_APPLICATION_TYPE;
 class TimeLineHOC extends Component {
   state = {
-    lang: format.eng,
+    lang: format.fa,
     hasRange: false,
     isPlayingAnimation: false,
     rangeValues: [],

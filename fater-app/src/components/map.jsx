@@ -42,7 +42,9 @@ class Map extends Component {
     return view;
   };
 
-  createDrawVectorLayer = (drawSource) => {
+  createDrawVectorLayer = () => {
+    var drawSource = new VectorSource();
+
     let drawVector = new VectorLayer({
       source: drawSource,
       style: new Style({
@@ -64,6 +66,7 @@ class Map extends Component {
     drawVector.set("name", "Draw vector layer");
     drawVector.set("description", "Vector Tile Layer provided by @Arad Co");
     drawVector.setZIndex(10000);
+    $("#mapContainer").data("drawVector-source", drawSource);
 
     return drawVector;
   };
@@ -182,8 +185,7 @@ class Map extends Component {
   initialLayers = () => {
     var layers = [];
 
-    var drawSource = new VectorSource();
-    var drawVector = this.createDrawVectorLayer(drawSource);
+    var drawVector = this.createDrawVectorLayer();
     var offlineMap = this.createOfflineMapLayer();
     var iranBorderVectorLayer = this.createIranBorderVectorLayer();
     //var wmsLayers = this.createIranHighwaysWmsLayer();
@@ -194,7 +196,7 @@ class Map extends Component {
     //layers.push(wmsLayers);
 
     layers = this.adjustLayersZIndex(layers);
-    $("#mapContainer").data("drawVector-source", drawSource);
+
     $("#mapContainer").data("drawVector", drawVector);
 
     return layers;
