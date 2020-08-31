@@ -93,7 +93,7 @@
 
 .ol-rotate-reset .ol-compass {
   transform: rotate(13.1528rad);
-  color: rgb(220, 53, 69);
+  color: rgb(0 123 255);
   font-size: 40px;
   font-weight: 900;
 }
@@ -104,12 +104,12 @@
 .ol-rotate:focus {
   bottom: 9.5em;
   top: auto;
-  right: 1.5em;
-  background: rgba(40, 167, 69, 0.2);
-  border: 2px dashed rgba(220, 53, 69, 0.8);
+  right: 1em;
+  background: rgb(255 255 255 / 51%);
+  border: 2px solid rgb(0 123 255);
   width: 65px;
   height: 65px;
-  border-radius: 50%;
+  border-radius: 15%;
 }
 
 .ol-scale-line {

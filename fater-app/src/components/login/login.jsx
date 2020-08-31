@@ -82,7 +82,7 @@ class Login extends Component {
             $("#password").val("");
 
             if (err) {
-              notif(err, "error");
+              notif(err.responseJSON.message, "error");
             } else {
               notif("check you internet connection.", "error");
             }
