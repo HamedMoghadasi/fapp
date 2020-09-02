@@ -6,9 +6,7 @@ import $ from "jquery";
 
 import { projections } from "../../../../constants/projections";
 import * as OlProj from "ol/proj";
-
-import { IonIcon } from "@ionic/react";
-import { close } from "ionicons/icons";
+import { isMobile } from "react-device-detect";
 
 import "./Search.css";
 let API_URL = process.env.REACT_APP_API_URL;
@@ -82,17 +80,31 @@ class Search extends Component {
     this.handleClose();
 
     let map = $("#mapContainer").data("map");
-
-    map.getView().animate({
-      center: OlProj.transform(
-        [Number(lon), Number(lat)],
-        projections.EPSG4326,
-        projections.EPSG3857
-      ),
-      zoom: 10,
-      projection: projections.EPSG3857,
-      duration: 1000,
-    });
+    if (isMobile) {
+      setTimeout(() => {
+        map.getView().animate({
+          center: OlProj.transform(
+            [Number(lon), Number(lat)],
+            projections.EPSG4326,
+            projections.EPSG3857
+          ),
+          zoom: 10,
+          projection: projections.EPSG3857,
+          duration: 1000,
+        });
+      }, 500);
+    } else {
+      map.getView().animate({
+        center: OlProj.transform(
+          [Number(lon), Number(lat)],
+          projections.EPSG4326,
+          projections.EPSG3857
+        ),
+        zoom: 10,
+        projection: projections.EPSG3857,
+        duration: 1000,
+      });
+    }
   };
 
   render() {

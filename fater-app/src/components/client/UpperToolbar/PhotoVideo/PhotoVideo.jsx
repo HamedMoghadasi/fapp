@@ -9,8 +9,48 @@ import Snapshot from "./snapshot/snapshot";
 import Video from "./video/video";
 import AnimationGif from "./AnimationGif/AnimationGif";
 
+import { isMobile } from "react-device-detect";
+
 class PhotoVideo extends Component {
   state = {};
+
+  handleMakeGifTabHeader = () => {
+    if (!isMobile) {
+      return (
+        <li className="nav-item">
+          <a
+            className="nav-link"
+            id="sreenCast-tab"
+            data-toggle="tab"
+            href="#sreenCast"
+            role="tab"
+            aria-controls="sreenCast"
+            aria-selected="false"
+          >
+            <FontAwesomeIcon icon={faVideo} />
+          </a>
+        </li>
+      );
+    }
+  };
+
+  handleMakeGifTab = () => {
+    if (!isMobile) {
+      return (
+        <div
+          className="tab-pane fade"
+          id="sreenCast"
+          role="tabpanel"
+          aria-labelledby="sreenCast-tab"
+        >
+          <Video />
+          {/* <AnimationGif /> */}
+        </div>
+      );
+    }
+    return;
+  };
+
   componentDidMount = () => {
     $("#photoVideo").on("click", function () {
       const wasClosed = $(this).attr("aria-expanded") === "false";
@@ -96,19 +136,7 @@ class PhotoVideo extends Component {
                   <FontAwesomeIcon icon={faCamera} />
                 </a>
               </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  id="sreenCast-tab"
-                  data-toggle="tab"
-                  href="#sreenCast"
-                  role="tab"
-                  aria-controls="sreenCast"
-                  aria-selected="false"
-                >
-                  <FontAwesomeIcon icon={faVideo} />
-                </a>
-              </li>
+              {this.handleMakeGifTabHeader()}
               <li className="nav-item">
                 <a
                   className="nav-link"
@@ -132,15 +160,7 @@ class PhotoVideo extends Component {
               >
                 <Snapshot />
               </div>
-              <div
-                className="tab-pane fade"
-                id="sreenCast"
-                role="tabpanel"
-                aria-labelledby="sreenCast-tab"
-              >
-                <Video />
-                {/* <AnimationGif /> */}
-              </div>
+              {this.handleMakeGifTab()}
               <div
                 className="tab-pane fade"
                 id="makeAnimation"

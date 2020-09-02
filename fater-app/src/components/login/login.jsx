@@ -150,7 +150,7 @@ class Login extends Component {
 
   validateCaptcha = () => {
     const token = $("#captcha-input").attr("token");
-    const text = $("#captcha-input").val();
+    const text = $("#captcha-input").val().toLowerCase();
     return bcrypt
       .hash(text, bcrypt.getSalt(token))
       .then((hash) => {
